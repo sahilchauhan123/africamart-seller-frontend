@@ -1,0 +1,7 @@
+{
+  "name": "AfricaMart Seller App",
+  "description": "A comprehensive mobile-first B2B marketplace application for sellers to manage products, inquiries, and customer interactions.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
