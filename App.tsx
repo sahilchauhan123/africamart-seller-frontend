@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View } from './types';
 import Onboarding from './components/Onboarding';
 import Signup from './components/Signup';
@@ -12,9 +11,14 @@ import LeadDetails from './components/LeadDetails';
 import ChatSession from './components/ChatSession';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
+import BusinessMessages from './components/BusinessMessages';
+import Drawer from './components/common/Drawer';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.ONBOARDING);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const isAuthView = ![View.ONBOARDING, View.SIGNUP, View.OTP].includes(currentView);
 
   const renderView = () => {
     switch (currentView) {
@@ -25,21 +29,21 @@ const App: React.FC = () => {
       case View.OTP:
         return <OtpVerification onBack={() => setCurrentView(View.SIGNUP)} onNext={() => setCurrentView(View.DASHBOARD)} />;
       case View.DASHBOARD:
-        return <Dashboard
-          onNavigate={(view: View) => setCurrentView(view)}
-        />;
+        return <Dashboard onNavigate={(view: View) => setCurrentView(view)} onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case View.PRODUCT_LIST:
-        return <ProductManager onBack={() => setCurrentView(View.DASHBOARD)} onAdd={() => setCurrentView(View.ADD_PRODUCT)} />;
+        return <ProductManager onBack={() => setIsDrawerOpen(true)} onAdd={() => setCurrentView(View.ADD_PRODUCT)} />;
       case View.ADD_PRODUCT:
         return <AddProduct onBack={() => setCurrentView(View.PRODUCT_LIST)} onSave={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.INQUIRY_LIST:
-        return <InquiryList onBack={() => setCurrentView(View.DASHBOARD)} onSelectLead={() => setCurrentView(View.LEAD_DETAILS)} />;
+        return <InquiryList onBack={() => setIsDrawerOpen(true)} onSelectLead={() => setCurrentView(View.LEAD_DETAILS)} />;
       case View.LEAD_DETAILS:
         return <LeadDetails onBack={() => setCurrentView(View.INQUIRY_LIST)} onAccept={() => setCurrentView(View.CHAT)} />;
+      case View.MESSAGES:
+        return <BusinessMessages onNavigate={(view: View) => setCurrentView(view)} onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case View.CHAT:
-        return <ChatSession onBack={() => setCurrentView(View.LEAD_DETAILS)} />;
+        return <ChatSession onBack={() => setCurrentView(View.MESSAGES)} />;
       case View.PROFILE:
-        return <Profile onBack={() => setCurrentView(View.DASHBOARD)} onEdit={() => setCurrentView(View.EDIT_PROFILE)} />;
+        return <Profile onBack={() => setIsDrawerOpen(true)} onEdit={() => setCurrentView(View.EDIT_PROFILE)} />;
       case View.EDIT_PROFILE:
         return <EditProfile onBack={() => setCurrentView(View.PROFILE)} onSave={() => setCurrentView(View.PROFILE)} />;
       default:
@@ -48,8 +52,20 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {renderView()}
+    <div className="min-h-screen bg-background-light">
+      {isAuthView && (
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          onNavigate={(view) => {
+            setCurrentView(view);
+            setIsDrawerOpen(false);
+          }}
+        />
+      )}
+      <div className={isAuthView ? "lg:pl-[300px]" : ""}>
+        {renderView()}
+      </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd }) => {
   return (
     <div className="min-h-screen bg-[#F5F7FA]">
       <header className="bg-primary px-4 h-16 flex items-center justify-between shadow-md">
-        <button onClick={onBack} className="text-white p-1 rounded-full hover:bg-white/10 transition">
+        <button onClick={onBack} className="text-white p-1 rounded-full hover:bg-white/10 transition lg:hidden">
           <span className="material-icons-round text-3xl">menu</span>
         </button>
         <h1 className="text-white text-lg font-bold">Product Manager</h1>

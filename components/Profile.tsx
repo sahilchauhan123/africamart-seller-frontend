@@ -11,7 +11,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-primary text-white p-4 flex items-center justify-between sticky top-0 z-50">
-        <button onClick={onBack} className="p-1">
+        <button onClick={onBack} className="p-1 lg:hidden">
           <span className="material-icons-round">menu</span>
         </button>
         <h1 className="font-bold text-lg">Seller Profile</h1>

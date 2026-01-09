@@ -10,7 +10,8 @@ export enum View {
   LEAD_DETAILS = 'LEAD_DETAILS',
   CHAT = 'CHAT',
   PROFILE = 'PROFILE',
-  EDIT_PROFILE = 'EDIT_PROFILE'
+  EDIT_PROFILE = 'EDIT_PROFILE',
+  MESSAGES = 'MESSAGES'
 }
 
 export interface Product {

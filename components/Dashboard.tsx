@@ -1,31 +1,28 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from '../types';
 import { MOCK_USER, MOCK_INQUIRIES } from '../constants';
 import Drawer from './common/Drawer';
 
 interface Props {
   onNavigate: (view: View) => void;
+  onOpenDrawer: () => void;
 }
 
-const Dashboard: React.FC<Props> = ({ onNavigate }) => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
   return (
-    <div className="relative">
-      <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} onNavigate={onNavigate} />
-
+    <div className="flex flex-col min-h-screen">
       <header className="bg-primary sticky top-0 z-50 px-4 py-3 shadow-md">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-3 max-w-7xl mx-auto w-full">
           <div className="flex items-center gap-3">
-            <button onClick={() => setIsDrawerOpen(true)} className="text-white p-1 rounded-md hover:bg-white/10 transition">
+            <button onClick={onOpenDrawer} className="text-white p-1 rounded-md hover:bg-white/10 transition lg:hidden">
               <span className="material-icons-round text-3xl">menu</span>
             </button>
             <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white/30 overflow-hidden flex-shrink-0 cursor-pointer" onClick={() => onNavigate(View.PROFILE)}>
               <img alt="User Avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi46GtpiM2PCOQBHANxFI9RbtsMJaAKLO_wmlPAAI9F3P8WF4Ol7CjQYs4bVfLnxrSMCfSNXNeQZNlSe5fCq1nvg6iZK9cONpUeEMCCP0YutzWEoXUtRyuz5USsT-FRNDsMLjixVN0_9RsTDgd2TXFi9OZ8lX0X5GwJX3Zb-AjabzDVPsA4t09tANJ6-oBYYqtF1RK_ZE0PH2XuqcFnS0mHoUyU1lr8hykoYW9ig6b4rqQOWYvQFo666LkAWEMXSTWA60ibVTejNI" />
             </div>
           </div>
-          <div className="flex-grow">
+          <div className="flex-grow max-w-md">
             <div className="relative">
               <input className="w-full pl-4 pr-10 py-2 rounded-full text-sm border-none focus:ring-2 focus:ring-blue-300 bg-white text-gray-800 placeholder-gray-400 shadow-sm" placeholder="Search Service / Prod.." type="text" />
               <span className="material-icons-round absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
@@ -40,9 +37,9 @@ const Dashboard: React.FC<Props> = ({ onNavigate }) => {
         </div>
       </header>
 
-      <main className="pb-8 bg-background-light min-h-screen">
+      <main className="pb-8 flex-1 max-w-7xl mx-auto w-full">
         <section className="px-4 py-6">
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 lg:grid-cols-4 gap-4">
             <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
               <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                 <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">

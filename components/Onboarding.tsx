@@ -1,11 +1,38 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Props {
   onNext: () => void;
 }
 
+const SLIDER_IMAGES = [
+  {
+    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6B5PXSiqMIxombYqKwb0oBoBceB8nx7f8j_QEe5N7_bM5o15b-aj1gvdnyg4umgpaygMcYRsJ2k235-1qyDqsjOhdlertlrjhk2DTOWhEHsUB46YkaSYQtB6X8vQgjLBKmUDVIXkxfxs4RZCkr5p5gVezyzPcxIjIwlR8CGdL2Mfqff40QPioUWcyuWK6aSF7ASgymBgtNV0DQO4HvgK0Leqrm5iSM77OQ8vk_TY2frMtd3MSlRjcbBi7CqqMrbYS9WF8mu3Q94I',
+    title: 'Connect with Buyers',
+    subtitle: 'Grow your business across Africa'
+  },
+  {
+    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADdoKDGdjfygl9pvaEPApxI4fr4h0cEAbPKME3eJGKTqtbbgfwSlFHEphHmXvTsl_1hOLdCvDwAa-VwzHwQ0FWZ6KE5SGvYCTqqCIrYqOppU-KJlzz63WIIJBBaod42KLAPmiKXLAnyJbSe7tfHeAvJp5mNc43G_12f9dX4PlrOxB6C7w8NOa6FKjXoyrXig9TKdFCs72NFX6v-uoOWYW69Rx9Vd9pN-r9NbQZafFcwTI1U-swutbM67_r-6p4mDWTTTG5vbBX1x0',
+    title: 'Digital Innovation',
+    subtitle: 'Reshaping Africa\'s economy'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
+    title: 'Quality Products',
+    subtitle: 'Showcase your best to the world'
+  }
+];
+
 const Onboarding: React.FC<Props> = ({ onNext }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="bg-background-light text-gray-900 antialiased transition-colors duration-200">
       {/* Shared Navigation */}
@@ -93,12 +120,24 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa’s economy through digital and cross boarder connectivity.
           </p>
           <div className="relative w-full h-64 rounded-3xl overflow-hidden mb-4 shadow-sm">
-            <img alt="African business person using a tablet" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADdoKDGdjfygl9pvaEPApxI4fr4h0cEAbPKME3eJGKTqtbbgfwSlFHEphHmXvTsl_1hOLdCvDwAa-VwzHwQ0FWZ6KE5SGvYCTqqCIrYqOppU-KJlzz63WIIJBBaod42KLAPmiKXLAnyJbSe7tfHeAvJp5mNc43G_12f9dX4PlrOxB6C7w8NOa6FKjXoyrXig9TKdFCs72NFX6v-uoOWYW69Rx9Vd9pN-r9NbQZafFcwTI1U-swutbM67_r-6p4mDWTTTG5vbBX1x0" />
+            {SLIDER_IMAGES.map((slide, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" />
+              </div>
+            ))}
           </div>
           <div className="flex justify-center gap-2 mt-4">
-            <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+            {SLIDER_IMAGES.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 hover:scale-125 ${index === currentSlide ? 'bg-gray-600 w-4' : 'bg-gray-300'}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
         <div className="px-6 py-10">

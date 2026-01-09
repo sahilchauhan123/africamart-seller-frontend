@@ -11,8 +11,8 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-primary sticky top-0 z-50 px-4 py-4 shadow-md text-white flex items-center justify-between">
-        <button onClick={onBack} className="p-1 -ml-2 rounded-full hover:bg-white/10 transition">
-          <span className="material-icons-round text-2xl">arrow_back</span>
+        <button onClick={onBack} className="p-1 -ml-2 rounded-full hover:bg-white/10 transition lg:hidden">
+          <span className="material-icons-round text-2xl">menu</span>
         </button>
         <h1 className="text-lg font-bold">Recent Inquiries</h1>
         <button className="p-1 rounded-full hover:bg-white/10 transition">
