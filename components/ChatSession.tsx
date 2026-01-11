@@ -7,8 +7,8 @@ interface Props {
 
 const ChatSession: React.FC<Props> = ({ onBack }) => {
   return (
-    <div className="h-screen flex flex-col bg-background-light">
-      <header className="bg-white border-b px-3 py-3 flex items-center justify-between sticky top-0 z-20">
+    <div className="fixed inset-0 lg:left-[300px] flex flex-col bg-background-light z-30">
+      <header className="bg-white border-b px-3 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center flex-1 min-w-0 mr-2">
           <button onClick={onBack} className="mr-2 p-1 rounded-full hover:bg-gray-100 transition-colors">
             <span className="material-icons text-2xl">arrow_back</span>

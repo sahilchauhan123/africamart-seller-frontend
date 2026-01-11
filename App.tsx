@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from './types';
 import Onboarding from './components/Onboarding';
 import Signup from './components/Signup';
@@ -15,8 +15,29 @@ import BusinessMessages from './components/BusinessMessages';
 import Drawer from './components/common/Drawer';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<View>(View.ONBOARDING);
+  const [currentView, setInternalView] = useState<View>(View.ONBOARDING);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (Object.values(View).includes(hash as View)) {
+        setInternalView(hash as View);
+      } else if (!hash) {
+        window.location.hash = View.ONBOARDING;
+      }
+    };
+
+    // Handle initial hash
+    handleHashChange();
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const setCurrentView = (view: View) => {
+    window.location.hash = view;
+  };
 
   const isAuthView = ![View.ONBOARDING, View.SIGNUP, View.OTP].includes(currentView);
 
@@ -31,7 +52,7 @@ const App: React.FC = () => {
       case View.DASHBOARD:
         return <Dashboard onNavigate={(view: View) => setCurrentView(view)} onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case View.PRODUCT_LIST:
-        return <ProductManager onBack={() => setIsDrawerOpen(true)} onAdd={() => setCurrentView(View.ADD_PRODUCT)} />;
+        return <ProductManager onBack={() => setIsDrawerOpen(true)} onAdd={() => setCurrentView(View.ADD_PRODUCT)} onEdit={() => setCurrentView(View.ADD_PRODUCT)} />;
       case View.ADD_PRODUCT:
         return <AddProduct onBack={() => setCurrentView(View.PRODUCT_LIST)} onSave={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.INQUIRY_LIST:

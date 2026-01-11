@@ -9,8 +9,8 @@ interface Props {
 
 const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-primary sticky top-0 z-50 px-4 py-4 shadow-md text-white flex items-center justify-between">
+    <div className="fixed inset-0 lg:left-[300px] flex flex-col bg-gray-100">
+      <header className="bg-primary px-4 py-4 shadow-md text-white flex items-center justify-between shrink-0">
         <button onClick={onBack} className="p-1 -ml-2 rounded-full hover:bg-white/10 transition lg:hidden">
           <span className="material-icons-round text-2xl">menu</span>
         </button>
@@ -20,13 +20,13 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
         </button>
       </header>
 
-      <div className="bg-white shadow-sm border-b border-gray-100 sticky top-[60px] z-40 px-4 py-3 overflow-x-auto no-scrollbar flex gap-2">
+      <div className="bg-white shadow-sm border-b border-gray-100 px-4 py-3 overflow-x-auto no-scrollbar flex gap-2 shrink-0">
         <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-primary text-white text-xs font-medium shadow-sm">All</button>
         <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-gray-100 text-gray-500 text-xs font-medium">New Leads</button>
         <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-gray-100 text-gray-500 text-xs font-medium">Viewed</button>
       </div>
 
-      <main className="p-4 space-y-3 pb-20">
+      <main className="p-4 space-y-3 pb-20 flex-1 overflow-y-auto">
         {MOCK_INQUIRIES.map(inq => (
           <div key={inq.id} onClick={onSelectLead} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99] cursor-pointer">
             <div className="flex gap-4">

@@ -5,9 +5,10 @@ import { MOCK_PRODUCTS } from '../constants';
 interface Props {
   onBack: () => void;
   onAdd: () => void;
+  onEdit: () => void;
 }
 
-const ProductManager: React.FC<Props> = ({ onBack, onAdd }) => {
+const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit }) => {
   return (
     <div className="min-h-screen bg-[#F5F7FA]">
       <header className="bg-primary px-4 h-16 flex items-center justify-between shadow-md">
@@ -40,7 +41,10 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd }) => {
                 <img src={product.image} className="w-full h-full object-cover" alt={product.name} />
               </div>
               <div className="flex-1 flex flex-col justify-between relative">
-                <button className="absolute top-0 right-0 text-gray-400 p-1">
+                <button
+                  onClick={onEdit}
+                  className="absolute top-0 right-0 text-gray-400 p-1"
+                >
                   <span className="material-icons-round text-lg">edit</span>
                 </button>
                 <div>
