@@ -15,9 +15,9 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
   }, []);
 
   return (
-    <div className="bg-[#f3f4f6] font-display antialiased h-screen flex flex-col overflow-hidden text-gray-900">
-      {/* Immersive Header */}
-      <header className="bg-white shadow-sm z-10 flex-none lg:static">
+    <div className="bg-[#f3f4f6] font-display antialiased h-full flex flex-col overflow-hidden text-gray-900 relative">
+      {/* Immersive Header - Fixed at Top */}
+      <header className="bg-white shadow-sm z-30 flex-none fixed top-0 left-0 right-0">
         <div className="flex items-center justify-between px-3 py-3 border-b border-gray-200">
           <div className="flex items-center flex-1 min-w-0 mr-2">
             <button
@@ -65,10 +65,10 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
         </div>
       </header>
 
-      {/* Chat Messages */}
+      {/* Chat Messages - Scrollable Area with P-Top to account for fixed header */}
       <main
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto bg-[#f3f4f6] p-4 space-y-4 no-scrollbar relative"
+        className="flex-1 overflow-y-auto bg-[#f3f4f6] p-4 pt-32 pb-40 space-y-4 no-scrollbar relative"
       >
         <div className="flex justify-center my-4">
           <span className="bg-gray-200 text-gray-600 text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-wider">
@@ -103,10 +103,10 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
               <img
                 alt="Product Catalog"
                 className="w-full h-auto object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCylpTUWvaYk5a3_Aww9d8GB7EsHJLIrRsri7x77ny18gO5rnTJ2dYRRxwa6kn4KopohCF_XiSHuV_FgPo08PJm3ZiGPxlMr4uIxehZZth8RO-FjJCVf9ghvsVS47G11L3GHQgPZgmmVDHYNnZIs55OOI1-nQxNDANPZaTAgC2p1l_DlNfGL37ujTJ3E7es8NyF0MDp0Lt87LBoVA-v6Vz5faZijVIDixeABS7Oeyrn2BjRoYfn2XguJyht7XZyL8m4bEOJrd6DuJ4"
+                src="https://media.gettyimages.com/id/1477545090/photo/rice-in-a-sack-at-mani-sithu-market-nyaung-u-myanmar.jpg?s=612x612&w=gi&k=20&c=MUI5GhAkr9BpXReHcGl-GcOdbjnnMWFwTzudHfXSUuc="
               />
             </div>
-            <p className="text-sm px-3 pb-2 pt-1 font-medium italic">Here is the catalogue image.</p>
+            <p className="text-sm px-3 pb-2 pt-1 font-medium">Here is the catalogue image.</p>
           </div>
           <span className="text-[10px] text-gray-400 pr-1 font-bold">10:35 AM</span>
         </div>
@@ -128,8 +128,8 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
         </div>
       </main>
 
-      {/* Chat Input Footer */}
-      <footer className="bg-white border-t border-gray-200 flex-none pb-2">
+      {/* Chat Input Footer - Fixed at Bottom */}
+      <footer className="bg-white border-t border-gray-200 flex-none fixed bottom-0 left-0 right-0 z-30 pb-2">
         <div className="flex overflow-x-auto space-x-3 px-4 py-2 border-b border-gray-100 no-scrollbar">
           <button className="flex-shrink-0 text-[10px] font-bold uppercase tracking-wider bg-gray-50 text-gray-600 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition shadow-sm">
             Send Catalog

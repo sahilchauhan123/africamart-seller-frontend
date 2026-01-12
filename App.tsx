@@ -12,6 +12,7 @@ import ChatSession from './components/ChatSession';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import BusinessMessages from './components/BusinessMessages';
+import MessageSearch from './components/MessageSearch';
 import Drawer from './components/common/Drawer';
 import Header from './components/common/Header';
 
@@ -61,7 +62,9 @@ const App: React.FC = () => {
       case View.LEAD_DETAILS:
         return <LeadDetails onBack={() => setCurrentView(View.INQUIRY_LIST)} onAccept={() => setCurrentView(View.CHAT)} />;
       case View.MESSAGES:
-        return <BusinessMessages onNavigate={(view: View) => setCurrentView(view)} onOpenDrawer={() => setIsDrawerOpen(true)} />;
+        return <BusinessMessages onNavigate={setCurrentView} onOpenDrawer={() => setIsDrawerOpen(true)} />;
+      case View.MESSAGE_SEARCH:
+        return <MessageSearch onBack={() => setCurrentView(View.MESSAGES)} onNavigate={setCurrentView} />;
       case View.CHAT:
         return <ChatSession onBack={() => setCurrentView(View.MESSAGES)} />;
       case View.PROFILE:
@@ -88,14 +91,14 @@ const App: React.FC = () => {
       )}
       <div className={isAuthView ? "lg:pl-72 flex flex-col h-full overflow-hidden" : ""}>
         {isAuthView && (
-          <div className={currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT ? "hidden lg:block" : ""}>
+          <div className={currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT || currentView === View.MESSAGE_SEARCH ? "hidden lg:block" : ""}>
             <Header
               onOpenDrawer={() => setIsDrawerOpen(true)}
               onNavigate={(view) => setCurrentView(view)}
             />
           </div>
         )}
-        <main className={`flex-1 overflow-hidden relative ${isAuthView ? (currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT ? "lg:pt-[72px]" : "pt-16 lg:pt-[72px]") : ""}`}>
+        <main className={`flex-1 overflow-hidden relative ${isAuthView ? (currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT || currentView === View.MESSAGE_SEARCH ? "lg:pt-[72px]" : "pt-16 lg:pt-[72px]") : ""}`}>
           {renderView()}
         </main>
       </div>

@@ -19,7 +19,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
             time: '22:30 AM',
             unread: 3,
             online: true,
-            color: 'bg-blue-100 text-[#0047AB] border-blue-200'
+            color: 'bg-blue-100 text-primary border-blue-200'
         },
         {
             id: 2,
@@ -88,13 +88,13 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     return (
         <div className="flex flex-col h-full bg-[#F8FAFC] font-display antialiased h-screen overflow-hidden transition-colors duration-300">
             {/* Mobile Header (from snippet) */}
-            <header className="bg-[#0047AB] shadow-md z-40 relative lg:hidden shrink-0">
-                <div className="flex items-center justify-between px-4 py-3">
+            <header className="bg-primary shadow-md z-40 sticky top-0 lg:hidden shrink-0">
+                <div className="flex items-center justify-between px-4 h-16">
                     <button
                         onClick={onOpenDrawer}
-                        className="p-2 rounded-full hover:bg-white/10 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                        className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center"
                     >
-                        <span className="material-icons text-2xl">menu</span>
+                        <span className="material-icons-round text-3xl leading-none">menu</span>
                     </button>
                     <h1 className="text-white text-lg font-semibold tracking-wide">Business Messages</h1>
                     <button className="p-2 rounded-full hover:bg-white/10 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-white/20">
@@ -107,9 +107,11 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <span className="material-icons text-gray-400 text-xl">search</span>
                         </div>
                         <input
-                            className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 sm:text-sm shadow-sm"
+                            className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 sm:text-sm shadow-sm cursor-pointer"
                             placeholder="Search chats..."
                             type="text"
+                            readOnly
+                            onClick={() => onNavigate(View.MESSAGE_SEARCH)}
                         />
                     </div>
                 </div>
@@ -152,7 +154,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         <h2 className="text-sm font-semibold text-[#1E293B] truncate pr-2">
                                             {chat.name}
                                         </h2>
-                                        <span className={`text-xs whitespace-nowrap ${chat.unread > 0 ? 'text-[#0047AB] font-medium' : 'text-[#64748B]'}`}>
+                                        <span className={`text-xs whitespace-nowrap ${chat.unread > 0 ? 'text-primary font-medium' : 'text-[#64748B]'}`}>
                                             {chat.time}
                                         </span>
                                     </div>
@@ -201,7 +203,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
 
             {/* Floating Action Button */}
             <div className="absolute bottom-6 right-6 z-50">
-                <button className="bg-[#0047AB] hover:bg-blue-700 text-white rounded-full px-5 py-3 shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <button className="bg-primary hover:bg-blue-700 text-white rounded-full px-5 py-3 shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     <span className="material-icons text-2xl">post_add</span>
                     <span className="font-medium text-base">Post Requirement</span>
                 </button>
