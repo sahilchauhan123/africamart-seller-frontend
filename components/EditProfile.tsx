@@ -11,8 +11,8 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
   return (
     <div className="bg-white font-body text-slate-900 antialiased h-full flex flex-col overflow-hidden">
       {/* Mobile Custom Header */}
-      <header className="bg-primary pt-12 pb-6 px-6 text-white shrink-0 z-10 shadow-lg lg:hidden">
-        <div className="flex items-center justify-between max-w-md mx-auto">
+      <header className="bg-primary text-white p-4 shrink-0 z-10 shadow-lg lg:hidden h-16 flex items-center">
+        <div className="flex items-center justify-between w-full max-w-md mx-auto">
           <button onClick={onBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors">
             <span className="material-icons-round leading-none text-xl">arrow_back_ios_new</span>
           </button>
@@ -39,7 +39,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="w-32 h-32 rounded-full bg-slate-100 flex items-center justify-center text-4xl font-black text-primary border-4 border-white shadow-2xl overflow-hidden">
               {MOCK_USER.businessName.charAt(0)}
             </div>
-            <button className="absolute bottom-1 right-1 bg-primary text-white p-2.5 rounded-full border-4 border-white shadow-xl active:scale-90 transition-transform">
+            <button className="absolute bottom-1 right-1 bg-primary text-white p-2.5 rounded-full border-4 border-white shadow-md active:scale-90 transition-transform">
               <span className="material-icons-round text-lg leading-none">photo_camera</span>
             </button>
           </div>
@@ -49,6 +49,18 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
 
         {/* Form Sections */}
         <form className="space-y-6 pb-24" onSubmit={(e) => { e.preventDefault(); onSave(); }}>
+          
+          <div className="space-y-1.5">
+            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nature of Business</label>
+            <div className="relative group">
+              <input
+                className="w-full px-5 py-4 rounded-2xl border-2 border-transparent bg-slate-50 text-slate-900 font-bold placeholder-slate-400 focus:bg-white focus:border-primary focus:ring-0 transition-all duration-200"
+                placeholder="e.g. Acme Solutions"
+                type="text"
+                defaultValue={MOCK_USER.businessName}
+              />
+            </div>
+          </div>
           <div className="space-y-1.5">
             <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Business Name</label>
             <div className="relative group">
@@ -109,6 +121,15 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
               placeholder="contact@business.com"
               type="email"
               defaultValue="alex@eliteliberia.com"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Capital & Country</label>
+            <input
+              className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
+              placeholder="Monrovia, Liberia"
+              type="text"
             />
           </div>
 

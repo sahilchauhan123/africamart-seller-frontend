@@ -106,11 +106,11 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                 <input
                   className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
                   type="text"
-                  defaultValue="ELWA, Paynesville City"
+                  defaultValue="Paynesville City"
                 />
               </div>
               <div className="p-4 space-y-2">
-                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Country & Capital</label>
+                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Capital & Country</label>
                 <input
                   className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
                   type="text"
