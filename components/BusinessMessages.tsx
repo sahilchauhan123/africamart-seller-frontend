@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from '../types';
 
 interface Props {
@@ -8,50 +8,160 @@ interface Props {
 }
 
 const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
+    const [activeTab, setActiveTab] = useState('all');
+
     const chats = [
-        { id: 1, name: 'Individual Name', initials: 'IN', message: 'Can we reschedule our meeting for tomorrow?', time: '22:30 AM', unread: 3, online: true, color: 'bg-blue-100 text-primary border-blue-200' },
-        { id: 2, name: 'Michael Johnson', initials: 'MJ', message: 'The project files have been updated. Please check.', time: '21:15 PM', unread: 1, online: false, color: 'bg-purple-100 text-purple-700 border-purple-200' },
-        { id: 3, name: 'Sarah Williams', initials: 'SW', message: 'Thanks for the update!', time: 'Yesterday', unread: 0, online: false, color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
-        { id: 4, name: 'Robert Brown', initials: 'RB', message: 'See you at the conference next week.', time: 'Yesterday', unread: 0, online: false, color: 'bg-orange-100 text-orange-700 border-orange-200' },
-        { id: 5, name: 'Lisa King', initials: 'LK', message: 'Invoice #4022 has been paid.', time: 'Mon', unread: 0, online: false, color: 'bg-pink-100 text-pink-700 border-pink-200' },
-        { id: 6, name: 'David Miller', initials: 'DM', message: 'Can you send me the contract details?', time: 'Mon', unread: 0, online: false, color: 'bg-teal-100 text-teal-700 border-teal-200' },
-        { id: 7, name: 'Alex Jones', initials: 'AJ', message: 'Looking forward to the demo.', time: 'Sun', unread: 2, online: false, color: 'bg-indigo-100 text-indigo-700 border-indigo-200' },
+        {
+            id: 1,
+            name: 'Individual Name',
+            initials: 'IN',
+            message: 'Can we reschedule our meeting for tomorrow?',
+            time: '22:30 AM',
+            unread: 3,
+            online: true,
+            color: 'bg-blue-100 text-[#0047AB] border-blue-200'
+        },
+        {
+            id: 2,
+            name: 'Michael Johnson',
+            initials: 'MJ',
+            message: 'The project files have been updated. Please check.',
+            time: '21:15 PM',
+            unread: 1,
+            online: false,
+            color: 'bg-purple-100 text-purple-700 border-purple-200'
+        },
+        {
+            id: 3,
+            name: 'Sarah Williams',
+            initials: 'SW',
+            message: 'Thanks for the update!',
+            time: 'Yesterday',
+            unread: 0,
+            online: false,
+            color: 'bg-emerald-100 text-emerald-700 border-emerald-200'
+        },
+        {
+            id: 4,
+            name: 'Robert Brown',
+            initials: 'RB',
+            message: 'See you at the conference next week.',
+            time: 'Yesterday',
+            unread: 0,
+            online: false,
+            color: 'bg-orange-100 text-orange-700 border-orange-200'
+        },
+        {
+            id: 5,
+            name: 'Lisa King',
+            initials: 'LK',
+            message: 'Invoice #4022 has been paid.',
+            time: 'Mon',
+            unread: 0,
+            online: false,
+            color: 'bg-pink-100 text-pink-700 border-pink-200'
+        },
+        {
+            id: 6,
+            name: 'David Miller',
+            initials: 'DM',
+            message: 'Can you send me the contract details?',
+            time: 'Mon',
+            unread: 0,
+            online: false,
+            color: 'bg-teal-100 text-teal-700 border-teal-200'
+        },
+        {
+            id: 7,
+            name: 'Alex Jones',
+            initials: 'AJ',
+            message: 'Looking forward to the demo.',
+            time: 'Sun',
+            unread: 2,
+            online: false,
+            color: 'bg-indigo-100 text-indigo-700 border-indigo-200'
+        },
     ];
 
+    const filteredChats = activeTab === 'all' ? chats : chats.filter(c => c.unread > 0);
+
     return (
-        <div className="flex flex-col h-full bg-white overflow-hidden">
-            <main className="flex-1 overflow-y-auto no-scrollbar">
-                <div className="divide-y divide-slate-100">
-                    {chats.map((chat) => (
+        <div className="flex flex-col h-full bg-[#F8FAFC] font-display antialiased h-screen overflow-hidden transition-colors duration-300">
+            {/* Mobile Header (from snippet) */}
+            <header className="bg-[#0047AB] shadow-md z-40 relative lg:hidden shrink-0">
+                <div className="flex items-center justify-between px-4 py-3">
+                    <button
+                        onClick={onOpenDrawer}
+                        className="p-2 rounded-full hover:bg-white/10 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                    >
+                        <span className="material-icons text-2xl">menu</span>
+                    </button>
+                    <h1 className="text-white text-lg font-semibold tracking-wide">Business Messages</h1>
+                    <button className="p-2 rounded-full hover:bg-white/10 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-white/20">
+                        <span className="material-icons text-2xl">more_vert</span>
+                    </button>
+                </div>
+                <div className="px-4 pb-3">
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span className="material-icons text-gray-400 text-xl">search</span>
+                        </div>
+                        <input
+                            className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 sm:text-sm shadow-sm"
+                            placeholder="Search chats..."
+                            type="text"
+                        />
+                    </div>
+                </div>
+                <div className="flex px-4 pb-0 space-x-6 text-sm font-medium text-blue-100 overflow-x-auto no-scrollbar">
+                    <button
+                        onClick={() => setActiveTab('all')}
+                        className={`pb-3 border-b-2 transition-all ${activeTab === 'all' ? 'border-white text-white' : 'border-transparent text-blue-100/70 hover:text-white'}`}
+                    >
+                        All Chats
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('unread')}
+                        className={`pb-3 border-b-2 transition-all ${activeTab === 'unread' ? 'border-white text-white' : 'border-transparent text-blue-100/70 hover:text-white'}`}
+                    >
+                        Unread
+                    </button>
+                </div>
+            </header>
+
+            {/* Main Chat List */}
+            <main className="flex-1 overflow-y-auto no-scrollbar relative bg-[#F8FAFC]">
+                <div className="divide-y divide-slate-200">
+                    {filteredChats.map((chat) => (
                         <div
                             key={chat.id}
                             onClick={() => onNavigate(View.CHAT)}
-                            className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 border-l-4 border-transparent hover:border-primary"
+                            className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100"
                         >
-                            <div className="flex items-center px-4 py-5 lg:px-10">
+                            <div className="flex items-center px-4 py-4 sm:px-6 lg:px-10">
                                 <div className="relative flex-shrink-0">
-                                    <div className={`h-14 w-14 rounded-full flex items-center justify-center border-2 ${chat.color} font-bold text-lg shadow-sm`}>
+                                    <div className={`h-12 w-12 rounded-full flex items-center justify-center border-2 ${chat.color} font-bold text-lg`}>
                                         {chat.initials}
                                     </div>
                                     {chat.online && (
-                                        <span className="absolute bottom-0.5 right-0.5 block h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white"></span>
+                                        <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
                                     )}
                                 </div>
-                                <div className="ml-5 flex-1 min-w-0">
+                                <div className="ml-4 flex-1 min-w-0">
                                     <div className="flex justify-between items-baseline mb-1">
-                                        <h2 className="text-base font-bold text-slate-900 truncate pr-2">
+                                        <h2 className="text-sm font-semibold text-[#1E293B] truncate pr-2">
                                             {chat.name}
                                         </h2>
-                                        <span className={`text-xs whitespace-nowrap ${chat.unread > 0 ? 'text-primary font-bold' : 'text-slate-400 font-medium'}`}>
+                                        <span className={`text-xs whitespace-nowrap ${chat.unread > 0 ? 'text-[#0047AB] font-medium' : 'text-[#64748B]'}`}>
                                             {chat.time}
                                         </span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <p className={`text-sm truncate pr-4 ${chat.unread > 0 ? 'text-slate-900 font-semibold' : 'text-slate-500 font-normal'}`}>
+                                        <p className={`text-sm truncate pr-4 ${chat.unread > 0 ? 'text-[#1E293B] font-medium' : 'text-[#64748B]'}`}>
                                             {chat.message}
                                         </p>
                                         {chat.unread > 0 && (
-                                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-primary text-white shadow-sm shadow-primary/20">
+                                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                                 {chat.unread}
                                             </span>
                                         )}
@@ -61,24 +171,25 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         </div>
                     ))}
 
-                    <div className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 pb-32">
-                        <div className="flex items-center px-4 py-5 lg:px-10">
+                    {/* Unknown User Placeholder */}
+                    <div className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 pb-24">
+                        <div className="flex items-center px-4 py-4 sm:px-6 lg:px-10">
                             <div className="relative flex-shrink-0">
-                                <div className="h-14 w-14 rounded-full bg-slate-50 flex items-center justify-center border-2 border-slate-100 text-slate-300 font-bold text-lg">
-                                    <span className="material-icons text-2xl">person</span>
+                                <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200 text-gray-600 font-bold text-lg">
+                                    <span className="material-icons text-xl">person</span>
                                 </div>
                             </div>
-                            <div className="ml-5 flex-1 min-w-0">
+                            <div className="ml-4 flex-1 min-w-0">
                                 <div className="flex justify-between items-baseline mb-1">
-                                    <h2 className="text-base font-bold text-slate-900 truncate pr-2">
+                                    <h2 className="text-sm font-semibold text-[#1E293B] truncate pr-2">
                                         Unknown User
                                     </h2>
-                                    <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
+                                    <span className="text-xs text-[#64748B] whitespace-nowrap">
                                         Sun
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <p className="text-sm text-slate-500 truncate pr-4">
+                                    <p className="text-sm text-[#64748B] truncate pr-4">
                                         New inquiry from website form.
                                     </p>
                                 </div>
@@ -88,10 +199,11 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                 </div>
             </main>
 
-            <div className="fixed bottom-8 right-8 z-50">
-                <button className="bg-primary hover:bg-blue-700 text-white rounded-full px-6 py-4 shadow-xl flex items-center justify-center gap-3 transition-all hover:scale-105 active:scale-95 shadow-primary/30">
-                    <span className="material-icons text-2xl leading-none">post_add</span>
-                    <span className="font-bold text-sm tracking-wide uppercase">New Message</span>
+            {/* Floating Action Button */}
+            <div className="absolute bottom-6 right-6 z-50">
+                <button className="bg-[#0047AB] hover:bg-blue-700 text-white rounded-full px-5 py-3 shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <span className="material-icons text-2xl">post_add</span>
+                    <span className="font-medium text-base">Post Requirement</span>
                 </button>
             </div>
         </div>

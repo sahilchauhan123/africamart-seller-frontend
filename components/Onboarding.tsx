@@ -225,7 +225,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
 
         <main>
           {/* Hero Section */}
-          <section className="py-20 lg:py-32 bg-white">
+          <section className="pt-10 lg:pt-16 pb-10 lg:pb-12 bg-white">
             <div className="max-w-[1536px] mx-auto px-6 xl:px-16">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div className="flex flex-col">
@@ -270,7 +270,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Benefits Section */}
-          <section className="py-24 lg:py-32 bg-white" id="benefits">
+          <section className="pt-10 lg:pt-12 pb-12 lg:pb-16 bg-white" id="benefits">
             <div className="max-w-[1536px] mx-auto px-6 xl:px-16">
               <div className="text-center md:text-left mb-16">
                 <h2 className="text-4xl font-extrabold mb-4 text-slate-900">Sell with AfricaMart</h2>
@@ -311,7 +311,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Why Section */}
-          <section className="py-24 lg:py-32 bg-sky-50/50">
+          <section className="pt-12 lg:pt-16 pb-24 lg:pb-32 bg-sky-50/50">
             <div className="max-w-[1536px] mx-auto px-6 xl:px-16">
               <div className="flex flex-col md:flex-row items-center gap-16 lg:gap-24">
                 <div className="w-full md:w-1/2">

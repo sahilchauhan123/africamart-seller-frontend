@@ -88,14 +88,14 @@ const App: React.FC = () => {
       )}
       <div className={isAuthView ? "lg:pl-72 flex flex-col h-full overflow-hidden" : ""}>
         {isAuthView && (
-          <div className={currentView === View.PROFILE || currentView === View.EDIT_PROFILE ? "hidden lg:block" : ""}>
+          <div className={currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT ? "hidden lg:block" : ""}>
             <Header
               onOpenDrawer={() => setIsDrawerOpen(true)}
               onNavigate={(view) => setCurrentView(view)}
             />
           </div>
         )}
-        <main className={`flex-1 overflow-hidden relative ${isAuthView ? (currentView === View.PROFILE || currentView === View.EDIT_PROFILE ? "lg:pt-[72px]" : "pt-16 lg:pt-[72px]") : ""}`}>
+        <main className={`flex-1 overflow-hidden relative ${isAuthView ? (currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT ? "lg:pt-[72px]" : "pt-16 lg:pt-[72px]") : ""}`}>
           {renderView()}
         </main>
       </div>
