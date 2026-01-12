@@ -9,16 +9,7 @@ interface Props {
 
 const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
   return (
-    <div className="fixed inset-0 lg:left-[300px] flex flex-col bg-gray-100">
-      <header className="bg-primary px-4 py-4 shadow-md text-white flex items-center justify-between shrink-0">
-        <button onClick={onBack} className="p-1 -ml-2 rounded-full hover:bg-white/10 transition lg:hidden">
-          <span className="material-icons-round text-2xl">menu</span>
-        </button>
-        <h1 className="text-lg font-bold">Recent Inquiries</h1>
-        <button className="p-1 rounded-full hover:bg-white/10 transition">
-          <span className="material-icons-round text-2xl">filter_list</span>
-        </button>
-      </header>
+    <div className="flex flex-col bg-gray-100 min-h-full">
 
       <div className="bg-white shadow-sm border-b border-gray-100 px-4 py-3 overflow-x-auto no-scrollbar flex gap-2 shrink-0">
         <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-primary text-white text-xs font-medium shadow-sm">All</button>

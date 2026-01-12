@@ -18,39 +18,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     ];
 
     return (
-        <div className="flex flex-col h-screen bg-background-light">
-            <header className="bg-primary shadow-md z-40 relative shrink-0">
-                <div className="flex items-center justify-between px-4 py-3">
-                    <button
-                        onClick={onOpenDrawer}
-                        className="p-2 rounded-full hover:bg-white/10 transition-colors text-white lg:hidden"
-                    >
-                        <span className="material-icons text-2xl">menu</span>
-                    </button>
-                    <h1 className="text-white text-lg font-semibold tracking-wide flex-grow lg:ml-0 ml-2">Business Messages</h1>
-                    <button className="p-2 rounded-full hover:bg-white/10 transition-colors text-white">
-                        <span className="material-icons text-2xl">more_vert</span>
-                    </button>
-                </div>
-
-                <div className="px-4 pb-3">
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="material-icons text-gray-400 text-xl">search</span>
-                        </div>
-                        <input
-                            className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 sm:text-sm shadow-sm"
-                            placeholder="Search chats..."
-                            type="text"
-                        />
-                    </div>
-                </div>
-
-                <div className="flex px-4 pb-0 space-x-6 text-sm font-medium text-blue-100 overflow-x-auto no-scrollbar">
-                    <button className="pb-3 border-b-2 border-white text-white whitespace-nowrap">All Chats</button>
-                    <button className="pb-3 border-b-2 border-transparent hover:text-white transition-colors whitespace-nowrap">Unread</button>
-                </div>
-            </header>
+        <div className="flex flex-col h-full bg-background-light">
 
             <main className="flex-1 overflow-y-auto no-scrollbar bg-background-light">
                 <div className="divide-y divide-slate-200">

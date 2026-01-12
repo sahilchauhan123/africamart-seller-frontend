@@ -5,141 +5,369 @@ import { MOCK_USER, MOCK_INQUIRIES } from '../constants';
 import Drawer from './common/Drawer';
 
 interface Props {
-  onNavigate: (view: View) => void;
-  onOpenDrawer: () => void;
+    onNavigate: (view: View) => void;
+    onOpenDrawer: () => void;
 }
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-primary sticky top-0 z-50 px-4 py-3 shadow-md">
-        <div className="flex items-center justify-between gap-3 max-w-7xl mx-auto w-full">
-          <div className="flex items-center gap-3">
-            <button onClick={onOpenDrawer} className="text-white p-1 rounded-md hover:bg-white/10 transition lg:hidden">
-              <span className="material-icons-round text-3xl">menu</span>
-            </button>
-            <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white/30 overflow-hidden flex-shrink-0 cursor-pointer" onClick={() => onNavigate(View.PROFILE)}>
-              <img alt="User Avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi46GtpiM2PCOQBHANxFI9RbtsMJaAKLO_wmlPAAI9F3P8WF4Ol7CjQYs4bVfLnxrSMCfSNXNeQZNlSe5fCq1nvg6iZK9cONpUeEMCCP0YutzWEoXUtRyuz5USsT-FRNDsMLjixVN0_9RsTDgd2TXFi9OZ8lX0X5GwJX3Zb-AjabzDVPsA4t09tANJ6-oBYYqtF1RK_ZE0PH2XuqcFnS0mHoUyU1lr8hykoYW9ig6b4rqQOWYvQFo666LkAWEMXSTWA60ibVTejNI" />
+    return (
+        <div className="flex flex-col min-h-screen bg-background-light">
+
+            {/* Mobile Dashboard */}
+            <div className="lg:hidden flex flex-col min-h-screen">
+                <main className="pb-8 flex-1 max-w-7xl mx-auto w-full">
+                    <section className="px-4 py-6">
+                        <div className="grid grid-cols-4 gap-4">
+                            <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
+                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <span className="material-icons-round text-blue-600">add</span>
+                                    </div>
+                                </div>
+                                <span className="text-[11px] font-medium text-center leading-tight">Add<br />Product</span>
+                            </button>
+                            <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="flex flex-col items-center group">
+                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                                        <span className="material-icons-round text-purple-600 text-lg">visibility</span>
+                                    </div>
+                                </div>
+                                <span className="text-[11px] font-medium text-center leading-tight">Check<br />Leads</span>
+                            </button>
+                            <button onClick={() => onNavigate(View.PRODUCT_LIST)} className="flex flex-col items-center group">
+                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                                        <span className="material-icons-round text-green-600 text-lg">inventory_2</span>
+                                    </div>
+                                </div>
+                                <span className="text-[11px] font-medium text-center leading-tight">Manage<br />Products</span>
+                            </button>
+                            <button className="flex flex-col items-center group">
+                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                                        <span className="material-icons-round text-orange-600 text-lg">description</span>
+                                    </div>
+                                </div>
+                                <span className="text-[11px] font-medium text-center leading-tight">Post<br />Req</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <section className="mb-6">
+                        <div className="flex items-center justify-between px-4 mb-3">
+                            <h2 className="text-lg font-bold">Business Overview</h2>
+                            <button className="text-sm font-medium text-primary hover:underline">View Report</button>
+                        </div>
+                        <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
+                            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                                <div className="flex items-start justify-between">
+                                    <span className="material-icons-round text-blue-500 text-xl">analytics</span>
+                                    <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500">Total Views</p>
+                                    <p className="text-xl font-bold">1,245</p>
+                                </div>
+                            </div>
+                            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                                <div className="flex items-start justify-between">
+                                    <span className="material-icons-round text-purple-500 text-xl">group</span>
+                                    <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500">New Leads</p>
+                                    <p className="text-xl font-bold">85</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="px-4">
+                        <div className="flex items-center justify-between mb-3">
+                            <h2 className="text-lg font-bold">Recent Inquiries</h2>
+                            <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="text-sm font-medium text-primary hover:underline">View all</button>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            {MOCK_INQUIRIES.map(inq => (
+                                <div key={inq.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99]" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="flex gap-4">
+                                        <div className="w-12 h-12 rounded-full border-2 border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0">
+                                            <span className="text-orange-500 font-bold text-sm">{inq.initials}</span>
+                                        </div>
+                                        <div className="flex-grow">
+                                            <div className="flex justify-between items-start mb-1">
+                                                <h3 className="font-bold text-sm">{inq.companyName}</h3>
+                                                <span className="text-xs text-gray-500">{inq.time}</span>
+                                            </div>
+                                            <p className="text-xs text-gray-500 mb-3 line-clamp-1">{inq.message}</p>
+                                            <div className="flex items-center gap-3">
+                                                <span className="px-2 py-0.5 rounded-full border border-green-500 text-[10px] font-medium text-green-600 bg-green-50">
+                                                    {inq.status}
+                                                </span>
+                                                <div className="flex items-center text-gray-500">
+                                                    <span className="material-icons-round text-[14px] mr-1">location_on</span>
+                                                    <span className="text-[10px]">{inq.location}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                </main>
             </div>
-          </div>
-          <div className="flex-grow max-w-md">
-            <div className="relative">
-              <input className="w-full pl-4 pr-10 py-2 rounded-full text-sm border-none focus:ring-2 focus:ring-blue-300 bg-white text-gray-800 placeholder-gray-400 shadow-sm" placeholder="Search Service / Prod.." type="text" />
-              <span className="material-icons-round absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+
+            {/* Desktop Dashboard */}
+            <div className="hidden lg:flex flex-col h-screen overflow-hidden">
+                <main className="flex-1 overflow-y-auto p-10">
+                    <div className="max-w-7xl mx-auto space-y-10">
+                        <section>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                    <div className="w-14 h-14 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 mb-5">
+                                        <span className="material-symbols-outlined text-2xl">add_circle</span>
+                                    </div>
+                                    <span className="font-bold text-slate-800 text-sm">Add Product</span>
+                                    <span className="text-[11px] text-slate-400 mt-1">Update inventory</span>
+                                </button>
+                                <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                    <div className="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 mb-5">
+                                        <span className="material-symbols-outlined text-2xl">ads_click</span>
+                                    </div>
+                                    <span className="font-bold text-slate-800 text-sm">Check Leads</span>
+                                    <span className="text-[11px] text-slate-400 mt-1">12 new today</span>
+                                </button>
+                                <button className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                    <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 mb-5">
+                                        <span className="material-symbols-outlined text-2xl">post_add</span>
+                                    </div>
+                                    <span className="font-bold text-slate-800 text-sm">Requirement</span>
+                                    <span className="text-[11px] text-slate-400 mt-1">Post new request</span>
+                                </button>
+                                <button className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                    <div className="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 mb-5">
+                                        <span className="material-symbols-outlined text-2xl text-[#f97316]">package_2</span>
+                                    </div>
+                                    <span className="font-bold text-slate-800 text-sm">Orders</span>
+                                    <span className="text-[11px] text-slate-400 mt-1">Manage shipping</span>
+                                </button>
+                            </div>
+                        </section>
+                        <div className="grid lg:grid-cols-3 gap-10">
+                            <div className="lg:col-span-2 space-y-8">
+                                <section>
+                                    <div className="flex items-center justify-between mb-8">
+                                        <h2 className="text-lg font-bold tracking-tight text-slate-800">Business Overview</h2>
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm gap-2">
+                                                <span className="material-symbols-outlined text-brand text-[18px]">group_add</span>
+                                                <span className="text-[11px] font-bold text-slate-600">NEW LEADS: <span className="text-brand">12</span></span>
+                                            </div>
+                                            <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm gap-2">
+                                                <span className="material-symbols-outlined text-brand text-[18px]">visibility</span>
+                                                <span className="text-[11px] font-bold text-slate-600">PRODUCT VIEWS: <span className="text-brand">1.2K</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <div className="bg-white border border-slate-100 rounded-[24px] p-6 relative overflow-hidden flex flex-col h-[220px] shadow-sm">
+                                            <div className="flex justify-between items-start mb-2 relative z-10">
+                                                <div>
+                                                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">JANUARY LEADS</p>
+                                                    <h3 className="text-3xl font-bold tracking-tight text-slate-800">125</h3>
+                                                </div>
+                                                <button className="bg-brand text-white text-[9px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide hover:bg-brand/90 transition-colors flex items-center gap-1">
+                                                    <span className="material-symbols-outlined text-[12px]">rocket_launch</span>
+                                                    Boost
+                                                </button>
+                                            </div>
+                                            <div className="flex-1 flex items-end gap-2.5 pb-0">
+                                                <div className="bg-slate-100 w-full h-[65%] rounded-lg"></div>
+                                                <div className="bg-slate-100 w-full h-[85%] rounded-lg"></div>
+                                                <div className="bg-slate-100 w-full h-[55%] rounded-lg"></div>
+                                                <div className="bg-brand w-full h-[100%] rounded-lg shadow-lg shadow-brand/20"></div>
+                                                <div className="bg-slate-100 w-full h-[90%] rounded-lg"></div>
+                                                <div className="bg-slate-100 w-full h-[75%] rounded-lg"></div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white border border-slate-100 rounded-[24px] p-6 flex flex-col h-[220px] shadow-sm">
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider">RESPONSE RATE</p>
+                                                    </div>
+                                                    <div className="flex items-baseline gap-2">
+                                                        <h3 className="text-3xl font-bold tracking-tight text-slate-800">92%</h3>
+                                                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Avg Score</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-3 flex-1">
+                                                <div className="space-y-1">
+                                                    <div className="flex justify-between items-center text-[10px] font-bold">
+                                                        <span className="text-brand flex items-center gap-1">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-brand"></span>
+                                                            Within 24hrs
+                                                        </span>
+                                                        <span className="text-slate-800">115 leads</span>
+                                                    </div>
+                                                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                                        <div className="bg-brand h-full w-[92%] rounded-full"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <div className="flex justify-between items-center text-[10px] font-bold text-slate-500">
+                                                        <span className="flex items-center gap-1">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                                                            After 24hrs
+                                                        </span>
+                                                        <span>10 leads</span>
+                                                    </div>
+                                                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                                        <div className="bg-slate-300 h-full w-[8%] rounded-full"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="pt-2 border-t border-slate-100 mt-auto">
+                                                    <p className="text-[9px] text-slate-400 italic">Goal: Respond to 100% within 24 hours.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-8 glass-card p-8 flex items-center justify-between border-l-4 border-brand">
+                                        <div className="flex items-center gap-8 flex-1">
+                                            <div className="relative w-16 h-16 flex items-center justify-center">
+                                                <svg className="w-full h-full -rotate-90">
+                                                    <circle className="text-slate-100" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <circle className="text-brand" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" strokeDasharray="175.9" strokeDashoffset="26.38" strokeWidth="4"></circle>
+                                                </svg>
+                                                <span className="absolute text-xs font-bold text-slate-800">85%</span>
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <h4 className="text-sm font-bold text-slate-800">Profile Completeness Score</h4>
+                                                    <a className="text-brand text-xs font-bold hover:underline cursor-pointer" onClick={() => onNavigate(View.EDIT_PROFILE)}>Complete now →</a>
+                                                </div>
+                                                <p className="text-[11px] text-slate-400">Increase your profile completeness to gain 40% more visibility in search results.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-8 bg-white/50 border border-slate-100 rounded-[24px] p-4 grid grid-cols-3">
+                                        <div className="text-center py-6 px-2 transition-all cursor-pointer relative">
+                                            <p className="text-[10px] text-brand font-bold uppercase tracking-widest mb-1">NEW</p>
+                                            <p className="text-2xl font-bold text-brand">2,450</p>
+                                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-brand rounded-full"></div>
+                                        </div>
+                                        <div className="text-center py-6 px-2 hover:bg-slate-50/50 rounded-2xl transition-all cursor-pointer">
+                                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">CONTACTED</p>
+                                            <p className="text-2xl font-bold text-slate-800">1,820</p>
+                                        </div>
+                                        <div className="text-center py-6 px-2 hover:bg-slate-50/50 rounded-2xl transition-all cursor-pointer">
+                                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">PENDING RESPONSE</p>
+                                            <p className="text-2xl font-bold text-slate-800">640</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div className="lg:col-span-1">
+                                <div className="flex items-center justify-between mb-8">
+                                    <h2 className="text-lg font-bold tracking-tight text-slate-800">Recent Inquiries</h2>
+                                    <a className="text-brand font-bold text-xs uppercase tracking-widest hover:underline cursor-pointer" onClick={() => onNavigate(View.INQUIRY_LIST)}>VIEW MORE</a>
+                                </div>
+                                <div className="space-y-2 relative">
+                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                        <div className="flex items-start gap-2.5 mb-1.5">
+                                            <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-[12px] font-bold text-orange-500 border border-orange-100 flex-shrink-0">CH</div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center justify-between gap-1.5">
+                                                    <h4 className="font-bold text-slate-800 text-xs group-hover:text-brand transition-colors truncate">Century Holdings</h4>
+                                                    <span className="bg-brand/5 text-brand text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-wide flex-shrink-0">NEW</span>
+                                                </div>
+                                                <p className="text-[9px] text-slate-400 font-medium">12 mins ago</p>
+                                            </div>
+                                        </div>
+                                        <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Request for quotation on bulk rice imports for Q2 cycle.</p>
+                                        <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
+                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            MONROVIA, LIBERIA
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                        <div className="flex items-start gap-2.5 mb-1.5">
+                                            <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[12px] font-bold text-indigo-500 border border-indigo-100 flex-shrink-0">AG</div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center justify-between gap-1.5">
+                                                    <h4 className="font-bold text-slate-800 text-xs group-hover:text-brand transition-colors truncate">AgroGlobal Ltd</h4>
+                                                    <span className="bg-slate-100 text-slate-500 text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-wide flex-shrink-0">CONTACTED</span>
+                                                </div>
+                                                <p className="text-[9px] text-slate-400 font-medium">45 mins ago</p>
+                                            </div>
+                                        </div>
+                                        <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Pricing update requested for organic fertilizer samples.</p>
+                                        <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
+                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            PAYNESVILLE, LIB
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                        <div className="flex items-start gap-2.5 mb-1.5">
+                                            <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-[12px] font-bold text-emerald-500 border border-emerald-100 flex-shrink-0">SD</div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center justify-between gap-1.5">
+                                                    <h4 className="font-bold text-slate-800 text-xs group-hover:text-brand transition-colors truncate">Skyline Distro</h4>
+                                                    <span className="bg-brand/5 text-brand text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-wide flex-shrink-0">NEW</span>
+                                                </div>
+                                                <p className="text-[9px] text-slate-400 font-medium">2 hours ago</p>
+                                            </div>
+                                        </div>
+                                        <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Inquiry regarding solar-powered irrigation pumps.</p>
+                                        <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
+                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            GBARNGA, LIBERIA
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                        <div className="flex items-start gap-2.5 mb-1.5">
+                                            <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-[12px] font-bold text-purple-500 border border-purple-100 flex-shrink-0">ME</div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center justify-between gap-1.5">
+                                                    <h4 className="font-bold text-slate-800 text-xs group-hover:text-brand transition-colors truncate">Maritime Export</h4>
+                                                    <span className="bg-amber-100 text-amber-600 text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-wide flex-shrink-0">PENDING</span>
+                                                </div>
+                                                <p className="text-[9px] text-slate-400 font-medium">5 hours ago</p>
+                                            </div>
+                                        </div>
+                                        <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Documentation check for international shipping compliance.</p>
+                                        <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
+                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            FREEPORT, MONROVIA
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group fade-bottom" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                        <div className="flex items-start gap-2.5 mb-1.5">
+                                            <div className="w-8 h-8 rounded-full bg-rose-50 flex items-center justify-center text-[12px] font-bold text-rose-500 border border-rose-100 flex-shrink-0">VH</div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center justify-between gap-1.5">
+                                                    <h4 className="font-bold text-slate-800 text-xs group-hover:text-brand transition-colors truncate">Vista Hotels</h4>
+                                                    <span className="bg-slate-100 text-slate-500 text-[7px] px-1 py-0.5 rounded-full font-bold uppercase tracking-wide flex-shrink-0">CONTACTED</span>
+                                                </div>
+                                                <p className="text-[9px] text-slate-400 font-medium">8 hours ago</p>
+                                            </div>
+                                        </div>
+                                        <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Volume discount request for high-grade linens.</p>
+                                        <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
+                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            BUCHANAN, LIB
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
-          </div>
-          <div className="relative">
-            <button className="text-white p-1 rounded-md hover:bg-white/10 transition">
-              <span className="material-icons-round text-2xl">notifications</span>
-            </button>
-            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-primary"></span>
-          </div>
         </div>
-      </header>
-
-      <main className="pb-8 flex-1 max-w-7xl mx-auto w-full">
-        <section className="px-4 py-6">
-          <div className="grid grid-cols-4 lg:grid-cols-4 gap-4">
-            <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
-              <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="material-icons-round text-blue-600">add</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-medium text-center leading-tight">Add<br />Product</span>
-            </button>
-            <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="flex flex-col items-center group">
-              <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
-                  <span className="material-icons-round text-purple-600 text-lg">visibility</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-medium text-center leading-tight">Check<br />Leads</span>
-            </button>
-            <button onClick={() => onNavigate(View.PRODUCT_LIST)} className="flex flex-col items-center group">
-              <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
-                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                  <span className="material-icons-round text-green-600 text-lg">inventory_2</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-medium text-center leading-tight">Manage<br />Products</span>
-            </button>
-            <button className="flex flex-col items-center group">
-              <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
-                <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
-                  <span className="material-icons-round text-orange-600 text-lg">description</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-medium text-center leading-tight">Post<br />Req</span>
-            </button>
-          </div>
-        </section>
-
-        <section className="mb-6">
-          <div className="flex items-center justify-between px-4 mb-3">
-            <h2 className="text-lg font-bold">Business Overview</h2>
-            <button className="text-sm font-medium text-primary hover:underline">View Report</button>
-          </div>
-          <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
-            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
-              <div className="flex items-start justify-between">
-                <span className="material-icons-round text-blue-500 text-xl">analytics</span>
-                <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500">Total Views</p>
-                <p className="text-xl font-bold">1,245</p>
-              </div>
-            </div>
-            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
-              <div className="flex items-start justify-between">
-                <span className="material-icons-round text-purple-500 text-xl">group</span>
-                <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500">New Leads</p>
-                <p className="text-xl font-bold">85</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="px-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-bold">Recent Inquiries</h2>
-            <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="text-sm font-medium text-primary hover:underline">View all</button>
-          </div>
-          <div className="flex flex-col gap-3">
-            {MOCK_INQUIRIES.map(inq => (
-              <div key={inq.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99]" onClick={() => onNavigate(View.LEAD_DETAILS)}>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-full border-2 border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0">
-                    <span className="text-orange-500 font-bold text-sm">{inq.initials}</span>
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between items-start mb-1">
-                      <h3 className="font-bold text-sm">{inq.companyName}</h3>
-                      <span className="text-xs text-gray-500">{inq.time}</span>
-                    </div>
-                    <p className="text-xs text-gray-500 mb-3 line-clamp-1">{inq.message}</p>
-                    <div className="flex items-center gap-3">
-                      <span className="px-2 py-0.5 rounded-full border border-green-500 text-[10px] font-medium text-green-600 bg-green-50">
-                        {inq.status}
-                      </span>
-                      <div className="flex items-center text-gray-500">
-                        <span className="material-icons-round text-[14px] mr-1">location_on</span>
-                        <span className="text-[10px]">{inq.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
-    </div>
-  );
+    );
 };
 
 export default Dashboard;

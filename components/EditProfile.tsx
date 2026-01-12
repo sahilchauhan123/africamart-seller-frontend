@@ -9,17 +9,7 @@ interface Props {
 
 const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
   return (
-    <div className="bg-[#ffffff] font-body text-gray-900 antialiased h-screen flex flex-col overflow-hidden">
-      <header className="bg-[#0033cc] pt-12 pb-4 px-4 shadow-md flex items-center relative z-10 shrink-0">
-        <button
-          onClick={onBack}
-          className="text-white p-1 hover:bg-white/10 rounded-full transition-colors absolute left-4"
-        >
-          <span className="material-icons text-3xl">arrow_back</span>
-        </button>
-        <h1 className="text-white text-xl font-medium w-full text-center">Edit Profile</h1>
-      </header>
-
+    <div className="bg-[#ffffff] font-body text-gray-900 antialiased h-full flex flex-col overflow-hidden">
       <main className="flex-1 overflow-y-auto no-scrollbar pb-8">
         <div className="px-5 pt-4">
           <div className="mb-6">

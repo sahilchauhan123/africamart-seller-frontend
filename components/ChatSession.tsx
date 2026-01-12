@@ -7,30 +7,7 @@ interface Props {
 
 const ChatSession: React.FC<Props> = ({ onBack }) => {
   return (
-    <div className="fixed inset-0 lg:left-[300px] flex flex-col bg-background-light z-30">
-      <header className="bg-white border-b px-3 py-3 flex items-center justify-between shrink-0">
-        <div className="flex items-center flex-1 min-w-0 mr-2">
-          <button onClick={onBack} className="mr-2 p-1 rounded-full hover:bg-gray-100 transition-colors">
-            <span className="material-icons text-2xl">arrow_back</span>
-          </button>
-          <div className="flex-1 min-w-0">
-            <h1 className="text-base font-bold truncate">Individual Name</h1>
-            <div className="flex items-center text-xs text-gray-500 mt-0.5 space-x-2">
-              <span className="flex items-center">
-                <span className="material-icons text-[14px] mr-0.5">location_on</span> New Delhi
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center space-x-1">
-          <button className="p-2 text-primary hover:bg-gray-100 rounded-full">
-            <span className="material-icons text-2xl">call</span>
-          </button>
-          <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full">
-            <span className="material-icons text-2xl">more_vert</span>
-          </button>
-        </div>
-      </header>
+    <div className="flex flex-col bg-background-light h-full overflow-hidden">
 
       <main className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
         <div className="flex justify-center">

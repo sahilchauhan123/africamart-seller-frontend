@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import BusinessMessages from './components/BusinessMessages';
 import Drawer from './components/common/Drawer';
+import Header from './components/common/Header';
 
 const App: React.FC = () => {
   const [currentView, setInternalView] = useState<View>(View.ONBOARDING);
@@ -82,10 +83,19 @@ const App: React.FC = () => {
             setCurrentView(view);
             setIsDrawerOpen(false);
           }}
+          currentView={currentView}
         />
       )}
-      <div className={isAuthView ? "lg:pl-[300px]" : ""}>
-        {renderView()}
+      <div className={isAuthView ? "lg:pl-72 flex flex-col min-h-screen" : ""}>
+        {isAuthView && (
+          <Header
+            onOpenDrawer={() => setIsDrawerOpen(true)}
+            onNavigate={(view) => setCurrentView(view)}
+          />
+        )}
+        <div className="flex-1">
+          {renderView()}
+        </div>
       </div>
     </div>
   );

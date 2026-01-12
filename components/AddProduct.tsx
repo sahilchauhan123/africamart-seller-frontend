@@ -21,15 +21,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900 antialiased">
-      <header className="bg-primary text-white p-4 flex items-center shadow-md z-10 shrink-0">
-        <button onClick={handleBack} className="p-1 mr-3 rounded-full hover:bg-white/10 transition-colors">
-          <span className="material-icons-outlined text-2xl">arrow_back</span>
-        </button>
-        <h1 className="text-lg font-semibold tracking-wide">
-          {step === 'basic' ? 'Add Product' : 'Product Name Here....'}
-        </h1>
-      </header>
+    <div className="flex-1 flex flex-col bg-white text-gray-900 antialiased overflow-hidden">
 
       <div className="flex bg-white border-b border-gray-200 shrink-0">
         <button
