@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View } from '../types';
 
@@ -18,40 +19,39 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     ];
 
     return (
-        <div className="flex flex-col h-full bg-background-light">
-
-            <main className="flex-1 overflow-y-auto no-scrollbar bg-background-light">
-                <div className="divide-y divide-slate-200">
+        <div className="flex flex-col h-full bg-white overflow-hidden">
+            <main className="flex-1 overflow-y-auto no-scrollbar">
+                <div className="divide-y divide-slate-100">
                     {chats.map((chat) => (
                         <div
                             key={chat.id}
                             onClick={() => onNavigate(View.CHAT)}
-                            className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100"
+                            className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 border-l-4 border-transparent hover:border-primary"
                         >
-                            <div className="flex items-center px-4 py-4 sm:px-6">
+                            <div className="flex items-center px-4 py-5 lg:px-10">
                                 <div className="relative flex-shrink-0">
-                                    <div className={`h-12 w-12 rounded-full flex items-center justify-center border-2 ${chat.color} font-bold text-lg`}>
+                                    <div className={`h-14 w-14 rounded-full flex items-center justify-center border-2 ${chat.color} font-bold text-lg shadow-sm`}>
                                         {chat.initials}
                                     </div>
                                     {chat.online && (
-                                        <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
+                                        <span className="absolute bottom-0.5 right-0.5 block h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white"></span>
                                     )}
                                 </div>
-                                <div className="ml-4 flex-1 min-w-0">
+                                <div className="ml-5 flex-1 min-w-0">
                                     <div className="flex justify-between items-baseline mb-1">
-                                        <h2 className="text-sm font-semibold text-slate-900 truncate pr-2">
+                                        <h2 className="text-base font-bold text-slate-900 truncate pr-2">
                                             {chat.name}
                                         </h2>
-                                        <span className={`text-xs whitespace-nowrap ${chat.unread > 0 ? 'text-primary font-medium' : 'text-slate-500'}`}>
+                                        <span className={`text-xs whitespace-nowrap ${chat.unread > 0 ? 'text-primary font-bold' : 'text-slate-400 font-medium'}`}>
                                             {chat.time}
                                         </span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <p className={`text-sm truncate pr-4 ${chat.unread > 0 ? 'text-slate-900 font-medium' : 'text-slate-500'}`}>
+                                        <p className={`text-sm truncate pr-4 ${chat.unread > 0 ? 'text-slate-900 font-semibold' : 'text-slate-500 font-normal'}`}>
                                             {chat.message}
                                         </p>
                                         {chat.unread > 0 && (
-                                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-primary text-white shadow-sm shadow-primary/20">
                                                 {chat.unread}
                                             </span>
                                         )}
@@ -61,19 +61,19 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         </div>
                     ))}
 
-                    <div className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 pb-24">
-                        <div className="flex items-center px-4 py-4 sm:px-6">
+                    <div className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 pb-32">
+                        <div className="flex items-center px-4 py-5 lg:px-10">
                             <div className="relative flex-shrink-0">
-                                <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200 text-gray-600 font-bold text-lg">
-                                    <span className="material-icons text-xl">person</span>
+                                <div className="h-14 w-14 rounded-full bg-slate-50 flex items-center justify-center border-2 border-slate-100 text-slate-300 font-bold text-lg">
+                                    <span className="material-icons text-2xl">person</span>
                                 </div>
                             </div>
-                            <div className="ml-4 flex-1 min-w-0">
+                            <div className="ml-5 flex-1 min-w-0">
                                 <div className="flex justify-between items-baseline mb-1">
-                                    <h2 className="text-sm font-semibold text-slate-900 truncate pr-2">
+                                    <h2 className="text-base font-bold text-slate-900 truncate pr-2">
                                         Unknown User
                                     </h2>
-                                    <span className="text-xs text-slate-500 whitespace-nowrap">
+                                    <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
                                         Sun
                                     </span>
                                 </div>
@@ -88,10 +88,10 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                 </div>
             </main>
 
-            <div className="fixed bottom-6 right-6 z-50">
-                <button className="bg-primary hover:bg-blue-700 text-white rounded-full px-5 py-3 shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95">
-                    <span className="material-icons text-2xl">post_add</span>
-                    <span className="font-medium text-base">Post Requirement</span>
+            <div className="fixed bottom-8 right-8 z-50">
+                <button className="bg-primary hover:bg-blue-700 text-white rounded-full px-6 py-4 shadow-xl flex items-center justify-center gap-3 transition-all hover:scale-105 active:scale-95 shadow-primary/30">
+                    <span className="material-icons text-2xl leading-none">post_add</span>
+                    <span className="font-bold text-sm tracking-wide uppercase">New Message</span>
                 </button>
             </div>
         </div>

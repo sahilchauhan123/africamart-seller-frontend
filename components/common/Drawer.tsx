@@ -17,7 +17,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
         onClick={onClose}
       />
       <div className={`fixed top-0 left-0 h-full w-[85%] max-w-[300px] bg-white z-[70] shadow-2xl flex flex-col transition-transform duration-300 lg:translate-x-0 lg:shadow-none lg:border-r lg:z-40 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="bg-white pt-12 pb-6 px-6 relative border-b border-gray-50">
+        <div className="bg-white px-6 h-16 flex items-center shrink-0 relative border-b border-gray-100">
           <button className="absolute top-4 right-4 text-gray-400 z-10 p-1 hover:bg-gray-100 rounded-full transition lg:hidden" onClick={onClose}>
             <span className="material-icons-round text-xl">close</span>
           </button>
@@ -84,10 +84,10 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
 
       {/* Desktop Sidebar */}
       <aside className="w-72 bg-white border-r border-slate-100 hidden lg:flex flex-col flex-shrink-0 z-20 fixed inset-y-0 left-0 font-display">
-        <div className="p-8">
-          <h1 className="text-xl font-bold flex items-center gap-3 text-black tracking-tight">
-            <span className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white">
-              <span className="material-symbols-outlined text-sm">dashboard</span>
+        <div className="px-8 h-[72px] flex items-center shrink-0 bg-white border-b border-slate-100">
+          <h1 className="text-xl font-bold flex items-center gap-3 text-slate-800 tracking-tight">
+            <span className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white shadow-sm shadow-brand/20">
+              <span className="material-symbols-outlined text-sm leading-none">dashboard</span>
             </span>
             PLATFORM
           </h1>

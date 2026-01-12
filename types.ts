@@ -40,4 +40,11 @@ export interface User {
   category: string;
   location: string;
   score: number;
+  rating?: string;
+  reviews?: number;
+  yearsInBusiness?: string;
+  employees?: string;
+  about?: string;
+  expertise?: string[];
+  certifications?: string[];
 }

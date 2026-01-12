@@ -74,7 +74,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-light">
+    <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
       {isAuthView && (
         <Drawer
           isOpen={isDrawerOpen}
@@ -86,16 +86,18 @@ const App: React.FC = () => {
           currentView={currentView}
         />
       )}
-      <div className={isAuthView ? "lg:pl-72 flex flex-col min-h-screen" : ""}>
+      <div className={isAuthView ? "lg:pl-72 flex flex-col h-full overflow-hidden" : ""}>
         {isAuthView && (
-          <Header
-            onOpenDrawer={() => setIsDrawerOpen(true)}
-            onNavigate={(view) => setCurrentView(view)}
-          />
+          <div className={currentView === View.PROFILE || currentView === View.EDIT_PROFILE ? "hidden lg:block" : ""}>
+            <Header
+              onOpenDrawer={() => setIsDrawerOpen(true)}
+              onNavigate={(view) => setCurrentView(view)}
+            />
+          </div>
         )}
-        <div className="flex-1">
+        <main className={`flex-1 overflow-hidden relative ${isAuthView ? (currentView === View.PROFILE || currentView === View.EDIT_PROFILE ? "lg:pt-[72px]" : "pt-16 lg:pt-[72px]") : ""}`}>
           {renderView()}
-        </div>
+        </main>
       </div>
     </div>
   );

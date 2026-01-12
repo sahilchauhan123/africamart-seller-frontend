@@ -11,11 +11,11 @@ interface Props {
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     return (
-        <div className="flex flex-col min-h-screen bg-background-light">
+        <div className="flex flex-col h-full bg-background-light overflow-hidden">
 
             {/* Mobile Dashboard */}
-            <div className="lg:hidden flex flex-col min-h-screen">
-                <main className="pb-8 flex-1 max-w-7xl mx-auto w-full">
+            <div className="lg:hidden flex flex-col h-full">
+                <main className="pb-8 flex-1 overflow-y-auto no-scrollbar max-w-7xl mx-auto w-full">
                     <section className="px-4 py-6">
                         <div className="grid grid-cols-4 gap-4">
                             <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
@@ -119,8 +119,8 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
             </div>
 
             {/* Desktop Dashboard */}
-            <div className="hidden lg:flex flex-col h-screen overflow-hidden">
-                <main className="flex-1 overflow-y-auto p-10">
+            <div className="hidden lg:flex flex-col h-full">
+                <main className="flex-1 overflow-y-auto no-scrollbar p-10">
                     <div className="max-w-7xl mx-auto space-y-10">
                         <section>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
