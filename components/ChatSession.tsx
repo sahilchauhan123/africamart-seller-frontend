@@ -17,8 +17,8 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
   return (
     <div className="bg-[#f3f4f6] font-display antialiased h-full flex flex-col overflow-hidden text-gray-900 relative">
       {/* Immersive Header - Fixed at Top */}
-      <header className="bg-white shadow-sm z-30 flex-none fixed top-0 left-0 right-0">
-        <div className="flex items-center justify-between px-3 py-3 border-b border-gray-200">
+      <header className="bg-white shadow-sm z-30 flex-none fixed top-0 left-0 lg:left-72 right-0">
+        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 py-3 border-b border-gray-200">
           <div className="flex items-center flex-1 min-w-0 mr-2">
             <button
               onClick={onBack}
@@ -51,7 +51,11 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
             </div>
           </div>
           <div className="flex items-center space-x-1">
-            <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-primary">
+            <button className="hidden lg:flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-bold text-sm hover:bg-primary/20 transition-colors mr-2">
+              <span className="material-icons text-xl">call</span>
+              Call Buyer
+            </button>
+            <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-primary lg:hidden">
               <span className="material-icons text-2xl leading-none">call</span>
             </button>
             <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600">
@@ -59,7 +63,7 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
             </button>
           </div>
         </div>
-        <div className="bg-blue-50 px-4 py-2 flex items-center justify-between text-xs border-b border-blue-100">
+        <div className="bg-blue-50 px-4 sm:px-6 lg:px-10 py-2 flex items-center justify-between text-xs border-b border-blue-100">
           <span className="text-gray-600 truncate mr-2 font-medium">Regarding: <span className="font-bold text-slate-800">Industrial Red Bucket (50L)</span></span>
           <span className="text-primary font-bold cursor-pointer whitespace-nowrap uppercase tracking-wider">View Item</span>
         </div>
@@ -68,7 +72,7 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
       {/* Chat Messages - Scrollable Area with P-Top to account for fixed header */}
       <main
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto bg-[#f3f4f6] p-4 pt-32 pb-40 space-y-4 no-scrollbar relative"
+        className="flex-1 overflow-y-auto bg-[#f3f4f6] px-4 sm:px-6 lg:px-10 pt-32 pb-40 space-y-4 no-scrollbar relative"
       >
         <div className="flex justify-center my-4">
           <span className="bg-gray-200 text-gray-600 text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-wider">
@@ -129,8 +133,8 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
       </main>
 
       {/* Chat Input Footer - Fixed at Bottom */}
-      <footer className="bg-white border-t border-gray-200 flex-none fixed bottom-0 left-0 right-0 z-30 pb-2">
-        <div className="flex overflow-x-auto space-x-3 px-4 py-2 border-b border-gray-100 no-scrollbar">
+      <footer className="bg-white border-t border-gray-200 flex-none fixed bottom-0 left-0 lg:left-72 right-0 z-30 pb-2">
+        <div className="flex overflow-x-auto space-x-3 px-4 sm:px-6 lg:px-10 py-2 border-b border-gray-100 no-scrollbar">
           <button className="flex-shrink-0 text-[10px] font-bold uppercase tracking-wider bg-gray-50 text-gray-600 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition shadow-sm">
             Send Catalog
           </button>
@@ -141,7 +145,7 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
             Attach Link
           </button>
         </div>
-        <div className="p-3 flex items-end space-x-2">
+        <div className="px-4 sm:px-6 lg:px-10 py-3 flex items-end space-x-2">
           <button className="p-2.5 text-slate-400 hover:text-primary transition-colors">
             <span className="material-icons-round transform rotate-45 text-2xl">attach_file</span>
           </button>

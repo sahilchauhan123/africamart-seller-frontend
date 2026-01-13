@@ -86,10 +86,47 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     const filteredChats = activeTab === 'all' ? chats : chats.filter(c => c.unread > 0);
 
     return (
-        <div className="flex flex-col h-full bg-[#F8FAFC] font-display antialiased h-screen overflow-hidden transition-colors duration-300">
-            {/* Mobile Header (from snippet) */}
-            <header className="bg-primary shadow-md z-40 sticky top-0 lg:hidden shrink-0">
-                <div className="flex items-center justify-between px-4 h-16">
+        <div className="flex flex-col h-full bg-[#F8FAFC] font-display antialiased overflow-hidden transition-colors duration-300">
+            {/* Desktop Header */}
+            <header className="hidden lg:flex flex-col bg-white border-b border-slate-200 flex-none px-10">
+                <div className="flex items-center justify-start h-[72px]">
+                    <div className="flex items-center gap-4 w-full max-w-xl">
+                        <div className="relative w-full">
+                            <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                            <input
+                                type="text"
+                                placeholder="Search conversations..."
+                                className="w-full pl-10 pr-4 py-2.5 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all font-medium"
+                                onClick={() => onNavigate(View.MESSAGE_SEARCH)}
+                                readOnly
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="flex gap-8 text-sm font-bold pb-0">
+                    <button
+                        onClick={() => setActiveTab('all')}
+                        className={`py-4 border-b-2 transition-all ${activeTab === 'all' ? 'border-primary text-primary' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                    >
+                        All Messages
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('unread')}
+                        className={`py-4 border-b-2 transition-all ${activeTab === 'unread' ? 'border-primary text-primary' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                    >
+                        Unread
+                        {chats.filter(c => c.unread > 0).length > 0 && (
+                            <span className="ml-2 bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">
+                                {chats.filter(c => c.unread > 0).length}
+                            </span>
+                        )}
+                    </button>
+                </div>
+            </header>
+
+            {/* Mobile Header (Original) */}
+            <header className="bg-primary shadow-md z-40 flex-none lg:hidden shrink-0">
+                <div className="flex items-center justify-between px-4 sm:px-6 h-16">
                     <button
                         onClick={onOpenDrawer}
                         className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center"
@@ -101,7 +138,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         <span className="material-icons text-2xl">more_vert</span>
                     </button>
                 </div>
-                <div className="px-4 pb-3">
+                <div className="px-4 sm:px-6 pb-3">
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <span className="material-icons text-gray-400 text-xl">search</span>
@@ -115,7 +152,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         />
                     </div>
                 </div>
-                <div className="flex px-4 pb-0 space-x-6 text-sm font-medium text-blue-100 overflow-x-auto no-scrollbar">
+                <div className="flex px-4 sm:px-6 pb-0 space-x-6 text-sm font-medium text-blue-100 overflow-x-auto no-scrollbar">
                     <button
                         onClick={() => setActiveTab('all')}
                         className={`pb-3 border-b-2 transition-all ${activeTab === 'all' ? 'border-white text-white' : 'border-transparent text-blue-100/70 hover:text-white'}`}
@@ -132,7 +169,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
             </header>
 
             {/* Main Chat List */}
-            <main className="flex-1 overflow-y-auto no-scrollbar relative bg-[#F8FAFC]">
+            <main className="flex-1 overflow-y-auto no-scrollbar relative bg-[#F8FAFC] pb-20">
                 <div className="divide-y divide-slate-200">
                     {filteredChats.map((chat) => (
                         <div
@@ -174,7 +211,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     ))}
 
                     {/* Unknown User Placeholder */}
-                    <div className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100 pb-24">
+                    <div className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100">
                         <div className="flex items-center px-4 py-4 sm:px-6 lg:px-10">
                             <div className="relative flex-shrink-0">
                                 <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200 text-gray-600 font-bold text-lg">
@@ -201,13 +238,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                 </div>
             </main>
 
-            {/* Floating Action Button */}
-            <div className="absolute bottom-6 right-6 z-50">
-                <button className="bg-primary hover:bg-blue-700 text-white rounded-full px-5 py-3 shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <span className="material-icons text-2xl">post_add</span>
-                    <span className="font-medium text-base">Post Requirement</span>
-                </button>
-            </div>
+
         </div>
     );
 };

@@ -76,6 +76,8 @@ const App: React.FC = () => {
     }
   };
 
+  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE, View.LEAD_DETAILS].includes(currentView);
+
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
       {isAuthView && (
@@ -90,15 +92,13 @@ const App: React.FC = () => {
         />
       )}
       <div className={isAuthView ? "lg:pl-72 flex flex-col h-full overflow-hidden" : ""}>
-        {isAuthView && (
-          <div className={currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT || currentView === View.MESSAGE_SEARCH ? "hidden lg:block" : ""}>
-            <Header
-              onOpenDrawer={() => setIsDrawerOpen(true)}
-              onNavigate={(view) => setCurrentView(view)}
-            />
-          </div>
+        {isAuthView && !hideHeader && (
+          <Header
+            onOpenDrawer={() => setIsDrawerOpen(true)}
+            onNavigate={(view) => setCurrentView(view)}
+          />
         )}
-        <main className={`flex-1 overflow-hidden relative ${isAuthView ? (currentView === View.PROFILE || currentView === View.EDIT_PROFILE || currentView === View.LEAD_DETAILS || currentView === View.MESSAGES || currentView === View.CHAT || currentView === View.MESSAGE_SEARCH ? "lg:pt-[72px]" : "pt-16 lg:pt-[72px]") : ""}`}>
+        <main className={`flex-1 overflow-hidden relative ${isAuthView && !hideHeader ? "pt-16 lg:pt-[72px]" : ""}`}>
           {renderView()}
         </main>
       </div>

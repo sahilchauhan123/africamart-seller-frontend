@@ -62,9 +62,9 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
     };
 
     return (
-        <div className="bg-[#F8FAFC] font-display antialiased h-screen overflow-hidden flex flex-col transition-colors duration-300">
-            <header className="bg-white shadow-sm z-50 relative border-b border-slate-200 flex-none">
-                <div className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-3">
+        <div className="bg-[#F8FAFC] font-display antialiased h-full overflow-hidden flex flex-col transition-colors duration-300">
+            <header className="bg-white shadow-sm z-10 relative border-b border-slate-200 flex-none">
+                <div className="flex items-center gap-2 px-4 sm:px-6 lg:px-10 py-3">
                     <button
                         onClick={onBack}
                         className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-200"
@@ -101,8 +101,8 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                 </div>
             </header>
 
-            <main className="flex-1 overflow-y-auto no-scrollbar relative bg-[#F8FAFC]">
-                <div className="px-4 py-5">
+            <main className="flex-1 overflow-y-auto no-scrollbar relative bg-[#F8FAFC] pb-20">
+                <div className="px-4 sm:px-6 lg:px-10 py-5">
                     <div className="flex items-center justify-between mb-3">
                         <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Recent Searches</h3>
                         <button className="text-xs text-primary font-medium hover:underline focus:outline-none">Clear all</button>
@@ -121,11 +121,11 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                     </div>
                 </div>
 
-                <div className="h-px bg-slate-200 mx-4 mb-4"></div>
+                <div className="h-px bg-slate-200 mx-4 sm:px-6 lg:mx-10 mb-4"></div>
 
                 {searchQuery && (
                     <>
-                        <div className="px-4 mb-2 flex items-center gap-2">
+                        <div className="px-4 sm:px-6 lg:px-10 mb-2 flex items-center gap-2">
                             <span className="material-icons text-primary text-sm">filter_list</span>
                             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Results for "{searchQuery}"</h3>
                         </div>
@@ -136,7 +136,7 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                                     onClick={() => onNavigate(View.CHAT)}
                                     className="group bg-white hover:bg-slate-50 transition-colors cursor-pointer active:bg-slate-100"
                                 >
-                                    <div className="flex items-center px-4 py-3.5 sm:px-6">
+                                    <div className="flex items-center px-4 py-3.5 sm:px-6 lg:px-10">
                                         <div className="relative flex-shrink-0">
                                             <div className={`h-12 w-12 rounded-full flex items-center justify-center border-2 ${chat.color} font-bold text-lg`}>
                                                 {chat.initials}
