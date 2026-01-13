@@ -207,7 +207,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-slate-800">Business Profile</h1>
-              <p className="text-sm text-slate-500">Manage your company information and verified status</p>
+              <p className="text-sm text-slate-500">Manage your business information and verified status</p>
             </div>
             <button onClick={onEdit} className="px-5 py-2 bg-primary text-white text-sm font-semibold rounded shadow-sm hover:bg-blue-800 transition-colors flex items-center gap-2">
               <span className="material-symbols-outlined text-lg">edit</span>

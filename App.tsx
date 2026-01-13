@@ -76,7 +76,7 @@ const App: React.FC = () => {
     }
   };
 
-  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE, View.LEAD_DETAILS].includes(currentView);
+  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
@@ -91,14 +91,17 @@ const App: React.FC = () => {
           currentView={currentView}
         />
       )}
-      <div className={isAuthView ? "lg:pl-72 flex flex-col h-full overflow-hidden" : ""}>
+      <div className={isAuthView ? "lg:pl-72 flex flex-col h-full overflow-y-auto" : ""}>
         {isAuthView && !hideHeader && (
           <Header
             onOpenDrawer={() => setIsDrawerOpen(true)}
             onNavigate={(view) => setCurrentView(view)}
+            currentView={currentView}
+            onBack={currentView === View.LEAD_DETAILS ? () => setCurrentView(View.INQUIRY_LIST) : undefined}
+            title={currentView === View.LEAD_DETAILS ? "Lead Details" : undefined}
           />
         )}
-        <main className={`flex-1 overflow-hidden relative ${isAuthView && !hideHeader ? "pt-16 lg:pt-[72px]" : ""}`}>
+        <main className={`flex-1 relative ${isAuthView && !hideHeader ? "pt-16 lg:pt-[72px]" : ""}`}>
           {renderView()}
         </main>
       </div>
