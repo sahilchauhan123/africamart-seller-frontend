@@ -207,7 +207,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </a>
             </div>
             <nav className="flex items-center gap-8">
-              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#how-it-works">How it Works</a>
+              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#how-it-works">Why AfricaMart</a>
               <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#benefits">Benefits</a>
               <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#faqs">FAQs</a>
             </nav>
