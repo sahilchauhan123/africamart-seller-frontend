@@ -11,7 +11,8 @@ export enum View {
   CHAT = 'CHAT',
   PROFILE = 'PROFILE',
   EDIT_PROFILE = 'EDIT_PROFILE',
-  MESSAGES = 'MESSAGES'
+  MESSAGES = 'MESSAGES',
+  MESSAGE_SEARCH = 'MESSAGE_SEARCH'
 }
 
 export interface Product {
@@ -40,4 +41,11 @@ export interface User {
   category: string;
   location: string;
   score: number;
+  rating?: string;
+  reviews?: number;
+  yearsInBusiness?: string;
+  employees?: string;
+  about?: string;
+  expertise?: string[];
+  certifications?: string[];
 }

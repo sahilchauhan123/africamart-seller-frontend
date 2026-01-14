@@ -6,7 +6,14 @@ export const MOCK_USER: User = {
   businessName: 'Global Agro Supplies Ltd.',
   category: 'Wholesale Distributor',
   location: 'Paynesville, Monrovia',
-  score: 25
+  score: 85,
+  rating: '4.8',
+  reviews: 125,
+  yearsInBusiness: '12+',
+  employees: '25-50',
+  about: 'Global Agro Supplies Ltd. is a leading provider of agricultural inputs and equipment in West Africa. We specialize in high-quality seeds, fertilizers, and modern irrigation systems designed for tropical farming conditions.',
+  expertise: ['Seeds & Grains', 'Organic Fertilizer', 'Irrigation Systems'],
+  certifications: ['Certified Food Distributor', 'Eco-Farm Partner', 'ISO 9001:2015']
 };
 
 export const MOCK_PRODUCTS: Product[] = [
