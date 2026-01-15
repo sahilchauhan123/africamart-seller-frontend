@@ -86,6 +86,18 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
                 <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
               </div>
             </button>
+            <button
+              onClick={() => { onNavigate(View.NOTIFICATIONS); if (window.innerWidth < 1024) onClose(); }}
+              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.NOTIFICATIONS ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+            >
+              <div className="flex-1 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className={`material-icons-round ${currentView === View.NOTIFICATIONS ? 'text-primary' : 'text-gray-400'}`}>notifications</span>
+                  <span className="text-sm">Notifications</span>
+                </div>
+                <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+              </div>
+            </button>
           </div>
 
           <div className="mt-2 border-t border-gray-100 flex flex-col gap-1">
@@ -176,6 +188,16 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
                 <span className="font-medium text-sm">Messages</span>
               </div>
               <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
+            </a>
+            <a
+              onClick={() => onNavigate(View.NOTIFICATIONS)}
+              className={`flex items-center justify-between px-6 py-3 transition-all cursor-pointer ${currentView === View.NOTIFICATIONS ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
+            >
+              <div className="flex items-center gap-4">
+                <span className={`material-symbols-outlined text-[22px] ${currentView === View.NOTIFICATIONS ? 'font-bold text-brand' : ''}`}>notifications</span>
+                <span className="font-medium text-sm">Notifications</span>
+              </div>
+              <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
             </a>
           </div>
           <div className="mt-auto pt-4 flex flex-col gap-2">

@@ -68,10 +68,10 @@ const Header: React.FC<HeaderProps> = (props) => {
                                 </button>
                             </div>
                             <div className="relative">
-                                <button className="text-white p-1 rounded-md hover:bg-white/10 transition">
+                                <button onClick={() => onNavigate(View.NOTIFICATIONS)} className="text-white p-1 rounded-md hover:bg-white/10 transition">
                                     <span className="material-icons-round text-2xl">notifications</span>
                                 </button>
-                                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-primary"></span>
+                                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-primary pointer-events-none"></span>
                             </div>
                         </>
                     )}
@@ -103,9 +103,9 @@ const Header: React.FC<HeaderProps> = (props) => {
                 </div>
                 <div className="flex items-center gap-6 ml-8">
                     <div className="flex gap-1">
-                        <button className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all relative text-white">
+                        <button onClick={() => onNavigate(View.NOTIFICATIONS)} className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all relative text-white">
                             <span className="material-symbols-outlined leading-none">notifications</span>
-                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-primary"></span>
+                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-primary pointer-events-none"></span>
                         </button>
                         <button className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all text-white">
                             <span className="material-symbols-outlined leading-none">settings</span>

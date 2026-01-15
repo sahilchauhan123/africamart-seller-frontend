@@ -17,6 +17,7 @@ import CategoryManager, { CategoryView } from './components/CategoryManager';
 import PremiumServices from './components/PremiumServices';
 import BusinessInfo from './components/BusinessInfo';
 import RecentUploads from './components/RecentUploads';
+import Notifications from './components/Notifications';
 import Drawer from './components/common/Drawer';
 import Header from './components/common/Header';
 
@@ -92,12 +93,14 @@ const App: React.FC = () => {
         return <BusinessInfo onOpenDrawer={() => setIsDrawerOpen(true)} onViewAll={() => setCurrentView(View.RECENT_UPLOADS)} />;
       case View.RECENT_UPLOADS:
         return <RecentUploads onBack={() => setCurrentView(View.BUSINESS_INFO)} />;
+      case View.NOTIFICATIONS:
+        return <Notifications onBack={() => setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} />;
       default:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} />;
     }
   };
 
-  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE, View.PREMIUM_SERVICES].includes(currentView);
+  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE, View.PREMIUM_SERVICES, View.NOTIFICATIONS].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
