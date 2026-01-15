@@ -198,7 +198,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
       {/* Desktop Layout (New) */}
       <div className="hidden lg:block bg-white">
         {/* Desktop Header */}
-        <header className="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <header className="fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
           <div className="max-w-[1536px] mx-auto px-6 xl:px-16 h-20 flex items-center justify-between">
             <div className="flex items-center">
               <a className="text-2xl font-extrabold text-primary flex items-center gap-2" href="#">
@@ -225,7 +225,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
 
         <main>
           {/* Hero Section */}
-          <section className="pt-10 lg:pt-16 pb-10 lg:pb-12 bg-white">
+          <section className="pt-10 lg:pt-36 pb-10 lg:pb-12 bg-white">
             <div className="max-w-[1536px] mx-auto px-6 xl:px-16">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div className="flex flex-col">

@@ -6,61 +6,238 @@ interface Props {
   onBack: () => void;
   onAdd: () => void;
   onEdit: () => void;
+  onReachBuyers: () => void;
 }
 
-const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit }) => {
+const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers }) => {
   return (
-    <div className="flex flex-col bg-[#F5F7FA] h-full overflow-hidden">
-      <main className="flex-1 overflow-y-auto p-4 lg:p-10 no-scrollbar">
-        <div className="max-w-7xl mx-auto space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 h-32 flex flex-col justify-between">
-              <h2 className="text-sm font-medium text-gray-500">Total Products</h2>
-              <span className="text-3xl font-bold">250</span>
-            </div>
-            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 h-32 flex flex-col justify-between">
-              <h2 className="text-sm font-medium text-gray-500">Categories</h2>
-              <div className="flex justify-between items-end">
-                <span className="text-3xl font-bold">3</span>
-                <span className="text-xs text-primary font-bold">View</span>
+    <div className="flex flex-col bg-[#F8FAFC] h-full overflow-hidden">
+      {/* Mobile View - Existing Card Layout */}
+      <div className="lg:hidden flex flex-col h-full bg-[#F5F7FA]">
+        <main className="flex-1 overflow-y-auto p-4 no-scrollbar">
+          <div className="max-w-7xl mx-auto space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 h-32 flex flex-col justify-between">
+                <h2 className="text-sm font-medium text-gray-500">Total Products</h2>
+                <span className="text-3xl font-bold">250</span>
+              </div>
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 h-32 flex flex-col justify-between">
+                <h2 className="text-sm font-medium text-gray-500">Categories</h2>
+                <div className="flex justify-between items-end">
+                  <span className="text-3xl font-bold">3</span>
+                  <span className="text-xs text-primary font-bold">View</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="space-y-4 pb-24">
-            {MOCK_PRODUCTS.map(product => (
-              <div key={product.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex gap-4 transition active:scale-[0.99]">
-                <div className="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
-                  <img src={product.image} className="w-full h-full object-cover" alt={product.name} />
-                </div>
-                <div className="flex-1 flex flex-col justify-between relative">
-                  <button
-                    onClick={onEdit}
-                    className="absolute top-0 right-0 text-gray-400 p-1"
-                  >
-                    <span className="material-icons-round text-lg">edit</span>
-                  </button>
-                  <div>
-                    <h3 className="font-semibold line-clamp-1">{product.name}</h3>
-                    <p className="text-sm text-green-600 font-medium">{product.price}</p>
+            <div className="space-y-4 pb-24">
+              {MOCK_PRODUCTS.map(product => (
+                <div key={product.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex gap-4 transition active:scale-[0.99]">
+                  <div className="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
+                    <img src={product.image} className="w-full h-full object-cover" alt={product.name} />
                   </div>
-                  <div className="flex justify-end">
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-primary text-xs font-medium">
-                      <span className="material-icons-round text-sm">ads_click</span>
-                      Reach Buyers
+                  <div className="flex-1 flex flex-col justify-between relative">
+                    <button
+                      onClick={onEdit}
+                      className="absolute top-0 right-0 text-gray-400 p-1"
+                    >
+                      <span className="material-icons-round text-lg">edit</span>
                     </button>
+                    <div>
+                      <h3 className="font-semibold line-clamp-1">{product.name}</h3>
+                      <p className="text-sm text-green-600 font-medium">{product.price}</p>
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        onClick={onReachBuyers}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-primary text-xs font-medium"
+                      >
+                        <span className="material-icons-round text-sm">ads_click</span>
+                        Reach Buyers
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+        <button onClick={onAdd} className="fixed bottom-6 right-6 bg-primary text-white rounded-full px-5 py-3 shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95 transition z-50">
+          <span className="material-icons-round">add</span>
+          <span className="font-medium">Add Product</span>
+        </button>
+      </div>
 
-      <button onClick={onAdd} className="fixed bottom-6 right-6 bg-primary text-white rounded-full px-5 py-3 shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95 transition">
-        <span className="material-icons-round">add</span>
-        <span className="font-medium">Add Product</span>
-      </button>
+      {/* Desktop View - New Compact Table Layout */}
+      <div className="hidden lg:flex flex-col h-full bg-[#F8FAFC]">
+        <main className="flex-1 overflow-y-auto p-10 no-scrollbar">
+          <div className="max-w-7xl mx-auto space-y-6">
+            {/* Stats Bar */}
+            <div className="grid grid-cols-4 gap-4 mb-6">
+              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                  <span className="material-symbols-outlined text-2xl">inventory_2</span>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Total Products</p>
+                  <h2 className="text-xl font-bold">250</h2>
+                </div>
+              </div>
+              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
+                  <span className="material-symbols-outlined text-2xl">category</span>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Categories</p>
+                  <h2 className="text-xl font-bold">3</h2>
+                </div>
+              </div>
+              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
+                  <span className="material-symbols-outlined text-2xl">check_circle</span>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Active Listings</p>
+                  <h2 className="text-xl font-bold">242</h2>
+                </div>
+              </div>
+              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                <div className="p-3 bg-amber-50 text-amber-600 rounded-lg">
+                  <span className="material-symbols-outlined text-2xl">warning</span>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Low Stock</p>
+                  <h2 className="text-xl font-bold">8</h2>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col">
+              {/* Table Controls */}
+              <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-lg border border-slate-200">
+                    <input className="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox" />
+                    <span className="text-[11px] font-bold text-slate-600 uppercase tracking-tight">Select All</span>
+                  </div>
+                  <div className="h-4 w-px bg-slate-200 mx-1"></div>
+                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
+                    <span className="material-symbols-outlined text-[18px]">delete</span>
+                    DELETE
+                  </button>
+                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
+                    <span className="material-symbols-outlined text-[18px]">drive_file_move</span>
+                    CATEGORY
+                  </button>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                    <input
+                      className="pl-10 pr-4 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs focus:ring-primary focus:border-primary w-64 focus:outline-none transition-all"
+                      placeholder="Search SKU, name..."
+                      type="text"
+                    />
+                  </div>
+                  <button className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">
+                    <span className="material-symbols-outlined text-[20px]">filter_list</span>
+                  </button>
+                  <button
+                    onClick={onAdd}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-800 font-bold text-xs shadow-sm transition-all"
+                  >
+                    <span className="material-symbols-outlined text-sm">add</span>
+                    ADD PRODUCT
+                  </button>
+                </div>
+              </div>
+
+              {/* Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50/50 text-[11px] uppercase tracking-wider text-slate-500 font-bold border-b border-slate-100 uppercase tracking-widest">
+                      <th className="w-12 px-6 py-4"></th>
+                      <th className="w-20 px-4 py-4">Image</th>
+                      <th className="px-4 py-4 min-w-[200px]">Product Name</th>
+                      <th className="px-4 py-4 w-40">Category</th>
+                      <th className="px-4 py-4 w-32">Price</th>
+                      <th className="px-4 py-4 w-32">Status</th>
+                      <th className="px-4 py-4 w-32 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {MOCK_PRODUCTS.map((product) => (
+                      <tr key={product.id} className="hover:bg-slate-50/50 transition-colors group cursor-default">
+                        <td className="px-6 py-4">
+                          <input className="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox" />
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="w-12 h-12 rounded border border-slate-200 bg-slate-100 overflow-hidden shadow-sm">
+                            <img alt={product.name} className="w-full h-full object-cover" src={product.image} />
+                          </div>
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="font-bold text-sm text-slate-900 truncate">{product.name}</div>
+                          <div className="text-[10px] text-slate-400 font-mono mt-0.5">ID: {product.id.padStart(5, '0')}</div>
+                        </td>
+                        <td className="px-4 py-4">
+                          <span className="text-[10px] px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
+                            {product.category}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="text-sm font-bold text-slate-800">{product.price}</div>
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.3)]"></span>
+                            <span className="text-[11px] text-emerald-600 font-bold uppercase">In Stock</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <button
+                              onClick={onEdit}
+                              className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-md transition-all"
+                              title="Edit"
+                            >
+                              <span className="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                            <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all" title="Delete">
+                              <span className="material-symbols-outlined text-[18px]">delete</span>
+                            </button>
+                            <button className="p-1.5 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-md transition-all" title="Promote">
+                              <span className="material-symbols-outlined text-[18px]">ads_click</span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pagination */}
+              <div className="p-4 border-t border-slate-100 flex items-center justify-between">
+                <p className="text-[11px] text-slate-500 font-bold uppercase tracking-tight">
+                  Showing 1-{MOCK_PRODUCTS.length} of 250 entries
+                </p>
+                <div className="flex items-center gap-1.5">
+                  <button className="p-1.5 rounded border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-30" disabled>
+                    <span className="material-symbols-outlined text-[20px]">chevron_left</span>
+                  </button>
+                  <button className="w-8 h-8 rounded bg-primary text-white text-[11px] font-bold">1</button>
+                  <button className="w-8 h-8 rounded text-[11px] font-bold text-slate-500 hover:bg-slate-50 transition-colors">2</button>
+                  <button className="p-1.5 rounded border border-slate-200 text-slate-400 hover:bg-slate-50">
+                    <span className="material-symbols-outlined text-[20px]">chevron_right</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

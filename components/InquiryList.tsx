@@ -51,134 +51,74 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
         </main>
       </div>
 
-      <div className="hidden lg:flex flex-col h-full bg-[#F8FAFC]">
-        <section className="p-10 flex-1 overflow-y-auto no-scrollbar">
-          <div className="max-w-7xl mx-auto space-y-4">
-            <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-              {/* Table Controls */}
-              <div className="p-4 flex items-center justify-between gap-4 border-b border-slate-100">
-                <div className="flex items-center p-1 bg-slate-100 rounded-lg w-fit">
-                  <button className="px-4 py-1.5 text-xs font-semibold rounded-md bg-white shadow-sm text-primary">All</button>
-                  <button className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-slate-700">New Leads</button>
-                  <button className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-slate-700">Viewed</button>
-                  <button className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-slate-700">Replied</button>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="relative w-72">
-                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                    <input
-                      className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 text-sm focus:outline-none transition-all"
-                      placeholder="Search by company or keyword..."
-                      type="text"
-                    />
-                  </div>
-                  <button className="flex items-center gap-2 px-3 py-2 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 text-sm transition-colors">
-                    <span className="material-symbols-outlined text-lg">filter_list</span>
-                    Filter
-                  </button>
-                </div>
+      <div className="hidden lg:flex flex-col h-full bg-slate-50 dark:bg-slate-900">
+        <section className="p-8 flex-1 overflow-y-auto no-scrollbar">
+          <div className="max-w-6xl mx-auto space-y-6">
+            <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100 dark:border-slate-700">
+              <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-900/50 rounded-lg w-fit">
+                <button className="px-5 py-2 text-sm font-medium rounded-md bg-white dark:bg-slate-700 shadow-sm text-primary">All</button>
+                <button className="px-5 py-2 text-sm font-medium rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">New Leads</button>
+                <button className="px-5 py-2 text-sm font-medium rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Viewed</button>
+                <button className="px-5 py-2 text-sm font-medium rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Replied</button>
               </div>
-
-              {/* Selection Bar */}
-              <div className="bg-slate-50 px-6 py-2 border-b border-slate-100 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">3 items selected</span>
-                  <div className="h-4 w-[1px] bg-slate-200"></div>
-                  <div className="flex items-center gap-2">
-                    <button className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-white rounded-md transition-all">
-                      <span className="material-symbols-outlined text-sm">mark_email_read</span> Mark Read
-                    </button>
-                    <button className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-white rounded-md transition-all">
-                      <span className="material-symbols-outlined text-sm">archive</span> Archive
-                    </button>
-                    <button className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-md transition-all">
-                      <span className="material-symbols-outlined text-sm">delete</span> Delete
-                    </button>
-                  </div>
+              <div className="flex items-center gap-3">
+                <div className="relative flex-1 md:w-64">
+                  <span className="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                  <input className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-900/50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-sm dark:text-white" placeholder="Search inquiries..." type="text" />
                 </div>
-                <button className="p-1.5 text-slate-400 hover:text-slate-600 transition-colors">
-                  <span className="material-symbols-outlined text-lg">more_horiz</span>
+                <button className="p-2 bg-slate-50 dark:bg-slate-900/50 text-slate-500 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700">
+                  <span className="material-icons-outlined">tune</span>
                 </button>
               </div>
+            </div>
 
-              {/* Table Body */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-slate-50/50 border-b border-slate-100">
-                      <th className="py-3 px-6 w-10">
-                        <input className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary/20" type="checkbox" />
-                      </th>
-                      <th className="py-3 px-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Company</th>
-                      <th className="py-3 px-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Message Snippet</th>
-                      <th className="py-3 px-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Status</th>
-                      <th className="py-3 px-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Date/Time</th>
-                      <th className="py-3 px-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Location</th>
-                      <th className="py-3 px-6 text-right"></th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {MOCK_INQUIRIES.map((inq) => (
-                      <tr
-                        key={inq.id}
-                        onClick={onSelectLead}
-                        className="hover:bg-slate-50 transition-colors group cursor-pointer"
-                      >
-                        <td className="py-3 px-6">
-                          <input className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary/20" type="checkbox" onClick={(e) => e.stopPropagation()} />
-                        </td>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-full ${inq.status === 'New Lead' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'} flex items-center justify-center text-xs font-bold shrink-0`}>
-                              {inq.initials}
-                            </div>
-                            <span className="text-sm font-semibold text-slate-900 truncate max-w-[150px]">{inq.companyName}</span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-4 max-w-xs">
-                          <p className="text-xs text-slate-600 truncate">{inq.message}</p>
-                        </td>
-                        <td className="py-3 px-4">
-                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${inq.status === 'New Lead'
-                            ? 'bg-green-100 text-green-700 border-green-200'
-                            : 'bg-blue-100 text-blue-700 border-blue-200'
-                            } border shadow-sm uppercase`}>
-                            {inq.status}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 whitespace-nowrap">
-                          <span className="text-xs text-slate-500 font-medium">{inq.time}</span>
-                        </td>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                            <span className="material-symbols-outlined text-sm">location_on</span>
-                            {inq.location.split(',')[0]}
-                          </div>
-                        </td>
-                        <td className="py-3 px-6 text-right">
-                          <button className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-white rounded-md shadow-sm border border-transparent hover:border-slate-200">
-                            <span className="material-symbols-outlined text-xl text-slate-400">chevron_right</span>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Pagination */}
-              <div className="p-4 border-t border-slate-100 flex items-center justify-between">
-                <p className="text-xs text-slate-500">Showing 1-{MOCK_INQUIRIES.length} of {MOCK_INQUIRIES.length} inquiries</p>
-                <div className="flex items-center gap-1">
-                  <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-30" disabled>
-                    <span className="material-symbols-outlined text-lg">chevron_left</span>
-                  </button>
-                  <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">1</button>
-                  <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50">
-                    <span className="material-symbols-outlined text-lg">chevron_right</span>
-                  </button>
+            <div className="space-y-4">
+              {MOCK_INQUIRIES.map((inq) => (
+                <div
+                  key={inq.id}
+                  onClick={onSelectLead}
+                  className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow group cursor-pointer"
+                >
+                  <div className="flex items-start gap-5">
+                    <div className="w-14 h-14 rounded-full bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 font-bold flex-shrink-0">
+                      {inq.initials}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="font-bold text-lg text-slate-900 dark:text-white truncate">{inq.companyName}</h3>
+                        <span className="text-sm text-slate-400 whitespace-nowrap">{inq.time}</span>
+                      </div>
+                      <p className="text-slate-600 dark:text-slate-400 mb-4 line-clamp-1">{inq.message}</p>
+                      <div className="flex flex-wrap items-center gap-4">
+                        <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${inq.status === 'New Lead'
+                            ? 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border-green-100 dark:border-green-800/50'
+                            : inq.status === 'Urgent'
+                              ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border-red-100 dark:border-red-800/50'
+                              : 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-800/50'
+                          }`}>
+                          {inq.status}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-slate-400 text-sm">
+                          <span className="material-icons-outlined text-base">location_on</span>
+                          {inq.location}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-center gap-2 py-4">
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50" disabled>
+                <span className="material-icons-outlined">chevron_left</span>
+              </button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-medium">1</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700">2</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800">3</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700">
+                <span className="material-icons-outlined">chevron_right</span>
+              </button>
             </div>
           </div>
         </section>

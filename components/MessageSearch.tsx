@@ -69,11 +69,11 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                         onClick={onBack}
                         className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-200"
                     >
-                        <span className="material-icons text-2xl">arrow_back</span>
+                        <span className="material-symbols-outlined text-2xl leading-none">arrow_back</span>
                     </button>
                     <div className="flex-1 relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="material-icons text-slate-400 text-xl">search</span>
+                            <span className="material-symbols-outlined text-slate-400 text-xl leading-none">search</span>
                         </div>
                         <input
                             autoFocus
@@ -88,7 +88,7 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                                 onClick={() => setSearchQuery('')}
                                 className="absolute inset-y-0 right-0 pr-2 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer focus:outline-none"
                             >
-                                <span className="material-icons text-lg p-1 bg-slate-200 rounded-full">close</span>
+                                <span className="material-symbols-outlined text-lg p-1 bg-slate-200 rounded-full leading-none">close</span>
                             </button>
                         )}
                     </div>
@@ -114,7 +114,7 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                             { text: 'Sarah Williams', icon: 'person' }
                         ].map((item, idx) => (
                             <button key={idx} className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300 flex items-center gap-1.5 transition-all shadow-sm">
-                                <span className="material-icons text-base text-slate-400">{item.icon}</span>
+                                <span className="material-symbols-outlined text-base text-slate-400 leading-none">{item.icon}</span>
                                 {item.text}
                             </button>
                         ))}
@@ -126,7 +126,7 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                 {searchQuery && (
                     <>
                         <div className="px-4 sm:px-6 lg:px-10 mb-2 flex items-center gap-2">
-                            <span className="material-icons text-primary text-sm">filter_list</span>
+                            <span className="material-symbols-outlined text-primary text-sm leading-none">filter_list</span>
                             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Results for "{searchQuery}"</h3>
                         </div>
                         <div className="divide-y divide-slate-100">

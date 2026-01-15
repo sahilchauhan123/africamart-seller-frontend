@@ -49,6 +49,13 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               <span className="text-sm">Manage Products</span>
             </button>
             <button
+              onClick={() => { onNavigate(View.CATEGORIES); if (window.innerWidth < 1024) onClose(); }}
+              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.CATEGORIES ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+            >
+              <span className={`material-icons-round ${currentView === View.CATEGORIES ? 'text-primary' : 'text-gray-400'}`}>category</span>
+              <span className="text-sm">Categories</span>
+            </button>
+            <button
               onClick={() => { onNavigate(View.INQUIRY_LIST); if (window.innerWidth < 1024) onClose(); }}
               className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.INQUIRY_LIST ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
             >
@@ -61,10 +68,11 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
 
           <div className="pt-2 pb-2">
             <button
-              className="w-full flex items-center gap-4 px-6 py-3.5 hover:bg-gray-50 transition-colors text-gray-600"
+              onClick={() => { onNavigate(View.BUSINESS_INFO); if (window.innerWidth < 1024) onClose(); }}
+              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.BUSINESS_INFO ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
             >
-              <span className="material-icons-round text-gray-400">description</span>
-              <span className="font-medium text-sm">Business Info</span>
+              <span className={`material-icons-round ${currentView === View.BUSINESS_INFO ? 'text-primary' : 'text-gray-400'}`}>description</span>
+              <span className="font-medium text-sm">Documents</span>
             </button>
             <button
               onClick={() => { onNavigate(View.MESSAGES); if (window.innerWidth < 1024) onClose(); }}
@@ -77,6 +85,17 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
                 </div>
                 <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
               </div>
+            </button>
+          </div>
+
+          <div className="mt-2 border-t border-gray-100 flex flex-col gap-1">
+            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
+              <span className="font-bold text-black text-xs tracking-wider uppercase">COMMUNICATIONS</span>
+              <span className="material-icons-round text-gray-400">expand_more</span>
+            </button>
+            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
+              <span className="font-bold text-black text-xs tracking-wider uppercase">MORE</span>
+              <span className="material-icons-round text-gray-400">expand_more</span>
             </button>
           </div>
         </nav>
@@ -135,11 +154,18 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               <span className="font-medium text-sm">Manage Products</span>
             </a>
             <a
-              onClick={() => onNavigate(View.PROFILE)}
-              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.PROFILE ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
+              onClick={() => onNavigate(View.CATEGORIES)}
+              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.CATEGORIES ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className="material-symbols-outlined text-[22px]">description</span>
-              <span className="font-medium text-sm">Business Information</span>
+              <span className="material-symbols-outlined text-[22px]">category</span>
+              <span className="font-medium text-sm">Categories</span>
+            </a>
+            <a
+              onClick={() => onNavigate(View.BUSINESS_INFO)}
+              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.BUSINESS_INFO ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
+            >
+              <span className={`material-symbols-outlined text-[22px] ${currentView === View.BUSINESS_INFO ? 'font-bold text-brand' : ''}`}>description</span>
+              <span className="font-medium text-sm">Documents</span>
             </a>
             <a
               onClick={() => onNavigate(View.MESSAGES)}
@@ -151,6 +177,16 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               </div>
               <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
             </a>
+          </div>
+          <div className="mt-auto pt-4 flex flex-col gap-2">
+            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
+              <span className="font-bold text-black text-xs tracking-wider">COMMUNICATIONS</span>
+              <span className="material-symbols-outlined text-gray-400">expand_more</span>
+            </button>
+            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
+              <span className="font-bold text-black text-xs tracking-wider">MORE</span>
+              <span className="material-symbols-outlined text-gray-400">expand_more</span>
+            </button>
           </div>
         </nav>
         <div className="p-8 border-t border-slate-100">
