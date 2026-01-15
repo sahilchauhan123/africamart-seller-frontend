@@ -68,9 +68,10 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
 
           <div className="pt-2 pb-2">
             <button
-              className="w-full flex items-center gap-4 px-6 py-3.5 hover:bg-gray-50 transition-colors text-gray-600"
+              onClick={() => { onNavigate(View.BUSINESS_INFO); if (window.innerWidth < 1024) onClose(); }}
+              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.BUSINESS_INFO ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
             >
-              <span className="material-icons-round text-gray-400">description</span>
+              <span className={`material-icons-round ${currentView === View.BUSINESS_INFO ? 'text-primary' : 'text-gray-400'}`}>description</span>
               <span className="font-medium text-sm">Business Info</span>
             </button>
             <button
@@ -149,10 +150,10 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               <span className="font-medium text-sm">Categories</span>
             </a>
             <a
-              onClick={() => onNavigate(View.PROFILE)}
-              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.PROFILE ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
+              onClick={() => onNavigate(View.BUSINESS_INFO)}
+              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.BUSINESS_INFO ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className="material-symbols-outlined text-[22px]">description</span>
+              <span className={`material-symbols-outlined text-[22px] ${currentView === View.BUSINESS_INFO ? 'font-bold text-brand' : ''}`}>description</span>
               <span className="font-medium text-sm">Business Information</span>
             </a>
             <a

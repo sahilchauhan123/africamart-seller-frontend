@@ -19,8 +19,8 @@ const Header: React.FC<HeaderProps> = (props) => {
     const isAddCategory = currentView === View.ADD_CATEGORY;
     const isInquiryList = currentView === View.INQUIRY_LIST;
     const isDashboard = currentView === View.DASHBOARD;
-    const showBackButton = (isLeadDetails || isAddProduct || isAddCategory) && onBack;
-    const isListView = isProductManager || isInquiryList || currentView === View.CATEGORIES;
+    const showBackButton = (isLeadDetails || isAddProduct || isAddCategory || currentView === View.RECENT_UPLOADS) && onBack;
+    const isListView = isProductManager || isInquiryList || currentView === View.CATEGORIES || currentView === View.BUSINESS_INFO;
     return (
         <>
             {/* Mobile Header */}

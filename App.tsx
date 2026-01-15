@@ -14,6 +14,9 @@ import EditProfile from './components/EditProfile';
 import BusinessMessages from './components/BusinessMessages';
 import MessageSearch from './components/MessageSearch';
 import CategoryManager, { CategoryView } from './components/CategoryManager';
+import PremiumServices from './components/PremiumServices';
+import BusinessInfo from './components/BusinessInfo';
+import RecentUploads from './components/RecentUploads';
 import Drawer from './components/common/Drawer';
 import Header from './components/common/Header';
 
@@ -55,7 +58,14 @@ const App: React.FC = () => {
       case View.DASHBOARD:
         return <Dashboard onNavigate={(view: View) => setCurrentView(view)} onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case View.PRODUCT_LIST:
-        return <ProductManager onBack={() => setIsDrawerOpen(true)} onAdd={() => setCurrentView(View.ADD_PRODUCT)} onEdit={() => setCurrentView(View.ADD_PRODUCT)} />;
+        return (
+          <ProductManager
+            onBack={() => setIsDrawerOpen(true)}
+            onAdd={() => setCurrentView(View.ADD_PRODUCT)}
+            onEdit={() => setCurrentView(View.ADD_PRODUCT)}
+            onReachBuyers={() => setCurrentView(View.PREMIUM_SERVICES)}
+          />
+        );
       case View.ADD_PRODUCT:
         return <AddProduct onBack={() => setCurrentView(View.PRODUCT_LIST)} onSave={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.INQUIRY_LIST:
@@ -76,12 +86,18 @@ const App: React.FC = () => {
         return <CategoryManager />;
       case View.ADD_CATEGORY:
         return <CategoryManager initialView={CategoryView.ADD} />;
+      case View.PREMIUM_SERVICES:
+        return <PremiumServices onBack={() => setCurrentView(View.PRODUCT_LIST)} />;
+      case View.BUSINESS_INFO:
+        return <BusinessInfo onOpenDrawer={() => setIsDrawerOpen(true)} onViewAll={() => setCurrentView(View.RECENT_UPLOADS)} />;
+      case View.RECENT_UPLOADS:
+        return <RecentUploads onBack={() => setCurrentView(View.BUSINESS_INFO)} />;
       default:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} />;
     }
   };
 
-  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE].includes(currentView);
+  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE, View.PREMIUM_SERVICES].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
@@ -102,10 +118,11 @@ const App: React.FC = () => {
             onOpenDrawer={() => setIsDrawerOpen(true)}
             onNavigate={(view) => setCurrentView(view)}
             currentView={currentView}
-            onBack={(currentView === View.LEAD_DETAILS || currentView === View.PRODUCT_LIST || currentView === View.ADD_PRODUCT || currentView === View.INQUIRY_LIST || currentView === View.ADD_CATEGORY) ? () => {
+            onBack={(currentView === View.LEAD_DETAILS || currentView === View.PRODUCT_LIST || currentView === View.ADD_PRODUCT || currentView === View.INQUIRY_LIST || currentView === View.ADD_CATEGORY || currentView === View.BUSINESS_INFO || currentView === View.RECENT_UPLOADS) ? () => {
               if (currentView === View.LEAD_DETAILS) setCurrentView(View.INQUIRY_LIST);
               else if (currentView === View.ADD_PRODUCT) setCurrentView(View.PRODUCT_LIST);
               else if (currentView === View.ADD_CATEGORY) setCurrentView(View.CATEGORIES);
+              else if (currentView === View.RECENT_UPLOADS) setCurrentView(View.BUSINESS_INFO);
               else setIsDrawerOpen(true);
             } : undefined}
             title={
@@ -116,7 +133,9 @@ const App: React.FC = () => {
                       currentView === View.DASHBOARD ? "Dashboard" :
                         currentView === View.CATEGORIES ? "Categories" :
                           currentView === View.ADD_CATEGORY ? "Add Category" :
-                            undefined
+                            currentView === View.BUSINESS_INFO ? "Business Information" :
+                              currentView === View.RECENT_UPLOADS ? "Recent Uploads" :
+                                undefined
             }
             onAdd={currentView === View.CATEGORIES ? () => setCurrentView(View.ADD_CATEGORY) : undefined}
           />

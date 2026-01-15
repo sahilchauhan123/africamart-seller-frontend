@@ -177,7 +177,10 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                                     <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">JANUARY LEADS</p>
                                                     <h3 className="text-3xl font-bold tracking-tight text-slate-800">125</h3>
                                                 </div>
-                                                <button className="bg-brand text-white text-[9px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide hover:bg-brand/90 transition-colors flex items-center gap-1">
+                                                <button
+                                                    onClick={() => onNavigate(View.PREMIUM_SERVICES)}
+                                                    className="bg-brand text-white text-[9px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide hover:bg-brand/90 transition-colors flex items-center gap-1"
+                                                >
                                                     <span className="material-symbols-outlined text-[12px]">rocket_launch</span>
                                                     Boost
                                                 </button>

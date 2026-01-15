@@ -6,9 +6,10 @@ interface Props {
   onBack: () => void;
   onAdd: () => void;
   onEdit: () => void;
+  onReachBuyers: () => void;
 }
 
-const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit }) => {
+const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers }) => {
   return (
     <div className="flex flex-col bg-[#F8FAFC] h-full overflow-hidden">
       {/* Mobile View - Existing Card Layout */}
@@ -47,7 +48,10 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit }) => {
                       <p className="text-sm text-green-600 font-medium">{product.price}</p>
                     </div>
                     <div className="flex justify-end">
-                      <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-primary text-xs font-medium">
+                      <button
+                        onClick={onReachBuyers}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-primary text-xs font-medium"
+                      >
                         <span className="material-icons-round text-sm">ads_click</span>
                         Reach Buyers
                       </button>
