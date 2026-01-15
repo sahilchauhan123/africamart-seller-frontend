@@ -133,7 +133,7 @@ const App: React.FC = () => {
                       currentView === View.DASHBOARD ? "Dashboard" :
                         currentView === View.CATEGORIES ? "Categories" :
                           currentView === View.ADD_CATEGORY ? "Add Category" :
-                            currentView === View.BUSINESS_INFO ? "Business Information" :
+                            currentView === View.BUSINESS_INFO ? "Documents" :
                               currentView === View.RECENT_UPLOADS ? "Recent Uploads" :
                                 undefined
             }

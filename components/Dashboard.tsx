@@ -10,8 +10,10 @@ interface Props {
 }
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
+    const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
     return (
-        <div className="flex flex-col h-full bg-background-light overflow-hidden">
+        <div className="flex flex-col h-full bg-background-light overflow-hidden relative">
 
             {/* Mobile Dashboard */}
             <div className="lg:hidden flex flex-col h-full">
@@ -42,7 +44,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Manage<br />Products</span>
                             </button>
-                            <button className="flex flex-col items-center group">
+                            <button onClick={() => setIsOverlayOpen(true)} className="flex flex-col items-center group">
                                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
                                         <span className="material-icons-round text-orange-600 text-lg">description</span>
@@ -138,7 +140,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                     <span className="font-bold text-slate-800 text-sm">Check Leads</span>
                                     <span className="text-[11px] text-slate-400 mt-1">12 new today</span>
                                 </button>
-                                <button className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => setIsOverlayOpen(true)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 mb-5">
                                         <span className="material-symbols-outlined text-2xl">post_add</span>
                                     </div>
@@ -369,6 +371,35 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     </div>
                 </main>
             </div>
+            {/* Switch Mode Overlay */}
+            {isOverlayOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div
+                        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300"
+                        onClick={() => setIsOverlayOpen(false)}
+                    ></div>
+                    <div className="relative bg-white w-full max-w-md rounded-[28px] p-8 lg:p-10 shadow-2xl flex flex-col items-center text-center transform animate-in zoom-in fade-in duration-300">
+                        <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-[#0026C0] mb-6">
+                            <span className="material-symbols-outlined text-4xl">swap_horiz</span>
+                        </div>
+                        <h2 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 tracking-tight">Switch to Buyer Mode</h2>
+                        <p className="text-slate-500 text-sm leading-relaxed mb-8 px-2">
+                            Posting a requirement is a buyer-specific feature. Please switch to your buyer profile to continue.
+                        </p>
+                        <div className="w-full flex flex-col gap-3">
+                            <button className="w-full bg-[#0026C0] text-white py-4 rounded-xl font-bold text-sm hover:bg-blue-800 transition-colors shadow-lg shadow-[#0026C0]/20 active:scale-95">
+                                Switch to Buyer
+                            </button>
+                            <button
+                                onClick={() => setIsOverlayOpen(false)}
+                                className="w-full bg-transparent text-slate-400 py-3 rounded-xl font-bold text-sm hover:text-slate-600 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
