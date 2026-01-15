@@ -166,7 +166,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                 <div className="w-full px-10 py-10">
                     <div className="flex items-center justify-between mb-10">
                         <div>
-                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Notifications</h2>
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors">Notifications</h2>
                             <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Stay updated with your latest business activities.</p>
                         </div>
                         <button className="flex items-center gap-2 text-primary dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-4 py-2 rounded-md font-medium text-sm transition-colors border border-blue-100 dark:border-blue-900/50">
@@ -190,7 +190,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">Inquiry</span>
                                                 <div className="flex items-center gap-2">
-                                                    <h4 className="font-semibold text-slate-900 dark:text-white">New Inquiry Received</h4>
+                                                    <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Inquiry Received</h4>
                                                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                                                 </div>
                                             </div>
@@ -210,7 +210,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-0.5">Response</span>
                                                 <div className="flex items-center gap-2">
-                                                    <h4 className="font-semibold text-slate-900 dark:text-white">Buyer Replied</h4>
+                                                    <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.CHAT)}>Buyer Replied</h4>
                                                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                                                 </div>
                                             </div>
@@ -237,7 +237,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider mb-0.5">Alert</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white">Missed Inquiry Alert</h4>
+                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>Missed Inquiry Alert</h4>
                                             </div>
                                             <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">4h ago</span>
                                         </div>
@@ -254,7 +254,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">Inquiry</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white">New Buyer Requirement</h4>
+                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Buyer Requirement</h4>
                                             </div>
                                             <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">1d ago</span>
                                         </div>
@@ -279,7 +279,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-wider mb-0.5">System</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white">Profile Incomplete</h4>
+                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.EDIT_PROFILE)}>Profile Incomplete</h4>
                                             </div>
                                             <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">2d ago</span>
                                         </div>
@@ -296,7 +296,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider mb-0.5">Alert</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white">Product Needs Update</h4>
+                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.PRODUCT_LIST)}>Product Needs Update</h4>
                                             </div>
                                             <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">3d ago</span>
                                         </div>

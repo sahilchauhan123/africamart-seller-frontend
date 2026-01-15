@@ -101,8 +101,9 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
           </div>
 
           <div className="mt-2 border-t border-gray-100 flex flex-col gap-1">
+
             <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
-              <span className="font-bold text-black text-xs tracking-wider uppercase">COMMUNICATIONS</span>
+              <span className="font-bold text-black text-xs tracking-wider uppercase">Help & support</span>
               <span className="material-icons-round text-gray-400">expand_more</span>
             </button>
             <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
@@ -201,12 +202,13 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
             </a>
           </div>
           <div className="mt-auto pt-4 flex flex-col gap-2">
+
             <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
-              <span className="font-bold text-black text-xs tracking-wider">COMMUNICATIONS</span>
+              <span className="font-bold text-black text-xs tracking-wider">Help & support</span>
               <span className="material-symbols-outlined text-gray-400">expand_more</span>
             </button>
             <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
-              <span className="font-bold text-black text-xs tracking-wider">MORE</span>
+              <span className="font-bold text-black text-xs tracking-wider uppercase">MORE</span>
               <span className="material-symbols-outlined text-gray-400">expand_more</span>
             </button>
           </div>

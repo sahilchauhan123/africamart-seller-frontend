@@ -6,6 +6,7 @@ export const MOCK_USER: User = {
   businessName: 'Global Agro Supplies Ltd.',
   category: 'Wholesale Distributor',
   location: 'Paynesville, Monrovia',
+  email: 'alex@eliteliberia.com',
   score: 85,
   rating: '4.8',
   reviews: 125,

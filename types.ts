@@ -46,6 +46,7 @@ export interface User {
   businessName: string;
   category: string;
   location: string;
+  email: string;
   score: number;
   rating?: string;
   reviews?: number;

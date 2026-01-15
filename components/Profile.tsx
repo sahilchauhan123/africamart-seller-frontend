@@ -102,7 +102,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                 />
               </div>
               <div className="p-4 space-y-2">
-                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Location/Address</label>
+                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Location/Address </label>
                 <input
                   className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
                   type="text"
@@ -202,194 +202,146 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
 
       {/* Desktop Layout */}
       <div className="hidden lg:flex flex-col h-full bg-[#F5F7FA] overflow-hidden">
-        {/* Fixed Desktop Header */}
-        <div className="bg-white border-b border-slate-200 px-4 lg:px-10 py-6 shrink-0 z-10">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-slate-800">Business Profile</h1>
-              <p className="text-sm text-slate-500">Manage your business information and verified status</p>
-            </div>
-            <button onClick={onEdit} className="px-5 py-2 bg-primary text-white text-sm font-semibold rounded shadow-sm hover:bg-blue-800 transition-colors flex items-center gap-2">
-              <span className="material-symbols-outlined text-lg">edit</span>
-              Edit Profile
-            </button>
-          </div>
-        </div>
-
-        <div className="flex-1 overflow-y-auto no-scrollbar p-4 lg:p-10">
-          <div className="max-w-7xl mx-auto space-y-8">
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-              <div className="p-8">
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-                  <div className="relative">
-                    <img alt="Business Logo" className="w-28 h-28 rounded-lg object-cover border-4 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvaLhmctPWKJhlK_MXdy_SIrtBngba8Y10QZ0DHMdN-qgihX1beyMHji9q1Ede6smdiP0vGLWjfETOnR2SvddgZMUOeCHMulFApwtoncfJWtPY6TxTPQ2WK-9uZGj-c4AmMGnWu-0bA7G7K-CPAbN2GYRKyY7tZwLMDa_uf1a0LOs14aEsSNxT-cXmZJDBtmMhN57qQpy6DcsABJ1tGzTTM7TUEU9LTAHIrubYK2D11Fp_EOdF6Jtic6b6u390Fthikys17BeOHsU" />
-                    <div className="absolute -bottom-2 -right-2 bg-blue-600 text-white rounded-full p-1 border-2 border-white">
-                      <span className="material-symbols-outlined text-sm block">verified</span>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <h2 className="text-2xl font-bold text-slate-900 leading-tight">Elite Electronics Liberia</h2>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold bg-green-50 text-green-700 border border-green-100 tracking-wider">
-                        TRUSTED SELLER
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-6 text-slate-500">
-                      <div className="flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-lg">location_on</span>
-                        <span className="text-sm">Red Light, Paynesville City</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex items-center text-yellow-500">
-                          <span className="material-symbols-outlined text-lg fill-1">star</span>
-                          <span className="text-sm font-bold text-slate-900 ml-1">4.5</span>
-                        </div>
-                        <span className="text-sm text-slate-400">(248 Verified Reviews)</span>
-                      </div>
-                    </div>
+        <main className="flex-1 overflow-y-auto no-scrollbar p-4 lg:px-10 lg:pt-10 lg:pb-10">
+          <div className="max-w-[1536px] mx-auto space-y-8">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-8">
+                <div className="relative flex-shrink-0">
+                  <div className="w-32 h-32 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-700 shadow-md overflow-hidden text-center">
+                    <img
+                      alt="Business Logo"
+                      className="w-full h-full object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvaLhmctPWKJhlK_MXdy_SIrtBngba8Y10QZ0DHMdN-qgihX1beyMHji9q1Ede6smdiP0vGLWjfETOnR2SvddgZMUOeCHMulFApwtoncfJWtPY6TxTPQ2WK-9uZGj-c4AmMGnWu-0bA7G7K-CPAbN2GYRKyY7tZwLMDa_uf1a0LOs14aEsSNxT-cXmZJDBtmMhN57qQpy6DcsABJ1tGzTTM7TUEU9LTAHIrubYK2D11Fp_EOdF6Jtic6b6u390Fthikys17BeOHsU"
+                    />
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 pt-8 border-t border-slate-100">
-                  <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">GST / Tax Identification</p>
-                    <p className="text-lg font-mono font-bold text-slate-800">245316853FBAT1</p>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Hi, {MOCK_USER.name}</h2>
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded-full uppercase tracking-wider">
+                      <span className="material-symbols-outlined text-base font-bold">verified</span>
+                      Verified Seller
+                    </span>
+                    <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-800/50 px-3 py-1 rounded-full border border-slate-100 dark:border-slate-700">
+                      <div className="flex items-center">
+                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
+                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
+                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
+                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
+                        <span className="material-symbols-outlined text-yellow-500 text-lg">star_half</span>
+                      </div>
+                      <span className="text-sm font-bold text-slate-700 dark:text-slate-200 ml-1">4.5</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">(128 reviews)</span>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Member Since</p>
-                    <p className="text-lg font-semibold text-slate-800">Aug 2018 (5 Years)</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Orders</p>
-                    <p className="text-lg font-semibold text-slate-800">1,240+</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Response Rate</p>
-                    <p className="text-lg font-semibold text-slate-800">98%</p>
+                  <div className="flex flex-wrap gap-4 text-slate-500 dark:text-slate-400 items-center">
+                    <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">location_on</span> {MOCK_USER.location}</span>
+                    <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                    <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">business_center</span> {MOCK_USER.category}</span>
                   </div>
                 </div>
+                <div className="flex gap-3">
+                  <a aria-label="LinkedIn" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="#">
+                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                  </a>
+                  <a aria-label="Facebook" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="#">
+                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.324v-21.35c0-.732-.593-1.325-1.325-1.325z"></path></svg>
+                  </a>
+                  <a aria-label="Website" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="#">
+                    <span className="material-symbols-outlined">public</span>
+                  </a>
+                </div>
+              </div>
+              <div className="border-t border-slate-100 dark:border-slate-800 pt-8">
+                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Nature of Business</h3>
+                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-4xl">
+                  {MOCK_USER.businessName} is a leading provider of {MOCK_USER.category.toLowerCase()} solutions, specializing in high-quality products and consumer goods across global markets. Established with a focus on supply chain efficiency, we bridge the gap between manufacturers and retailers with reliable service and competitive pricing.
+                </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 pb-10">
-              <div className="xl:col-span-2 space-y-8">
-                <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-                  <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-primary">info</span>
-                      <h3 className="font-bold text-slate-800 uppercase tracking-tight text-xs">Company Overview</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Business Details</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Business Category</label>
+                      <p className="font-medium text-slate-900 dark:text-white">{MOCK_USER.category}</p>
                     </div>
-                    <button onClick={onEdit} className="text-primary hover:underline text-xs font-semibold">Update Details</button>
-                  </div>
-                  <div className="p-6">
-                    <dl className="grid grid-cols-1 gap-y-4">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 py-2">
-                        <dt className="text-sm font-medium text-slate-500 w-48">Nature of Business</dt>
-                        <dd className="text-sm text-slate-900 font-medium">Wholesale &amp; Retail of Smart Home Appliances</dd>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 py-2">
-                        <dt className="text-sm font-medium text-slate-500 w-48">Registered Mobile No.</dt>
-                        <dd className="text-sm text-slate-900 font-medium">+231 773 49915</dd>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 py-2">
-                        <dt className="text-sm font-medium text-slate-500 w-48">Principal Office</dt>
-                        <dd className="text-sm text-slate-900 font-medium">ELWA Junction, Monrovia, Liberia</dd>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 py-2">
-                        <dt className="text-sm font-medium text-slate-500 w-48">Business Type</dt>
-                        <dd className="text-sm text-slate-900 font-medium">Sole Proprietorship</dd>
-                      </div>
-                    </dl>
-                  </div>
-                </div>
-                <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-                  <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-primary">inventory</span>
-                      <h3 className="font-bold text-slate-800 uppercase tracking-tight text-xs">Product &amp; Services</h3>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Location/Address</label>
+                      <p className="font-medium text-slate-900 dark:text-white">{MOCK_USER.location}</p>
                     </div>
-                    <button className="text-primary hover:underline text-xs font-semibold">View Catalog</button>
-                  </div>
-                  <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex items-center p-3 border border-slate-100 rounded-lg hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
-                      <div className="w-10 h-10 rounded bg-slate-100 flex items-center justify-center mr-4 group-hover:bg-white transition-colors">
-                        <span className="material-symbols-outlined text-slate-400 group-hover:text-primary">devices</span>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Country</label>
+                        <p className="font-medium text-slate-900 dark:text-white">Liberia</p>
                       </div>
-                      <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-slate-900">Smart Home</h4>
-                        <p className="text-[10px] text-slate-500">12 Products</p>
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Capital</label>
+                        <p className="font-medium text-slate-900 dark:text-white">Monrovia</p>
                       </div>
-                      <span className="material-symbols-outlined text-slate-300 text-sm">chevron_right</span>
                     </div>
-                    <div className="flex items-center p-3 border border-slate-100 rounded-lg hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
-                      <div className="w-10 h-10 rounded bg-slate-100 flex items-center justify-center mr-4 group-hover:bg-white transition-colors">
-                        <span className="material-symbols-outlined text-slate-400 group-hover:text-primary">smartphone</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-slate-900">Accessories</h4>
-                        <p className="text-[10px] text-slate-500">45 Products</p>
-                      </div>
-                      <span className="material-symbols-outlined text-slate-300 text-sm">chevron_right</span>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Year of Establishment</label>
+                      <p className="font-medium text-slate-900 dark:text-white">2018</p>
                     </div>
-                    <button className="sm:col-span-2 py-3 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center gap-2 text-slate-400 hover:border-primary hover:text-primary transition-all bg-slate-50/50">
-                      <span className="material-symbols-outlined text-lg">add_circle</span>
-                      <span className="text-xs font-bold uppercase tracking-wider">Add New Category</span>
-                    </button>
                   </div>
                 </div>
               </div>
 
-              <div className="xl:col-span-1">
-                <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden sticky top-24">
-                  <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-primary">groups</span>
-                      <h3 className="font-bold text-slate-800 uppercase tracking-tight text-xs">Team Members</h3>
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Contact & Verification</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Email Address</label>
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium text-slate-900 dark:text-white">{MOCK_USER.email}</p>
+                        <span className="material-symbols-outlined text-emerald-500 text-base">check_circle</span>
+                      </div>
                     </div>
-                    <button className="text-primary hover:underline text-[10px] font-bold">MANAGE ALL</button>
-                  </div>
-                  <div className="p-6 space-y-5">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-primary font-bold text-xs border border-blue-100">JD</div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Contact Number</label>
+                      <p className="font-medium text-slate-900 dark:text-white">+231 773 499 15</p>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">GST & Tax Number</label>
+                      <p className="font-medium text-slate-900 dark:text-white">245316853FBAT1</p>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Verification Status</label>
+                      <div className="mt-2 p-3 bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 rounded-lg flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white">
+                          <span className="material-symbols-outlined text-sm">verified_user</span>
+                        </div>
                         <div>
-                          <p className="text-sm font-semibold text-slate-900">John Doe</p>
-                          <p className="text-[10px] text-slate-500">Operations Manager</p>
+                          <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400">Identity Verified</p>
+                          <p className="text-[10px] text-emerald-600 dark:text-emerald-500/80">Last checked on January 2026</p>
                         </div>
                       </div>
-                      <span className="px-1.5 py-0.5 rounded bg-green-50 text-[10px] font-bold text-green-700 border border-green-100 uppercase tracking-tighter">Active</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs border border-slate-200">AS</div>
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900">Alice Smith</p>
-                          <p className="text-[10px] text-slate-500">Sales Lead</p>
-                        </div>
-                      </div>
-                      <span className="px-1.5 py-0.5 rounded bg-slate-50 text-[10px] font-bold text-slate-400 border border-slate-100 uppercase tracking-tighter">Inactive</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-primary font-bold text-xs border border-blue-100">MK</div>
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900">Mark Kamara</p>
-                          <p className="text-[10px] text-slate-500">Logistics Admin</p>
-                        </div>
-                      </div>
-                      <span className="px-1.5 py-0.5 rounded bg-green-50 text-[10px] font-bold text-green-700 border border-green-100 uppercase tracking-tighter">Active</span>
-                    </div>
-                    <div className="pt-4">
-                      <button className="w-full py-2.5 flex items-center justify-center gap-2 text-primary bg-blue-50 hover:bg-blue-100 rounded text-xs font-bold transition-colors">
-                        <span className="material-symbols-outlined text-sm">person_add</span>
-                        INVITE TEAM MEMBER
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-between items-center pt-4">
+              <div className="flex items-center gap-2 text-slate-400">
+                <span className="material-symbols-outlined text-sm">lock</span>
+                <span className="text-[10px] uppercase tracking-widest font-bold">Secure Public Profile View</span>
+              </div>
+              <button
+                onClick={onEdit}
+                className="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center gap-2 group uppercase text-sm tracking-wide"
+              >
+                Edit Profile Information
+                <span className="material-symbols-outlined text-lg">edit</span>
+              </button>
             </div>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
