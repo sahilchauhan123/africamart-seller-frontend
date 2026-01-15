@@ -89,7 +89,17 @@ const Header: React.FC<HeaderProps> = (props) => {
                             <div className="h-6 w-px bg-white/20"></div>
                         </>
                     )}
-                    {title && currentView !== View.CATEGORIES && <h1 className="text-white font-semibold text-base tracking-wide">{title}</h1>}
+                    {title && currentView !== View.CATEGORIES && currentView !== View.BUSINESS_INFO && <h1 className="text-white font-semibold text-base tracking-wide">{title}</h1>}
+                    {currentView === View.BUSINESS_INFO && (
+                        <div className="flex-grow max-w-2xl relative">
+                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/60">search</span>
+                            <input
+                                className="w-full bg-white/10 border-transparent focus:border-white/20 focus:ring-0 text-white placeholder-white/60 rounded-lg pl-10 py-2 transition-all outline-none"
+                                placeholder="Search documents..."
+                                type="text"
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className="flex items-center gap-6 ml-8">
                     <div className="flex gap-1">
