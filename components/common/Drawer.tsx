@@ -49,6 +49,13 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               <span className="text-sm">Manage Products</span>
             </button>
             <button
+              onClick={() => { onNavigate(View.CATEGORIES); if (window.innerWidth < 1024) onClose(); }}
+              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.CATEGORIES ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+            >
+              <span className={`material-icons-round ${currentView === View.CATEGORIES ? 'text-primary' : 'text-gray-400'}`}>category</span>
+              <span className="text-sm">Categories</span>
+            </button>
+            <button
               onClick={() => { onNavigate(View.INQUIRY_LIST); if (window.innerWidth < 1024) onClose(); }}
               className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.INQUIRY_LIST ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
             >
@@ -133,6 +140,13 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
             >
               <span className="material-symbols-outlined text-[22px]">inventory_2</span>
               <span className="font-medium text-sm">Manage Products</span>
+            </a>
+            <a
+              onClick={() => onNavigate(View.CATEGORIES)}
+              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.CATEGORIES ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
+            >
+              <span className="material-symbols-outlined text-[22px]">category</span>
+              <span className="font-medium text-sm">Categories</span>
             </a>
             <a
               onClick={() => onNavigate(View.PROFILE)}

@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import BusinessMessages from './components/BusinessMessages';
 import MessageSearch from './components/MessageSearch';
+import CategoryManager, { CategoryView } from './components/CategoryManager';
 import Drawer from './components/common/Drawer';
 import Header from './components/common/Header';
 
@@ -71,6 +72,10 @@ const App: React.FC = () => {
         return <Profile onBack={() => setIsDrawerOpen(true)} onEdit={() => setCurrentView(View.EDIT_PROFILE)} />;
       case View.EDIT_PROFILE:
         return <EditProfile onBack={() => setCurrentView(View.PROFILE)} onSave={() => setCurrentView(View.PROFILE)} />;
+      case View.CATEGORIES:
+        return <CategoryManager />;
+      case View.ADD_CATEGORY:
+        return <CategoryManager initialView={CategoryView.ADD} />;
       default:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} />;
     }
@@ -97,8 +102,23 @@ const App: React.FC = () => {
             onOpenDrawer={() => setIsDrawerOpen(true)}
             onNavigate={(view) => setCurrentView(view)}
             currentView={currentView}
-            onBack={currentView === View.LEAD_DETAILS ? () => setCurrentView(View.INQUIRY_LIST) : undefined}
-            title={currentView === View.LEAD_DETAILS ? "Lead Details" : undefined}
+            onBack={(currentView === View.LEAD_DETAILS || currentView === View.PRODUCT_LIST || currentView === View.ADD_PRODUCT || currentView === View.INQUIRY_LIST || currentView === View.ADD_CATEGORY) ? () => {
+              if (currentView === View.LEAD_DETAILS) setCurrentView(View.INQUIRY_LIST);
+              else if (currentView === View.ADD_PRODUCT) setCurrentView(View.PRODUCT_LIST);
+              else if (currentView === View.ADD_CATEGORY) setCurrentView(View.CATEGORIES);
+              else setIsDrawerOpen(true);
+            } : undefined}
+            title={
+              currentView === View.LEAD_DETAILS ? "Lead Request Details" :
+                currentView === View.ADD_PRODUCT ? "Add New Product" :
+                  currentView === View.PRODUCT_LIST ? "Manage Products" :
+                    currentView === View.INQUIRY_LIST ? "Leads & Inquiries" :
+                      currentView === View.DASHBOARD ? "Dashboard" :
+                        currentView === View.CATEGORIES ? "Categories" :
+                          currentView === View.ADD_CATEGORY ? "Add Category" :
+                            undefined
+            }
+            onAdd={currentView === View.CATEGORIES ? () => setCurrentView(View.ADD_CATEGORY) : undefined}
           />
         )}
         <main className={`flex-1 relative ${isAuthView && !hideHeader ? "pt-16 lg:pt-[72px]" : ""}`}>

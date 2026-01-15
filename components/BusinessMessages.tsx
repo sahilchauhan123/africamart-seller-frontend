@@ -92,7 +92,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                 <div className="flex items-center justify-start h-[72px]">
                     <div className="flex items-center gap-4 w-full max-w-xl">
                         <div className="relative w-full">
-                            <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl leading-none">search</span>
                             <input
                                 type="text"
                                 placeholder="Search conversations..."
@@ -131,17 +131,17 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         onClick={onOpenDrawer}
                         className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center"
                     >
-                        <span className="material-icons-round text-3xl leading-none">menu</span>
+                        <span className="material-symbols-outlined text-3xl leading-none">menu</span>
                     </button>
                     <h1 className="text-white text-lg font-semibold tracking-wide">Business Messages</h1>
                     <button className="p-2 rounded-full hover:bg-white/10 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-white/20">
-                        <span className="material-icons text-2xl">more_vert</span>
+                        <span className="material-symbols-outlined text-2xl leading-none">more_vert</span>
                     </button>
                 </div>
                 <div className="px-4 sm:px-6 pb-3">
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="material-icons text-gray-400 text-xl">search</span>
+                            <span className="material-symbols-outlined text-gray-400 text-xl leading-none">search</span>
                         </div>
                         <input
                             className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 sm:text-sm shadow-sm cursor-pointer"
@@ -215,7 +215,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         <div className="flex items-center px-4 py-4 sm:px-6 lg:px-10">
                             <div className="relative flex-shrink-0">
                                 <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200 text-gray-600 font-bold text-lg">
-                                    <span className="material-icons text-xl">person</span>
+                                    <span className="material-symbols-outlined text-xl leading-none">person</span>
                                 </div>
                             </div>
                             <div className="ml-4 flex-1 min-w-0">

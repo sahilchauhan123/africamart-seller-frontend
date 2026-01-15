@@ -7,25 +7,49 @@ interface HeaderProps {
     onNavigate: (view: View) => void;
     currentView?: View;
     onBack?: () => void;
+    onAdd?: () => void;
     title?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ onOpenDrawer, onNavigate, currentView, onBack, title }) => {
+const Header: React.FC<HeaderProps> = (props) => {
+    const { onOpenDrawer, onNavigate, currentView, onBack, title } = props;
     const isLeadDetails = currentView === View.LEAD_DETAILS;
+    const isProductManager = currentView === View.PRODUCT_LIST;
+    const isAddProduct = currentView === View.ADD_PRODUCT;
+    const isAddCategory = currentView === View.ADD_CATEGORY;
+    const isInquiryList = currentView === View.INQUIRY_LIST;
+    const isDashboard = currentView === View.DASHBOARD;
+    const showBackButton = (isLeadDetails || isAddProduct || isAddCategory) && onBack;
+    const isListView = isProductManager || isInquiryList || currentView === View.CATEGORIES;
     return (
         <>
             {/* Mobile Header */}
             <header className="bg-primary fixed top-0 left-0 right-0 z-50 px-4 h-16 shadow-md lg:hidden flex items-center shrink-0">
                 <div className="flex items-center justify-between gap-3 max-w-7xl mx-auto w-full">
-                    {isLeadDetails && onBack ? (
+                    {showBackButton || isListView ? (
                         <div className="flex items-center w-full relative">
-                            <button onClick={onBack} aria-label="Go back" className="text-white p-2 rounded-full hover:bg-white/10 transition-colors z-10">
-                                <span className="material-icons-round text-2xl">arrow_back</span>
-                            </button>
+                            {isListView ? (
+                                <button onClick={onOpenDrawer} className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center z-10">
+                                    <span className="material-icons-round text-3xl leading-none">menu</span>
+                                </button>
+                            ) : (
+                                <button onClick={onBack} aria-label="Go back" className="text-white p-2 rounded-full hover:bg-white/10 transition-colors z-10">
+                                    <span className="material-icons-round text-2xl">arrow_back</span>
+                                </button>
+                            )}
                             <h1 className="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold tracking-wide pointer-events-none">
-                                Lead Request Details
+                                {title || 'Details'}
                             </h1>
-                            <div className="w-10"></div> {/* Spacer to balance the back button width */}
+                            <div className="flex items-center absolute right-0 z-10">
+                                {props.onAdd && (
+                                    <button
+                                        onClick={props.onAdd}
+                                        className="text-white p-2 rounded-full hover:bg-white/10 transition-colors flex items-center justify-center"
+                                    >
+                                        <span className="material-icons-round text-2xl">add</span>
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     ) : (
                         <>
@@ -57,15 +81,15 @@ const Header: React.FC<HeaderProps> = ({ onOpenDrawer, onNavigate, currentView, 
             {/* Desktop Header */}
             <header className="bg-primary px-10 h-[72px] hidden lg:flex items-center justify-between fixed top-0 right-0 left-0 lg:left-72 z-10 shrink-0">
                 <div className="flex-1 flex items-center gap-4">
-                    {isLeadDetails && onBack && (
+                    {showBackButton && !isListView && (
                         <>
                             <button onClick={onBack} className="text-white p-2 rounded-lg hover:bg-white/10 transition flex items-center justify-center">
                                 <span className="material-symbols-outlined text-2xl">arrow_back</span>
                             </button>
                             <div className="h-6 w-px bg-white/20"></div>
-                            <h1 className="text-white font-semibold text-base tracking-wide">{title || 'Lead Details'}</h1>
                         </>
                     )}
+                    {title && currentView !== View.CATEGORIES && <h1 className="text-white font-semibold text-base tracking-wide">{title}</h1>}
                 </div>
                 <div className="flex items-center gap-6 ml-8">
                     <div className="flex gap-1">
