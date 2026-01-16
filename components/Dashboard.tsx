@@ -11,6 +11,15 @@ interface Props {
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [activeMonthIndex, setActiveMonthIndex] = useState(3);
+    const months = [
+        { name: 'AUG', full: 'AUGUST', leads: 95, height: '65%' },
+        { name: 'SEP', full: 'SEPTEMBER', leads: 110, height: '85%' },
+        { name: 'OCT', full: 'OCTOBER', leads: 85, height: '55%' },
+        { name: 'NOV', full: 'NOVEMBER', leads: 142, height: '100%' },
+        { name: 'DEC', full: 'DECEMBER', leads: 120, height: '90%' },
+        { name: 'JAN', full: 'JANUARY', leads: 125, height: '75%' },
+    ];
 
     return (
         <div className="flex flex-col h-full bg-background-light overflow-hidden relative">
@@ -176,8 +185,8 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         <div className="bg-white border border-slate-100 rounded-[24px] p-6 relative overflow-hidden flex flex-col h-[220px] shadow-sm">
                                             <div className="flex justify-between items-start mb-2 relative z-10">
                                                 <div>
-                                                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">JANUARY LEADS</p>
-                                                    <h3 className="text-3xl font-bold tracking-tight text-slate-800">125</h3>
+                                                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">{months[activeMonthIndex].full} LEADS</p>
+                                                    <h3 className="text-3xl font-bold tracking-tight text-slate-800">{months[activeMonthIndex].leads}</h3>
                                                 </div>
                                                 <button
                                                     onClick={() => onNavigate(View.PREMIUM_SERVICES)}
@@ -188,12 +197,14 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                                 </button>
                                             </div>
                                             <div className="flex-1 flex items-end gap-2.5 pb-0">
-                                                <div className="bg-slate-100 w-full h-[65%] rounded-lg"></div>
-                                                <div className="bg-slate-100 w-full h-[85%] rounded-lg"></div>
-                                                <div className="bg-slate-100 w-full h-[55%] rounded-lg"></div>
-                                                <div className="bg-brand w-full h-[100%] rounded-lg shadow-lg shadow-brand/20"></div>
-                                                <div className="bg-slate-100 w-full h-[90%] rounded-lg"></div>
-                                                <div className="bg-slate-100 w-full h-[75%] rounded-lg"></div>
+                                                {months.map((m, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        onClick={() => setActiveMonthIndex(idx)}
+                                                        className={`${idx === activeMonthIndex ? 'bg-brand shadow-lg shadow-brand/20' : 'bg-slate-100 hover:bg-slate-200'} w-full rounded-lg cursor-pointer transition-all`}
+                                                        style={{ height: m.height }}
+                                                    ></div>
+                                                ))}
                                             </div>
                                         </div>
                                         <div className="bg-white border border-slate-100 rounded-[24px] p-6 flex flex-col h-[220px] shadow-sm">

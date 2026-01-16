@@ -162,14 +162,14 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
             </div>
 
             {/* Desktop View */}
-            <div className="hidden lg:block w-full bg-white dark:bg-slate-950 font-display">
+            <div className="hidden lg:block w-full bg-white font-display">
                 <div className="w-full px-10 py-10">
                     <div className="flex items-center justify-between mb-10">
                         <div>
-                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors">Notifications</h2>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Stay updated with your latest business activities.</p>
+                            <h2 className="text-2xl font-bold text-slate-900 cursor-pointer hover:text-primary transition-colors">Notifications</h2>
+                            <p className="text-slate-500 text-sm mt-1">Stay updated with your latest business activities.</p>
                         </div>
-                        <button className="flex items-center gap-2 text-primary dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-4 py-2 rounded-md font-medium text-sm transition-colors border border-blue-100 dark:border-blue-900/50">
+                        <button className="flex items-center gap-2 text-primary hover:bg-blue-50 px-4 py-2 rounded-md font-medium text-sm transition-colors border border-blue-100">
                             <span className="material-symbols-outlined text-[18px]">done_all</span>
                             Mark all as read
                         </button>
@@ -177,47 +177,47 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                     <div className="space-y-12">
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] whitespace-nowrap">Today</h3>
-                                <div className="h-px w-full bg-slate-100 dark:bg-slate-800"></div>
+                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">Today</h3>
+                                <div className="h-px w-full bg-slate-100"></div>
                             </div>
-                            <div className="divide-y divide-slate-100 dark:divide-slate-800 border-b border-slate-100 dark:border-slate-800">
+                            <div className="divide-y divide-slate-100 border-b border-slate-100">
                                 <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
                                         <span className="material-symbols-outlined text-primary text-[20px]">mail</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">Inquiry</span>
+                                                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-0.5">Inquiry</span>
                                                 <div className="flex items-center gap-2">
-                                                    <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Inquiry Received</h4>
+                                                    <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Inquiry Received</h4>
                                                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                                                 </div>
                                             </div>
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">15m ago</span>
+                                            <span className="text-xs text-slate-400 flex-shrink-0">15m ago</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            A buyer from Delhi is interested in <span className="text-slate-900 dark:text-slate-200 font-medium">'Industrial Valves'</span>. View details to send a professional quotation and close the deal.
+                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
+                                            A buyer from Delhi is interested in <span className="text-slate-900 font-medium">'Industrial Valves'</span>. View details to send a professional quotation and close the deal.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
                                         <span className="material-symbols-outlined text-emerald-600 text-[20px]">chat</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-0.5">Response</span>
+                                                <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-0.5">Response</span>
                                                 <div className="flex items-center gap-2">
-                                                    <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.CHAT)}>Buyer Replied</h4>
+                                                    <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.CHAT)}>Buyer Replied</h4>
                                                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                                                 </div>
                                             </div>
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">1h ago</span>
+                                            <span className="text-xs text-slate-400 flex-shrink-0">1h ago</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            New message regarding <span className="text-slate-900 dark:text-slate-200 font-medium">'PVC Pipes'</span>. Quick replies are 3x more likely to convert to an order according to our stats.
+                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
+                                            New message regarding <span className="text-slate-900 font-medium">'PVC Pipes'</span>. Quick replies are 3x more likely to convert to an order according to our stats.
                                         </p>
                                     </div>
                                 </div>
@@ -225,41 +225,41 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         </section>
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] whitespace-nowrap">Yesterday</h3>
-                                <div className="h-px w-full bg-slate-100 dark:bg-slate-800"></div>
+                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">Yesterday</h3>
+                                <div className="h-px w-full bg-slate-100"></div>
                             </div>
-                            <div className="divide-y divide-slate-100 dark:divide-slate-800 border-b border-slate-100 dark:border-slate-800">
+                            <div className="divide-y divide-slate-100 border-b border-slate-100">
                                 <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-red-50 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
                                         <span className="material-symbols-outlined text-red-500 text-[20px]">notifications_active</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider mb-0.5">Alert</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>Missed Inquiry Alert</h4>
+                                                <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-0.5">Alert</span>
+                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>Missed Inquiry Alert</h4>
                                             </div>
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">4h ago</span>
+                                            <span className="text-xs text-slate-400 flex-shrink-0">4h ago</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
+                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
                                             You have pending inquiries from yesterday. Remember that faster replies significantly increase your seller rating and trust score.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
                                         <span className="material-symbols-outlined text-blue-500 text-[20px]">assignment</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">Inquiry</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Buyer Requirement</h4>
+                                                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-0.5">Inquiry</span>
+                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Buyer Requirement</h4>
                                             </div>
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">1d ago</span>
+                                            <span className="text-xs text-slate-400 flex-shrink-0">1d ago</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            A new requirement for <span className="text-slate-900 dark:text-slate-200 font-medium">'Electrical Cables'</span> matches your profile categories. Apply now to get the contact info.
+                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
+                                            A new requirement for <span className="text-slate-900 font-medium">'Electrical Cables'</span> matches your profile categories. Apply now to get the contact info.
                                         </p>
                                     </div>
                                 </div>
@@ -267,43 +267,43 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         </section>
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] whitespace-nowrap">Earlier</h3>
-                                <div className="h-px w-full bg-slate-100 dark:bg-slate-800"></div>
+                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">Earlier</h3>
+                                <div className="h-px w-full bg-slate-100"></div>
                             </div>
-                            <div className="divide-y divide-slate-100 dark:divide-slate-800 border-b border-slate-100 dark:border-slate-800">
+                            <div className="divide-y divide-slate-100 border-b border-slate-100">
                                 <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
                                         <span className="material-symbols-outlined text-orange-500 text-[20px]">account_circle</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-wider mb-0.5">System</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.EDIT_PROFILE)}>Profile Incomplete</h4>
+                                                <span className="text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-0.5">System</span>
+                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.EDIT_PROFILE)}>Profile Incomplete</h4>
                                             </div>
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">2d ago</span>
+                                            <span className="text-xs text-slate-400 flex-shrink-0">2d ago</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
+                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
                                             Complete your business profile including GST and warehouse location to gain buyer trust and get more high-quality inquiries.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-red-50 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
                                         <span className="material-symbols-outlined text-red-500 text-[20px]">error</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-red-500 dark:text-red-400 uppercase tracking-wider mb-0.5">Alert</span>
-                                                <h4 className="font-semibold text-slate-900 dark:text-white cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.PRODUCT_LIST)}>Product Needs Update</h4>
+                                                <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-0.5">Alert</span>
+                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.PRODUCT_LIST)}>Product Needs Update</h4>
                                             </div>
-                                            <span className="text-xs text-slate-400 dark:text-slate-500 flex-shrink-0">3d ago</span>
+                                            <span className="text-xs text-slate-400 flex-shrink-0">3d ago</span>
                                         </div>
-                                        <p className="text-slate-500 dark:text-slate-400 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            Listing for <span className="text-slate-900 dark:text-slate-200 font-medium">'Hydraulic Pump'</span> was rejected due to missing technical specifications. Update to resume visibility.
+                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
+                                            Listing for <span className="text-slate-900 font-medium">'Hydraulic Pump'</span> was rejected due to missing technical specifications. Update to resume visibility.
                                         </p>
-                                        <button className="mt-4 px-3 py-1.5 rounded bg-slate-50 dark:bg-slate-900 text-[13px] font-semibold text-primary dark:text-blue-400 inline-flex items-center gap-1.5 hover:bg-blue-50 dark:hover:bg-blue-900/40 transition-colors border border-slate-200 dark:border-slate-800">
+                                        <button className="mt-4 px-3 py-1.5 rounded bg-slate-50 text-[13px] font-semibold text-primary inline-flex items-center gap-1.5 hover:bg-blue-50 transition-colors border border-slate-200">
                                             Update Listing <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                                         </button>
                                     </div>
@@ -312,7 +312,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         </section>
                     </div>
                     <div className="mt-16 flex justify-center pb-20">
-                        <button className="bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 px-8 py-2.5 rounded-full font-medium text-sm hover:text-primary dark:hover:text-blue-400 transition-all border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-blue-900/50">
+                        <button className="bg-white text-slate-500 px-8 py-2.5 rounded-full font-medium text-sm hover:text-primary transition-all border border-slate-200 hover:border-primary">
                             Load older notifications
                         </button>
                     </div>

@@ -58,9 +58,9 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
       </div>
 
       {/* Desktop View */}
-      <div className="hidden lg:flex h-screen overflow-hidden bg-white dark:bg-slate-950 font-sans">
+      <div className="hidden lg:flex h-screen overflow-hidden bg-white font-sans">
         {/* Left Side: Form */}
-        <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white dark:bg-slate-950">
+        <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white">
           <div className="w-full max-w-md space-y-8">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold tracking-tight text-primary">
@@ -68,17 +68,17 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
               </h1>
             </div>
 
-            <div className="bg-[#F0F4FF] dark:bg-slate-900 p-8 rounded-[1.5rem] shadow-sm">
-              <p className="text-left text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+            <div className="bg-[#F0F4FF] p-8 rounded-[1.5rem] shadow-sm">
+              <p className="text-left text-gray-600 mb-8 leading-relaxed">
                 Enter your details below to set up your seller account.
               </p>
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2" htmlFor="business_name">
+                  <label className="block text-sm font-semibold text-gray-900 mb-2" htmlFor="business_name">
                     Business Owner Name
                   </label>
                   <input
-                    className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-primary/20 dark:border-primary/40 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                    className="w-full px-4 py-3 bg-white border border-primary/20 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-900 placeholder-gray-400"
                     id="business_name"
                     name="business_name"
                     placeholder="Typing...."
@@ -86,12 +86,12 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2" htmlFor="mobile">
+                  <label className="block text-sm font-semibold text-gray-900 mb-2" htmlFor="mobile">
                     Mobile
                   </label>
                   <div className="relative">
                     <input
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-primary/20 dark:border-primary/40 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+                      className="w-full px-4 py-3 bg-white border border-primary/20 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-900"
                       id="mobile"
                       name="mobile"
                       type="tel"
@@ -103,7 +103,7 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
             </div>
 
             <div className="space-y-4 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-500">
                 Click continue to verify your contact details
               </p>
               <button

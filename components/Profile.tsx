@@ -204,10 +204,10 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
       <div className="hidden lg:flex flex-col h-full bg-[#F5F7FA] overflow-hidden">
         <main className="flex-1 overflow-y-auto no-scrollbar p-4 lg:px-10 lg:pt-10 lg:pb-10">
           <div className="max-w-[1536px] mx-auto space-y-8">
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-8">
                 <div className="relative flex-shrink-0">
-                  <div className="w-32 h-32 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-700 shadow-md overflow-hidden text-center">
+                  <div className="w-32 h-32 rounded-full bg-slate-100 flex items-center justify-center border-4 border-white shadow-md overflow-hidden text-center">
                     <img
                       alt="Business Logo"
                       className="w-full h-full object-cover"
@@ -216,13 +216,13 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Hi, {MOCK_USER.name}</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 mb-2">Hi, {MOCK_USER.name}</h2>
                   <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded-full uppercase tracking-wider">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase tracking-wider">
                       <span className="material-symbols-outlined text-base font-bold">verified</span>
                       Verified Seller
                     </span>
-                    <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-800/50 px-3 py-1 rounded-full border border-slate-100 dark:border-slate-700">
+                    <div className="flex items-center gap-1 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
                       <div className="flex items-center">
                         <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
                         <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
@@ -230,95 +230,95 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                         <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
                         <span className="material-symbols-outlined text-yellow-500 text-lg">star_half</span>
                       </div>
-                      <span className="text-sm font-bold text-slate-700 dark:text-slate-200 ml-1">4.5</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">(128 reviews)</span>
+                      <span className="text-sm font-bold text-slate-700 ml-1">4.5</span>
+                      <span className="text-xs text-slate-500 ml-1">(128 reviews)</span>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-4 text-slate-500 dark:text-slate-400 items-center">
+                  <div className="flex flex-wrap gap-4 text-slate-500 items-center">
                     <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">location_on</span> {MOCK_USER.location}</span>
                     <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
                     <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">business_center</span> {MOCK_USER.category}</span>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <a aria-label="LinkedIn" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="#">
+                  <a aria-label="LinkedIn" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 transition-colors text-slate-600" href="#">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                   </a>
-                  <a aria-label="Facebook" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="#">
+                  <a aria-label="Facebook" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 transition-colors text-slate-600" href="#">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.324v-21.35c0-.732-.593-1.325-1.325-1.325z"></path></svg>
                   </a>
-                  <a aria-label="Website" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400" href="#">
+                  <a aria-label="Website" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 transition-colors text-slate-600" href="#">
                     <span className="material-symbols-outlined">public</span>
                   </a>
                 </div>
               </div>
-              <div className="border-t border-slate-100 dark:border-slate-800 pt-8">
+              <div className="border-t border-slate-100 pt-8">
                 <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Nature of Business</h3>
-                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-4xl">
+                <p className="text-lg text-slate-700 leading-relaxed max-w-4xl">
                   {MOCK_USER.businessName} is a leading provider of {MOCK_USER.category.toLowerCase()} solutions, specializing in high-quality products and consumer goods across global markets. Established with a focus on supply chain efficiency, we bridge the gap between manufacturers and retailers with reliable service and competitive pricing.
                 </p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+              <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm space-y-8">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Business Details</h3>
+                  <h3 className="text-xl font-bold text-slate-900 mb-6">Business Details</h3>
                   <div className="space-y-6">
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Business Category</label>
-                      <p className="font-medium text-slate-900 dark:text-white">{MOCK_USER.category}</p>
+                      <p className="font-medium text-slate-900">{MOCK_USER.category}</p>
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Location/Address</label>
-                      <p className="font-medium text-slate-900 dark:text-white">{MOCK_USER.location}</p>
+                      <p className="font-medium text-slate-900">{MOCK_USER.location}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Country</label>
-                        <p className="font-medium text-slate-900 dark:text-white">Liberia</p>
+                        <p className="font-medium text-slate-900">Liberia</p>
                       </div>
                       <div>
                         <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Capital</label>
-                        <p className="font-medium text-slate-900 dark:text-white">Monrovia</p>
+                        <p className="font-medium text-slate-900">Monrovia</p>
                       </div>
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Year of Establishment</label>
-                      <p className="font-medium text-slate-900 dark:text-white">2018</p>
+                      <p className="font-medium text-slate-900">2018</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+              <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm space-y-8">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Contact & Verification</h3>
+                  <h3 className="text-xl font-bold text-slate-900 mb-6">Contact & Verification</h3>
                   <div className="space-y-6">
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Email Address</label>
                       <div className="flex items-center gap-2">
-                        <p className="font-medium text-slate-900 dark:text-white">{MOCK_USER.email}</p>
+                        <p className="font-medium text-slate-900">{MOCK_USER.email}</p>
                         <span className="material-symbols-outlined text-emerald-500 text-base">check_circle</span>
                       </div>
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Contact Number</label>
-                      <p className="font-medium text-slate-900 dark:text-white">+231 773 499 15</p>
+                      <p className="font-medium text-slate-900">+231 773 499 15</p>
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">GST & Tax Number</label>
-                      <p className="font-medium text-slate-900 dark:text-white">245316853FBAT1</p>
+                      <p className="font-medium text-slate-900">245316853FBAT1</p>
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Verification Status</label>
-                      <div className="mt-2 p-3 bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 rounded-lg flex items-center gap-3">
+                      <div className="mt-2 p-3 bg-emerald-50 border border-emerald-100 rounded-lg flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white">
                           <span className="material-symbols-outlined text-sm">verified_user</span>
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400">Identity Verified</p>
-                          <p className="text-[10px] text-emerald-600 dark:text-emerald-500/80">Last checked on January 2026</p>
+                          <p className="text-sm font-bold text-emerald-700">Identity Verified</p>
+                          <p className="text-[10px] text-emerald-600">Last checked on January 2026</p>
                         </div>
                       </div>
                     </div>

@@ -46,9 +46,9 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
             </div>
 
             {/* Desktop View */}
-            <div className="hidden lg:flex h-screen overflow-hidden bg-white dark:bg-slate-950 font-sans">
+            <div className="hidden lg:flex h-screen overflow-hidden bg-white font-sans">
                 {/* Left Side: Form */}
-                <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white dark:bg-slate-950">
+                <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white">
                     <div className="w-full max-w-md space-y-8">
                         <div className="text-center mb-8">
                             <h1 className="text-3xl font-bold tracking-tight text-primary">
@@ -56,15 +56,15 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
                             </h1>
                         </div>
 
-                        <div className="bg-[#F0F4FF] dark:bg-slate-900 p-8 rounded-[1.5rem] shadow-sm text-center">
-                            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                        <div className="bg-[#F0F4FF] p-8 rounded-[1.5rem] shadow-sm text-center">
+                            <p className="text-gray-600 mb-8 leading-relaxed">
                                 Please use the OTP sent to your sms/email to verify.
                             </p>
                             <input
                                 type="text"
                                 value={otp}
                                 onChange={(e) => setOtp(e.target.value)}
-                                className="w-full h-16 bg-white dark:bg-gray-800 border-2 border-primary/30 rounded-2xl text-center text-3xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900 dark:text-white"
+                                className="w-full h-16 bg-white border-2 border-primary/30 rounded-2xl text-center text-3xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900"
                             />
                             <div className="mt-6">
                                 <p className="text-gray-500 text-sm">Resend OTP in <span className="font-bold text-primary">0:30</span></p>

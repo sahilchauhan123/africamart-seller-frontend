@@ -16,11 +16,11 @@ const Header: React.FC<HeaderProps> = (props) => {
     const isLeadDetails = currentView === View.LEAD_DETAILS;
     const isProductManager = currentView === View.PRODUCT_LIST;
     const isAddProduct = currentView === View.ADD_PRODUCT;
-    const isAddCategory = currentView === View.ADD_CATEGORY;
+
     const isInquiryList = currentView === View.INQUIRY_LIST;
     const isDashboard = currentView === View.DASHBOARD;
-    const showBackButton = (isLeadDetails || isAddProduct || isAddCategory || currentView === View.RECENT_UPLOADS || currentView === View.EDIT_PROFILE) && onBack;
-    const isListView = isProductManager || isInquiryList || currentView === View.CATEGORIES || currentView === View.BUSINESS_INFO;
+    const showBackButton = (isLeadDetails || isAddProduct || currentView === View.RECENT_UPLOADS || currentView === View.EDIT_PROFILE) && onBack;
+    const isListView = isProductManager || isInquiryList || currentView === View.BUSINESS_INFO;
     return (
         <>
             {/* Mobile Header */}
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                             <div className="h-6 w-px bg-white/20"></div>
                         </>
                     )}
-                    {title && currentView !== View.CATEGORIES && currentView !== View.BUSINESS_INFO && <h1 className="text-white font-semibold text-base tracking-wide">{title}</h1>}
+                    {title && currentView !== View.BUSINESS_INFO && <h1 className="text-white font-semibold text-base tracking-wide">{title}</h1>}
                     {currentView === View.BUSINESS_INFO && (
                         <div className="flex-grow max-w-2xl relative">
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/60">search</span>
