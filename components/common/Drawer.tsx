@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from '../../types';
 
 interface Props {
@@ -10,6 +10,10 @@ interface Props {
 }
 
 const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) => {
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+
+
   return (
     <>
       <div
@@ -94,16 +98,74 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
             </button>
           </div>
 
-          <div className="mt-2 border-t border-gray-100 flex flex-col gap-1">
+          <div className="border-b border-gray-100 mx-6"></div>
 
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
-              <span className="font-bold text-black text-xs tracking-wider uppercase">Help & support</span>
-              <span className="material-icons-round text-gray-400">expand_more</span>
+          <div className="mt-2 flex flex-col gap-1">
+
+            <button
+              onClick={() => setIsHelpOpen(!isHelpOpen)}
+              className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none"
+            >
+              <span className="font-bold text-black text-xs tracking-wider uppercase">Help & Support</span>
+              <span className={`material-icons-round text-gray-400 transition-transform ${isHelpOpen ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
-              <span className="font-bold text-black text-xs tracking-wider uppercase">MORE</span>
-              <span className="material-icons-round text-gray-400">expand_more</span>
+            {isHelpOpen && (
+              <div className="flex flex-col bg-white border-b border-gray-50">
+                <button
+                  onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <span className="material-icons-round text-gray-400 text-[20px]">help_outline</span>
+                  <span>Help Center (FAQs)</span>
+                </button>
+                <button
+                  onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <span className="material-icons-round text-gray-400 text-[20px]">support_agent</span>
+                  <span>Contact Support</span>
+                </button>
+                <button
+                  onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <span className="material-icons-round text-gray-400 text-[20px]">report_problem</span>
+                  <span>Report a Problem</span>
+                </button>
+                <button
+                  onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <span className="material-icons-round text-gray-400 text-[20px]">policy</span>
+                  <span>Policies</span>
+                </button>
+              </div>
+            )}
+            <button
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none"
+            >
+              <span className="font-bold text-black text-xs tracking-wider uppercase">More</span>
+              <span className={`material-icons-round text-gray-400 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
+            {isMoreOpen && (
+              <div className="flex flex-col bg-white border-b border-gray-50">
+                <button
+                  onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <span className="material-icons-round text-gray-400 text-[20px]">info</span>
+                  <span>About AfricaMart</span>
+                </button>
+                <button
+                  onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <span className="material-icons-round text-gray-400 text-[20px]">verified</span>
+                  <span>AfricaMart Services</span>
+                </button>
+              </div>
+            )}
           </div>
         </nav>
       </div>
@@ -189,16 +251,57 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
             </a>
           </div>
+          <div className="px-6">
+            <hr className="border-slate-100" />
+          </div>
           <div className="mt-auto pt-4 flex flex-col gap-2">
 
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
-              <span className="font-bold text-black text-xs tracking-wider">Help & support</span>
-              <span className="material-symbols-outlined text-gray-400">expand_more</span>
+            <button
+              onClick={() => setIsHelpOpen(!isHelpOpen)}
+              className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl"
+            >
+              <span className="font-bold text-black text-xs tracking-wider uppercase">Help & Support</span>
+              <span className={`material-symbols-outlined text-gray-400 transition-transform ${isHelpOpen ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
-              <span className="font-bold text-black text-xs tracking-wider uppercase">MORE</span>
-              <span className="material-symbols-outlined text-gray-400">expand_more</span>
+            {isHelpOpen && (
+              <div className="flex flex-col bg-slate-50/50 rounded-xl overflow-hidden mt-1 mx-2">
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <span className="material-symbols-outlined text-[20px]">help_outline</span>
+                  <span>Help Center (FAQs)</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <span className="material-symbols-outlined text-[20px]">support_agent</span>
+                  <span>Contact Support</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <span className="material-symbols-outlined text-[20px]">report_problem</span>
+                  <span>Report a Problem</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors">
+                  <span className="material-symbols-outlined text-[20px]">policy</span>
+                  <span>Policies</span>
+                </button>
+              </div>
+            )}
+            <button
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl"
+            >
+              <span className="font-bold text-black text-xs tracking-wider uppercase">More</span>
+              <span className={`material-symbols-outlined text-gray-400 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
+            {isMoreOpen && (
+              <div className="flex flex-col bg-slate-50/50 rounded-xl overflow-hidden mt-1 mx-2">
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <span className="material-symbols-outlined text-[20px]">info</span>
+                  <span>About AfricaMart</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors">
+                  <span className="material-symbols-outlined text-[20px]">verified</span>
+                  <span>AfricaMart Services</span>
+                </button>
+              </div>
+            )}
           </div>
         </nav>
         <div className="p-8 border-t border-slate-100">

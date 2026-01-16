@@ -13,16 +13,11 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
             {/* Mobile View */}
             <div className="flex flex-col min-h-full bg-background-light font-display text-[#121417] relative antialiased lg:hidden">
                 {/* Header - App branded style */}
-                <header className="bg-primary sticky top-0 z-50 px-4 py-4 flex items-center justify-between shadow-md">
-                    <div className="flex items-center gap-3">
-                        <button onClick={onBack} className="text-white flex items-center p-1 rounded-full hover:bg-white/10 transition-colors">
-                            <span className="material-icons-round" style={{ fontSize: '24px' }}>arrow_back_ios</span>
-                        </button>
-                        <h1 className="text-white text-lg font-bold tracking-tight">Notifications</h1>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
-                        <span className="material-icons-round text-white" style={{ fontSize: '20px' }}>more_vert</span>
-                    </div>
+                <header className="bg-primary sticky top-0 z-50 px-4 py-4 flex items-center justify-center shadow-md min-h-[64px]">
+                    <button onClick={onBack} className="absolute left-4 text-white flex items-center p-1 rounded-full hover:bg-white/10 transition-colors">
+                        <span className="material-icons-round" style={{ fontSize: '24px' }}>arrow_back_ios</span>
+                    </button>
+                    <h1 className="text-white text-lg font-bold tracking-tight">Notifications</h1>
                 </header>
 
                 {/* Mark all as read bar */}
