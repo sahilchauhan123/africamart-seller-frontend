@@ -1,5 +1,22 @@
 
 import React from 'react';
+import {
+  Menu,
+  FilePenLine,
+  Verified,
+  MapPin,
+  Star,
+  Building,
+  Briefcase,
+  ChevronRight,
+  PlusCircle,
+  Users,
+  Globe,
+  Edit,
+  CheckCircle2,
+  ShieldCheck,
+  Lock
+} from 'lucide-react';
 import { MOCK_USER } from '../constants';
 
 interface Props {
@@ -16,13 +33,17 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
         {/* Mobile Header from Snippet */}
         <header className="bg-primary text-white p-4 sticky top-0 z-50 flex items-center h-16 shrink-0">
           <div className="flex-none w-12 flex items-center justify-start">
-            <button onClick={onBack} className="material-icons cursor-pointer text-[32px] focus:outline-none">menu</button>
+            <button onClick={onBack} className="cursor-pointer focus:outline-none">
+              <Menu size={32} />
+            </button>
           </div>
           <div className="flex-1 text-center">
             <h1 className="text-lg font-semibold tracking-tight">Seller Profile</h1>
           </div>
           <div className="flex-none w-12 flex items-center justify-end">
-            <button onClick={onEdit} className="material-icons cursor-pointer text-[32px] focus:outline-none">edit_note</button>
+            <button onClick={onEdit} className="cursor-pointer focus:outline-none">
+              <FilePenLine size={32} />
+            </button>
           </div>
         </header>
 
@@ -38,10 +59,10 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
             <div className="flex-1">
               <div className="flex items-center gap-1">
                 <h2 className="text-xl font-bold truncate">{MOCK_USER.businessName}</h2>
-                <span className="material-icons text-blue-500 text-base">verified</span>
+                <Verified className="text-blue-500" size={16} />
               </div>
               <div className="flex items-center gap-1 text-gray-500 text-sm mt-1">
-                <span className="material-icons text-sm">location_on</span>
+                <MapPin size={14} />
                 <span>{MOCK_USER.location}</span>
               </div>
               <div className="flex items-center gap-4 mt-3">
@@ -50,7 +71,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                 </span>
                 <div className="flex items-center gap-1">
                   <span className="font-bold">{MOCK_USER.rating}</span>
-                  <span className="material-icons text-orange-400 text-sm">star</span>
+                  <Star className="text-orange-400" size={14} fill="currentColor" />
                 </div>
               </div>
             </div>
@@ -72,7 +93,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
           <section id="company-overview-section">
             <div className="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-100">
               <div className="flex items-center gap-2">
-                <span className="material-icons text-primary">business</span>
+                <Building className="text-primary" size={24} />
                 <h3 className="font-bold text-xs uppercase tracking-wider">Business Overview</h3>
               </div>
               <div className="flex items-center">
@@ -125,7 +146,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
           <section>
             <div className="flex items-center justify-between p-4 bg-gray-50">
               <div className="flex items-center gap-2">
-                <span className="material-icons text-primary">business_center</span>
+                <Briefcase className="text-primary" size={24} />
                 <h3 className="font-bold text-xs uppercase tracking-wider">Product & Services</h3>
               </div>
               <a className="text-primary text-xs font-bold uppercase tracking-wide" href="#">Manage</a>
@@ -139,7 +160,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                     <p className="text-xs text-gray-400">12 Products Listed</p>
                   </div>
                 </div>
-                <span className="material-icons text-gray-400">chevron_right</span>
+                <ChevronRight className="text-gray-400" size={24} />
               </div>
               <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors">
                 <div className="flex gap-4 items-center">
@@ -149,12 +170,12 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                     <p className="text-xs text-gray-400">45 Products Listed</p>
                   </div>
                 </div>
-                <span className="material-icons text-gray-400">chevron_right</span>
+                <ChevronRight className="text-gray-400" size={24} />
               </div>
             </div>
             <div className="px-4 py-6">
               <button className="w-full border-2 border-dashed border-gray-300 rounded-lg p-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                <span className="material-icons text-gray-700">add_circle</span>
+                <PlusCircle className="text-gray-700" size={24} />
                 <span className="font-medium text-gray-700">Add New Category</span>
               </button>
             </div>
@@ -165,7 +186,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
           <section className="pb-10">
             <div className="flex items-center justify-between p-4 bg-gray-50">
               <div className="flex items-center gap-2">
-                <span className="material-icons text-primary">groups</span>
+                <Users className="text-primary" size={24} />
                 <h3 className="font-bold text-xs uppercase tracking-wider">Team Members</h3>
               </div>
               <a className="text-primary text-xs font-bold uppercase tracking-wide" href="#">View All</a>
@@ -219,25 +240,25 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                   <h2 className="text-3xl font-bold text-slate-900 mb-2">Hi, {MOCK_USER.name}</h2>
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase tracking-wider">
-                      <span className="material-symbols-outlined text-base font-bold">verified</span>
+                      <Verified className="text-base font-bold" size={16} />
                       Verified Seller
                     </span>
                     <div className="flex items-center gap-1 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
-                      <div className="flex items-center">
-                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
-                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
-                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
-                        <span className="material-symbols-outlined !fill-1 text-yellow-500 text-lg">star</span>
-                        <span className="material-symbols-outlined text-yellow-500 text-lg">star_half</span>
+                      <div className="flex items-center gap-0.5">
+                        <Star className="text-yellow-500 fill-current" size={18} />
+                        <Star className="text-yellow-500 fill-current" size={18} />
+                        <Star className="text-yellow-500 fill-current" size={18} />
+                        <Star className="text-yellow-500 fill-current" size={18} />
+                        <Star className="text-yellow-500" size={18} />
                       </div>
                       <span className="text-sm font-bold text-slate-700 ml-1">4.5</span>
                       <span className="text-xs text-slate-500 ml-1">(128 reviews)</span>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-4 text-slate-500 items-center">
-                    <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">location_on</span> {MOCK_USER.location}</span>
+                    <span className="flex items-center gap-1.5"><MapPin size={18} /> {MOCK_USER.location}</span>
                     <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">business_center</span> {MOCK_USER.category}</span>
+                    <span className="flex items-center gap-1.5"><Briefcase size={18} /> {MOCK_USER.category}</span>
                   </div>
                 </div>
                 <div className="flex gap-3">
@@ -248,7 +269,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.324v-21.35c0-.732-.593-1.325-1.325-1.325z"></path></svg>
                   </a>
                   <a aria-label="Website" className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 transition-colors text-slate-600" href="#">
-                    <span className="material-symbols-outlined">public</span>
+                    <Globe size={20} />
                   </a>
                 </div>
               </div>
@@ -299,7 +320,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Email Address</label>
                       <div className="flex items-center gap-2">
                         <p className="font-medium text-slate-900">{MOCK_USER.email}</p>
-                        <span className="material-symbols-outlined text-emerald-500 text-base">check_circle</span>
+                        <CheckCircle2 className="text-emerald-500" size={16} />
                       </div>
                     </div>
                     <div>
@@ -314,7 +335,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Verification Status</label>
                       <div className="mt-2 p-3 bg-emerald-50 border border-emerald-100 rounded-lg flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white">
-                          <span className="material-symbols-outlined text-sm">verified_user</span>
+                          <ShieldCheck size={14} />
                         </div>
                         <div>
                           <p className="text-sm font-bold text-emerald-700">Identity Verified</p>
@@ -329,7 +350,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
 
             <div className="flex justify-between items-center pt-4">
               <div className="flex items-center gap-2 text-slate-400">
-                <span className="material-symbols-outlined text-sm">lock</span>
+                <Lock size={14} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Secure Public Profile View</span>
               </div>
               <button
@@ -337,7 +358,7 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
                 className="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center gap-2 group uppercase text-sm tracking-wide"
               >
                 Edit Profile Information
-                <span className="material-symbols-outlined text-lg">edit</span>
+                <Edit size={18} />
               </button>
             </div>
           </div>

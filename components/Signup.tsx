@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 
 interface Props {
   onBack: () => void;
@@ -13,7 +14,7 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
       <div className="lg:hidden min-h-screen bg-background-light text-gray-900 p-6 flex flex-col transition-colors duration-200">
         <header className="mb-12">
           <button onClick={onBack} className="p-2 -ml-2 text-primary hover:bg-gray-100 rounded-full transition">
-            <span className="material-icons-round text-3xl">arrow_back</span>
+            <ArrowLeft size={32} />
           </button>
         </header>
 

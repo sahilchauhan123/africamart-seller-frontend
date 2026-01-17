@@ -1,5 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
+import {
+  Menu,
+  LayoutGrid,
+  BarChart3,
+  UserSearch,
+  CheckCircle,
+  Store,
+  LayoutDashboard,
+  TrendingUp,
+  Eye
+} from 'lucide-react';
 
 interface Props {
   onNext: () => void;
@@ -40,7 +51,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
         {/* Shared Navigation */}
         <nav className="flex items-center justify-between px-6 py-4 sticky top-0 bg-white z-50 border-b border-gray-100">
           <button className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition">
-            <span className="material-icons text-3xl text-gray-800">menu</span>
+            <Menu className="text-gray-800" size={32} />
           </button>
           <button
             onClick={onNext}
@@ -81,7 +92,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             <div className="bg-[#F5F7FF] rounded-3xl p-6 space-y-8">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <span className="material-icons text-3xl text-gray-900">grid_view</span>
+                  <LayoutGrid className="text-gray-900" size={32} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Easy setup and tools that help you succeed</h3>
@@ -92,7 +103,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <span className="material-icons text-3xl text-gray-900">bar_chart</span>
+                  <BarChart3 className="text-gray-900" size={32} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Reach Million Buyers</h3>
@@ -103,7 +114,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <span className="material-icons text-3xl text-gray-900">person_search</span>
+                  <UserSearch className="text-gray-900" size={32} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Strong Brand Visibility</h3>
@@ -152,7 +163,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             <div className="bg-[#FFF1F1] rounded-3xl p-6 space-y-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <span className="material-icons text-2xl text-gray-900">check_circle_outline</span>
+                  <CheckCircle className="text-gray-900" size={24} />
                 </div>
                 <p className="text-sm font-medium text-gray-800 leading-snug">
                   Sign up on AfricaMart and verify your <strong>mobile number + email</strong> through OTP.
@@ -160,7 +171,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <span className="material-icons text-2xl text-gray-900">check_circle_outline</span>
+                  <CheckCircle className="text-gray-900" size={24} />
                 </div>
                 <p className="text-sm font-medium text-gray-800 leading-snug">
                   Submit <strong>PAN, GST/Business Proof</strong> for basic business verification.
@@ -168,7 +179,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <span className="material-icons text-2xl text-gray-900">check_circle_outline</span>
+                  <CheckCircle className="text-gray-900" size={24} />
                 </div>
                 <p className="text-sm font-medium text-gray-800 leading-snug">
                   We checks your <strong>documents, business name, address and contact</strong> validity (within 24–48 hours).
@@ -176,7 +187,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <span className="material-icons text-2xl text-gray-900">check_circle_outline</span>
+                  <CheckCircle className="text-gray-900" size={24} />
                 </div>
                 <p className="text-sm font-medium text-gray-800 leading-snug">
                   A third-party agency verifies your <strong>office, documents and business authenticity</strong>, providing a <strong>TrustSEAL badge</strong> for higher trust and visibility.
@@ -202,7 +213,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           <div className="max-w-[1536px] mx-auto px-6 xl:px-16 h-20 flex items-center justify-between">
             <div className="flex items-center">
               <a className="text-2xl font-extrabold text-primary flex items-center gap-2" href="#">
-                <span className="material-symbols-outlined text-primary text-3xl">storefront</span>
+                <Store className="text-primary" size={32} />
                 AfricaMart
               </a>
             </div>
@@ -275,7 +286,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
                 <div className="flex flex-col items-start text-left">
                   <div className="w-14 h-14 text-primary flex items-center justify-center mb-8 border border-slate-200 rounded-2xl bg-white">
-                    <span className="material-symbols-outlined text-4xl">dashboard_customize</span>
+                    <LayoutDashboard size={40} />
                   </div>
                   <h3 className="text-2xl font-bold mb-5 text-slate-900 leading-tight">Easy setup and tools that help you succeed</h3>
                   <p className="text-slate-600 leading-relaxed">
@@ -284,7 +295,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                 </div>
                 <div className="flex flex-col items-start text-left">
                   <div className="w-14 h-14 text-primary flex items-center justify-center mb-8 border border-slate-200 rounded-2xl bg-white">
-                    <span className="material-symbols-outlined text-4xl">trending_up</span>
+                    <TrendingUp size={40} />
                   </div>
                   <h3 className="text-2xl font-bold mb-5 text-slate-900 leading-tight">Reach Million Buyers</h3>
                   <p className="text-slate-600 leading-relaxed">
@@ -293,7 +304,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                 </div>
                 <div className="flex flex-col items-start text-left">
                   <div className="w-14 h-14 text-primary flex items-center justify-center mb-8 border border-slate-200 rounded-2xl bg-white">
-                    <span className="material-symbols-outlined text-4xl">visibility</span>
+                    <Eye size={40} />
                   </div>
                   <h3 className="text-2xl font-bold mb-5 text-slate-900 leading-tight">Strong Brand Visibility</h3>
                   <p className="text-slate-600 leading-relaxed">
@@ -416,7 +427,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center">
               <span className="text-xl font-extrabold text-slate-400 flex items-center gap-1">
-                <span className="material-symbols-outlined text-2xl">storefront</span>
+                <Store size={24} />
                 AfricaMart
               </span>
             </div>

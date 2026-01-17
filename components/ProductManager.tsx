@@ -1,6 +1,21 @@
 
 import React from 'react';
 import { MOCK_PRODUCTS } from '../constants';
+import {
+  Edit2,
+  MousePointerClick,
+  Plus,
+  Package,
+  LayoutGrid,
+  CheckCircle2,
+  AlertTriangle,
+  Trash2,
+  Folder,
+  Search,
+  Filter,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 
 interface Props {
   onBack: () => void;
@@ -41,7 +56,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                       onClick={onEdit}
                       className="absolute top-0 right-0 text-gray-400 p-1"
                     >
-                      <span className="material-icons-round text-lg">edit</span>
+                      <Edit2 size={18} />
                     </button>
                     <div>
                       <h3 className="font-semibold line-clamp-1">{product.name}</h3>
@@ -52,7 +67,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                         onClick={onReachBuyers}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-primary text-xs font-medium"
                       >
-                        <span className="material-icons-round text-sm">ads_click</span>
+                        <MousePointerClick size={14} />
                         Reach Buyers
                       </button>
                     </div>
@@ -63,7 +78,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
           </div>
         </main>
         <button onClick={onAdd} className="fixed bottom-6 right-6 bg-primary text-white rounded-full px-5 py-3 shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95 transition z-50">
-          <span className="material-icons-round">add</span>
+          <Plus size={24} />
           <span className="font-medium">Add Product</span>
         </button>
       </div>
@@ -76,7 +91,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
             <div className="grid grid-cols-4 gap-4 mb-6">
               <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
-                  <span className="material-symbols-outlined text-2xl">inventory_2</span>
+                  <Package size={24} />
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Total Products</p>
@@ -85,7 +100,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
               </div>
               <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
-                  <span className="material-symbols-outlined text-2xl">category</span>
+                  <LayoutGrid size={24} />
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Categories</p>
@@ -94,7 +109,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
               </div>
               <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
-                  <span className="material-symbols-outlined text-2xl">check_circle</span>
+                  <CheckCircle2 size={24} />
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Active Listings</p>
@@ -103,7 +118,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
               </div>
               <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-amber-50 text-amber-600 rounded-lg">
-                  <span className="material-symbols-outlined text-2xl">warning</span>
+                  <AlertTriangle size={24} />
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Low Stock</p>
@@ -122,17 +137,17 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                   </div>
                   <div className="h-4 w-px bg-slate-200 mx-1"></div>
                   <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
-                    <span className="material-symbols-outlined text-[18px]">delete</span>
+                    <Trash2 size={18} />
                     DELETE
                   </button>
                   <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
-                    <span className="material-symbols-outlined text-[18px]">drive_file_move</span>
+                    <Folder size={18} />
                     CATEGORY
                   </button>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input
                       className="pl-10 pr-4 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs focus:ring-primary focus:border-primary w-64 focus:outline-none transition-all"
                       placeholder="Search SKU, name..."
@@ -140,13 +155,13 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                     />
                   </div>
                   <button className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">
-                    <span className="material-symbols-outlined text-[20px]">filter_list</span>
+                    <Filter size={20} />
                   </button>
                   <button
                     onClick={onAdd}
                     className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-800 font-bold text-xs shadow-sm transition-all"
                   >
-                    <span className="material-symbols-outlined text-sm">add</span>
+                    <Plus size={14} />
                     ADD PRODUCT
                   </button>
                 </div>
@@ -202,13 +217,13 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                               className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-md transition-all"
                               title="Edit"
                             >
-                              <span className="material-symbols-outlined text-[18px]">edit</span>
+                              <Edit2 size={18} />
                             </button>
                             <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all" title="Delete">
-                              <span className="material-symbols-outlined text-[18px]">delete</span>
+                              <Trash2 size={18} />
                             </button>
                             <button className="p-1.5 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-md transition-all" title="Promote">
-                              <span className="material-symbols-outlined text-[18px]">ads_click</span>
+                              <MousePointerClick size={18} />
                             </button>
                           </div>
                         </td>
@@ -225,12 +240,12 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                 </p>
                 <div className="flex items-center gap-1.5">
                   <button className="p-1.5 rounded border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-30" disabled>
-                    <span className="material-symbols-outlined text-[20px]">chevron_left</span>
+                    <ChevronLeft size={20} />
                   </button>
                   <button className="w-8 h-8 rounded bg-primary text-white text-[11px] font-bold">1</button>
                   <button className="w-8 h-8 rounded text-[11px] font-bold text-slate-500 hover:bg-slate-50 transition-colors">2</button>
                   <button className="p-1.5 rounded border border-slate-200 text-slate-400 hover:bg-slate-50">
-                    <span className="material-symbols-outlined text-[20px]">chevron_right</span>
+                    <ChevronRight size={20} />
                   </button>
                 </div>
               </div>

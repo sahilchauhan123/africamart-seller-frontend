@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { MOCK_INQUIRIES } from '../constants';
+import { MapPin, Search, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Props {
   onBack: () => void;
@@ -39,7 +40,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                         {inq.status}
                       </span>
                       <div className="flex items-center text-gray-500">
-                        <span className="material-icons-round text-[14px] mr-1">location_on</span>
+                        <MapPin size={14} className="mr-1" />
                         <span className="text-[10px]">{inq.location}</span>
                       </div>
                     </div>
@@ -63,11 +64,11 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
               </div>
               <div className="flex items-center gap-3">
                 <div className="relative flex-1 md:w-64">
-                  <span className="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
                   <input className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search inquiries..." type="text" />
                 </div>
                 <button className="p-2 bg-slate-50 text-slate-500 rounded-lg hover:bg-slate-100">
-                  <span className="material-icons-outlined">tune</span>
+                  <SlidersHorizontal size={20} />
                 </button>
               </div>
             </div>
@@ -99,7 +100,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                           {inq.status}
                         </span>
                         <div className="flex items-center gap-1.5 text-slate-400 text-sm">
-                          <span className="material-icons-outlined text-base">location_on</span>
+                          <MapPin size={16} />
                           {inq.location}
                         </div>
                       </div>
@@ -111,13 +112,13 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
 
             <div className="flex items-center justify-center gap-2 py-4">
               <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled>
-                <span className="material-icons-outlined">chevron_left</span>
+                <ChevronLeft size={20} />
               </button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-medium">1</button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">2</button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">3</button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50">
-                <span className="material-icons-outlined">chevron_right</span>
+                <ChevronRight size={20} />
               </button>
             </div>
           </div>

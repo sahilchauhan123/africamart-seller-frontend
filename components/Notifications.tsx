@@ -1,6 +1,20 @@
 
 import React from 'react';
 import { View } from '../types';
+import {
+    ChevronLeft,
+    Inbox,
+    MessageCircle,
+    AlertTriangle,
+    ClipboardList,
+    UserCircle,
+    XCircle,
+    CheckCheck,
+    Mail,
+    BellRing,
+    AlertCircle,
+    ArrowRight
+} from 'lucide-react';
 
 interface NotificationsProps {
     onBack: () => void;
@@ -15,7 +29,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                 {/* Header - App branded style */}
                 <header className="bg-primary sticky top-0 z-50 px-4 py-4 flex items-center justify-center shadow-md min-h-[64px]">
                     <button onClick={onBack} className="absolute left-4 text-white flex items-center p-1 rounded-full hover:bg-white/10 transition-colors">
-                        <span className="material-icons-round" style={{ fontSize: '24px' }}>arrow_back_ios</span>
+                        <ChevronLeft size={24} />
                     </button>
                     <h1 className="text-white text-lg font-bold tracking-tight">Notifications</h1>
                 </header>
@@ -35,7 +49,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         <div className="bg-[#E8F2F7] border-l-4 border-primary px-4 py-5 mb-0.5 transition-all hover:bg-white cursor-pointer relative">
                             <div className="flex gap-4">
                                 <div className="shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
-                                    <span className="material-icons-round" style={{ fontSize: '22px' }}>inbox</span>
+                                    <Inbox size={22} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between items-start mb-0.5">
@@ -56,7 +70,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         <div className="bg-[#E8F2F7] border-l-4 border-primary px-4 py-5 mb-0.5 transition-all hover:bg-white cursor-pointer relative">
                             <div className="flex gap-4">
                                 <div className="shrink-0 w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
-                                    <span className="material-icons-round" style={{ fontSize: '22px' }}>chat</span>
+                                    <MessageCircle size={22} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between items-start mb-0.5">
@@ -81,7 +95,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         <div className="bg-white border-b border-gray-50 px-4 py-5 transition-all hover:bg-[#F8FAFC] cursor-pointer">
                             <div className="flex gap-4">
                                 <div className="shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-red-600">
-                                    <span className="material-icons-round" style={{ fontSize: '22px' }}>notification_important</span>
+                                    <AlertTriangle size={22} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between items-start mb-0.5">
@@ -99,7 +113,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         <div className="bg-white border-b border-gray-50 px-4 py-5 transition-all hover:bg-[#F8FAFC] cursor-pointer">
                             <div className="flex gap-4">
                                 <div className="shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
-                                    <span className="material-icons-round" style={{ fontSize: '22px' }}>assignment</span>
+                                    <ClipboardList size={22} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between items-start mb-0.5">
@@ -121,7 +135,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         <div className="bg-white border-b border-gray-50 px-4 py-5 transition-all hover:bg-[#F8FAFC] cursor-pointer">
                             <div className="flex gap-4">
                                 <div className="shrink-0 w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600">
-                                    <span className="material-icons-round" style={{ fontSize: '22px' }}>account_circle</span>
+                                    <UserCircle size={22} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between items-start mb-0.5">
@@ -139,7 +153,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                         <div className="bg-white border-b border-gray-50 px-4 py-5 transition-all hover:bg-[#F8FAFC] cursor-pointer">
                             <div className="flex gap-4">
                                 <div className="shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-red-600">
-                                    <span className="material-icons-round" style={{ fontSize: '22px' }}>cancel</span>
+                                    <XCircle size={22} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between items-start mb-0.5">
@@ -165,7 +179,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                             <p className="text-slate-500 text-sm mt-1">Stay updated with your latest business activities.</p>
                         </div>
                         <button className="flex items-center gap-2 text-primary hover:bg-blue-50 px-4 py-2 rounded-md font-medium text-sm transition-colors border border-blue-100">
-                            <span className="material-symbols-outlined text-[18px]">done_all</span>
+                            <CheckCheck size={18} />
                             Mark all as read
                         </button>
                     </div>
@@ -178,7 +192,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                             <div className="divide-y divide-slate-100 border-b border-slate-100">
                                 <div className="py-6 flex items-start gap-5 group relative">
                                     <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <span className="material-symbols-outlined text-primary text-[20px]">mail</span>
+                                        <Mail className="text-primary" size={20} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
@@ -198,7 +212,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                 </div>
                                 <div className="py-6 flex items-start gap-5 group relative">
                                     <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                                        <span className="material-symbols-outlined text-emerald-600 text-[20px]">chat</span>
+                                        <MessageCircle className="text-emerald-600" size={20} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
@@ -226,7 +240,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                             <div className="divide-y divide-slate-100 border-b border-slate-100">
                                 <div className="py-6 flex items-start gap-5 group relative">
                                     <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                                        <span className="material-symbols-outlined text-red-500 text-[20px]">notifications_active</span>
+                                        <BellRing className="text-red-500" size={20} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
@@ -243,7 +257,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                 </div>
                                 <div className="py-6 flex items-start gap-5 group relative">
                                     <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <span className="material-symbols-outlined text-blue-500 text-[20px]">assignment</span>
+                                        <ClipboardList className="text-blue-500" size={20} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
@@ -268,7 +282,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                             <div className="divide-y divide-slate-100 border-b border-slate-100">
                                 <div className="py-6 flex items-start gap-5 group relative">
                                     <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
-                                        <span className="material-symbols-outlined text-orange-500 text-[20px]">account_circle</span>
+                                        <UserCircle className="text-orange-500" size={20} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
@@ -285,7 +299,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                 </div>
                                 <div className="py-6 flex items-start gap-5 group relative">
                                     <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                                        <span className="material-symbols-outlined text-red-500 text-[20px]">error</span>
+                                        <AlertCircle className="text-red-500" size={20} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between gap-4">
@@ -299,7 +313,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                                             Listing for <span className="text-slate-900 font-medium">'Hydraulic Pump'</span> was rejected due to missing technical specifications. Update to resume visibility.
                                         </p>
                                         <button className="mt-4 px-3 py-1.5 rounded bg-slate-50 text-[13px] font-semibold text-primary inline-flex items-center gap-1.5 hover:bg-blue-50 transition-colors border border-slate-200">
-                                            Update Listing <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                                            Update Listing <ArrowRight size={16} />
                                         </button>
                                     </div>
                                 </div>

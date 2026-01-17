@@ -1,5 +1,13 @@
 
 import React from 'react';
+import {
+    Search,
+    SlidersHorizontal,
+    FileText,
+    Image as ImageIcon,
+    AlertCircle,
+    Plus
+} from 'lucide-react';
 
 interface RecentUploadsProps {
     onBack: () => void;
@@ -8,14 +16,7 @@ interface RecentUploadsProps {
 const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
     return (
         <div className="bg-[#f9fafb] font-display text-[#131516] min-h-screen flex flex-col pb-28">
-            <style>{`
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .fill-1 {
-            font-variation-settings: 'FILL' 1;
-        }
-      `}</style>
+
 
             <main className="max-w-lg mx-auto w-full">
                 {/* Search and Filter bar */}
@@ -25,7 +26,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                             <label className="flex flex-col w-full group">
                                 <div className="flex w-full items-stretch rounded-xl h-11 transition-all ring-1 ring-gray-200 focus-within:ring-[#0033C4] bg-white shadow-sm">
                                     <div className="flex items-center justify-center pl-4 rounded-l-xl">
-                                        <span className="material-symbols-outlined text-gray-400 group-focus-within:text-[#0033C4] text-xl">search</span>
+                                        <Search className="text-gray-400 group-focus-within:text-[#0033C4]" size={20} />
                                     </div>
                                     <input
                                         className="flex w-full border-none bg-transparent focus:ring-0 h-full placeholder:text-gray-400 px-4 pl-2 text-sm font-normal outline-none"
@@ -35,7 +36,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                             </label>
                         </div>
                         <button className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white border border-gray-200 shadow-sm text-gray-600">
-                            <span className="material-symbols-outlined">tune</span>
+                            <SlidersHorizontal size={20} />
                         </button>
                     </div>
                 </div>
@@ -48,7 +49,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                    <span className="material-symbols-outlined text-2xl">picture_as_pdf</span>
+                                    <FileText size={24} />
                                 </div>
                                 <div>
                                     <p className="font-bold text-base text-gray-900 leading-tight">Tax Certificate 2023</p>
@@ -66,7 +67,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
-                                    <span className="material-symbols-outlined text-2xl">image</span>
+                                    <ImageIcon size={24} />
                                 </div>
                                 <div>
                                     <p className="font-bold text-base text-gray-900 leading-tight">Business License</p>
@@ -86,7 +87,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-red-50 flex items-center justify-center text-red-600">
-                                    <span className="material-symbols-outlined text-2xl">description</span>
+                                    <FileText size={24} />
                                 </div>
                                 <div>
                                     <p className="font-bold text-base text-gray-900 leading-tight">VAT Declaration Q3</p>
@@ -99,7 +100,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         </div>
                         <div className="mt-3 pt-3 border-t border-gray-50">
                             <p className="text-xs text-red-600 flex items-center gap-1.5">
-                                <span className="material-symbols-outlined text-sm">error</span>
+                                <AlertCircle size={16} />
                                 Scan is too blurry. Please re-upload.
                             </p>
                         </div>
@@ -110,7 +111,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                    <span className="material-symbols-outlined text-2xl">article</span>
+                                    <FileText size={24} />
                                 </div>
                                 <div>
                                     <p className="font-bold text-base text-gray-900 leading-tight">Article of Inc.</p>
@@ -130,7 +131,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                    <span className="material-symbols-outlined text-2xl">picture_as_pdf</span>
+                                    <FileText size={24} />
                                 </div>
                                 <div>
                                     <p className="font-bold text-base text-gray-900 leading-tight">Bank Statement Sept</p>
@@ -148,7 +149,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                    <span className="material-symbols-outlined text-2xl">description</span>
+                                    <FileText size={24} />
                                 </div>
                                 <div>
                                     <p className="font-bold text-base text-gray-900 leading-tight">Identity Proof</p>
@@ -165,7 +166,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
 
             {/* Floating Action Button */}
             <button className="fixed right-4 bottom-6 size-14 bg-[#0033C4] text-white rounded-full shadow-xl shadow-[#0033C4]/30 flex items-center justify-center z-40 active:scale-95 transition-transform">
-                <span className="material-symbols-outlined text-3xl">add</span>
+                <Plus size={32} />
             </button>
         </div>
     );

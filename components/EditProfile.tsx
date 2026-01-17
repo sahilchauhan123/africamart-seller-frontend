@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { ChevronLeft, Camera, Lock, ArrowRight, ImagePlus } from 'lucide-react';
 import { MOCK_USER } from '../constants';
 
 interface Props {
@@ -16,7 +17,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
         <header className="bg-primary text-white p-4 shrink-0 z-10 shadow-lg h-16 flex items-center">
           <div className="flex items-center justify-between w-full max-w-md mx-auto">
             <button onClick={onBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors">
-              <span className="material-icons-round leading-none text-xl">arrow_back_ios_new</span>
+              <ChevronLeft size={24} />
             </button>
             <h1 className="text-lg font-semibold tracking-tight">Edit Profile</h1>
             <div className="w-10"></div>
@@ -42,7 +43,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
                 {MOCK_USER.businessName.charAt(0)}
               </div>
               <button className="absolute bottom-1 right-1 bg-primary text-white p-2.5 rounded-full border-4 border-white shadow-md active:scale-90 transition-transform">
-                <span className="material-icons-round text-lg leading-none">photo_camera</span>
+                <Camera size={18} />
               </button>
             </div>
             <h2 className="mt-5 text-2xl font-black text-slate-900 tracking-tight">Hi, {MOCK_USER.name.split(' ')[0]}</h2>
@@ -176,7 +177,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
                 <span className="text-3xl font-bold text-slate-400">{MOCK_USER.businessName.charAt(0)}</span>
               </div>
               <button className="absolute -bottom-1 -right-1 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center border-2 border-background-light hover:scale-110 transition-transform shadow-md">
-                <span className="material-symbols-outlined text-sm">add_a_photo</span>
+                <ImagePlus size={14} />
               </button>
             </div>
             <div>
@@ -292,7 +293,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
 
             <div className="pt-8 flex items-center justify-between border-t border-slate-200">
               <div className="flex items-center gap-2 text-slate-400">
-                <span className="material-symbols-outlined text-sm">lock</span>
+                <Lock size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Your data is secured with enterprise-grade encryption</span>
               </div>
               <button
@@ -300,7 +301,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
                 type="submit"
               >
                 Save and Continue
-                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </form>

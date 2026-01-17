@@ -1,5 +1,14 @@
 
 import React, { useState } from 'react';
+import {
+  Camera,
+  ChevronDown,
+  Edit2,
+  Search,
+  Lightbulb,
+  ChevronUp,
+  Circle
+} from 'lucide-react';
 
 interface Props {
   onBack: () => void;
@@ -52,7 +61,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
               <div>
                 <h3 className="font-semibold text-sm mb-2">Product Photos</h3>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg h-36 flex flex-col items-center justify-center bg-gray-50 cursor-pointer">
-                  <span className="material-icons-outlined text-gray-400 text-3xl mb-2">add_a_photo</span>
+                  <Camera className="text-gray-400 mb-2" size={30} />
                   <p className="text-xs font-medium text-gray-500">Tap to add main photo</p>
                 </div>
               </div>
@@ -72,7 +81,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                         <option>Kg</option>
                         <option>Bag</option>
                       </select>
-                      <span className="material-icons absolute right-2 top-3 text-gray-400">expand_more</span>
+                      <ChevronDown className="absolute right-2 top-3 text-gray-400" size={20} />
                     </div>
                   </div>
                 </div>
@@ -86,7 +95,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                   Default Selected Cat
                 </div>
                 <button className="text-primary p-1 rounded-full hover:bg-blue-50">
-                  <span className="material-icons-outlined text-lg">edit</span>
+                  <Edit2 size={18} />
                 </button>
               </div>
 
@@ -96,13 +105,11 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                   placeholder="Search Specifications..."
                   type="text"
                 />
-                <span className="material-icons-outlined absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                  search
-                </span>
+                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
               </div>
 
               <div className="flex items-start gap-2 mb-6">
-                <span className="material-icons-outlined text-green-600 text-lg mt-0.5">lightbulb</span>
+                <Lightbulb className="text-green-600 mt-0.5" size={18} />
                 <p className="text-xs sm:text-sm text-green-600 font-medium italic">
                   Highlighted Specification are used by most customers!
                 </p>
@@ -119,16 +126,14 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                         <h3 className="text-green-600 font-semibold text-base mb-0.5">Speci Name</h3>
                         <p className="text-xs text-gray-500">Support Text</p>
                       </div>
-                      <span className="material-icons-outlined text-gray-700">
-                        {expandedSpec === index ? 'expand_less' : 'expand_more'}
-                      </span>
+                      {expandedSpec === index ? <ChevronUp className="text-gray-700" size={20} /> : <ChevronDown className="text-gray-700" size={20} />}
                     </div>
                     {expandedSpec === index && (
                       <div className="p-4">
                         <div className="grid grid-cols-2 gap-3">
                           {[1, 2, 3, 4].map((type) => (
                             <div key={type} className="border border-gray-300 rounded-lg p-3 flex items-center gap-2 hover:border-primary cursor-pointer bg-white">
-                              <span className="material-icons-outlined text-gray-400 text-xl">radio_button_unchecked</span>
+                              <Circle className="text-gray-400" size={20} />
                               <span className="text-sm font-medium text-gray-700">Type</span>
                             </div>
                           ))}

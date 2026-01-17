@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { View } from '../types';
+import { Search, Menu, MoreVertical, User } from 'lucide-react';
 
 interface Props {
     onNavigate: (view: View) => void;
@@ -92,7 +93,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                 <div className="flex items-center justify-start h-[72px]">
                     <div className="flex items-center gap-4 w-full max-w-xl">
                         <div className="relative w-full">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl leading-none">search</span>
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                             <input
                                 type="text"
                                 placeholder="Search conversations..."
@@ -131,17 +132,17 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         onClick={onOpenDrawer}
                         className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center"
                     >
-                        <span className="material-symbols-outlined text-3xl leading-none">menu</span>
+                        <Menu size={28} />
                     </button>
                     <h1 className="text-white text-lg font-semibold tracking-wide">Business Messages</h1>
                     <button className="p-2 rounded-full hover:bg-white/10 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-white/20">
-                        <span className="material-symbols-outlined text-2xl leading-none">more_vert</span>
+                        <MoreVertical size={24} />
                     </button>
                 </div>
                 <div className="px-4 sm:px-6 pb-3">
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="material-symbols-outlined text-gray-400 text-xl leading-none">search</span>
+                            <Search className="text-gray-400" size={20} />
                         </div>
                         <input
                             className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 sm:text-sm shadow-sm cursor-pointer"
@@ -215,7 +216,7 @@ const BusinessMessages: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         <div className="flex items-center px-4 py-4 sm:px-6 lg:px-10">
                             <div className="relative flex-shrink-0">
                                 <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200 text-gray-600 font-bold text-lg">
-                                    <span className="material-symbols-outlined text-xl leading-none">person</span>
+                                    <User size={20} />
                                 </div>
                             </div>
                             <div className="ml-4 flex-1 min-w-0">

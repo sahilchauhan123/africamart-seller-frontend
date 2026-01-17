@@ -3,6 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { View } from '../types';
 import { MOCK_USER, MOCK_INQUIRIES } from '../constants';
 import Drawer from './common/Drawer';
+import {
+    Plus,
+    Eye,
+    Package,
+    FileText,
+    TrendingUp,
+    Users,
+    MapPin,
+    PlusCircle,
+    MousePointerClick,
+    FilePlus,
+    UserPlus,
+    Rocket,
+    ArrowLeftRight
+} from 'lucide-react';
 
 interface Props {
     onNavigate: (view: View) => void;
@@ -32,7 +47,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
                                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-blue-600">add</span>
+                                        <Plus className="text-blue-600" size={24} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Add<br />Product</span>
@@ -40,7 +55,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="flex flex-col items-center group">
                                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-purple-600 text-lg">visibility</span>
+                                        <Eye className="text-purple-600" size={18} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Check<br />Leads</span>
@@ -48,7 +63,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => onNavigate(View.PRODUCT_LIST)} className="flex flex-col items-center group">
                                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-green-600 text-lg">inventory_2</span>
+                                        <Package className="text-green-600" size={18} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Manage<br />Products</span>
@@ -56,7 +71,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => setIsOverlayOpen(true)} className="flex flex-col items-center group">
                                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-orange-600 text-lg">description</span>
+                                        <FileText className="text-orange-600" size={18} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Post<br />Req</span>
@@ -72,7 +87,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
                             <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
-                                    <span className="material-icons-round text-blue-500 text-xl">analytics</span>
+                                    <TrendingUp className="text-blue-500" size={20} />
                                     <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
                                 </div>
                                 <div>
@@ -82,7 +97,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             </div>
                             <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
-                                    <span className="material-icons-round text-purple-500 text-xl">group</span>
+                                    <Users className="text-purple-500" size={20} />
                                     <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
                                 </div>
                                 <div>
@@ -116,7 +131,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                                     {inq.status}
                                                 </span>
                                                 <div className="flex items-center text-gray-500">
-                                                    <span className="material-icons-round text-[14px] mr-1">location_on</span>
+                                                    <MapPin size={14} className="mr-1" />
                                                     <span className="text-[10px]">{inq.location}</span>
                                                 </div>
                                             </div>
@@ -137,28 +152,28 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                 <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl">add_circle</span>
+                                        <PlusCircle size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Add Product</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Update inventory</span>
                                 </button>
                                 <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl">ads_click</span>
+                                        <MousePointerClick size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Check Leads</span>
                                     <span className="text-[11px] text-slate-400 mt-1">12 new today</span>
                                 </button>
                                 <button onClick={() => setIsOverlayOpen(true)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl">post_add</span>
+                                        <FilePlus size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Requirement</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Post new request</span>
                                 </button>
                                 <button className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl text-[#f97316]">package_2</span>
+                                        <Package className="text-[#f97316]" size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Orders</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Manage shipping</span>
@@ -172,11 +187,11 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         <h2 className="text-lg font-bold tracking-tight text-slate-800">Business Overview</h2>
                                         <div className="flex items-center gap-3">
                                             <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm gap-2">
-                                                <span className="material-symbols-outlined text-brand text-[18px]">group_add</span>
+                                                <UserPlus className="text-brand" size={18} />
                                                 <span className="text-[11px] font-bold text-slate-600">NEW LEADS: <span className="text-brand">12</span></span>
                                             </div>
                                             <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm gap-2">
-                                                <span className="material-symbols-outlined text-brand text-[18px]">visibility</span>
+                                                <Eye className="text-brand" size={18} />
                                                 <span className="text-[11px] font-bold text-slate-600">PRODUCT VIEWS: <span className="text-brand">1.2K</span></span>
                                             </div>
                                         </div>
@@ -192,7 +207,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                                     onClick={() => onNavigate(View.PREMIUM_SERVICES)}
                                                     className="bg-brand text-white text-[9px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide hover:bg-brand/90 transition-colors flex items-center gap-1"
                                                 >
-                                                    <span className="material-symbols-outlined text-[12px]">rocket_launch</span>
+                                                    <Rocket size={12} />
                                                     Boost
                                                 </button>
                                             </div>
@@ -304,7 +319,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Request for quotation on bulk rice imports for Q2 cycle.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             MONROVIA, LIBERIA
                                         </div>
                                     </div>
@@ -321,7 +336,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Pricing update requested for organic fertilizer samples.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             PAYNESVILLE, LIB
                                         </div>
                                     </div>
@@ -338,7 +353,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Inquiry regarding solar-powered irrigation pumps.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             GBARNGA, LIBERIA
                                         </div>
                                     </div>
@@ -355,7 +370,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Documentation check for international shipping compliance.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             FREEPORT, MONROVIA
                                         </div>
                                     </div>
@@ -372,7 +387,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Volume discount request for high-grade linens.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             BUCHANAN, LIB
                                         </div>
                                     </div>
@@ -391,7 +406,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     ></div>
                     <div className="relative bg-white w-full max-w-md rounded-[28px] p-8 lg:p-10 shadow-2xl flex flex-col items-center text-center transform animate-in zoom-in fade-in duration-300">
                         <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-[#0026C0] mb-6">
-                            <span className="material-symbols-outlined text-4xl">swap_horiz</span>
+                            <ArrowLeftRight size={40} />
                         </div>
                         <h2 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 tracking-tight">Switch to Buyer Mode</h2>
                         <p className="text-slate-500 text-sm leading-relaxed mb-8 px-2">
