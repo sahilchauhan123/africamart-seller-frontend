@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
+import Drawer from './common/Drawer';
+import { View } from '../types';
 import {
   Menu,
   LayoutGrid,
@@ -36,6 +38,7 @@ const SLIDER_IMAGES = [
 
 const Onboarding: React.FC<Props> = ({ onNext }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,9 +51,21 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
     <div className="bg-white text-gray-900 antialiased h-full overflow-y-auto no-scrollbar">
       {/* Mobile Layout (Existing) */}
       <div className="lg:hidden flex flex-col">
+        {/* Slide Menu Overlay */}
+        <Drawer
+          isOpen={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
+          isOnboarding={true}
+          onNavigate={() => { }}
+          currentView={View.ONBOARDING}
+        />
+
         {/* Shared Navigation */}
-        <nav className="flex items-center justify-between px-6 py-4 sticky top-0 bg-white z-50 border-b border-gray-100">
-          <button className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition">
+        <nav className="flex items-center justify-between px-6 py-4 fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm h-16">
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition"
+          >
             <Menu className="text-gray-800" size={32} />
           </button>
           <button
@@ -62,7 +77,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
         </nav>
 
         {/* Old Onboarding Section */}
-        <div className="flex flex-col items-center justify-start pt-12 pb-16 p-6 text-center">
+        <div className="flex flex-col items-center justify-start pt-24 pb-16 p-6 text-center">
           <h1 className="text-[2.5rem] leading-[1.1] font-extrabold text-black mb-8 tracking-tight">
             Create an<br />account to sell<br />on AfricaMart
           </h1>

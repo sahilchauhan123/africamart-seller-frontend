@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+
 
 interface Props {
   onBack: () => void;
@@ -11,19 +11,15 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
   return (
     <>
       {/* Mobile View */}
-      <div className="lg:hidden min-h-screen bg-background-light text-gray-900 p-6 flex flex-col transition-colors duration-200">
-        <header className="mb-12">
-          <button onClick={onBack} className="p-2 -ml-2 text-primary hover:bg-gray-100 rounded-full transition">
-            <ArrowLeft size={32} />
-          </button>
-        </header>
+      <div className="lg:hidden min-h-screen bg-background-light text-gray-900 px-4 py-6 flex flex-col transition-colors duration-200">
 
-        <main className="flex-1 flex flex-col items-center w-full max-w-md mx-auto">
-          <h1 className="text-3xl font-extrabold text-primary text-center mb-8">Create Seller Account</h1>
 
-          <div className="w-full bg-[#F0F4FF] rounded-3xl p-8 space-y-6 mb-8 shadow-sm">
+        <main className="flex-1 flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+          <h1 className="text-2xl font-extrabold text-primary text-center mb-5">Create Seller Account</h1>
+
+          <div className="w-full bg-[#F0F4FF] rounded-2xl p-5 space-y-4 mb-6 shadow-sm">
             <p className="text-center text-sm text-gray-600 leading-relaxed mb-4">
-              Enter your details below to get started with Africa's first cross-border marketplace.
+              Enter your details below to get started with Africa's first B2B marketplace.
             </p>
 
             <div>
@@ -31,7 +27,7 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
               <input
                 type="text"
                 placeholder="Individual name here"
-                className="w-full px-4 py-4 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
               />
             </div>
 
@@ -40,18 +36,18 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
               <input
                 type="tel"
                 placeholder="+231 555 367 471"
-                className="w-full px-4 py-4 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
               />
             </div>
           </div>
 
-          <p className="text-xs text-gray-500 text-center mb-8">
+          <p className="text-xs text-gray-500 text-center mb-6">
             Click continue to verify your contact details
           </p>
 
           <button
             onClick={onNext}
-            className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-4 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
+            className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
           >
             Continue
           </button>

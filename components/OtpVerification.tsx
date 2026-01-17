@@ -12,27 +12,28 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
     return (
         <>
             {/* Mobile View */}
-            <div className="lg:hidden min-h-screen bg-background-light text-gray-900 p-6 flex flex-col justify-between items-center text-center transition-colors duration-200">
-                <main className="w-full max-w-md mt-20">
-                    <h1 className="text-3xl font-extrabold text-primary mb-8">Verify Account</h1>
-                    <p className="font-medium mb-10 text-gray-600">Please use the OTP sent to your sms/email to verify.</p>
+            <div className="lg:hidden min-h-screen bg-background-light text-gray-900 px-4 py-6 flex flex-col justify-center items-center text-center transition-colors duration-200">
+                <main className="w-full max-w-sm flex flex-col items-center">
+                    <h1 className="text-2xl font-extrabold text-primary mb-5">Verify Account</h1>
 
-                    <input
-                        type="text"
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                        className="w-full h-16 bg-white border-2 border-primary/30 rounded-2xl text-center text-3xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
-                    />
+                    <div className="w-full bg-[#F0F4FF] rounded-2xl p-5 space-y-4 mb-6 shadow-sm">
+                        <p className="font-medium text-gray-600">Please use the OTP sent to your sms/email to verify.</p>
 
-                    <div className="mt-8">
-                        <p className="text-gray-500 text-sm">Resend OTP in <span className="font-bold text-primary">0:30</span></p>
+                        <input
+                            type="text"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                            className="w-full h-14 bg-white border-2 border-primary/30 rounded-2xl text-center text-2xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                        />
+
+                        <div className="pt-2">
+                            <p className="text-gray-500 text-sm">Resend OTP in <span className="font-bold text-primary">0:30</span></p>
+                        </div>
                     </div>
-                </main>
 
-                <footer className="w-full max-w-md pb-12">
                     <button
                         onClick={onNext}
-                        className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-4 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
+                        className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
                     >
                         Verify & Continue
                     </button>
@@ -42,7 +43,7 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
                     >
                         Change details
                     </button>
-                </footer>
+                </main>
             </div>
 
             {/* Desktop View */}
