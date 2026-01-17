@@ -22,6 +22,89 @@ interface NotificationsProps {
 }
 
 const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => {
+    const desktopNotifications = [
+        {
+            id: 1,
+            section: 'Today',
+            type: 'Inquiry',
+            title: 'New Inquiry Received',
+            icon: <Mail className="text-primary" size={20} />,
+            bg: 'bg-blue-50',
+            color: 'text-blue-600',
+            time: '15m ago',
+            unread: true,
+            description: "A buyer from Delhi is interested in 'Industrial Valves'. View details to send a professional quotation and close the deal.",
+            link: () => onNavigate(View.INQUIRY_LIST)
+        },
+        {
+            id: 2,
+            section: 'Today',
+            type: 'Response',
+            title: 'Buyer Replied',
+            icon: <MessageCircle className="text-emerald-600" size={20} />,
+            bg: 'bg-emerald-50',
+            color: 'text-emerald-600',
+            time: '1h ago',
+            unread: true,
+            description: "New message regarding 'PVC Pipes'. Quick replies are 3x more likely to convert to an order according to our stats.",
+            link: () => onNavigate(View.CHAT)
+        },
+        {
+            id: 3,
+            section: 'Yesterday',
+            type: 'Alert',
+            title: 'Missed Inquiry Alert',
+            icon: <BellRing className="text-red-500" size={20} />,
+            bg: 'bg-red-50',
+            color: 'text-red-500',
+            time: '4h ago',
+            unread: false,
+            description: "You have pending inquiries from yesterday. Remember that faster replies significantly increase your seller rating and trust score.",
+            link: () => onNavigate(View.INQUIRY_LIST)
+        },
+        {
+            id: 4,
+            section: 'Yesterday',
+            type: 'Inquiry',
+            title: 'New Buyer Requirement',
+            icon: <ClipboardList className="text-blue-500" size={20} />,
+            bg: 'bg-blue-50',
+            color: 'text-blue-600',
+            time: '1d ago',
+            unread: false,
+            description: "A new requirement for 'Electrical Cables' matches your profile categories. Apply now to get the contact info.",
+            link: () => onNavigate(View.INQUIRY_LIST)
+        },
+        {
+            id: 5,
+            section: 'Earlier',
+            type: 'System',
+            title: 'Profile Incomplete',
+            icon: <UserCircle className="text-orange-500" size={20} />,
+            bg: 'bg-orange-50',
+            color: 'text-orange-500',
+            time: '2d ago',
+            unread: false,
+            description: "Complete your business profile including GST and warehouse location to gain buyer trust and get more high-quality inquiries.",
+            link: () => onNavigate(View.EDIT_PROFILE)
+        },
+        {
+            id: 6,
+            section: 'Earlier',
+            type: 'Alert',
+            title: 'Product Needs Update',
+            icon: <AlertCircle className="text-red-500" size={20} />,
+            bg: 'bg-red-50',
+            color: 'text-red-500',
+            time: '3d ago',
+            unread: false,
+            description: "Listing for 'Hydraulic Pump' was rejected due to missing technical specifications. Update to resume visibility.",
+            link: () => onNavigate(View.PRODUCT_LIST),
+            action: 'Update Listing'
+        }
+    ];
+
+    const sections = ['Today', 'Yesterday', 'Earlier'];
     return (
         <>
             {/* Mobile View */}
@@ -173,7 +256,7 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
             {/* Desktop View */}
             <div className="hidden lg:block w-full bg-white font-display">
                 <div className="w-full px-10 py-10">
-                    <div className="flex items-center justify-between mb-10">
+                    <div className="flex items-center justify-between mb-6">
                         <div>
                             <h2 className="text-2xl font-bold text-slate-900 cursor-pointer hover:text-primary transition-colors">Notifications</h2>
                             <p className="text-slate-500 text-sm mt-1">Stay updated with your latest business activities.</p>
@@ -183,142 +266,46 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
                             Mark all as read
                         </button>
                     </div>
-                    <div className="space-y-12">
-                        <section>
-                            <div className="flex items-center gap-4 mb-4">
-                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">Today</h3>
-                                <div className="h-px w-full bg-slate-100"></div>
-                            </div>
-                            <div className="divide-y divide-slate-100 border-b border-slate-100">
-                                <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <Mail className="text-primary" size={20} />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-0.5">Inquiry</span>
-                                                <div className="flex items-center gap-2">
-                                                    <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Inquiry Received</h4>
-                                                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <div className="space-y-6">
+                        {sections.map(section => (
+                            <section key={section}>
+                                <div className="flex items-center gap-4 mb-2">
+                                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">{section}</h3>
+                                    <div className="h-px w-full bg-slate-100"></div>
+                                </div>
+                                <div className="divide-y divide-slate-100 border-b border-slate-100">
+                                    {desktopNotifications
+                                        .filter(n => n.section === section)
+                                        .map(notification => (
+                                            <div key={notification.id} className="py-2.5 flex items-start gap-5 group relative">
+                                                <div className={`w-10 h-10 rounded-full ${notification.bg} flex items-center justify-center flex-shrink-0`}>
+                                                    {notification.icon}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center justify-between gap-4">
+                                                        <div className="flex flex-col">
+                                                            <span className={`text-[10px] font-bold ${notification.color} uppercase tracking-wider mb-0.5`}>{notification.type}</span>
+                                                            <div className="flex items-center gap-2">
+                                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={notification.link}>{notification.title}</h4>
+                                                                {notification.unread && <div className="w-2 h-2 bg-blue-500 rounded-full"></div>}
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-xs text-slate-400 flex-shrink-0">{notification.time}</span>
+                                                    </div>
+                                                    <p className="text-slate-500 text-[14px] mt-1 leading-relaxed max-w-4xl">
+                                                        {notification.description}
+                                                    </p>
+                                                    {notification.action && (
+                                                        <button className="mt-2 px-3 py-1.5 rounded bg-slate-50 text-[13px] font-semibold text-primary inline-flex items-center gap-1.5 hover:bg-blue-50 transition-colors border border-slate-200" onClick={notification.link}>
+                                                            {notification.action} <ArrowRight size={16} />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </div>
-                                            <span className="text-xs text-slate-400 flex-shrink-0">15m ago</span>
-                                        </div>
-                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            A buyer from Delhi is interested in <span className="text-slate-900 font-medium">'Industrial Valves'</span>. View details to send a professional quotation and close the deal.
-                                        </p>
-                                    </div>
+                                        ))}
                                 </div>
-                                <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                                        <MessageCircle className="text-emerald-600" size={20} />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-0.5">Response</span>
-                                                <div className="flex items-center gap-2">
-                                                    <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.CHAT)}>Buyer Replied</h4>
-                                                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                </div>
-                                            </div>
-                                            <span className="text-xs text-slate-400 flex-shrink-0">1h ago</span>
-                                        </div>
-                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            New message regarding <span className="text-slate-900 font-medium">'PVC Pipes'</span>. Quick replies are 3x more likely to convert to an order according to our stats.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section>
-                            <div className="flex items-center gap-4 mb-4">
-                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">Yesterday</h3>
-                                <div className="h-px w-full bg-slate-100"></div>
-                            </div>
-                            <div className="divide-y divide-slate-100 border-b border-slate-100">
-                                <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                                        <BellRing className="text-red-500" size={20} />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-0.5">Alert</span>
-                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>Missed Inquiry Alert</h4>
-                                            </div>
-                                            <span className="text-xs text-slate-400 flex-shrink-0">4h ago</span>
-                                        </div>
-                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            You have pending inquiries from yesterday. Remember that faster replies significantly increase your seller rating and trust score.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <ClipboardList className="text-blue-500" size={20} />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-0.5">Inquiry</span>
-                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.INQUIRY_LIST)}>New Buyer Requirement</h4>
-                                            </div>
-                                            <span className="text-xs text-slate-400 flex-shrink-0">1d ago</span>
-                                        </div>
-                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            A new requirement for <span className="text-slate-900 font-medium">'Electrical Cables'</span> matches your profile categories. Apply now to get the contact info.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section>
-                            <div className="flex items-center gap-4 mb-4">
-                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] whitespace-nowrap">Earlier</h3>
-                                <div className="h-px w-full bg-slate-100"></div>
-                            </div>
-                            <div className="divide-y divide-slate-100 border-b border-slate-100">
-                                <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
-                                        <UserCircle className="text-orange-500" size={20} />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-0.5">System</span>
-                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.EDIT_PROFILE)}>Profile Incomplete</h4>
-                                            </div>
-                                            <span className="text-xs text-slate-400 flex-shrink-0">2d ago</span>
-                                        </div>
-                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            Complete your business profile including GST and warehouse location to gain buyer trust and get more high-quality inquiries.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="py-6 flex items-start gap-5 group relative">
-                                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                                        <AlertCircle className="text-red-500" size={20} />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-0.5">Alert</span>
-                                                <h4 className="font-semibold text-slate-900 cursor-pointer hover:text-primary transition-colors" onClick={() => onNavigate(View.PRODUCT_LIST)}>Product Needs Update</h4>
-                                            </div>
-                                            <span className="text-xs text-slate-400 flex-shrink-0">3d ago</span>
-                                        </div>
-                                        <p className="text-slate-500 text-[14px] mt-1.5 leading-relaxed max-w-4xl">
-                                            Listing for <span className="text-slate-900 font-medium">'Hydraulic Pump'</span> was rejected due to missing technical specifications. Update to resume visibility.
-                                        </p>
-                                        <button className="mt-4 px-3 py-1.5 rounded bg-slate-50 text-[13px] font-semibold text-primary inline-flex items-center gap-1.5 hover:bg-blue-50 transition-colors border border-slate-200">
-                                            Update Listing <ArrowRight size={16} />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                            </section>
+                        ))}
                     </div>
                     <div className="mt-16 flex justify-center pb-20">
                         <button className="bg-white text-slate-500 px-8 py-2.5 rounded-full font-medium text-sm hover:text-primary transition-all border border-slate-200 hover:border-primary">

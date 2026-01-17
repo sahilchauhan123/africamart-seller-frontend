@@ -73,24 +73,24 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {MOCK_INQUIRIES.map((inq) => (
                 <div
                   key={inq.id}
                   onClick={onSelectLead}
-                  className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group cursor-pointer"
+                  className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group cursor-pointer"
                 >
-                  <div className="flex items-start gap-5">
-                    <div className="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 font-bold flex-shrink-0">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 font-bold flex-shrink-0 text-xs">
                       {inq.initials}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-bold text-lg text-slate-900 truncate">{inq.companyName}</h3>
+                      <div className="flex items-center justify-between mb-0.5">
+                        <h3 className="font-bold text-base text-slate-900 truncate">{inq.companyName}</h3>
                         <span className="text-sm text-slate-400 whitespace-nowrap">{inq.time}</span>
                       </div>
-                      <p className="text-slate-600 mb-4 line-clamp-1">{inq.message}</p>
-                      <div className="flex flex-wrap items-center gap-4">
+                      <p className="text-slate-600 mb-2 line-clamp-1 text-sm">{inq.message}</p>
+                      <div className="flex flex-wrap items-center gap-3">
                         <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${inq.status === 'New Lead'
                           ? 'bg-green-50 text-green-600 border-green-100'
                           : inq.status === 'Urgent'

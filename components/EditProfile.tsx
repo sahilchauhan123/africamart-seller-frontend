@@ -14,7 +14,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
       {/* Mobile View */}
       <div className="lg:hidden h-full flex flex-col overflow-hidden">
         {/* Mobile Custom Header */}
-        <header className="bg-primary text-white p-4 shrink-0 z-10 shadow-lg h-16 flex items-center">
+        <header className="bg-primary text-white p-4 fixed top-0 left-0 right-0 shrink-0 z-50 shadow-lg h-16 flex items-center">
           <div className="flex items-center justify-between w-full max-w-md mx-auto">
             <button onClick={onBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors">
               <ChevronLeft size={24} />
@@ -24,7 +24,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
           </div>
         </header>
 
-        <main className="flex-1 w-full max-w-md mx-auto px-6 py-8 overflow-y-auto no-scrollbar">
+        <main className="flex-1 w-full max-w-md mx-auto px-4 py-8 overflow-y-auto no-scrollbar pt-12">
           {/* Profile Completion Card */}
           <div className="mb-10 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
             <div className="flex justify-between items-end mb-3">
@@ -57,7 +57,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nature of Business</label>
               <div className="relative group">
                 <input
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-transparent bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:bg-white dark:focus:bg-slate-900 focus:border-primary focus:ring-0 transition-all duration-200"
+                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                   placeholder="e.g. Acme Solutions"
                   type="text"
                   defaultValue={MOCK_USER.businessName}
@@ -68,7 +68,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Business Name</label>
               <div className="relative group">
                 <input
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-transparent bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:bg-white dark:focus:bg-slate-900 focus:border-primary focus:ring-0 transition-all duration-200"
+                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                   placeholder="e.g. Acme Solutions"
                   type="text"
                   defaultValue={MOCK_USER.businessName}
@@ -79,7 +79,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="space-y-1.5">
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Business Category</label>
               <input
-                className="w-full px-5 py-4 rounded-2xl border-2 border-transparent bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:bg-white dark:focus:bg-slate-900 focus:border-primary focus:ring-0 transition-all"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                 placeholder="e.g. Wholesale Electronics"
                 type="text"
                 defaultValue={MOCK_USER.category}
@@ -89,7 +89,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="space-y-1.5">
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Location/Address</label>
               <input
-                className="w-full px-5 py-4 rounded-2xl border-2 border-transparent bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:bg-white dark:focus:bg-slate-900 focus:border-primary focus:ring-0 transition-all"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                 placeholder="e.g. 123 Commerce St"
                 type="text"
                 defaultValue={MOCK_USER.location}
@@ -100,7 +100,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Established</label>
                 <input
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
+                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                   placeholder="Year"
                   type="text"
                   defaultValue="2018"
@@ -109,7 +109,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">GST/Tax ID</label>
                 <input
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
+                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                   placeholder="Tax ID"
                   type="text"
                   defaultValue="245316853FBAT1"
@@ -120,7 +120,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="space-y-1.5">
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
               <input
-                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                 placeholder="contact@business.com"
                 type="email"
                 defaultValue="alex@eliteliberia.com"
@@ -130,7 +130,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="space-y-1.5">
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Capital & Country</label>
               <input
-                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                 placeholder="Monrovia, Liberia"
                 type="text"
               />
@@ -139,7 +139,7 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="space-y-1.5">
               <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Social Links</label>
               <input
-                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-white text-slate-900 font-bold placeholder-slate-400 focus:border-primary focus:ring-0 transition-all"
                 placeholder="LinkedIn, Website..."
                 type="text"
               />

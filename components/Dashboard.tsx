@@ -45,7 +45,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     <section className="px-4 py-6">
                         <div className="grid grid-cols-4 gap-4">
                             <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                                         <Plus className="text-blue-600" size={24} />
                                     </div>
@@ -53,7 +53,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                 <span className="text-[11px] font-medium text-center leading-tight">Add<br />Product</span>
                             </button>
                             <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                                         <Eye className="text-purple-600" size={18} />
                                     </div>
@@ -61,7 +61,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                 <span className="text-[11px] font-medium text-center leading-tight">Check<br />Leads</span>
                             </button>
                             <button onClick={() => onNavigate(View.PRODUCT_LIST)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                                         <Package className="text-green-600" size={18} />
                                     </div>
@@ -69,7 +69,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                 <span className="text-[11px] font-medium text-center leading-tight">Manage<br />Products</span>
                             </button>
                             <button onClick={() => setIsOverlayOpen(true)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
                                         <FileText className="text-orange-600" size={18} />
                                     </div>
@@ -82,7 +82,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     <section className="mb-6">
                         <div className="flex items-center justify-between px-4 mb-3">
                             <h2 className="text-lg font-bold">Business Overview</h2>
-                            <button className="text-sm font-medium text-primary hover:underline">View Report</button>
+                            <button onClick={() => onNavigate(View.BUSINESS_REPORT)} className="text-sm font-medium text-primary hover:underline">View Report</button>
                         </div>
                         <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
                             <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
@@ -150,28 +150,28 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     <div className="max-w-7xl mx-auto space-y-10">
                         <section>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                                <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 mb-5">
                                         <PlusCircle size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Add Product</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Update inventory</span>
                                 </button>
-                                <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 mb-5">
                                         <MousePointerClick size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Check Leads</span>
                                     <span className="text-[11px] text-slate-400 mt-1">12 new today</span>
                                 </button>
-                                <button onClick={() => setIsOverlayOpen(true)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => setIsOverlayOpen(true)} className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 mb-5">
                                         <FilePlus size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Requirement</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Post new request</span>
                                 </button>
-                                <button className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 mb-5">
                                         <Package className="text-[#f97316]" size={24} />
                                     </div>
@@ -197,7 +197,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <div className="bg-white border border-slate-100 rounded-[24px] p-6 relative overflow-hidden flex flex-col h-[220px] shadow-sm">
+                                        <div className="bg-white border border-slate-100 rounded-xl p-6 relative overflow-hidden flex flex-col h-[220px] shadow-sm">
                                             <div className="flex justify-between items-start mb-2 relative z-10">
                                                 <div>
                                                     <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">{months[activeMonthIndex].full} LEADS</p>
@@ -222,7 +222,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                                 ))}
                                             </div>
                                         </div>
-                                        <div className="bg-white border border-slate-100 rounded-[24px] p-6 flex flex-col h-[220px] shadow-sm">
+                                        <div className="bg-white border border-slate-100 rounded-xl p-6 flex flex-col h-[220px] shadow-sm">
                                             <div className="flex justify-between items-start mb-4">
                                                 <div>
                                                     <div className="flex items-center gap-2 mb-1">
@@ -283,7 +283,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-8 bg-white/50 border border-slate-100 rounded-[24px] p-4 grid grid-cols-3">
+                                    <div className="mt-8 bg-white/50 border border-slate-100 rounded-xl p-4 grid grid-cols-3">
                                         <div className="text-center py-6 px-2 transition-all cursor-pointer relative">
                                             <p className="text-[10px] text-brand font-bold uppercase tracking-widest mb-1">NEW</p>
                                             <p className="text-2xl font-bold text-brand">2,450</p>
@@ -306,7 +306,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                     <a className="text-brand font-bold text-xs uppercase tracking-widest hover:underline cursor-pointer" onClick={() => onNavigate(View.INQUIRY_LIST)}>VIEW MORE</a>
                                 </div>
                                 <div className="space-y-2 relative">
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-[12px] font-bold text-orange-500 border border-orange-100 flex-shrink-0">CH</div>
                                             <div className="flex-1 min-w-0">
@@ -323,7 +323,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             MONROVIA, LIBERIA
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[12px] font-bold text-indigo-500 border border-indigo-100 flex-shrink-0">AG</div>
                                             <div className="flex-1 min-w-0">
@@ -340,7 +340,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             PAYNESVILLE, LIB
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-[12px] font-bold text-emerald-500 border border-emerald-100 flex-shrink-0">SD</div>
                                             <div className="flex-1 min-w-0">
@@ -357,7 +357,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             GBARNGA, LIBERIA
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-[12px] font-bold text-purple-500 border border-purple-100 flex-shrink-0">ME</div>
                                             <div className="flex-1 min-w-0">
@@ -374,7 +374,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             FREEPORT, MONROVIA
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group fade-bottom" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group fade-bottom" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-rose-50 flex items-center justify-center text-[12px] font-bold text-rose-500 border border-rose-100 flex-shrink-0">VH</div>
                                             <div className="flex-1 min-w-0">

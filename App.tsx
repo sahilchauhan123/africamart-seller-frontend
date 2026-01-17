@@ -18,6 +18,7 @@ import PremiumServices from './components/PremiumServices';
 import BusinessInfo from './components/BusinessInfo';
 import RecentUploads from './components/RecentUploads';
 import Notifications from './components/Notifications';
+import BusinessReport from './components/BusinessReport';
 import Drawer from './components/common/Drawer';
 import Header from './components/common/Header';
 
@@ -92,12 +93,14 @@ const App: React.FC = () => {
         return <RecentUploads onBack={() => setCurrentView(View.BUSINESS_INFO)} />;
       case View.NOTIFICATIONS:
         return <Notifications onBack={() => setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} />;
+      case View.BUSINESS_REPORT:
+        return <BusinessReport onBack={() => setCurrentView(View.DASHBOARD)} />;
       default:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} />;
     }
   };
 
-  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS].includes(currentView);
+  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
@@ -133,7 +136,7 @@ const App: React.FC = () => {
                     currentView === View.INQUIRY_LIST ? "Leads & Inquiries" :
                       currentView === View.DASHBOARD ? "Dashboard" :
 
-                        currentView === View.BUSINESS_INFO ? "Documents" :
+                        currentView === View.BUSINESS_INFO ? "Document Management" :
                           currentView === View.RECENT_UPLOADS ? "Recent Uploads" :
                             currentView === View.PROFILE ? "Seller Profile" :
                               currentView === View.EDIT_PROFILE ? "Edit Profile" :

@@ -89,7 +89,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
           <div className="max-w-7xl mx-auto space-y-6">
             {/* Stats Bar */}
             <div className="grid grid-cols-4 gap-4 mb-6">
-              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+              <div className="bg-white p-5 rounded-xl border border-slate-100 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
                   <Package size={24} />
                 </div>
@@ -98,7 +98,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                   <h2 className="text-xl font-bold">250</h2>
                 </div>
               </div>
-              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+              <div className="bg-white p-5 rounded-xl border border-slate-100 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
                   <LayoutGrid size={24} />
                 </div>
@@ -107,7 +107,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                   <h2 className="text-xl font-bold">3</h2>
                 </div>
               </div>
-              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+              <div className="bg-white p-5 rounded-xl border border-slate-100 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
                   <CheckCircle2 size={24} />
                 </div>
@@ -116,7 +116,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                   <h2 className="text-xl font-bold">242</h2>
                 </div>
               </div>
-              <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+              <div className="bg-white p-5 rounded-xl border border-slate-100 flex items-center gap-4 shadow-sm">
                 <div className="p-3 bg-amber-50 text-amber-600 rounded-lg">
                   <AlertTriangle size={24} />
                 </div>
@@ -127,20 +127,20 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col">
+            <div className="bg-white rounded-xl border border-slate-100 overflow-hidden shadow-sm flex flex-col">
               {/* Table Controls */}
               <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-lg border border-slate-100">
                     <input className="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox" />
                     <span className="text-[11px] font-bold text-slate-600 uppercase tracking-tight">Select All</span>
                   </div>
                   <div className="h-4 w-px bg-slate-200 mx-1"></div>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
+                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-100 transition-colors">
                     <Trash2 size={18} />
                     DELETE
                   </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
+                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-100 transition-colors">
                     <Folder size={18} />
                     CATEGORY
                   </button>
@@ -149,12 +149,12 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input
-                      className="pl-10 pr-4 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs focus:ring-primary focus:border-primary w-64 focus:outline-none transition-all"
+                      className="pl-10 pr-4 py-2 rounded-lg bg-slate-50 border border-slate-100 text-xs focus:ring-primary focus:border-primary w-64 focus:outline-none transition-all"
                       placeholder="Search SKU, name..."
                       type="text"
                     />
                   </div>
-                  <button className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">
+                  <button className="p-1.5 rounded-lg border border-slate-100 text-slate-600 hover:bg-slate-50">
                     <Filter size={20} />
                   </button>
                   <button
@@ -188,7 +188,7 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                           <input className="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox" />
                         </td>
                         <td className="px-4 py-4">
-                          <div className="w-12 h-12 rounded border border-slate-200 bg-slate-100 overflow-hidden shadow-sm">
+                          <div className="w-12 h-12 rounded border border-slate-100 bg-slate-100 overflow-hidden shadow-sm">
                             <img alt={product.name} className="w-full h-full object-cover" src={product.image} />
                           </div>
                         </td>
@@ -239,12 +239,12 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
                   Showing 1-{MOCK_PRODUCTS.length} of 250 entries
                 </p>
                 <div className="flex items-center gap-1.5">
-                  <button className="p-1.5 rounded border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-30" disabled>
+                  <button className="p-1.5 rounded border border-slate-100 text-slate-400 hover:bg-slate-50 disabled:opacity-30" disabled>
                     <ChevronLeft size={20} />
                   </button>
                   <button className="w-8 h-8 rounded bg-primary text-white text-[11px] font-bold">1</button>
                   <button className="w-8 h-8 rounded text-[11px] font-bold text-slate-500 hover:bg-slate-50 transition-colors">2</button>
-                  <button className="p-1.5 rounded border border-slate-200 text-slate-400 hover:bg-slate-50">
+                  <button className="p-1.5 rounded border border-slate-100 text-slate-400 hover:bg-slate-50">
                     <ChevronRight size={20} />
                   </button>
                 </div>

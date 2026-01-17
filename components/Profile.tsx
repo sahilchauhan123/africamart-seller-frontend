@@ -29,9 +29,9 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
     <div className="bg-gray-100 text-gray-900 h-full font-body overflow-hidden flex flex-col">
 
       {/* Mobile Layout */}
-      <div className="lg:hidden h-full flex flex-col bg-gray-100 overflow-hidden">
-        {/* Mobile Header from Snippet */}
-        <header className="bg-primary text-white p-4 sticky top-0 z-50 flex items-center h-16 shrink-0">
+      <div className="lg:hidden h-full flex flex-col bg-background-light">
+        {/* Mobile Header */}
+        <header className="bg-primary text-white p-4 fixed top-0 left-0 right-0 z-50 flex items-center h-16 shrink-0">
           <div className="flex-none w-12 flex items-center justify-start">
             <button onClick={onBack} className="cursor-pointer focus:outline-none">
               <Menu size={32} />
@@ -42,187 +42,165 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
           </div>
           <div className="flex-none w-12 flex items-center justify-end">
             <button onClick={onEdit} className="cursor-pointer focus:outline-none">
-              <FilePenLine size={32} />
+              <FilePenLine size={24} />
             </button>
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto no-scrollbar bg-white">
-          <section className="p-4 flex gap-4 items-start">
-            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-100 flex-shrink-0">
+        <main className="flex-1 overflow-y-auto no-scrollbar px-4 py-6 space-y-10 pt-20">
+          {/* Profile Header - Centered */}
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-24 h-24 rounded-full bg-slate-200 flex items-center justify-center border-4 border-white shadow-sm overflow-hidden">
               <img
-                alt="Seller Business Profile"
+                alt="Business Logo"
                 className="w-full h-full object-cover"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi46GtpiM2PCOQBHANxFI9RbtsMJaAKLO_wmlPAAI9F3P8WF4Ol7CjQYs4bVfLnxrSMCfSNXNeQZNlSe5fCq1nvg6iZK9cONpUeEMCCP0YutzWEoXUtRyuz5USsT-FRNDsMLjixVN0_9RsTDgd2TXFi9OZ8lX0X5GwJX3Zb-AjabzDVPsA4t09tANJ6-oBYYqtF1RK_ZE0PH2XuqcFnS0mHoUyU1lr8hykoYW9ig6b4rqQOWYvQFo666LkAWEMXSTWA60ibVTejNI"
               />
             </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-1">
-                <h2 className="text-xl font-bold truncate">{MOCK_USER.businessName}</h2>
-                <Verified className="text-blue-500" size={16} />
+            <div className="space-y-1">
+              <h1 className="text-2xl font-bold">Hi, {MOCK_USER.name}</h1>
+              <div className="flex items-center justify-center gap-2">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-800 tracking-wider">
+                  <Verified className="mr-1" size={14} fill="currentColor" /> VERIFIED SELLER
+                </span>
               </div>
-              <div className="flex items-center gap-1 text-gray-500 text-sm mt-1">
-                <MapPin size={14} />
+            </div>
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <div className="flex text-yellow-500">
+                <Star size={18} fill="currentColor" />
+                <Star size={18} fill="currentColor" />
+                <Star size={18} fill="currentColor" />
+                <Star size={18} fill="currentColor" />
+                <Star size={18} fill="currentColor" className="opacity-50" />
+              </div>
+              <span className="text-slate-900">{MOCK_USER.rating}</span>
+              <span className="text-slate-400">({MOCK_USER.reviews} reviews)</span>
+            </div>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-slate-500">
+              <div className="flex items-center gap-1">
+                <MapPin size={18} />
                 <span>{MOCK_USER.location}</span>
               </div>
-              <div className="flex items-center gap-4 mt-3">
-                <span className="border border-green-600 text-green-600 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
-                  Trust Seller
-                </span>
-                <div className="flex items-center gap-1">
-                  <span className="font-bold">{MOCK_USER.rating}</span>
-                  <Star className="text-orange-400" size={14} fill="currentColor" />
-                </div>
+              <div className="flex items-center gap-1">
+                <Briefcase size={18} />
+                <span>{MOCK_USER.category}</span>
               </div>
             </div>
-          </section>
-
-          <section className="grid grid-cols-2 gap-3 px-4 py-2">
-            <div className="border border-gray-100 p-3 rounded-lg bg-gray-50">
-              <p className="text-[10px] uppercase text-gray-400 font-semibold tracking-tight">GST Number</p>
-              <p className="text-sm font-medium mt-1 text-gray-700">245316853FBAT1</p>
-            </div>
-            <div className="border border-gray-100 p-3 rounded-lg bg-gray-50">
-              <p className="text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Member Since</p>
-              <p className="text-sm font-medium mt-1 text-gray-700">2018 (5 YEARS)</p>
-            </div>
-          </section>
-
-          <div className="h-2 bg-gray-100 border-y border-gray-200 mt-4"></div>
-
-          <section id="company-overview-section">
-            <div className="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-100">
-              <div className="flex items-center gap-2">
-                <Building className="text-primary" size={24} />
-                <h3 className="font-bold text-xs uppercase tracking-wider">Business Overview</h3>
-              </div>
-              <div className="flex items-center">
-                <button
-                  onClick={onEdit}
-                  className="text-primary text-[10px] font-bold uppercase border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-colors"
-                >
-                  Update
-                </button>
-              </div>
-            </div>
-            <div className="divide-y divide-gray-100">
-              <div className="p-4 space-y-2">
-                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Nature of Business</label>
-                <input
-                  className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
-                  type="text"
-                  defaultValue="Electronics, Appliances, Gadgets etc..."
-                />
-              </div>
-              <div className="p-4 space-y-2">
-                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Mobile No. (Official)</label>
-                <input
-                  className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
-                  type="tel"
-                  defaultValue="+23177349915"
-                />
-              </div>
-              <div className="p-4 space-y-2">
-                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Location/Address </label>
-                <input
-                  className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
-                  type="text"
-                  defaultValue="Paynesville City"
-                />
-              </div>
-              <div className="p-4 space-y-2">
-                <label className="block text-[10px] uppercase text-gray-400 font-semibold tracking-tight">Capital & Country</label>
-                <input
-                  className="w-full bg-white border border-gray-300 rounded-md text-sm py-1.5 px-3 focus:ring-1 focus:ring-primary focus:border-primary text-gray-900 outline-none"
-                  type="text"
-                  defaultValue="Monrovia, Liberia"
-                />
-              </div>
-            </div>
-          </section>
-
-          <div className="h-2 bg-gray-100 border-y border-gray-200"></div>
-
-          <section>
-            <div className="flex items-center justify-between p-4 bg-gray-50">
-              <div className="flex items-center gap-2">
-                <Briefcase className="text-primary" size={24} />
-                <h3 className="font-bold text-xs uppercase tracking-wider">Product & Services</h3>
-              </div>
-              <a className="text-primary text-xs font-bold uppercase tracking-wide" href="#">Manage</a>
-            </div>
-            <div className="divide-y divide-gray-100">
-              <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors">
-                <div className="flex gap-4 items-center">
-                  <div className="w-12 h-12 bg-gray-200 rounded-lg shrink-0"></div>
-                  <div>
-                    <p className="font-medium text-sm">Consumer Electronics</p>
-                    <p className="text-xs text-gray-400">12 Products Listed</p>
-                  </div>
-                </div>
-                <ChevronRight className="text-gray-400" size={24} />
-              </div>
-              <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors">
-                <div className="flex gap-4 items-center">
-                  <div className="w-12 h-12 bg-gray-200 rounded-lg shrink-0"></div>
-                  <div>
-                    <p className="font-medium text-sm">Home Appliances</p>
-                    <p className="text-xs text-gray-400">45 Products Listed</p>
-                  </div>
-                </div>
-                <ChevronRight className="text-gray-400" size={24} />
-              </div>
-            </div>
-            <div className="px-4 py-6">
-              <button className="w-full border-2 border-dashed border-gray-300 rounded-lg p-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                <PlusCircle className="text-gray-700" size={24} />
-                <span className="font-medium text-gray-700">Add New Category</span>
+            <div className="flex gap-4 pt-2">
+              <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 text-slate-600 shadow-sm">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+              </button>
+              <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 text-slate-600 shadow-sm">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+              </button>
+              <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 text-slate-600 shadow-sm">
+                <Globe size={20} />
               </button>
             </div>
-          </section>
+          </div>
 
-          <div className="h-2 bg-gray-100 border-y border-gray-200"></div>
-
-          <section className="pb-10">
-            <div className="flex items-center justify-between p-4 bg-gray-50">
-              <div className="flex items-center gap-2">
-                <Users className="text-primary" size={24} />
-                <h3 className="font-bold text-xs uppercase tracking-wider">Team Members</h3>
-              </div>
-              <a className="text-primary text-xs font-bold uppercase tracking-wide" href="#">View All</a>
+          {/* Nature of Business */}
+          <div className="space-y-4 pt-2 border-t border-slate-200/60">
+            <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-1">Nature of Business</h3>
+            <div className="px-1 leading-relaxed text-slate-600 text-sm">
+              {MOCK_USER.about}
             </div>
-            <div className="divide-y divide-gray-100">
-              <div className="flex items-center justify-between p-4">
-                <div className="flex gap-4 items-center">
-                  <div className="w-12 h-12 bg-blue-100 text-primary flex items-center justify-center rounded-full shrink-0 font-bold">JD</div>
+          </div>
+
+          {/* Business Details */}
+          <div className="space-y-6 pt-2 border-t border-slate-200/60">
+            <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-1">Business Details</h3>
+            <div className="space-y-6 px-1">
+              <div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Business Category</p>
+                <p className="text-sm font-medium text-slate-800">{MOCK_USER.category}</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Location/Address</p>
+                <p className="text-sm font-medium text-slate-800 leading-snug">{MOCK_USER.location}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Country</p>
+                  <p className="text-sm font-medium text-slate-800">Liberia</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Capital</p>
+                  <p className="text-sm font-medium text-slate-800">Monrovia</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Year of Establishment</p>
+                <p className="text-sm font-medium text-slate-800">2018</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact & Verification */}
+          <div className="space-y-6 pt-2 border-t border-slate-200/60">
+            <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-1">Contact & Verification</h3>
+            <div className="space-y-6 px-1">
+              <div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Email Address</p>
+                <p className="text-sm font-medium text-slate-800 flex items-center gap-1.5">
+                  {MOCK_USER.email}
+                  <CheckCircle2 className="text-green-500" size={18} />
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Contact Number</p>
+                <p className="text-sm font-medium text-slate-800">+231 555 367 471</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">GST & Tax Number</p>
+                <p className="text-sm font-medium text-slate-800">TX-98234-5501-A</p>
+              </div>
+              <div className="mt-2">
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Verification Status</p>
+                <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center gap-4 shadow-sm">
+                  <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
+                    <ShieldCheck size={28} />
+                  </div>
                   <div>
-                    <p className="font-medium text-sm">John Doe</p>
-                    <p className="text-xs text-gray-400">Operations Manager</p>
+                    <p className="text-sm font-bold text-slate-900">Identity Verified</p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Last checked on June 2024</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-semibold text-green-600 border border-green-600 px-3 py-1 rounded-full bg-green-50 uppercase">
-                  Active
-                </span>
-              </div>
-              <div className="flex items-center justify-between p-4">
-                <div className="flex gap-4 items-center">
-                  <div className="w-12 h-12 bg-gray-100 text-gray-400 flex items-center justify-center rounded-full shrink-0 font-bold">AS</div>
-                  <div>
-                    <p className="font-medium text-sm text-gray-500">Alice Smith</p>
-                    <p className="text-xs text-gray-400">Sales Lead</p>
-                  </div>
-                </div>
-                <span className="text-[10px] font-semibold text-gray-500 border border-gray-400 px-3 py-1 rounded-full bg-gray-50 uppercase">
-                  Inactive
-                </span>
               </div>
             </div>
-          </section>
+          </div>
+
+          {/* Support Section */}
+          <div className="pt-6 border-t border-slate-200/60">
+            <div className="bg-white/40 border border-slate-200 p-4 rounded-2xl flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Support</p>
+                  <p className="text-sm font-semibold">Help Center</p>
+                </div>
+              </div>
+              <ChevronRight className="text-slate-400" size={20} />
+            </div>
+          </div>
+
+          {/* Security Footer */}
+          <div className="flex flex-col items-center justify-center gap-2 py-4">
+            <div className="flex items-center gap-1.5 opacity-60">
+              <Lock size={14} />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Secure Public Profile View</span>
+            </div>
+          </div>
         </main>
       </div>
 
+
       {/* Desktop Layout */}
-      <div className="hidden lg:flex flex-col h-full bg-[#F5F7FA] overflow-hidden">
+      < div className="hidden lg:flex flex-col h-full bg-[#F5F7FA] overflow-hidden" >
         <main className="flex-1 overflow-y-auto no-scrollbar p-4 lg:px-10 lg:pt-10 lg:pb-10">
           <div className="max-w-[1536px] mx-auto space-y-8">
             <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
@@ -363,8 +341,8 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
             </div>
           </div>
         </main>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

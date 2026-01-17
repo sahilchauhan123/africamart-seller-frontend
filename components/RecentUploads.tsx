@@ -35,7 +35,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                                 </div>
                             </label>
                         </div>
-                        <button className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white border border-gray-200 shadow-sm text-gray-600">
+                        <button className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white border border-gray-100 shadow-sm text-gray-600">
                             <SlidersHorizontal size={20} />
                         </button>
                     </div>
@@ -45,7 +45,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                     <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 px-1 mt-2">Today</p>
 
                     {/* Doc Item 1 */}
-                    <div className="flex flex-col p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                    <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
@@ -63,7 +63,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                     </div>
 
                     {/* Doc Item 2 */}
-                    <div className="flex flex-col p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                    <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
@@ -83,7 +83,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                     <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 px-1 mt-6">Yesterday</p>
 
                     {/* Doc Item 3 - Rejected */}
-                    <div className="flex flex-col p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                    <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-red-50 flex items-center justify-center text-red-600">
@@ -107,7 +107,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                     </div>
 
                     {/* Doc Item 4 */}
-                    <div className="flex flex-col p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                    <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
@@ -127,7 +127,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                     <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 px-1 mt-6">Earlier this Month</p>
 
                     {/* Doc Item 5 */}
-                    <div className="flex flex-col p-4 bg-white rounded-2xl border border-gray-100 shadow-sm opacity-90">
+                    <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-100 shadow-sm opacity-90">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
@@ -145,7 +145,7 @@ const RecentUploads: React.FC<RecentUploadsProps> = ({ onBack }) => {
                     </div>
 
                     {/* Doc Item 6 */}
-                    <div className="flex flex-col p-4 bg-white rounded-2xl border border-gray-100 shadow-sm opacity-90">
+                    <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-100 shadow-sm opacity-90">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                                 <div className="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">

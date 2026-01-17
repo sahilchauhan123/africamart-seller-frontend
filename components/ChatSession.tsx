@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
   MapPin,
@@ -10,7 +10,9 @@ import {
   Paperclip,
   Camera,
   Send,
-  Star
+  Star,
+  Flag,
+  Ban
 } from 'lucide-react';
 
 interface Props {
@@ -18,6 +20,7 @@ interface Props {
 }
 
 const ChatSession: React.FC<Props> = ({ onBack }) => {
+  const [showMenu, setShowMenu] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -70,9 +73,32 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
             <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-primary lg:hidden">
               <Phone size={24} />
             </button>
-            <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600">
-              <MoreVertical size={24} />
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setShowMenu(!showMenu)}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600"
+              >
+                <MoreVertical size={24} />
+              </button>
+              {showMenu && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setShowMenu(false)}
+                  ></div>
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 p-1.5 z-50 animate-in fade-in zoom-in-95 duration-200">
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-lg transition-colors text-left">
+                      <Flag size={16} className="text-orange-500" />
+                      Report User
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors text-left">
+                      <Ban size={16} />
+                      Block User
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div className="bg-blue-50 px-4 sm:px-6 lg:px-10 py-2 flex items-center justify-between text-xs border-b border-blue-100">
