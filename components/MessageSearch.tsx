@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { View } from '../types';
+import { ArrowLeft, Search, X, History, User, Filter } from 'lucide-react';
 
 interface Props {
     onBack: () => void;
@@ -69,11 +70,11 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                         onClick={onBack}
                         className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-200"
                     >
-                        <span className="material-symbols-outlined text-2xl leading-none">arrow_back</span>
+                        <ArrowLeft size={24} />
                     </button>
                     <div className="flex-1 relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="material-symbols-outlined text-slate-400 text-xl leading-none">search</span>
+                            <Search className="text-slate-400" size={20} />
                         </div>
                         <input
                             autoFocus
@@ -88,7 +89,9 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                                 onClick={() => setSearchQuery('')}
                                 className="absolute inset-y-0 right-0 pr-2 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer focus:outline-none"
                             >
-                                <span className="material-symbols-outlined text-lg p-1 bg-slate-200 rounded-full leading-none">close</span>
+                                <div className="p-1 bg-slate-200 rounded-full">
+                                    <X size={14} />
+                                </div>
                             </button>
                         )}
                     </div>
@@ -109,12 +112,12 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {[
-                            { text: 'Invoice #4022', icon: 'history' },
-                            { text: 'Project details', icon: 'history' },
-                            { text: 'Sarah Williams', icon: 'person' }
+                            { text: 'Invoice #4022', icon: <History size={16} /> },
+                            { text: 'Project details', icon: <History size={16} /> },
+                            { text: 'Sarah Williams', icon: <User size={16} /> }
                         ].map((item, idx) => (
                             <button key={idx} className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300 flex items-center gap-1.5 transition-all shadow-sm">
-                                <span className="material-symbols-outlined text-base text-slate-400 leading-none">{item.icon}</span>
+                                <span className="text-slate-400">{item.icon}</span>
                                 {item.text}
                             </button>
                         ))}
@@ -126,7 +129,7 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                 {searchQuery && (
                     <>
                         <div className="px-4 sm:px-6 lg:px-10 mb-2 flex items-center gap-2">
-                            <span className="material-symbols-outlined text-primary text-sm leading-none">filter_list</span>
+                            <Filter className="text-primary" size={14} />
                             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Results for "{searchQuery}"</h3>
                         </div>
                         <div className="divide-y divide-slate-100">

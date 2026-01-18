@@ -13,11 +13,11 @@ export enum View {
   EDIT_PROFILE = 'EDIT_PROFILE',
   MESSAGES = 'MESSAGES',
   MESSAGE_SEARCH = 'MESSAGE_SEARCH',
-  CATEGORIES = 'CATEGORIES',
-  ADD_CATEGORY = 'ADD_CATEGORY',
   PREMIUM_SERVICES = 'PREMIUM_SERVICES',
   BUSINESS_INFO = 'BUSINESS_INFO',
-  RECENT_UPLOADS = 'RECENT_UPLOADS'
+  RECENT_UPLOADS = 'RECENT_UPLOADS',
+  NOTIFICATIONS = 'NOTIFICATIONS',
+  BUSINESS_REPORT = 'BUSINESS_REPORT'
 }
 
 export interface Product {
@@ -45,6 +45,7 @@ export interface User {
   businessName: string;
   category: string;
   location: string;
+  email: string;
   score: number;
   rating?: string;
   reviews?: number;

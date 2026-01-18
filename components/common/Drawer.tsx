@@ -1,15 +1,42 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from '../../types';
+import {
+  X,
+  Store,
+  Home,
+  Package,
+  TrendingUp,
+  FileText,
+  MessageCircle,
+  Bell,
+  ChevronDown,
+  HelpCircle,
+  Headphones,
+  AlertTriangle,
+  ShieldCheck,
+  Info,
+  BadgeCheck,
+  LayoutDashboard,
+  Landmark,
+  Send,
+  LogOut,
+  CheckCircle
+} from 'lucide-react';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (view: View) => void;
   currentView: View;
+  isOnboarding?: boolean;
 }
 
-const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) => {
+const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isOnboarding }) => {
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+
+
   return (
     <>
       <div
@@ -19,11 +46,11 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
       <div className={`fixed top-0 left-0 h-full w-[85%] max-w-[300px] bg-white z-[70] shadow-2xl flex flex-col transition-transform duration-300 lg:translate-x-0 lg:shadow-none lg:border-r lg:z-40 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="bg-white px-6 h-16 flex items-center shrink-0 relative border-b border-gray-100">
           <button className="absolute top-4 right-4 text-gray-400 z-10 p-1 hover:bg-gray-100 rounded-full transition lg:hidden" onClick={onClose}>
-            <span className="material-icons-round text-xl">close</span>
+            <X size={20} />
           </button>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-sm shadow-primary/30">
-              <span className="material-icons-round text-2xl text-white">storefront</span>
+              <Store className="text-white" size={24} />
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight leading-none text-slate-800">AfricaMart</h1>
@@ -33,71 +60,164 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
         </div>
 
         <nav className="flex-1 overflow-y-auto no-scrollbar">
-          <div className="py-4">
-            <button
-              onClick={() => { onNavigate(View.DASHBOARD); if (window.innerWidth < 1024) onClose(); }}
-              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.DASHBOARD ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-            >
-              <span className={`material-icons-round ${currentView === View.DASHBOARD ? 'text-primary' : 'text-gray-400'}`}>home</span>
-              <span className="text-sm tracking-wide">HOME</span>
-            </button>
-            <button
-              onClick={() => { onNavigate(View.PRODUCT_LIST); if (window.innerWidth < 1024) onClose(); }}
-              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.PRODUCT_LIST ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-            >
-              <span className={`material-icons-round ${currentView === View.PRODUCT_LIST ? 'text-primary' : 'text-gray-400'}`}>inventory_2</span>
-              <span className="text-sm">Manage Products</span>
-            </button>
-            <button
-              onClick={() => { onNavigate(View.CATEGORIES); if (window.innerWidth < 1024) onClose(); }}
-              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.CATEGORIES ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-            >
-              <span className={`material-icons-round ${currentView === View.CATEGORIES ? 'text-primary' : 'text-gray-400'}`}>category</span>
-              <span className="text-sm">Categories</span>
-            </button>
-            <button
-              onClick={() => { onNavigate(View.INQUIRY_LIST); if (window.innerWidth < 1024) onClose(); }}
-              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.INQUIRY_LIST ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-            >
-              <span className={`material-icons-round ${currentView === View.INQUIRY_LIST ? 'text-primary' : 'text-gray-400'}`}>analytics</span>
-              <span className="text-sm">Leads & Inquiries</span>
-            </button>
-          </div>
+          {isOnboarding ? (
+            <div className="py-4">
+              <button
+                onClick={onClose}
+                className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-gray-600"
+              >
+                <Info className="text-gray-400" size={24} />
+                <span className="text-sm tracking-wide">Why AfricaMart</span>
+              </button>
+              <button
+                onClick={onClose}
+                className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-gray-600"
+              >
+                <CheckCircle className="text-gray-400" size={24} />
+                <span className="text-sm">Benefits</span>
+              </button>
+              <button
+                onClick={onClose}
+                className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-gray-600"
+              >
+                <HelpCircle className="text-gray-400" size={24} />
+                <span className="text-sm">FAQs</span>
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="py-4">
+                <button
+                  onClick={() => { onNavigate(View.DASHBOARD); if (window.innerWidth < 1024) onClose(); }}
+                  className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.DASHBOARD ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                >
+                  <Home className={currentView === View.DASHBOARD ? 'text-primary' : 'text-gray-400'} size={24} />
+                  <span className="text-sm tracking-wide">HOME</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate(View.PRODUCT_LIST); if (window.innerWidth < 1024) onClose(); }}
+                  className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.PRODUCT_LIST ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                >
+                  <Package className={currentView === View.PRODUCT_LIST ? 'text-primary' : 'text-gray-400'} size={24} />
+                  <span className="text-sm">Manage Products</span>
+                </button>
 
-          <div className="border-b border-gray-100 mx-6"></div>
-
-          <div className="pt-2 pb-2">
-            <button
-              onClick={() => { onNavigate(View.BUSINESS_INFO); if (window.innerWidth < 1024) onClose(); }}
-              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.BUSINESS_INFO ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-            >
-              <span className={`material-icons-round ${currentView === View.BUSINESS_INFO ? 'text-primary' : 'text-gray-400'}`}>description</span>
-              <span className="font-medium text-sm">Documents</span>
-            </button>
-            <button
-              onClick={() => { onNavigate(View.MESSAGES); if (window.innerWidth < 1024) onClose(); }}
-              className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.MESSAGES ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-            >
-              <div className="flex-1 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <span className={`material-icons-round ${currentView === View.MESSAGES ? 'text-primary' : 'text-gray-400'}`}>chat_bubble_outline</span>
-                  <span className="text-sm">Messages</span>
-                </div>
-                <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
+                <button
+                  onClick={() => { onNavigate(View.INQUIRY_LIST); if (window.innerWidth < 1024) onClose(); }}
+                  className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.INQUIRY_LIST ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                >
+                  <TrendingUp className={currentView === View.INQUIRY_LIST ? 'text-primary' : 'text-gray-400'} size={24} />
+                  <span className="text-sm">Leads & Inquiries</span>
+                </button>
               </div>
-            </button>
-          </div>
 
-          <div className="mt-2 border-t border-gray-100 flex flex-col gap-1">
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
-              <span className="font-bold text-black text-xs tracking-wider uppercase">COMMUNICATIONS</span>
-              <span className="material-icons-round text-gray-400">expand_more</span>
-            </button>
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none">
-              <span className="font-bold text-black text-xs tracking-wider uppercase">MORE</span>
-              <span className="material-icons-round text-gray-400">expand_more</span>
-            </button>
-          </div>
+              <div className="border-b border-gray-100 mx-6"></div>
+
+              <div className="pt-2 pb-2">
+                <button
+                  onClick={() => { onNavigate(View.BUSINESS_INFO); if (window.innerWidth < 1024) onClose(); }}
+                  className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.BUSINESS_INFO ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                >
+                  <FileText className={currentView === View.BUSINESS_INFO ? 'text-primary' : 'text-gray-400'} size={24} />
+                  <span className="font-medium text-sm">Documents</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate(View.MESSAGES); if (window.innerWidth < 1024) onClose(); }}
+                  className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.MESSAGES ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                >
+                  <div className="flex-1 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <MessageCircle className={currentView === View.MESSAGES ? 'text-primary' : 'text-gray-400'} size={24} />
+                      <span className="text-sm">Messages</span>
+                    </div>
+                    <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
+                  </div>
+                </button>
+                <button
+                  onClick={() => { onNavigate(View.NOTIFICATIONS); if (window.innerWidth < 1024) onClose(); }}
+                  className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.NOTIFICATIONS ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                >
+                  <div className="flex-1 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <Bell className={currentView === View.NOTIFICATIONS ? 'text-primary' : 'text-gray-400'} size={24} />
+                      <span className="text-sm">Notifications</span>
+                    </div>
+                    <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+                  </div>
+                </button>
+              </div>
+
+              <div className="border-b border-gray-100 mx-6"></div>
+
+              <div className="mt-2 flex flex-col gap-1">
+
+                <button
+                  onClick={() => setIsHelpOpen(!isHelpOpen)}
+                  className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none"
+                >
+                  <span className="font-bold text-black text-xs tracking-wider uppercase">Help & Support</span>
+                  <ChevronDown className={`text-gray-400 transition-transform ${isHelpOpen ? 'rotate-180' : ''}`} size={24} />
+                </button>
+                {isHelpOpen && (
+                  <div className="flex flex-col bg-white border-b border-gray-50">
+                    <button
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    >
+                      <HelpCircle className="text-gray-400" size={20} />
+                      <span>Help Center (FAQs)</span>
+                    </button>
+                    <button
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    >
+                      <Headphones className="text-gray-400" size={20} />
+                      <span>Contact Support</span>
+                    </button>
+                    <button
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    >
+                      <AlertTriangle className="text-gray-400" size={20} />
+                      <span>Report a Problem</span>
+                    </button>
+                    <button
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    >
+                      <ShieldCheck className="text-gray-400" size={20} />
+                      <span>Policies</span>
+                    </button>
+                  </div>
+                )}
+                <button
+                  onClick={() => setIsMoreOpen(!isMoreOpen)}
+                  className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none"
+                >
+                  <span className="font-bold text-black text-xs tracking-wider uppercase">More</span>
+                  <ChevronDown className={`text-gray-400 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} size={24} />
+                </button>
+                {isMoreOpen && (
+                  <div className="flex flex-col bg-white border-b border-gray-50">
+                    <button
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    >
+                      <Info className="text-gray-400" size={20} />
+                      <span>About AfricaMart</span>
+                    </button>
+                    <button
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    >
+                      <BadgeCheck className="text-gray-400" size={20} />
+                      <span>AfricaMart Services</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </nav>
       </div>
 
@@ -106,7 +226,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
         <div className="px-8 h-[72px] flex items-center shrink-0 bg-white border-b border-slate-100">
           <h1 className="text-xl font-bold flex items-center gap-3 text-slate-800 tracking-tight">
             <span className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white shadow-sm shadow-brand/20">
-              <span className="material-symbols-outlined text-sm leading-none">dashboard</span>
+              <LayoutDashboard className="text-white" size={14} />
             </span>
             PLATFORM
           </h1>
@@ -117,21 +237,21 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               onClick={() => onNavigate(View.DASHBOARD)}
               className={`flex items-center gap-4 px-6 py-3 transition-all rounded-r-xl cursor-pointer ${currentView === View.DASHBOARD ? 'bg-slate-50 border-l-4 border-brand' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className={`material-symbols-outlined text-[22px] ${currentView === View.DASHBOARD ? 'font-bold text-brand' : ''}`}>home</span>
+              <Home className={currentView === View.DASHBOARD ? 'text-brand' : ''} size={22} />
               <span className={`text-sm tracking-wide ${currentView === View.DASHBOARD ? 'font-bold text-black' : 'font-medium'}`}>HOME</span>
             </a>
             <a
               onClick={() => onNavigate(View.DASHBOARD)}
               className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.DASHBOARD ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className="material-symbols-outlined text-[22px]">account_balance</span>
+              <Landmark size={22} />
               <span className="font-medium text-sm">Your Dashboard</span>
             </a>
             <a
               onClick={() => onNavigate(View.ADD_PRODUCT)}
               className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.ADD_PRODUCT ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className="material-symbols-outlined text-[22px]">send</span>
+              <Send size={22} />
               <span className="font-medium text-sm">Send Enquiries</span>
             </a>
           </div>
@@ -143,28 +263,22 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               onClick={() => onNavigate(View.INQUIRY_LIST)}
               className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.INQUIRY_LIST ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className="material-symbols-outlined text-[22px]">trending_up</span>
+              <TrendingUp size={22} />
               <span className="font-medium text-sm">View Lead Requests</span>
             </a>
             <a
               onClick={() => onNavigate(View.PRODUCT_LIST)}
               className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.PRODUCT_LIST ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className="material-symbols-outlined text-[22px]">inventory_2</span>
+              <Package size={22} />
               <span className="font-medium text-sm">Manage Products</span>
             </a>
-            <a
-              onClick={() => onNavigate(View.CATEGORIES)}
-              className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.CATEGORIES ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
-            >
-              <span className="material-symbols-outlined text-[22px]">category</span>
-              <span className="font-medium text-sm">Categories</span>
-            </a>
+
             <a
               onClick={() => onNavigate(View.BUSINESS_INFO)}
               className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.BUSINESS_INFO ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
-              <span className={`material-symbols-outlined text-[22px] ${currentView === View.BUSINESS_INFO ? 'font-bold text-brand' : ''}`}>description</span>
+              <FileText className={currentView === View.BUSINESS_INFO ? 'font-bold text-brand' : ''} size={22} />
               <span className="font-medium text-sm">Documents</span>
             </a>
             <a
@@ -172,26 +286,78 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView }) =
               className={`flex items-center justify-between px-6 py-3 transition-all cursor-pointer ${currentView === View.MESSAGES ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
               <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-[22px]">chat</span>
+                <MessageCircle size={22} />
                 <span className="font-medium text-sm">Messages</span>
               </div>
               <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
             </a>
+            <a
+              onClick={() => onNavigate(View.NOTIFICATIONS)}
+              className={`flex items-center justify-between px-6 py-3 transition-all cursor-pointer ${currentView === View.NOTIFICATIONS ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
+            >
+              <div className="flex items-center gap-4">
+                <Bell className={currentView === View.NOTIFICATIONS ? 'font-bold text-brand' : ''} size={22} />
+                <span className="font-medium text-sm">Notifications</span>
+              </div>
+              <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+            </a>
+          </div>
+          <div className="px-6">
+            <hr className="border-slate-100" />
           </div>
           <div className="mt-auto pt-4 flex flex-col gap-2">
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
-              <span className="font-bold text-black text-xs tracking-wider">COMMUNICATIONS</span>
-              <span className="material-symbols-outlined text-gray-400">expand_more</span>
+
+            <button
+              onClick={() => setIsHelpOpen(!isHelpOpen)}
+              className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl"
+            >
+              <span className="font-bold text-black text-xs tracking-wider uppercase">Help & Support</span>
+              <ChevronDown className={`text-gray-400 transition-transform ${isHelpOpen ? 'rotate-180' : ''}`} size={20} />
             </button>
-            <button className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl">
-              <span className="font-bold text-black text-xs tracking-wider">MORE</span>
-              <span className="material-symbols-outlined text-gray-400">expand_more</span>
+            {isHelpOpen && (
+              <div className="flex flex-col bg-slate-50/50 rounded-xl overflow-hidden mt-1 mx-2">
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <HelpCircle size={20} />
+                  <span>Help Center (FAQs)</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <Headphones size={20} />
+                  <span>Contact Support</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <AlertTriangle size={20} />
+                  <span>Report a Problem</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors">
+                  <ShieldCheck size={20} />
+                  <span>Policies</span>
+                </button>
+              </div>
+            )}
+            <button
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className="w-full flex items-center justify-between px-6 py-4 bg-[#f3f6fa] hover:brightness-95 transition-all outline-none rounded-xl"
+            >
+              <span className="font-bold text-black text-xs tracking-wider uppercase">More</span>
+              <ChevronDown className={`text-gray-400 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} size={20} />
             </button>
+            {isMoreOpen && (
+              <div className="flex flex-col bg-slate-50/50 rounded-xl overflow-hidden mt-1 mx-2">
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
+                  <Info size={20} />
+                  <span>About AfricaMart</span>
+                </button>
+                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors">
+                  <BadgeCheck size={20} />
+                  <span>AfricaMart Services</span>
+                </button>
+              </div>
+            )}
           </div>
         </nav>
         <div className="p-8 border-t border-slate-100">
           <button className="flex items-center gap-4 px-4 py-2 transition-all text-slate-400 hover:text-red-500 w-full text-left">
-            <span className="material-symbols-outlined">logout</span>
+            <LogOut size={24} />
             <span className="font-medium text-sm">Logout</span>
           </button>
         </div>

@@ -13,10 +13,12 @@ import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import BusinessMessages from './components/BusinessMessages';
 import MessageSearch from './components/MessageSearch';
-import CategoryManager, { CategoryView } from './components/CategoryManager';
+
 import PremiumServices from './components/PremiumServices';
 import BusinessInfo from './components/BusinessInfo';
 import RecentUploads from './components/RecentUploads';
+import Notifications from './components/Notifications';
+import BusinessReport from './components/BusinessReport';
 import Drawer from './components/common/Drawer';
 import Header from './components/common/Header';
 
@@ -82,22 +84,23 @@ const App: React.FC = () => {
         return <Profile onBack={() => setIsDrawerOpen(true)} onEdit={() => setCurrentView(View.EDIT_PROFILE)} />;
       case View.EDIT_PROFILE:
         return <EditProfile onBack={() => setCurrentView(View.PROFILE)} onSave={() => setCurrentView(View.PROFILE)} />;
-      case View.CATEGORIES:
-        return <CategoryManager />;
-      case View.ADD_CATEGORY:
-        return <CategoryManager initialView={CategoryView.ADD} />;
+
       case View.PREMIUM_SERVICES:
         return <PremiumServices onBack={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.BUSINESS_INFO:
         return <BusinessInfo onOpenDrawer={() => setIsDrawerOpen(true)} onViewAll={() => setCurrentView(View.RECENT_UPLOADS)} />;
       case View.RECENT_UPLOADS:
         return <RecentUploads onBack={() => setCurrentView(View.BUSINESS_INFO)} />;
+      case View.NOTIFICATIONS:
+        return <Notifications onBack={() => setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} />;
+      case View.BUSINESS_REPORT:
+        return <BusinessReport onBack={() => setCurrentView(View.DASHBOARD)} />;
       default:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} />;
     }
   };
 
-  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PROFILE, View.EDIT_PROFILE, View.PREMIUM_SERVICES].includes(currentView);
+  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
@@ -118,11 +121,12 @@ const App: React.FC = () => {
             onOpenDrawer={() => setIsDrawerOpen(true)}
             onNavigate={(view) => setCurrentView(view)}
             currentView={currentView}
-            onBack={(currentView === View.LEAD_DETAILS || currentView === View.PRODUCT_LIST || currentView === View.ADD_PRODUCT || currentView === View.INQUIRY_LIST || currentView === View.ADD_CATEGORY || currentView === View.BUSINESS_INFO || currentView === View.RECENT_UPLOADS) ? () => {
+            onBack={(currentView === View.LEAD_DETAILS || currentView === View.PRODUCT_LIST || currentView === View.ADD_PRODUCT || currentView === View.INQUIRY_LIST || currentView === View.BUSINESS_INFO || currentView === View.RECENT_UPLOADS || currentView === View.EDIT_PROFILE) ? () => {
               if (currentView === View.LEAD_DETAILS) setCurrentView(View.INQUIRY_LIST);
               else if (currentView === View.ADD_PRODUCT) setCurrentView(View.PRODUCT_LIST);
-              else if (currentView === View.ADD_CATEGORY) setCurrentView(View.CATEGORIES);
+
               else if (currentView === View.RECENT_UPLOADS) setCurrentView(View.BUSINESS_INFO);
+              else if (currentView === View.EDIT_PROFILE) setCurrentView(View.PROFILE);
               else setIsDrawerOpen(true);
             } : undefined}
             title={
@@ -131,13 +135,14 @@ const App: React.FC = () => {
                   currentView === View.PRODUCT_LIST ? "Manage Products" :
                     currentView === View.INQUIRY_LIST ? "Leads & Inquiries" :
                       currentView === View.DASHBOARD ? "Dashboard" :
-                        currentView === View.CATEGORIES ? "Categories" :
-                          currentView === View.ADD_CATEGORY ? "Add Category" :
-                            currentView === View.BUSINESS_INFO ? "Documents" :
-                              currentView === View.RECENT_UPLOADS ? "Recent Uploads" :
+
+                        currentView === View.BUSINESS_INFO ? "Document Management" :
+                          currentView === View.RECENT_UPLOADS ? "Recent Uploads" :
+                            currentView === View.PROFILE ? "Seller Profile" :
+                              currentView === View.EDIT_PROFILE ? "Edit Profile" :
                                 undefined
             }
-            onAdd={currentView === View.CATEGORIES ? () => setCurrentView(View.ADD_CATEGORY) : undefined}
+            onAdd={undefined}
           />
         )}
         <main className={`flex-1 relative ${isAuthView && !hideHeader ? "pt-16 lg:pt-[72px]" : ""}`}>

@@ -1,11 +1,26 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  ArrowLeft,
+  MapPin,
+  ShieldCheck,
+  Phone,
+  MoreVertical,
+  CheckCheck,
+  Paperclip,
+  Camera,
+  Send,
+  Star,
+  Flag,
+  Ban
+} from 'lucide-react';
 
 interface Props {
   onBack: () => void;
 }
 
 const ChatSession: React.FC<Props> = ({ onBack }) => {
+  const [showMenu, setShowMenu] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,7 +39,7 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
               onClick={onBack}
               className="mr-2 p-1 rounded-full hover:bg-gray-100 transition-colors text-gray-600"
             >
-              <span className="material-icons text-2xl leading-none">arrow_back</span>
+              <ArrowLeft size={24} />
             </button>
             <div className="flex-1 min-w-0">
               <h1 className="text-base font-bold text-gray-900 truncate leading-tight">
@@ -32,35 +47,58 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
               </h1>
               <div className="flex items-center text-xs text-gray-500 mt-0.5 space-x-2">
                 <span className="flex items-center">
-                  <span className="material-icons text-[14px] mr-0.5">location_on</span>
+                  <MapPin size={14} className="mr-0.5" />
                   Paynesville, Monrovia
                 </span>
-                <span className="flex items-center">
-                  <span className="text-yellow-500 text-[14px]">★</span>
-                  <span className="text-yellow-500 text-[14px]">★</span>
-                  <span className="text-yellow-500 text-[14px]">★</span>
-                  <span className="text-yellow-500 text-[14px]">★</span>
-                  <span className="text-yellow-500 text-[14px] mr-1">★</span>
-                  <span className="font-medium">4.8</span>
+                <span className="flex items-center text-yellow-500 space-x-0.5">
+                  <Star size={14} fill="currentColor" />
+                  <Star size={14} fill="currentColor" />
+                  <Star size={14} fill="currentColor" />
+                  <Star size={14} fill="currentColor" />
+                  <Star size={14} fill="currentColor" className="mr-1" />
+                  <span className="font-medium text-gray-500">4.8</span>
                 </span>
               </div>
               <div className="flex items-center text-xs mt-0.5">
-                <span className="material-icons text-primary text-[14px] mr-1">verified</span>
+                <ShieldCheck className="text-primary mr-1" size={14} />
                 <span className="text-gray-600 font-medium font-bold uppercase tracking-tighter">Business Verified</span>
               </div>
             </div>
           </div>
           <div className="flex items-center space-x-1">
             <button className="hidden lg:flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-bold text-sm hover:bg-primary/20 transition-colors mr-2">
-              <span className="material-icons text-xl">call</span>
+              <Phone size={20} />
               Call Buyer
             </button>
             <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-primary lg:hidden">
-              <span className="material-icons text-2xl leading-none">call</span>
+              <Phone size={24} />
             </button>
-            <button className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600">
-              <span className="material-icons text-2xl leading-none">more_vert</span>
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setShowMenu(!showMenu)}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600"
+              >
+                <MoreVertical size={24} />
+              </button>
+              {showMenu && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setShowMenu(false)}
+                  ></div>
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 p-1.5 z-50 animate-in fade-in zoom-in-95 duration-200">
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-lg transition-colors text-left">
+                      <Flag size={16} className="text-orange-500" />
+                      Report User
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors text-left">
+                      <Ban size={16} />
+                      Block User
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div className="bg-blue-50 px-4 sm:px-6 lg:px-10 py-2 flex items-center justify-between text-xs border-b border-blue-100">
@@ -127,7 +165,7 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
           </div>
           <div className="flex items-center space-x-1 pr-1">
             <span className="text-[10px] text-gray-400 font-bold">09:15 AM</span>
-            <span className="material-icons text-[14px] text-primary">done_all</span>
+            <CheckCheck size={14} className="text-primary" />
           </div>
         </div>
       </main>
@@ -147,7 +185,7 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
         </div>
         <div className="px-4 sm:px-6 lg:px-10 py-3 flex items-end space-x-2">
           <button className="p-2.5 text-slate-400 hover:text-primary transition-colors">
-            <span className="material-icons-round transform rotate-45 text-2xl">attach_file</span>
+            <Paperclip size={20} />
           </button>
           <div className="flex-1 bg-slate-100 rounded-[2rem] flex items-center border border-slate-200 focus-within:border-primary focus-within:bg-white transition-all shadow-inner">
             <textarea
@@ -161,11 +199,11 @@ const ChatSession: React.FC<Props> = ({ onBack }) => {
               }}
             />
             <button className="p-2 mr-1 text-slate-400 hover:text-primary transition-colors">
-              <span className="material-icons-outlined text-2xl leading-none">camera_alt</span>
+              <Camera size={20} />
             </button>
           </div>
           <button className="w-12 h-12 bg-primary text-white rounded-full shadow-lg hover:bg-blue-600 transition-all active:scale-90 flex items-center justify-center">
-            <span className="material-icons text-[24px] ml-0.5 leading-none">send</span>
+            <Send size={20} />
           </button>
         </div>
       </footer>

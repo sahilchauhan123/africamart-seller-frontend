@@ -1,5 +1,24 @@
 
 import React from 'react';
+import {
+    X,
+    Check,
+    Bookmark,
+    Package,
+    Banknote,
+    MapPin,
+    LayoutGrid,
+    Timer,
+    FileText,
+    Star,
+    Eye,
+    Send,
+    CheckCircle2,
+    ShoppingCart,
+    Images,
+    BadgeCheck,
+    HelpCircle
+} from 'lucide-react';
 
 interface Props {
     onBack: () => void;
@@ -18,14 +37,14 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             onClick={onBack}
                             className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl border-2 border-primary bg-white text-primary font-semibold hover:bg-blue-50 transition-all active:scale-95 text-sm shadow-sm"
                         >
-                            <span className="material-icons-round text-lg">close</span>
+                            <X size={18} />
                             Decline
                         </button>
                         <button
                             onClick={onAccept}
                             className="flex-[2] flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all active:scale-95 text-sm"
                         >
-                            <span className="material-icons-round text-lg">check</span>
+                            <Check size={18} />
                             Accept & Contact
                         </button>
                     </div>
@@ -52,12 +71,12 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             <div>
                                 <h2 className="text-xl font-bold text-gray-900 leading-tight mb-2">Industrial Red Bucket (50L)</h2>
                                 <div className="flex items-center text-sm text-slate-500">
-                                    <span className="material-icons-round text-base mr-1">schedule</span>
+                                    <Timer size={16} className="mr-1" />
                                     <span>Posted Yesterday, 5 hrs ago</span>
                                 </div>
                             </div>
                             <button className="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
-                                <span className="material-icons-round">bookmark_border</span>
+                                <Bookmark size={24} />
                             </button>
                         </div>
                     </div>
@@ -66,14 +85,14 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                     <div className="grid grid-cols-2 gap-3">
                         <div className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center text-center shadow-sm">
                             <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-2 text-primary">
-                                <span className="material-icons-round">inventory_2</span>
+                                <Package size={24} />
                             </div>
                             <span className="text-xs text-slate-500 uppercase tracking-wider font-medium">Quantity</span>
                             <span className="text-lg font-bold mt-1">50+ Units</span>
                         </div>
                         <div className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center text-center shadow-sm">
                             <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center mb-2 text-green-600">
-                                <span className="material-icons-round">payments</span>
+                                <Banknote size={24} />
                             </div>
                             <span className="text-xs text-slate-500 uppercase tracking-wider font-medium">Est. Value</span>
                             <span className="text-lg font-bold mt-1">LD 150 - 300</span>
@@ -88,7 +107,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                         <div className="divide-y divide-slate-100">
                             <div className="p-4 flex items-start gap-4">
                                 <div className="mt-1 text-primary">
-                                    <span className="material-icons-round">location_on</span>
+                                    <MapPin size={24} />
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-500 mb-1">Delivery Location</p>
@@ -98,7 +117,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             </div>
                             <div className="p-4 flex items-start gap-4">
                                 <div className="mt-1 text-primary">
-                                    <span className="material-icons-round">category</span>
+                                    <LayoutGrid size={24} />
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-500 mb-1">Product Category</p>
@@ -107,7 +126,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             </div>
                             <div className="p-4 flex items-start gap-4">
                                 <div className="mt-1 text-primary">
-                                    <span className="material-icons-round">hourglass_top</span>
+                                    <Timer size={24} />
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-500 mb-1">Requirement Urgency</p>
@@ -118,7 +137,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             </div>
                             <div className="p-4 flex items-start gap-4">
                                 <div className="mt-1 text-primary">
-                                    <span className="material-icons-round">description</span>
+                                    <FileText size={24} />
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-500 mb-1">Buyer Note</p>
@@ -139,7 +158,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             <div>
                                 <p className="text-sm font-semibold text-gray-900">John Doe Construction</p>
                                 <div className="flex items-center text-xs text-yellow-500">
-                                    <span className="material-icons-round text-sm">star</span>
+                                    <Star size={14} />
                                     <span className="font-medium ml-1">4.8</span>
                                     <span className="text-slate-400 ml-1">(12 Orders)</span>
                                 </div>
@@ -157,12 +176,12 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                     <div className="max-w-[1536px] mx-auto px-10 py-4 flex items-center justify-between">
                         <div className="flex items-center space-x-6 text-slate-500 text-sm">
                             <div className="flex items-center">
-                                <span className="material-symbols-outlined mr-2">visibility</span>
+                                <Eye size={20} className="mr-2" />
                                 <span className="font-medium">14 Views</span>
                             </div>
                             <div className="h-4 w-px bg-slate-200"></div>
                             <div className="flex items-center">
-                                <span className="material-symbols-outlined mr-2">send</span>
+                                <Send size={20} className="mr-2" />
                                 <span className="font-medium">2 Quotes Sent</span>
                             </div>
                         </div>
@@ -171,14 +190,14 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                 onClick={onBack}
                                 className="px-6 py-2 text-slate-600 font-bold text-sm rounded-lg hover:bg-slate-50 border border-slate-300 transition-all flex items-center space-x-2"
                             >
-                                <span className="material-symbols-outlined">close</span>
+                                <X size={20} />
                                 <span>DECLINE LEAD</span>
                             </button>
                             <button
                                 onClick={onAccept}
                                 className="px-8 py-2 bg-primary text-white font-bold text-sm rounded-lg hover:bg-blue-800 shadow-md transition-all flex items-center space-x-2"
                             >
-                                <span className="material-symbols-outlined">check_circle</span>
+                                <CheckCircle2 size={20} />
                                 <span>ACCEPT & CONTACT BUYER</span>
                             </button>
                         </div>
@@ -192,7 +211,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6">
                             <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-5 lg:p-6 flex items-center shadow-sm">
                                 <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center mr-4 lg:mr-5 shrink-0">
-                                    <span className="material-symbols-outlined !text-3xl">shopping_cart</span>
+                                    <ShoppingCart className="!w-8 !h-8" />
                                 </div>
                                 <div className="min-w-0">
                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">Product Title</p>
@@ -201,7 +220,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             </div>
                             <div className="bg-white rounded-xl border border-slate-200 p-5 lg:p-6 flex items-center shadow-sm">
                                 <div className="w-10 h-10 lg:w-12 lg:h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mr-4 shrink-0">
-                                    <span className="material-symbols-outlined">inventory_2</span>
+                                    <Package size={24} />
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">Quantity</p>
@@ -210,7 +229,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             </div>
                             <div className="bg-white rounded-xl border border-slate-200 p-5 lg:p-6 flex items-center shadow-sm">
                                 <div className="w-10 h-10 lg:w-12 lg:h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mr-4 shrink-0">
-                                    <span className="material-symbols-outlined">payments</span>
+                                    <Banknote size={24} />
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">Est. Value</p>
@@ -239,7 +258,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                         </div>
                                         <div className="absolute bottom-4 lg:bottom-6 right-4 lg:right-6 flex space-x-2">
                                             <span className="bg-black/70 backdrop-blur-md text-white px-3 py-1.5 rounded-lg text-[10px] lg:text-xs font-medium border border-white/20 flex items-center uppercase tracking-wider">
-                                                <span className="material-symbols-outlined !text-sm lg:!text-base mr-1 lg:mr-2">photo_library</span> 1/3 Photos
+                                                <Images size={16} className="mr-1 lg:mr-2" /> 1/3 Photos
                                             </span>
                                         </div>
                                     </div>
@@ -253,7 +272,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                     </div>
                                     <div className="p-6 lg:p-8 grid grid-cols-1 sm:grid-cols-2 gap-y-8 lg:gap-y-10 gap-x-6">
                                         <div className="flex items-start space-x-4">
-                                            <span className="material-symbols-outlined text-primary mt-1">location_on</span>
+                                            <MapPin className="text-primary mt-1" size={24} />
                                             <div>
                                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Delivery Location</p>
                                                 <p className="text-slate-900 font-semibold text-sm lg:text-base">Paynesville, Monrovia</p>
@@ -261,14 +280,14 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                             </div>
                                         </div>
                                         <div className="flex items-start space-x-4">
-                                            <span className="material-symbols-outlined text-primary mt-1">category</span>
+                                            <LayoutGrid className="text-primary mt-1" size={24} />
                                             <div>
                                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Product Category</p>
                                                 <p className="text-slate-900 font-semibold text-sm lg:text-base">Industrial Plastic Supplies</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start space-x-4">
-                                            <span className="material-symbols-outlined text-primary mt-1">timer</span>
+                                            <Timer className="text-primary mt-1" size={24} />
                                             <div>
                                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Requirement Urgency</p>
                                                 <span className="mt-1 inline-block bg-orange-100 text-orange-700 px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-widest border border-orange-200">Immediate</span>
@@ -277,7 +296,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
 
                                         <div className="col-span-1 sm:col-span-2 pt-6 border-t border-slate-50">
                                             <div className="flex items-start space-x-4">
-                                                <span className="material-symbols-outlined text-primary mt-1">notes</span>
+                                                <FileText className="text-primary mt-1" size={24} />
                                                 <div className="flex-1">
                                                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Buyer Note</p>
                                                     <div className="bg-slate-50 p-4 lg:p-5 rounded-xl border-l-4 border-primary italic text-slate-700 leading-relaxed text-sm">
@@ -305,7 +324,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                                 <h4 className="font-bold text-slate-900 text-sm lg:text-base">John Doe Construction</h4>
                                                 <div className="flex items-center space-x-2 mt-1">
                                                     <div className="flex items-center text-amber-500">
-                                                        <span className="material-symbols-outlined !text-sm">star</span>
+                                                        <Star size={14} />
                                                         <span className="ml-1 text-xs lg:text-sm font-bold text-slate-900">4.8</span>
                                                     </div>
                                                     <span className="text-slate-300">•</span>
@@ -320,7 +339,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                         <div className="bg-blue-600 p-5 rounded-xl text-white relative overflow-hidden group">
                                             <div className="relative z-10">
                                                 <div className="flex items-center text-[9px] font-bold bg-white/20 w-fit px-2 py-0.5 rounded-full mb-3 tracking-widest">
-                                                    <span className="material-symbols-outlined !text-[14px] mr-1">verified</span>
+                                                    <BadgeCheck size={14} className="mr-1" />
                                                     VERIFIED BUYER
                                                 </div>
                                                 <h4 className="font-bold text-sm mb-1 leading-tight">Elite Partner Program</h4>
@@ -332,7 +351,7 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                                         {/* Support Card - Fixed Inside Sticky Container */}
                                         <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 mt-6 flex flex-col">
                                             <div className="flex items-center space-x-3 mb-3 text-slate-600">
-                                                <span className="material-symbols-outlined">help_outline</span>
+                                                <HelpCircle size={24} />
                                                 <span className="font-bold text-sm">Need Help?</span>
                                             </div>
                                             <p className="text-[10px] lg:text-xs text-slate-500 leading-relaxed mb-4 font-medium">Contact our lead specialists if you have questions about this inquiry.</p>

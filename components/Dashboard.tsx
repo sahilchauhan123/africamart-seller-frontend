@@ -3,6 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { View } from '../types';
 import { MOCK_USER, MOCK_INQUIRIES } from '../constants';
 import Drawer from './common/Drawer';
+import {
+    Plus,
+    Eye,
+    Package,
+    FileText,
+    TrendingUp,
+    Users,
+    MapPin,
+    PlusCircle,
+    MousePointerClick,
+    FilePlus,
+    UserPlus,
+    Rocket,
+    ArrowLeftRight
+} from 'lucide-react';
 
 interface Props {
     onNavigate: (view: View) => void;
@@ -11,6 +26,15 @@ interface Props {
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [activeMonthIndex, setActiveMonthIndex] = useState(3);
+    const months = [
+        { name: 'AUG', full: 'AUGUST', leads: 95, height: '65%' },
+        { name: 'SEP', full: 'SEPTEMBER', leads: 110, height: '85%' },
+        { name: 'OCT', full: 'OCTOBER', leads: 85, height: '55%' },
+        { name: 'NOV', full: 'NOVEMBER', leads: 142, height: '100%' },
+        { name: 'DEC', full: 'DECEMBER', leads: 120, height: '90%' },
+        { name: 'JAN', full: 'JANUARY', leads: 125, height: '75%' },
+    ];
 
     return (
         <div className="flex flex-col h-full bg-background-light overflow-hidden relative">
@@ -21,33 +45,33 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     <section className="px-4 py-6">
                         <div className="grid grid-cols-4 gap-4">
                             <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-blue-600">add</span>
+                                        <Plus className="text-blue-600" size={24} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Add<br />Product</span>
                             </button>
                             <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-purple-600 text-lg">visibility</span>
+                                        <Eye className="text-purple-600" size={18} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Check<br />Leads</span>
                             </button>
                             <button onClick={() => onNavigate(View.PRODUCT_LIST)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-green-600 text-lg">inventory_2</span>
+                                        <Package className="text-green-600" size={18} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Manage<br />Products</span>
                             </button>
                             <button onClick={() => setIsOverlayOpen(true)} className="flex flex-col items-center group">
-                                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
+                                <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-2 group-active:scale-95 transition-transform">
                                     <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <span className="material-icons-round text-orange-600 text-lg">description</span>
+                                        <FileText className="text-orange-600" size={18} />
                                     </div>
                                 </div>
                                 <span className="text-[11px] font-medium text-center leading-tight">Post<br />Req</span>
@@ -58,12 +82,12 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     <section className="mb-6">
                         <div className="flex items-center justify-between px-4 mb-3">
                             <h2 className="text-lg font-bold">Business Overview</h2>
-                            <button className="text-sm font-medium text-primary hover:underline">View Report</button>
+                            <button onClick={() => onNavigate(View.BUSINESS_REPORT)} className="text-sm font-medium text-primary hover:underline">View Report</button>
                         </div>
                         <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
                             <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
-                                    <span className="material-icons-round text-blue-500 text-xl">analytics</span>
+                                    <TrendingUp className="text-blue-500" size={20} />
                                     <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
                                 </div>
                                 <div>
@@ -73,7 +97,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             </div>
                             <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
-                                    <span className="material-icons-round text-purple-500 text-xl">group</span>
+                                    <Users className="text-purple-500" size={20} />
                                     <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
                                 </div>
                                 <div>
@@ -107,7 +131,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                                     {inq.status}
                                                 </span>
                                                 <div className="flex items-center text-gray-500">
-                                                    <span className="material-icons-round text-[14px] mr-1">location_on</span>
+                                                    <MapPin size={14} className="mr-1" />
                                                     <span className="text-[10px]">{inq.location}</span>
                                                 </div>
                                             </div>
@@ -126,30 +150,30 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     <div className="max-w-7xl mx-auto space-y-10">
                         <section>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                                <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl">add_circle</span>
+                                        <PlusCircle size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Add Product</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Update inventory</span>
                                 </button>
-                                <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl">ads_click</span>
+                                        <MousePointerClick size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Check Leads</span>
                                     <span className="text-[11px] text-slate-400 mt-1">12 new today</span>
                                 </button>
-                                <button onClick={() => setIsOverlayOpen(true)} className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button onClick={() => setIsOverlayOpen(true)} className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl">post_add</span>
+                                        <FilePlus size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Requirement</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Post new request</span>
                                 </button>
-                                <button className="action-card bg-white p-8 rounded-[24px] shadow-sm border border-slate-50 transition-all flex flex-col items-center text-center group">
+                                <button className="action-card bg-white p-8 rounded-xl shadow-sm border border-slate-100 transition-all flex flex-col items-center text-center group">
                                     <div className="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 mb-5">
-                                        <span className="material-symbols-outlined text-2xl text-[#f97316]">package_2</span>
+                                        <Package className="text-[#f97316]" size={24} />
                                     </div>
                                     <span className="font-bold text-slate-800 text-sm">Orders</span>
                                     <span className="text-[11px] text-slate-400 mt-1">Manage shipping</span>
@@ -163,40 +187,42 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         <h2 className="text-lg font-bold tracking-tight text-slate-800">Business Overview</h2>
                                         <div className="flex items-center gap-3">
                                             <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm gap-2">
-                                                <span className="material-symbols-outlined text-brand text-[18px]">group_add</span>
+                                                <UserPlus className="text-brand" size={18} />
                                                 <span className="text-[11px] font-bold text-slate-600">NEW LEADS: <span className="text-brand">12</span></span>
                                             </div>
                                             <div className="flex items-center bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm gap-2">
-                                                <span className="material-symbols-outlined text-brand text-[18px]">visibility</span>
+                                                <Eye className="text-brand" size={18} />
                                                 <span className="text-[11px] font-bold text-slate-600">PRODUCT VIEWS: <span className="text-brand">1.2K</span></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <div className="bg-white border border-slate-100 rounded-[24px] p-6 relative overflow-hidden flex flex-col h-[220px] shadow-sm">
+                                        <div className="bg-white border border-slate-100 rounded-xl p-6 relative overflow-hidden flex flex-col h-[220px] shadow-sm">
                                             <div className="flex justify-between items-start mb-2 relative z-10">
                                                 <div>
-                                                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">JANUARY LEADS</p>
-                                                    <h3 className="text-3xl font-bold tracking-tight text-slate-800">125</h3>
+                                                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">{months[activeMonthIndex].full} LEADS</p>
+                                                    <h3 className="text-3xl font-bold tracking-tight text-slate-800">{months[activeMonthIndex].leads}</h3>
                                                 </div>
                                                 <button
                                                     onClick={() => onNavigate(View.PREMIUM_SERVICES)}
                                                     className="bg-brand text-white text-[9px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wide hover:bg-brand/90 transition-colors flex items-center gap-1"
                                                 >
-                                                    <span className="material-symbols-outlined text-[12px]">rocket_launch</span>
+                                                    <Rocket size={12} />
                                                     Boost
                                                 </button>
                                             </div>
                                             <div className="flex-1 flex items-end gap-2.5 pb-0">
-                                                <div className="bg-slate-100 w-full h-[65%] rounded-lg"></div>
-                                                <div className="bg-slate-100 w-full h-[85%] rounded-lg"></div>
-                                                <div className="bg-slate-100 w-full h-[55%] rounded-lg"></div>
-                                                <div className="bg-brand w-full h-[100%] rounded-lg shadow-lg shadow-brand/20"></div>
-                                                <div className="bg-slate-100 w-full h-[90%] rounded-lg"></div>
-                                                <div className="bg-slate-100 w-full h-[75%] rounded-lg"></div>
+                                                {months.map((m, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        onClick={() => setActiveMonthIndex(idx)}
+                                                        className={`${idx === activeMonthIndex ? 'bg-brand shadow-lg shadow-brand/20' : 'bg-slate-100 hover:bg-slate-200'} w-full rounded-lg cursor-pointer transition-all`}
+                                                        style={{ height: m.height }}
+                                                    ></div>
+                                                ))}
                                             </div>
                                         </div>
-                                        <div className="bg-white border border-slate-100 rounded-[24px] p-6 flex flex-col h-[220px] shadow-sm">
+                                        <div className="bg-white border border-slate-100 rounded-xl p-6 flex flex-col h-[220px] shadow-sm">
                                             <div className="flex justify-between items-start mb-4">
                                                 <div>
                                                     <div className="flex items-center gap-2 mb-1">
@@ -257,7 +283,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-8 bg-white/50 border border-slate-100 rounded-[24px] p-4 grid grid-cols-3">
+                                    <div className="mt-8 bg-white/50 border border-slate-100 rounded-xl p-4 grid grid-cols-3">
                                         <div className="text-center py-6 px-2 transition-all cursor-pointer relative">
                                             <p className="text-[10px] text-brand font-bold uppercase tracking-widest mb-1">NEW</p>
                                             <p className="text-2xl font-bold text-brand">2,450</p>
@@ -280,7 +306,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                     <a className="text-brand font-bold text-xs uppercase tracking-widest hover:underline cursor-pointer" onClick={() => onNavigate(View.INQUIRY_LIST)}>VIEW MORE</a>
                                 </div>
                                 <div className="space-y-2 relative">
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-[12px] font-bold text-orange-500 border border-orange-100 flex-shrink-0">CH</div>
                                             <div className="flex-1 min-w-0">
@@ -293,11 +319,11 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Request for quotation on bulk rice imports for Q2 cycle.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             MONROVIA, LIBERIA
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[12px] font-bold text-indigo-500 border border-indigo-100 flex-shrink-0">AG</div>
                                             <div className="flex-1 min-w-0">
@@ -310,11 +336,11 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Pricing update requested for organic fertilizer samples.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             PAYNESVILLE, LIB
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-[12px] font-bold text-emerald-500 border border-emerald-100 flex-shrink-0">SD</div>
                                             <div className="flex-1 min-w-0">
@@ -327,11 +353,11 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Inquiry regarding solar-powered irrigation pumps.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             GBARNGA, LIBERIA
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-[12px] font-bold text-purple-500 border border-purple-100 flex-shrink-0">ME</div>
                                             <div className="flex-1 min-w-0">
@@ -344,11 +370,11 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Documentation check for international shipping compliance.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             FREEPORT, MONROVIA
                                         </div>
                                     </div>
-                                    <div className="bg-white p-3 rounded-[14px] shadow-sm border border-slate-50 hover:border-brand/20 transition-all cursor-pointer group fade-bottom" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:border-brand/20 transition-all cursor-pointer group fade-bottom" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                         <div className="flex items-start gap-2.5 mb-1.5">
                                             <div className="w-8 h-8 rounded-full bg-rose-50 flex items-center justify-center text-[12px] font-bold text-rose-500 border border-rose-100 flex-shrink-0">VH</div>
                                             <div className="flex-1 min-w-0">
@@ -361,7 +387,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                         </div>
                                         <p className="text-[11px] text-slate-500 leading-tight line-clamp-1 mb-1.5">Volume discount request for high-grade linens.</p>
                                         <div className="flex items-center text-slate-400 text-[8px] font-bold tracking-wider">
-                                            <span className="material-symbols-outlined text-[10px] mr-1 text-slate-300">location_on</span>
+                                            <MapPin size={10} className="mr-1 text-slate-300" />
                                             BUCHANAN, LIB
                                         </div>
                                     </div>
@@ -380,7 +406,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     ></div>
                     <div className="relative bg-white w-full max-w-md rounded-[28px] p-8 lg:p-10 shadow-2xl flex flex-col items-center text-center transform animate-in zoom-in fade-in duration-300">
                         <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-[#0026C0] mb-6">
-                            <span className="material-symbols-outlined text-4xl">swap_horiz</span>
+                            <ArrowLeftRight size={40} />
                         </div>
                         <h2 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 tracking-tight">Switch to Buyer Mode</h2>
                         <p className="text-slate-500 text-sm leading-relaxed mb-8 px-2">

@@ -6,6 +6,7 @@ export const MOCK_USER: User = {
   businessName: 'Global Agro Supplies Ltd.',
   category: 'Wholesale Distributor',
   location: 'Paynesville, Monrovia',
+  email: 'alex@eliteliberia.com',
   score: 85,
   rating: '4.8',
   reviews: 125,
@@ -55,5 +56,41 @@ export const MOCK_INQUIRIES: Inquiry[] = [
     time: '25m ago',
     location: 'Red Light, Paynesville',
     initials: 'AGR'
+  },
+  {
+    id: '3',
+    companyName: 'TechPro Solutions',
+    message: 'Interested in purchasing office furniture and electronics...',
+    status: 'New Lead',
+    time: '1h ago',
+    location: 'Sinkor, Monrovia',
+    initials: 'TPS'
+  },
+  {
+    id: '4',
+    companyName: 'FreshMart Distributors',
+    message: 'Need wholesale prices for fresh produce and dairy products...',
+    status: 'Urgent',
+    time: '2h ago',
+    location: 'Congo Town',
+    initials: 'FMD'
+  },
+  {
+    id: '5',
+    companyName: 'BuildRight Supplies',
+    message: 'Request for quote on construction materials for new project...',
+    status: 'Viewed',
+    time: '3h ago',
+    location: 'Paynesville',
+    initials: 'BRS'
+  },
+  {
+    id: '6',
+    companyName: 'Global Trading Co.',
+    message: 'Bulk order inquiry for imported electronics and appliances...',
+    status: 'New Lead',
+    time: '5h ago',
+    location: 'Broad Street, Monrovia',
+    initials: 'GTC'
   }
 ];
