@@ -51,6 +51,7 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch (currentView) {
+
       case View.ONBOARDING:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} />;
       case View.SIGNUP:
@@ -100,7 +101,7 @@ const App: React.FC = () => {
     }
   };
 
-  const hideHeader = [View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT].includes(currentView);
+  const hideHeader = [View.ONBOARDING, View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>

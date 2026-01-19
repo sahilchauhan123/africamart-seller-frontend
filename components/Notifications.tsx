@@ -108,23 +108,26 @@ const Notifications: React.FC<NotificationsProps> = ({ onBack, onNavigate }) => 
     return (
         <>
             {/* Mobile View */}
-            <div className="flex flex-col min-h-full bg-background-light font-display text-[#121417] relative antialiased lg:hidden">
-                {/* Header - App branded style */}
-                <header className="bg-primary sticky top-0 z-50 px-4 py-4 flex items-center justify-center shadow-md min-h-[64px]">
-                    <button onClick={onBack} className="absolute left-4 text-white flex items-center p-1 rounded-full hover:bg-white/10 transition-colors">
-                        <ChevronLeft size={24} />
-                    </button>
-                    <h1 className="text-white text-lg font-bold tracking-tight">Notifications</h1>
-                </header>
+            <div className="flex flex-col min-h-screen bg-background-light font-display text-[#121417] relative antialiased lg:hidden">
+                {/* Fixed Header Section */}
+                <div className="fixed top-0 left-0 right-0 z-50 lg:hidden">
+                    {/* Header - App branded style */}
+                    <header className="bg-primary px-4 py-4 flex items-center justify-center shadow-md h-16">
+                        <button onClick={onBack} className="absolute left-4 text-white flex items-center p-1 rounded-full hover:bg-white/10 transition-colors">
+                            <ChevronLeft size={24} />
+                        </button>
+                        <h1 className="text-white text-lg font-bold tracking-tight">Notifications</h1>
+                    </header>
 
-                {/* Mark all as read bar */}
-                <div className="flex items-center justify-end px-4 py-3 bg-white border-b border-gray-100 sticky top-16 z-40">
-                    <button className="text-primary text-sm font-semibold hover:opacity-80 transition-opacity">
-                        Mark all as read
-                    </button>
+                    {/* Mark all as read bar */}
+                    <div className="flex items-center justify-end px-4 py-3 bg-white border-b border-gray-100">
+                        <button className="text-primary text-sm font-semibold hover:opacity-80 transition-opacity">
+                            Mark all as read
+                        </button>
+                    </div>
                 </div>
 
-                <main className="max-w-md mx-auto w-full flex-1 px-0 pb-12">
+                <main className="max-w-md mx-auto w-full flex-1 px-0 pb-12 pt-[108px]">
                     <section>
                         <h3 className="text-[#677583] text-[10px] font-bold uppercase tracking-widest px-4 pt-6 pb-2">Today</h3>
 
