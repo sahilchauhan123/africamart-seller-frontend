@@ -1,5 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
+const HERO_IMAGES = [
+  'https://img.freepik.com/free-photo/african-business-male-people-shaking-hands_1303-18516.jpg?semt=ais_hybrid&w=740&q=80',
+  'https://media.istockphoto.com/id/1364023819/vector/africa-map-with-polygonal-glowing-shapes.jpg?s=612x612&w=0&k=20&c=xo_R85TYnK4LJyw4Ot1N3KMhzL3HgSov31KtEel2OB0=',
+  'https://media.istockphoto.com/id/1150882713/photo/workers-checking-the-quality-of-freshly-prepared-snacks-at-a-factory-in-africa.jpg?s=612x612&w=0&k=20&c=aPbFouejciurSTFn7tQ_5WF-vJhtTT1dhsYUIRbYB54='
+];
 import Drawer from './common/Drawer';
 import { View } from '../types';
 import {
@@ -11,40 +15,199 @@ import {
   Store,
   LayoutDashboard,
   TrendingUp,
-  Eye
+  Eye,
+  Globe,
+  ArrowRight,
+  Activity,
+  Package,
+  MessageSquare,
+  CreditCard,
+  Truck,
+  ShieldCheck,
+  Megaphone,
+  Headphones,
+  Lock,
+  UserCheck,
+  Wallet,
+  Network,
+  Layers,
+  Star,
+  ChevronRight,
+  ChevronLeft,
+  MoveRight,
+  CheckCircle2,
+  PieChart,
+  Target,
+  Rocket,
+  Languages
 } from 'lucide-react';
+
+const ICON_MAP: Record<string, any> = {
+  monitoring: Activity,
+  inventory_2: Package,
+  chat_bubble_outline: MessageSquare,
+  payments: CreditCard,
+  local_shipping: Truck,
+  verified: ShieldCheck,
+  insights: BarChart3,
+  campaign: Megaphone,
+  support_agent: Headphones,
+  security: Lock,
+  public: Globe,
+  verified_user: ShieldCheck,
+  account_balance_wallet: Wallet,
+  hub: Network,
+  trending_up: TrendingUp,
+  layers: Layers,
+  star: Star,
+  star_outline: Star,
+  language: Languages,
+  chevron_right: ChevronRight,
+  arrow_forward: ArrowRight,
+  arrow_right_alt: MoveRight,
+  trending_flat: MoveRight,
+  storefront: Store,
+};
+
+const WHY_SECTION_CONTENT = [
+  {
+    title: "Why AfricaMart exist?",
+    paragraph: "We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.",
+    image: "https://ctgafrica.com/wp-content/uploads/2023/07/diversity-people-international-conference-partnership-scaled-1.jpg"
+  },
+  {
+    title: "Empowering Local Trade",
+    paragraph: "Our mission is to break down geographical barriers, allowing local manufacturers and wholesalers to reach continental markets with ease and unparalleled efficiency.",
+    image: "https://truckandfreight.co.za/wp-content/uploads/2020/05/Trucks-open-roads.jpg"
+  },
+  {
+    title: "Digital Growth Ecosystem",
+    paragraph: "We are committed to building a robust digital infrastructure that fosters transparency, trust and sustainable growth for every business, regardless of size.",
+    image: "https://t3.ftcdn.net/jpg/04/83/54/94/360_F_483549452_rTmdAtAIf1128c4H7Rj4L2Bt3ZLLgxZi.jpg"
+  }
+];
 
 interface Props {
   onNext: () => void;
 }
 
+const LOCAL_TRADE_CONTENT = [
+  {
+    title: "Empowering Local Trade",
+    text: "To break down geographical barriers, allowing local manufacturers and wholesalers to reach continental markets with ease and unparalleled efficiency.",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBL0r8RwRNIm2J1oyfRJTqLF8g-s44vmlg2e_s9DIiYPROMPeqCxmW8BXFHqbORjItAzIW0hKB9K-h0_F5jT8dYJucTvvbtu-I_gPsTMSKbutiyEHoEhrB4P-7mKNpUcDqJ4qtP0nrx6tFKF9LnjRTPyO1pcAGcvyLIGMwsIMzQU_TKcwsqinbNp7ZqbgI2Lb3eUh0VByGXUnw4Vq-I39Ff1qzOPBrCMtrqr0Ril5mcaxFzr9txeGaynm1th_-0yPk-4MQKI1s924Y",
+    mobileImage: "https://www.worldbank.org/content/dam/photos/780x439/2022/feb-1/Trade-report-africa.jpg"
+  },
+  {
+    title: "Supply Chain Excellence",
+    text: "Streamlining logistics and distribution networks to ensure that high-quality African products reach their destination faster and more reliably than ever before.",
+    image: "https://media.istockphoto.com/id/1150882713/photo/workers-checking-the-quality-of-freshly-prepared-snacks-at-a-factory-in-africa.jpg?s=612x612&w=0&k=20&c=aPbFouejciurSTFn7tQ_5WF-vJhtTT1dhsYUIRbYB54="
+  },
+  {
+    title: "Market Integration",
+    text: "Fostering collaboration between regional markets to create a unified economic space where innovation thrives and trade flows without friction.",
+    image: "https://ctgafrica.com/wp-content/uploads/2023/07/diversity-people-international-conference-partnership-scaled-1.jpg"
+  }
+];
+
 const SLIDER_IMAGES = [
   {
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6B5PXSiqMIxombYqKwb0oBoBceB8nx7f8j_QEe5N7_bM5o15b-aj1gvdnyg4umgpaygMcYRsJ2k235-1qyDqsjOhdlertlrjhk2DTOWhEHsUB46YkaSYQtB6X8vQgjLBKmUDVIXkxfxs4RZCkr5p5gVezyzPcxIjIwlR8CGdL2Mfqff40QPioUWcyuWK6aSF7ASgymBgtNV0DQO4HvgK0Leqrm5iSM77OQ8vk_TY2frMtd3MSlRjcbBi7CqqMrbYS9WF8mu3Q94I',
+    url: 'https://edfimc.eu/wp-content/uploads/2024/08/copyright-EAF.jpeg',
     title: 'Connect with Buyers',
     subtitle: 'Grow your business across Africa'
   },
   {
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADdoKDGdjfygl9pvaEPApxI4fr4h0cEAbPKME3eJGKTqtbbgfwSlFHEphHmXvTsl_1hOLdCvDwAa-VwzHwQ0FWZ6KE5SGvYCTqqCIrYqOppU-KJlzz63WIIJBBaod42KLAPmiKXLAnyJbSe7tfHeAvJp5mNc43G_12f9dX4PlrOxB6C7w8NOa6FKjXoyrXig9TKdFCs72NFX6v-uoOWYW69Rx9Vd9pN-r9NbQZafFcwTI1U-swutbM67_r-6p4mDWTTTG5vbBX1x0',
+    url: 'https://img.freepik.com/free-photo/african-business-male-people-shaking-hands_1303-18516.jpg?semt=ais_hybrid&w=740&q=80',
     title: 'Digital Innovation',
     subtitle: 'Reshaping Africa\'s economy'
   },
   {
-    url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
+    url: 'https://media.istockphoto.com/id/1364023819/vector/africa-map-with-polygonal-glowing-shapes.jpg?s=612x612&w=0&k=20&c=xo_R85TYnK4LJyw4Ot1N3KMhzL3HgSov31KtEel2OB0=',
     title: 'Quality Products',
     subtitle: 'Showcase your best to the world'
   }
 ];
 
+const DASHBOARD_SLIDES = [
+  {
+    image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768861863/Screenshot_2026-01-20_035440_iqjstq.png",
+    mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768866341/x1_hj2hhl.png",
+    badges: [
+      { icon: 'monitoring', title: 'Real-time Analytics', desc: 'Track performance live', pos: '-top-10 -left-6 lg:-left-12' },
+      { icon: 'inventory_2', title: 'Business Overview', desc: 'Leads, Product Views & Inquiries', pos: 'top-1/2 -right-6 lg:-right-16 -translate-y-1/2' },
+      { icon: 'chat_bubble_outline', title: 'Seamless Communication', desc: 'Direct buyer messaging', pos: '-bottom-10 -left-6 lg:left-20' }
+    ]
+  },
+  {
+    image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768897684/Screenshot_2026-01-20_041523_ux42m7.png",
+    mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867227/x6_tahhpa.png",
+    badges: [
+      { icon: 'payments', title: 'Secure Payouts', desc: 'Fast & reliable transfers', pos: 'top-4 left-1/2 -translate-x-1/2' },
+      { icon: 'local_shipping', title: 'Logistics Tracking', desc: 'Real-time shipment updates', pos: 'bottom-20 -left-10 lg:-left-16' },
+      { icon: 'verified', title: 'Trust Badge', desc: 'Build buyer confidence', pos: '-bottom-12 right-10 lg:right-24' }
+    ]
+  },
+  {
+    image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768897852/Screenshot_2026-01-20_140022_hyixhi.png",
+    mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867138/x5_z1wti2.png",
+    badges: [
+      { icon: 'insights', title: 'Market Insights', desc: 'Analyze buyer trends', pos: 'top-10 -left-6 lg:-left-12' },
+      { icon: 'campaign', title: 'Ad Manager', desc: 'Boost product visibility', pos: '-top-12 right-12 lg:right-20' },
+      { icon: 'support_agent', title: '24/7 Support', desc: 'Help whenever you need it', pos: '-bottom-10 left-1/2 -translate-x-1/2' }
+    ]
+  },
+  {
+    image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768897967/Screenshot_2026-01-20_140225_c83ztb.png",
+    mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867725/x7_rmjw2w.png",
+    badges: [
+      { icon: 'security', title: 'Data Protection', desc: 'Your business is safe', pos: '-top-12 -left-8 lg:-left-16' },
+      { icon: 'public', title: 'Global Exposure', desc: 'Reach international buyers', pos: 'top-1/4 -right-8 lg:-right-14' },
+      { icon: 'verified_user', title: 'Verified Seller', desc: 'Elite status badge', pos: '-bottom-10 left-1/2 -translate-x-1/2' }
+    ]
+  },
+  {
+    image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768898212/Screenshot_2026-01-20_140625_epit2t.png",
+    mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867138/x4_t99svv.png",
+    badges: [
+      { icon: 'account_balance_wallet', title: 'Finance Tools', desc: 'Manage your earnings', pos: '-bottom-12 -right-4 lg:right-10' },
+      { icon: 'hub', title: 'B2B Networking', desc: 'Connect with partners', pos: 'top-1/2 -left-12 lg:-left-20' },
+      { icon: 'trending_up', title: 'Growth Metrics', desc: 'Scale your business', pos: '-top-12 right-12 lg:right-20' }
+    ]
+  }
+];
+
 const Onboarding: React.FC<Props> = ({ onNext }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+  const [activeWhySlide, setActiveWhySlide] = useState(0);
+  const [activeDashboardSlide, setActiveDashboardSlide] = useState(0);
+  const [activeLocalTradeSlide, setActiveLocalTradeSlide] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const benefitsScrollRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollBenefits = (direction: 'left' | 'right') => {
+    if (benefitsScrollRef.current) {
+      const scrollAmount = benefitsScrollRef.current.clientWidth;
+      benefitsScrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const mobileTimer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
     }, 4000);
-    return () => clearInterval(timer);
+
+    const heroTimer = setInterval(() => {
+      setCurrentHeroSlide((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(mobileTimer);
+      clearInterval(heroTimer);
+    };
   }, []);
 
   return (
@@ -60,7 +223,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           currentView={View.ONBOARDING}
         />
 
-        {/* Shared Navigation */}
+        {/* Existing Navigation Bar */}
         <nav className="flex items-center justify-between px-6 py-4 fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm h-16">
           <button
             onClick={() => setIsMenuOpen(true)}
@@ -76,78 +239,11 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </button>
         </nav>
 
-        {/* Old Onboarding Section */}
-        <div className="flex flex-col items-center justify-start pt-24 pb-16 p-6 text-center">
-          <h1 className="text-[2.5rem] leading-[1.1] font-extrabold text-black mb-8 tracking-tight">
-            Create an<br />account to sell<br />on AfricaMart
-          </h1>
-          <button
-            onClick={onNext}
-            className="bg-primary hover:bg-blue-600 transition-colors text-white font-semibold text-lg py-3 px-12 rounded-full shadow-md hover:shadow-lg transform active:scale-95 duration-200 mb-10"
-          >
-            Sign up
-          </button>
-          <p className="text-sm text-gray-800 mb-5 px-4 font-medium">
-            Give it a chance and join Africa’s first B2B platform.
-          </p>
-          <div className="w-full mb-6 relative max-w-lg">
-            <img alt="Two African business men" className="w-full h-64 object-cover rounded-2xl shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6B5PXSiqMIxombYqKwb0oBoBceB8nx7f8j_QEe5N7_bM5o15b-aj1gvdnyg4umgpaygMcYRsJ2k235-1qyDqsjOhdlertlrjhk2DTOWhEHsUB46YkaSYQtB6X8vQgjLBKmUDVIXkxfxs4RZCkr5p5gVezyzPcxIjIwlR8CGdL2Mfqff40QPioUWcyuWK6aSF7ASgymBgtNV0DQO4HvgK0Leqrm5iSM77OQ8vk_TY2frMtd3MSlRjcbBi7CqqMrbYS9WF8mu3Q94I" />
-          </div>
-        </div>
-
-        {/* New Onboarding Section */}
-        <main className="w-full mx-auto max-w-lg">
-          <div className="px-6 pb-8 pt-8">
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight mb-4">
-              Sell with <br /> AfricaMart
-            </h1>
-            <p className="text-gray-600 text-base leading-relaxed mb-8">
-              Here are just a few of the many reasons selling with AfricaMart is a smart choice.
-            </p>
-            <div className="bg-[#F5F7FF] rounded-3xl p-6 space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <LayoutGrid className="text-gray-900" size={32} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2 text-gray-900">Easy setup and tools that help you succeed</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    It takes a lot to run a business. That's why we provide every Professional seller with a full toolkit for listing, pricing, and promoting products. We also offer fulfillment options, advertising solutions, specialty programs, and much more.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <BarChart3 className="text-gray-900" size={32} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2 text-gray-900">Reach Million Buyers</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    AfricaMart connects you with a vast network of B2B and B2C buyers across your country and the continent, helping you expand your customer base instantly.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <UserSearch className="text-gray-900" size={32} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2 text-gray-900">Strong Brand Visibility</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    Listing on AfricaMart boosts your brand presence and allows your products to be discovered easily by customers searching online.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-sky-50 py-10 px-6 w-full">
-            <h2 className="text-3xl font-extrabold mb-4 text-gray-900">
-              Why AfricaMart <br /> exist?
-            </h2>
-            <p className="text-gray-700 text-base leading-relaxed mb-6">
-              We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa’s economy through digital and cross boarder connectivity.
-            </p>
-            <div className="relative w-full h-64 rounded-3xl overflow-hidden mb-4 shadow-sm">
+        {/* New Mobile Sections */}
+        <main className="pt-16 pb-24">
+          {/* Hero Slider at the Top */}
+          <div className="px-5 pt-14 pb-4">
+            <div className="relative rounded-3xl overflow-hidden h-80">
               {SLIDER_IMAGES.map((slide, index) => (
                 <div
                   key={index}
@@ -157,91 +253,265 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center gap-2 mt-4">
-              {SLIDER_IMAGES.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 hover:scale-125 ${index === currentSlide ? 'bg-gray-600 w-4' : 'bg-gray-300'}`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
           </div>
-          <div className="px-6 py-10">
-            <h2 className="text-4xl font-extrabold mb-2 text-gray-900">
-              Seller’s <br /> Procedures
-            </h2>
-            <p className="text-gray-600 mb-6 text-base">
-              Complete guide to AfricaMart Seller Authentication Process
+
+          {/* Hero Content Section */}
+          <section className="px-5 pb-10 pt-4">
+            <h1 className="text-4xl font-extrabold leading-[1.1] mb-4 text-slate-900">
+              Create an account to sell on <span className="text-primary">AfricaMart</span>
+            </h1>
+            <p className="text-slate-500 text-base mb-6 leading-relaxed">
+              Join us to connect Africa and grow your business.
             </p>
-            <div className="bg-[#FFF1F1] rounded-3xl p-6 space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <CheckCircle className="text-gray-900" size={24} />
-                </div>
-                <p className="text-sm font-medium text-gray-800 leading-snug">
-                  Sign up on AfricaMart and verify your <strong>mobile number + email</strong> through OTP.
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <CheckCircle className="text-gray-900" size={24} />
-                </div>
-                <p className="text-sm font-medium text-gray-800 leading-snug">
-                  Submit <strong>PAN, GST/Business Proof</strong> for basic business verification.
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <CheckCircle className="text-gray-900" size={24} />
-                </div>
-                <p className="text-sm font-medium text-gray-800 leading-snug">
-                  We checks your <strong>documents, business name, address and contact</strong> validity (within 24–48 hours).
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <CheckCircle className="text-gray-900" size={24} />
-                </div>
-                <p className="text-sm font-medium text-gray-800 leading-snug">
-                  A third-party agency verifies your <strong>office, documents and business authenticity</strong>, providing a <strong>TrustSEAL badge</strong> for higher trust and visibility.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="px-6 pb-12 pt-4">
             <button
               onClick={onNext}
-              className="w-full bg-primary hover:bg-blue-600 text-white font-semibold py-4 rounded-full text-lg shadow-lg transition transform active:scale-95"
+              className="w-full bg-primary text-white font-bold py-4 rounded-xl mb-8 active:scale-95 transition-transform"
+            >
+              Start Selling Now
+            </button>
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-3">
+                <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://media.istockphoto.com/id/1156428559/photo/female-workers-at-a-factory-production-line.jpg?s=612x612&w=0&k=20&c=OH_ZxwYLf9c8PRkSO6q9uvlY82oevvyTF2Mm5GFKCBE=" alt="Services" />
+                <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=100&auto=format&fit=crop" alt="Business" />
+                <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://edfimc.eu/wp-content/uploads/2024/08/copyright-EAF.jpeg" alt="Logistics" />
+              </div>
+              <p className="text-xs font-medium text-slate-500">Joined by 1,000+ businesses</p>
+            </div>
+          </section>
+
+          {/* Mission Section */}
+          <section className="px-5 py-32 bg-slate-50">
+            <div className="text-center mb-8">
+              <span className="inline-block text-[10px] uppercase tracking-widest font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">Mission Driven</span>
+              <h2 className="text-2xl font-bold mb-4 text-slate-900">Why We Do What We Do</h2>
+              <p className="font-serif italic text-lg text-slate-600 leading-relaxed px-4">
+                "We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross-border connectivity."
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <button className="py-3 px-4 border-2 border-primary text-primary font-bold rounded-xl text-sm active:scale-95 transition-transform">Our Story</button>
+              <button
+                onClick={onNext}
+                className="py-3 px-4 bg-primary text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              >
+                Partner With Us
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </section>
+
+          {/* Local Trade Section */}
+          <section className="px-5 py-16">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex justify-between w-24">
+                {LOCAL_TRADE_CONTENT.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveLocalTradeSlide(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${idx === activeLocalTradeSlide ? 'w-6 bg-primary' : 'w-2 bg-slate-200'}`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">
+                Explore Scale
+              </span>
+            </div>
+
+            <div className="transition-all duration-500 transform">
+              <h2 className="text-3xl font-extrabold uppercase tracking-tight mb-4 text-slate-900 leading-none min-h-[4rem]">
+                {LOCAL_TRADE_CONTENT[activeLocalTradeSlide].title.split(' ').map((word, i) => (
+                  <React.Fragment key={i}>
+                    {word} {i === 0 && <br />}
+                  </React.Fragment>
+                ))}
+              </h2>
+              <p className="text-slate-500 mb-8 leading-relaxed text-sm h-20 overflow-hidden">
+                {LOCAL_TRADE_CONTENT[activeLocalTradeSlide].text}
+              </p>
+              <div className="mb-8 rounded-3xl overflow-hidden shadow-lg border border-slate-100 h-56 relative group">
+                {LOCAL_TRADE_CONTENT.map((slide, idx) => (
+                  <img
+                    key={idx}
+                    alt={slide.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${idx === activeLocalTradeSlide ? 'opacity-100' : 'opacity-0'}`}
+                    src={slide.mobileImage || slide.image}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <a className="text-primary font-bold flex items-center gap-2 group" href="#">
+              Explore Markets
+              <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </section>
+
+          {/* Benefits Section */}
+          <section className="px-5 py-16 bg-blue-50">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-extrabold mb-3 text-slate-900">Sell with AfricaMart</h2>
+              <p className="text-slate-500 text-sm">Elevate your business trajectory with premium tools designed for the modern African entrepreneur.</p>
+            </div>
+            <div className="space-y-6">
+              {[
+                { icon: 'layers', title: 'Easy Setup & Toolkit', text: 'Professional listing, pricing, and promotion tools. Launch your continental storefront with intuitive systems.' },
+                { icon: 'public', title: 'Global Reach', text: 'Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into Pan-African markets.' },
+                { icon: 'star', title: 'Brand Visibility', text: 'Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques.' }
+              ].map((benefit, i) => (
+                <div key={i} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                    {React.createElement(ICON_MAP[benefit.icon] || Globe, { className: "w-6 h-6 text-primary" })}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900">{benefit.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    {benefit.text}
+                  </p>
+                  <a className="text-primary text-xs font-bold flex items-center gap-1" href="#">
+                    Learn More <ChevronRight className="w-4 h-4" />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Dashboard Section */}
+          <section className="px-5 py-16 overflow-hidden bg-white">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-extrabold mb-3 text-slate-900 tracking-tight">Intuitive Seller Dashboard</h2>
+              <p className="text-slate-500 text-sm">Experience a seamless workflow with our state-of-the-art seller dashboard. </p>
+            </div>
+
+            <div className="relative py-10 flex flex-col items-center">
+              {/* Interaction Dots */}
+              <div className="flex justify-center gap-6 mb-8">
+                {DASHBOARD_SLIDES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveDashboardSlide(idx)}
+                    className={`transition-all duration-300 rounded-full ${idx === activeDashboardSlide ? 'w-8 h-1.5 bg-primary' : 'w-1.5 h-1.5 bg-slate-200'}`}
+                    aria-label={`Dashboard slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Smartphone Wrapper with External Badges */}
+              <div className="relative group/phone">
+                {/* Floating Badges Positioned Around the Frame */}
+                {DASHBOARD_SLIDES[activeDashboardSlide].badges.map((badge, bIdx) => {
+                  // Coordinate mapping for each slide to differentiate positions
+                  const positions = [
+                    ['top-20 -left-10', 'top-1/2 -right-10 -translate-y-1/2', '-bottom-6 left-1/2 -translate-x-1/2'], // Slide 1
+                    ['top-10 -right-8', 'bottom-20 -left-12', 'top-3/4 -right-12'], // Slide 2
+                    ['-top-6 left-1/2 -translate-x-1/2', 'top-1/3 -left-14', 'bottom-12 -right-10'], // Slide 3
+                    ['top-1/4 -right-14', 'top-2/3 -left-12', '-bottom-10 left-1/4'], // Slide 4
+                    ['top-1/2 -left-14 -translate-y-1/2', 'top-8 -right-10', 'bottom-16 -right-12'], // Slide 5
+                  ];
+
+                  const mobilePos = positions[activeDashboardSlide % 5][bIdx % 3];
+
+                  return (
+                    <div
+                      key={activeDashboardSlide + '-' + bIdx}
+                      className={`absolute z-30 bg-white shadow-2xl p-3 rounded-2xl border border-slate-50 flex items-center gap-3 scale-90 transition-all duration-700 animate-in fade-in slide-in-from-bottom-5 ${mobilePos}`}
+                    >
+                      <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center">
+                        {React.createElement(ICON_MAP[badge.icon] || Activity, { className: "w-5 h-5 text-primary" })}
+                      </div>
+                      <div className="whitespace-nowrap">
+                        <p className="text-[11px] font-extrabold text-slate-900 tracking-tight">{badge.title}</p>
+                        <p className="text-[9px] font-medium text-slate-500">{badge.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Android Smartphone Frame */}
+                <div className="relative z-10 w-[260px] h-[520px] rounded-[2.5rem] border-[8px] border-slate-900 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.2)] overflow-hidden transition-all duration-500">
+                  {/* Punch-hole Camera */}
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-slate-900 rounded-full z-30 border border-slate-800/50 shadow-inner"></div>
+
+                  {/* Side Buttons (Right Side) */}
+                  <div className="absolute top-24 -right-2 w-1 h-12 bg-slate-900 rounded-l-md z-10"></div>
+                  <div className="absolute top-40 -right-2 w-1 h-8 bg-slate-900 rounded-l-md z-10"></div>
+
+                  {/* Screen Content */}
+                  <div className="relative h-full w-full bg-slate-50">
+                    {DASHBOARD_SLIDES.map((slide, idx) => (
+                      <img
+                        key={idx}
+                        alt={`Dashboard mobile ${idx + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out transform ${idx === activeDashboardSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                          }`}
+                        src={slide.mobileImage || slide.image}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Glossy Background Effect */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-48 bg-primary/5 blur-3xl rounded-full -z-10"></div>
+            </div>
+          </section>
+
+          {/* Procedures Section */}
+          <section className="px-5 py-16 border-t border-slate-100 bg-white">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-extrabold mb-3 text-slate-900">Seller's Procedures</h2>
+              <p className="text-slate-500 text-sm">Complete guide to AfricaMart Seller Authentication Process</p>
+            </div>
+            <div className="space-y-10 relative">
+              <div className="absolute left-[19px] top-4 bottom-4 w-px bg-slate-200"></div>
+              {[
+                { step: 1, title: 'Orientation', heading: 'Sign up on AfricaMart', text: 'Verify your mobile number and email through OTP to secure your account and initiate the onboarding process.' },
+                { step: 2, title: 'Documentation', heading: 'Submit Business Proof', text: 'Provide your PAN, GST, or other official Business Proof for essential identity and tax verification.' },
+                { step: 3, title: 'Validation', heading: 'Verification Review', text: 'We check your documents, business name, address and contact validity within a standard 24-48 hour window.' },
+                { step: 4, title: 'Approval', heading: 'TrustSEAL Badge', text: 'A third party agency verifies your authenticity, providing a TrustSEAL badge for premium platform visibility.', active: true }
+              ].map((proc, i) => (
+                <div key={i} className="flex gap-6 relative">
+                  <div className={`flex-none w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center font-bold ${proc.active ? 'bg-primary text-white' : 'bg-white text-primary'} text-sm z-10 shadow-sm`}>
+                    {proc.step}
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">{proc.title}</span>
+                    <h4 className="text-lg font-bold mb-1 text-slate-900">{proc.heading}</h4>
+                    <p className="text-sm text-slate-500 leading-relaxed">{proc.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={onNext}
+              className="w-full bg-primary text-white font-bold py-5 rounded-2xl shadow-2xl shadow-primary/30 mt-16 active:scale-95 transition-transform uppercase tracking-wider text-sm"
             >
               Create Seller Account
             </button>
-          </div>
+          </section>
         </main>
       </div>
 
-      {/* Desktop Layout (New) */}
-      <div className="hidden lg:block bg-white">
+      {/* Desktop Layout (Premium) */}
+      <div className="hidden lg:block bg-white text-slate-900 transition-colors duration-300">
         {/* Desktop Header */}
-        <header className="fixed top-0 left-0 right-0 z-[100] bg-white border-b border-slate-200">
-          <div className="max-w-[1536px] mx-auto px-6 xl:px-16 h-20 flex items-center justify-between">
+        <header className="fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+          <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
             <div className="flex items-center">
-              <a className="text-2xl font-extrabold text-primary flex items-center gap-2" href="#">
-                <Store className="text-primary" size={32} />
+              <a className="text-2xl font-extrabold text-primary flex items-center gap-1" href="#">
+                <Store className="w-8 h-8 text-primary" />
                 AfricaMart
               </a>
             </div>
-            <nav className="flex items-center gap-8">
-              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#how-it-works">Why AfricaMart</a>
+            <nav className="flex items-center gap-10">
+              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#how-it-works">How it Works</a>
               <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#benefits">Benefits</a>
               <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#faqs">FAQs</a>
             </nav>
-            <div className="flex items-center gap-4">
-              <a className="text-sm font-bold text-slate-700 hover:text-primary px-4 py-2 transition-colors" href="#">Login</a>
+            <div className="flex items-center gap-6">
+              <a className="text-sm font-bold text-slate-700 hover:text-primary transition-colors" href="#">Login</a>
               <button
                 onClick={onNext}
-                className="bg-primary hover:bg-blue-700 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all shadow-md"
+                className="bg-primary hover:bg-blue-700 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all"
               >
                 Sign up
               </button>
@@ -251,15 +521,15 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
 
         <main>
           {/* Hero Section */}
-          <section className="bg-white overflow-hidden py-24 md:py-32 lg:pt-36">
+          <section className="bg-white dark:bg-slate-900 overflow-hidden py-24 md:py-32 lg:pt-44">
             <div className="max-w-6xl mx-auto px-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="flex flex-col items-start text-left order-2 lg:order-1">
                   <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-slate-900 leading-[1.1]">
-                    Create an account to sell on AfricaMart
+                    Create an account to sell on <span className="text-primary">AfricaMart</span>
                   </h1>
                   <p className="text-xl text-slate-500 mb-10 font-medium max-w-lg">
-                    Give it a chance and join Africa's first B2B platform.
+                    Join us to connect Africa and grow your business.
                   </p>
                   <div className="flex flex-col items-start gap-4 w-full">
                     <button
@@ -269,20 +539,136 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                       Start Selling Now
                     </button>
                     <div className="flex items-center gap-2 mt-4">
-                      <div className="flex -space-x-2">
-                        <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
-                        <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
-                        <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-400"></div>
+                      <div className="flex -space-x-3">
+                        <img className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-sm" src="https://media.istockphoto.com/id/1156428559/photo/female-workers-at-a-factory-production-line.jpg?s=612x612&w=0&k=20&c=OH_ZxwYLf9c8PRkSO6q9uvlY82oevvyTF2Mm5GFKCBE=" alt="Services" />
+                        <img className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=100&auto=format&fit=crop" alt="Business" />
+                        <img className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-sm" src="https://edfimc.eu/wp-content/uploads/2024/08/copyright-EAF.jpeg" alt="Logistics" />
                       </div>
                       <p className="text-sm font-semibold text-slate-600">
-                        Joined by 10,000+ businesses
+                        Joined by 1,000+ businesses
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-                  <div className="rounded-3xl overflow-hidden w-full max-w-lg">
-                    <img alt="Two business professionals collaborating with a laptop" className="w-full h-[320px] lg:h-[400px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpg1b4uiSKHpOoityZ4Aw4Yn0SxAo81vA-edM-8zifC6IvRlQ2yet2PelcaeYkqbFQecf6s2RWmQLsq7xEzBINw9Day7wJSeUOynFOqwJu30kAGsJU27_djqDt6fjrX2moZ4dtTlo3DznkRfYaV5iQNQdK1KyzzQBUrWjbvhW7p2ronfmyu9EFm_0VcIaIbE0cix67Isg10ypriRbZo98qMdVZ_FOzykYufCQMvIl6umIHyQtiXemZWuWrmmu8SJ43Xzzf9uzG97Y" />
+                  <div className="rounded-3xl overflow-hidden w-full max-w-lg relative h-[320px] lg:h-[400px]">
+                    {HERO_IMAGES.map((img, index) => (
+                      <div
+                        key={index}
+                        className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${index === currentHeroSlide ? 'opacity-100' : 'opacity-0'}`}
+                      >
+                        <img
+                          alt="Two business professionals collaborating with a laptop"
+                          className="w-full h-full object-cover"
+                          src={img}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Mission Section */}
+          <section className="relative py-24 md:py-32 bg-section-grey border-y border-slate-100 overflow-hidden">
+            <div className="absolute inset-0 bg-pattern-africa opacity-[0.03] pointer-events-none"></div>
+            <div className="relative max-w-5xl mx-auto px-4 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                Mission Driven
+              </div>
+              <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
+                Why We Do What We Do
+              </h2>
+              <div className="flex flex-col items-center">
+                <div className="relative mb-8">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 text-primary/10 text-7xl font-serif select-none">"</span>
+                  <p className="text-xl md:text-2xl text-slate-800 leading-relaxed font-serif italic max-w-3xl mx-auto px-6 relative z-10">
+                    "We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity."
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+                  <button className="group relative inline-flex items-center justify-center border-2 border-primary text-primary hover:text-white font-bold h-14 px-10 rounded-xl transition-all duration-300 overflow-hidden text-base min-w-[200px]">
+                    <span className="absolute inset-0 w-full h-full bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                    <span className="relative z-10">Our Story</span>
+                  </button>
+                  <button className="group relative inline-flex items-center justify-center border-2 border-primary text-primary hover:text-white font-bold h-14 px-10 rounded-xl transition-all duration-300 overflow-hidden text-base min-w-[200px]">
+                    <span className="absolute inset-0 w-full h-full bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                    <span className="relative z-10 flex items-center gap-2">
+                      Partner with Us
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Local Trade Section */}
+          <section className="py-20 md:py-32 px-4 bg-section-grey dark:bg-slate-800/50">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                <div className="w-full lg:w-[45%] flex flex-col items-start">
+                  <div className="flex items-center gap-4 mb-12">
+                    {LOCAL_TRADE_CONTENT.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onMouseEnter={() => setActiveLocalTradeSlide(idx)}
+                        onClick={() => setActiveLocalTradeSlide(idx)}
+                        className={`text-lg font-bold tracking-widest transition-all duration-300 ${activeLocalTradeSlide === idx ? 'text-primary scale-110' : 'text-slate-300 hover:text-slate-400'}`}
+                      >
+                        0{idx + 1}
+                      </button>
+                    ))}
+                    <div className="w-24 h-[2px] bg-slate-200 relative overflow-hidden ml-2">
+                      <div
+                        className="absolute inset-y-0 left-0 bg-primary transition-all duration-500 ease-out"
+                        style={{ width: `${((activeLocalTradeSlide + 1) / LOCAL_TRADE_CONTENT.length) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-12">
+                    {LOCAL_TRADE_CONTENT.map((item, idx) => (
+                      <div
+                        key={idx}
+                        onMouseEnter={() => setActiveLocalTradeSlide(idx)}
+                        className={`group cursor-pointer transition-all duration-500 ${activeLocalTradeSlide === idx ? 'translate-x-4' : 'opacity-40 hover:opacity-60'}`}
+                      >
+                        <h2 className={`text-4xl font-extrabold mb-4 transition-colors duration-300 ${activeLocalTradeSlide === idx ? 'text-slate-900' : 'text-slate-400'} uppercase tracking-tight`}>
+                          {item.title.split(' ').map((word, i) => (
+                            <React.Fragment key={i}>
+                              {word} {i === 0 && <br className="hidden xl:block" />}
+                            </React.Fragment>
+                          ))}
+                        </h2>
+                        <div className={`overflow-hidden transition-all duration-500 ${activeLocalTradeSlide === idx ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                          <p className="text-lg text-slate-600 leading-relaxed max-w-md mb-8">
+                            {item.text}
+                          </p>
+                          <a className="group/link inline-flex items-center gap-2 text-primary font-bold text-lg" href="#">
+                            Explore Markets
+                            <MoveRight className="w-6 h-6 transition-transform duration-300 group-hover/link:translate-x-2" />
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-full lg:w-[55%]">
+                  <div className="relative group">
+                    <div className="absolute -inset-4 bg-primary/5 rounded-[3rem] blur-2xl group-hover:bg-primary/10 transition-colors duration-500"></div>
+                    <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 border border-white/50 h-[500px]">
+                      {LOCAL_TRADE_CONTENT.map((slide, idx) => (
+                        <img
+                          key={idx}
+                          alt={slide.title}
+                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out transform ${idx === activeLocalTradeSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'}`}
+                          src={slide.image}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -290,65 +676,113 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Benefits Section */}
-          <section className="py-24 md:py-40 px-4 bg-[#F8FAFC]" id="benefits">
-            <div className="max-w-6xl mx-auto">
-              <div className="mb-20">
-                <h2 className="text-4xl font-extrabold mb-4 text-slate-900">Sell with AfricaMart</h2>
-                <p className="text-xl text-slate-500 max-w-2xl">
-                  Here are just a few of the many reasons selling with AfricaMart is a smart choice.
+          <section className="relative py-16 md:py-24 overflow-hidden bg-section-grey" id="benefits">
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none topo-bg scale-150 transform"></div>
+            <div className="absolute -right-20 -top-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="absolute -left-20 -bottom-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="relative max-w-6xl mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900">Sell with AfricaMart</h2>
+                <p className="text-xl text-slate-500 max-w-2xl mx-auto">
+                  Elevate your business trajectory with premium tools designed for the modern African entrepreneur.
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
-                <div className="flex flex-col items-start text-left">
-                  <div className="w-14 h-14 text-primary flex items-center justify-center mb-8 border border-slate-200 rounded-2xl bg-white">
-                    <LayoutDashboard size={40} />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-5 text-slate-900 leading-tight">Easy setup and tools that help you succeed</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    It takes a lot to run a business. That's why we provide every Professional seller with a full toolkit for listing, pricing, and promoting products.
-                  </p>
-                </div>
-                <div className="flex flex-col items-start text-left">
-                  <div className="w-14 h-14 text-primary flex items-center justify-center mb-8 border border-slate-200 rounded-2xl bg-white">
-                    <TrendingUp size={40} />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-5 text-slate-900 leading-tight">Reach Million Buyers</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    AfricaMart connects you with a vast network of B2B and B2C buyers across your country and the continent, helping you expand your customer base instantly.
-                  </p>
-                </div>
-                <div className="flex flex-col items-start text-left">
-                  <div className="w-14 h-14 text-primary flex items-center justify-center mb-8 border border-slate-200 rounded-2xl bg-white">
-                    <Eye size={40} />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-5 text-slate-900 leading-tight">Strong Brand Visibility</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    Listing on AfricaMart boosts your brand presence and allows your products to be discovered easily by customers searching online.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
+              <div className="relative group/slider">
+                {/* Navigation Buttons */}
+                <button
+                  onClick={() => scrollBenefits('left')}
+                  className="absolute -left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white rounded-full shadow-xl border border-slate-100 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all opacity-0 group-hover/slider:opacity-100 hidden lg:flex"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => scrollBenefits('right')}
+                  className="absolute -right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white rounded-full shadow-xl border border-slate-100 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all opacity-0 group-hover/slider:opacity-100 hidden lg:flex"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
 
-          {/* Why Section */}
-          <section className="py-24 md:py-40 px-4 bg-white">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex flex-col md:flex-row items-center gap-20">
-                <div className="w-full md:w-1/2">
-                  <h2 className="text-5xl font-extrabold mb-8 text-slate-900 leading-tight">Why AfricaMart exist?</h2>
-                  <p className="text-xl text-slate-600 leading-relaxed mb-10">
-                    We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.
-                  </p>
-                  <div className="flex gap-3">
-                    <div className="w-3 h-3 rounded-full bg-primary"></div>
-                    <div className="w-3 h-3 rounded-full bg-slate-200"></div>
-                    <div className="w-3 h-3 rounded-full bg-slate-200"></div>
+                <div
+                  ref={benefitsScrollRef}
+                  className="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory py-4 scroll-smooth"
+                >
+                  {/* Card 1 */}
+                  <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
+                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-6">
+                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
+                          <Layers className="w-12 h-12 text-primary font-light" />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Easy Setup & Toolkit</h3>
+                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
+                        Professional listing, pricing, and promotion tools. Launch your continental storefront with intuitive systems built for speed and scale.
+                      </p>
+                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                        Learn More
+                        <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="w-full md:w-1/2">
-                  <div className="relative">
-                    <div className="rounded-3xl overflow-hidden aspect-video border border-slate-100">
-                      <img alt="Person using tablet for business data" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvsjKV7J9b0kTxGS9SPU75dxZeNzn4YZNJ5uXCvug2gKvuqFlOwSzOpYTIx6w8z0ULDIeIFyXaQ4GK_RTeMtRzBtfYmNVBcF_QKH7wm_94efEKFHPDl4cuFBxgBRXIQCI2auhmdSkdWYrgnov7LtAaTPJs_u8QT5U1WMsS8i5S_958iBvZNQO5Lt8ohwbJuJr1GAFBlWkHPSIX8_wGhGQnvkHRTxpTD0qtzb1NtfmlhWl4HtrJMkQ_kApFsJvJgmg24kkYB04ONVY" />
+
+                  {/* Card 2 */}
+                  <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
+                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-6">
+                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
+                          <Languages className="w-12 h-12 text-primary font-light" />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Global Reach</h3>
+                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
+                        Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into the burgeoning Pan-African market landscape.
+                      </p>
+                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                        Learn More
+                        <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
+                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-6">
+                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
+                          <Star className="w-12 h-12 text-primary font-light" />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Brand Visibility</h3>
+                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
+                        Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques that ensure your products are always discoverable.
+                      </p>
+                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                        Learn More
+                        <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Card 4 */}
+                  <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
+                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-6">
+                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
+                          <ShieldCheck className="w-12 h-12 text-primary font-light" />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Secure Payments</h3>
+                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
+                        Benefit from our integrated secure payment gateways and escrow services that ensure trust and safety for every trade on the platform.
+                      </p>
+                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                        Learn More
+                        <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -356,8 +790,69 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             </div>
           </section>
 
+          {/* Dashboard Section */}
+          <section className="py-24 md:py-32 bg-white">
+            <div className="max-w-6xl mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight">
+                  Intuitive Seller Dashboard
+                </h2>
+                <p className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
+                  Experience a seamless workflow with our state-of-the-art seller dashboard. Manage products, track leads, and monitor your business growth with ease.
+                </p>
+              </div>
+              <div className="relative max-w-5xl mx-auto">
+                <div className="relative z-10 dashboard-glow rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-2xl transition-all duration-500 transform hover:scale-[1.01]">
+                  <div className="h-10 bg-slate-50 border-b border-slate-100 flex items-center px-4 justify-between">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                    </div>
+                    {/* Interaction Dots */}
+                    <div className="flex gap-2">
+                      {DASHBOARD_SLIDES.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onMouseEnter={() => setActiveDashboardSlide(idx)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${activeDashboardSlide === idx ? 'bg-primary w-6' : 'bg-slate-300 hover:bg-primary/50'}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden h-[500px]">
+                    {DASHBOARD_SLIDES.map((slide, idx) => (
+                      <img
+                        key={idx}
+                        alt="AfricaMart Seller Dashboard Interface"
+                        className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 ease-in-out ${activeDashboardSlide === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}
+                        src={slide.image}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Dynamic Badges */}
+                {DASHBOARD_SLIDES[activeDashboardSlide].badges.map((badge, idx) => (
+                  <div
+                    key={`${activeDashboardSlide}-${idx}`}
+                    className={`absolute z-20 flex items-center gap-4 bg-white p-4 rounded-2xl shadow-xl border border-primary/10 max-w-[240px] transition-all duration-500 animate-in fade-in slide-in-from-bottom-4 ${badge.pos}`}
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      {React.createElement(ICON_MAP[badge.icon] || Globe, { className: "w-6 h-6 text-primary" })}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900">{badge.title}</h4>
+                      <p className="text-xs text-slate-500">{badge.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Procedures Section */}
-          <section className="py-24 md:py-40 px-4 bg-[#F8FAFC]" id="how-it-works">
+          <section className="py-24 md:py-40 px-4 bg-white" id="how-it-works">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-24">
                 <h2 className="text-4xl font-extrabold mb-4 text-slate-900">Seller's Procedures</h2>
@@ -442,7 +937,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center">
               <span className="text-xl font-extrabold text-slate-400 flex items-center gap-1">
-                <Store size={24} />
+                <Store className="w-6 h-6" />
                 AfricaMart
               </span>
             </div>
@@ -451,9 +946,12 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             </div>
           </div>
         </footer>
+
+        {/* Dark Mode Toggle */}
       </div>
-    </div>
+    </div >
   );
 };
 
 export default Onboarding;
+

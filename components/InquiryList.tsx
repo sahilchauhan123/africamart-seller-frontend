@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { MOCK_INQUIRIES } from '../constants';
 import { MapPin, Search, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -9,21 +9,63 @@ interface Props {
 }
 
 const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState<'Newest' | 'Oldest'>('Newest');
+
+  const filteredInquiries = useMemo(() => {
+    let result = MOCK_INQUIRIES.filter(inq => {
+      // Search matching
+      const matchesSearch = inq.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        inq.message.toLowerCase().includes(searchQuery.toLowerCase());
+
+      if (!matchesSearch) return false;
+
+      // Filter matching
+      if (activeFilter === 'All') return true;
+      if (activeFilter === 'New Leads') return inq.status === 'New Lead' || inq.status === 'Urgent';
+      if (activeFilter === 'Viewed') return inq.status === 'Viewed';
+      if (activeFilter === 'Replied') return inq.status === 'Replied';
+
+      return true;
+    });
+
+    return sortOrder === 'Newest' ? result : [...result].reverse();
+  }, [searchQuery, activeFilter, sortOrder]);
+
   return (
     <div className="flex flex-col bg-[#F8FAFC] h-full overflow-hidden">
       {/* Mobile View - Existing Layout */}
       <div className="lg:hidden flex flex-col h-full bg-gray-100">
         <div className="bg-white shadow-sm border-b border-gray-100 shrink-0">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex gap-2 overflow-x-auto no-scrollbar">
-            <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-primary text-white text-xs font-medium shadow-sm">All</button>
-            <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-gray-100 text-gray-500 text-xs font-medium">New Leads</button>
-            <button className="flex-shrink-0 px-4 py-1.5 rounded-full bg-gray-100 text-gray-500 text-xs font-medium">Viewed</button>
+          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4 overflow-hidden">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar flex-1">
+              {['All', 'New Leads', 'Viewed', 'Replied'].map(filter => (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`flex-shrink-0 px-4 py-1.5 rounded-full text-[10px] font-bold shadow-sm transition-colors uppercase tracking-tight ${activeFilter === filter ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'}`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+            <div className="shrink-0 border-l border-gray-100 pl-3">
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value as any)}
+                className="bg-gray-50 text-[10px] font-bold text-gray-500 uppercase px-2 py-1.5 rounded-lg outline-none border border-gray-100"
+              >
+                <option value="Newest">Newest</option>
+                <option value="Oldest">Oldest</option>
+              </select>
+            </div>
           </div>
         </div>
 
         <main className="flex-1 overflow-y-auto p-4 no-scrollbar">
           <div className="max-w-7xl mx-auto space-y-3 pb-20">
-            {MOCK_INQUIRIES.map(inq => (
+            {filteredInquiries.length > 0 ? filteredInquiries.map(inq => (
               <div key={inq.id} onClick={onSelectLead} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99] cursor-pointer">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full border-2 border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0">
@@ -47,7 +89,12 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                   </div>
                 </div>
               </div>
-            ))}
+            )) : (
+              <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+                <Search size={48} className="mb-4 opacity-20" />
+                <p className="text-sm font-medium">No inquiries found matching your criteria</p>
+              </div>
+            )}
           </div>
         </main>
       </div>
@@ -57,24 +104,46 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
           <div className="max-w-6xl mx-auto space-y-6">
             <div className="bg-white p-4 rounded-xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100">
               <div className="flex items-center p-1 bg-slate-100 rounded-lg w-fit">
-                <button className="px-5 py-2 text-sm font-medium rounded-md bg-white shadow-sm text-primary">All</button>
-                <button className="px-5 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-700">New Leads</button>
-                <button className="px-5 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-700">Viewed</button>
-                <button className="px-5 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-700">Replied</button>
+                {['All', 'New Leads', 'Viewed', 'Replied'].map(filter => (
+                  <button
+                    key={filter}
+                    onClick={() => setActiveFilter(filter)}
+                    className={`px-5 py-2 text-sm font-medium rounded-md transition-all ${activeFilter === filter ? 'bg-white shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700'}`}
+                  >
+                    {filter}
+                  </button>
+                ))}
               </div>
               <div className="flex items-center gap-3">
                 <div className="relative flex-1 md:w-64">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
-                  <input className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search inquiries..." type="text" />
+                  <input
+                    className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-sm"
+                    placeholder="Search inquiries..."
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                 </div>
-                <button className="p-2 bg-slate-50 text-slate-500 rounded-lg hover:bg-slate-100">
-                  <SlidersHorizontal size={20} />
-                </button>
+                <div className="flex items-center gap-2 bg-slate-50 p-1 rounded-lg border border-slate-100">
+                  <select
+                    value={sortOrder}
+                    onChange={(e) => setSortOrder(e.target.value as any)}
+                    className="bg-transparent text-sm font-medium text-slate-600 outline-none px-2 cursor-pointer"
+                  >
+                    <option value="Newest">Newest First</option>
+                    <option value="Oldest">Oldest First</option>
+                  </select>
+                  <div className="w-px h-6 bg-slate-200"></div>
+                  <button className="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                    <SlidersHorizontal size={18} />
+                  </button>
+                </div>
               </div>
             </div>
 
             <div className="space-y-3">
-              {MOCK_INQUIRIES.map((inq) => (
+              {filteredInquiries.length > 0 ? filteredInquiries.map((inq) => (
                 <div
                   key={inq.id}
                   onClick={onSelectLead}
@@ -105,9 +174,26 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                         </div>
                       </div>
                     </div>
+                    <div className="flex flex-col items-end justify-between h-full pt-1">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectLead();
+                        }}
+                        className="px-4 py-2 bg-primary/5 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all border border-primary/20"
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div className="flex flex-col items-center justify-center py-32 bg-white rounded-xl border border-dashed border-slate-200 text-slate-400">
+                  <Search size={64} className="mb-4 opacity-10" />
+                  <p className="text-lg font-medium">No results found for "{searchQuery}"</p>
+                  <button onClick={() => { setSearchQuery(''); setActiveFilter('All'); }} className="mt-4 text-primary font-bold hover:underline">Clear all filters</button>
+                </div>
+              )}
             </div>
 
             <div className="flex items-center justify-center gap-2 py-4">

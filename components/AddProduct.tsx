@@ -10,7 +10,6 @@ import {
   Circle,
   PlusCircle,
   Video,
-  RefreshCw,
   LayoutGrid,
   Bold,
   Italic,
@@ -118,7 +117,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                   <h2 className="text-xl font-bold text-slate-900">Product Images & Video</h2>
                   <p className="text-sm text-slate-500 mt-1">Upload at least 3 images for best results. First image will be your cover.</p>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   <div className="aspect-square border-2 border-dashed border-slate-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-white transition-all group bg-slate-100/50">
                     <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-2 group-hover:scale-110 transition-transform border border-slate-100">
                       <Camera className="text-primary" size={24} />
@@ -132,10 +131,6 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                   <div className="aspect-square border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-all bg-slate-50/50 group">
                     <Video className="text-slate-400 mb-2 group-hover:text-primary transition-colors" size={28} />
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Video</span>
-                  </div>
-                  <div className="aspect-square border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-all bg-slate-50/50 group">
-                    <RefreshCw className="text-slate-400 mb-2 group-hover:text-primary transition-colors" size={28} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">360 View</span>
                   </div>
                 </div>
               </section>
