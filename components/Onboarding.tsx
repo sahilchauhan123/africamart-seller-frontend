@@ -39,7 +39,9 @@ import {
   PieChart,
   Target,
   Rocket,
-  Languages
+  Languages,
+  FileText,
+  Activity as ActivityIcon
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, any> = {
@@ -67,6 +69,11 @@ const ICON_MAP: Record<string, any> = {
   arrow_right_alt: MoveRight,
   trending_flat: MoveRight,
   storefront: Store,
+  description: FileText,
+  catalog: LayoutGrid,
+  promote: Rocket,
+  reviews: Star,
+  notifications: Megaphone,
 };
 
 const WHY_SECTION_CONTENT = [
@@ -94,19 +101,19 @@ interface Props {
 const LOCAL_TRADE_CONTENT = [
   {
     title: "Empowering Local Trade",
-    text: "To break down geographical barriers, allowing local manufacturers and wholesalers to reach continental markets with ease and unparalleled efficiency.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBL0r8RwRNIm2J1oyfRJTqLF8g-s44vmlg2e_s9DIiYPROMPeqCxmW8BXFHqbORjItAzIW0hKB9K-h0_F5jT8dYJucTvvbtu-I_gPsTMSKbutiyEHoEhrB4P-7mKNpUcDqJ4qtP0nrx6tFKF9LnjRTPyO1pcAGcvyLIGMwsIMzQU_TKcwsqinbNp7ZqbgI2Lb3eUh0VByGXUnw4Vq-I39Ff1qzOPBrCMtrqr0Ril5mcaxFzr9txeGaynm1th_-0yPk-4MQKI1s924Y",
+    text: "Breaking down geographical barriers, allowing local manufacturers and wholesalers to reach continental markets.",
+    image: "https://clubofmozambique.com/wp-content/uploads/2025/10/Trucks-1.jpg",
     mobileImage: "https://www.worldbank.org/content/dam/photos/780x439/2022/feb-1/Trade-report-africa.jpg"
   },
   {
-    title: "Supply Chain Excellence",
-    text: "Streamlining logistics and distribution networks to ensure that high-quality African products reach their destination faster and more reliably than ever before.",
+    title: "Simplifying Market Access",
+    text: "We help to improve the visibility of African Businesses and connect them with ready buyers, while buyers gain easy access to reliable suppliers. All through a smoother, more transparent process.",
     image: "https://media.istockphoto.com/id/1150882713/photo/workers-checking-the-quality-of-freshly-prepared-snacks-at-a-factory-in-africa.jpg?s=612x612&w=0&k=20&c=aPbFouejciurSTFn7tQ_5WF-vJhtTT1dhsYUIRbYB54="
   },
   {
-    title: "Market Integration",
-    text: "Fostering collaboration between regional markets to create a unified economic space where innovation thrives and trade flows without friction.",
-    image: "https://ctgafrica.com/wp-content/uploads/2023/07/diversity-people-international-conference-partnership-scaled-1.jpg"
+    title: "Redefining African Markets",
+    text: "Rethinking traditional market structures to make trade more open, efficient and inclusive across Africa.",
+    image: "https://blogs.worldbank.org/content/dam/sites/blogs/img/detail/mgr/building-a-connected-africa-blog-1140x500.jpg"
   }
 ];
 
@@ -133,7 +140,7 @@ const DASHBOARD_SLIDES = [
     image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768861863/Screenshot_2026-01-20_035440_iqjstq.png",
     mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768866341/x1_hj2hhl.png",
     badges: [
-      { icon: 'monitoring', title: 'Real-time Analytics', desc: 'Track performance live', pos: '-top-10 -left-6 lg:-left-12' },
+      { icon: 'monitoring', title: 'Real-time Analytics', desc: 'Track your performance', pos: '-top-10 -left-6 lg:-left-12' },
       { icon: 'inventory_2', title: 'Business Overview', desc: 'Leads, Product Views & Inquiries', pos: 'top-1/2 -right-6 lg:-right-16 -translate-y-1/2' },
       { icon: 'chat_bubble_outline', title: 'Seamless Communication', desc: 'Direct buyer messaging', pos: '-bottom-10 -left-6 lg:left-20' }
     ]
@@ -142,18 +149,18 @@ const DASHBOARD_SLIDES = [
     image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768897684/Screenshot_2026-01-20_041523_ux42m7.png",
     mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867227/x6_tahhpa.png",
     badges: [
-      { icon: 'payments', title: 'Secure Payouts', desc: 'Fast & reliable transfers', pos: 'top-4 left-1/2 -translate-x-1/2' },
-      { icon: 'local_shipping', title: 'Logistics Tracking', desc: 'Real-time shipment updates', pos: 'bottom-20 -left-10 lg:-left-16' },
-      { icon: 'verified', title: 'Trust Badge', desc: 'Build buyer confidence', pos: '-bottom-12 right-10 lg:right-24' }
+      { icon: 'notifications', title: 'Alert', desc: 'Instant Notifications', pos: 'top-4 left-1/2 -translate-x-1/2' },
+      { icon: 'chat_bubble_outline', title: 'Email & SMS Notifications', desc: 'Important events', pos: 'bottom-20 -left-10 lg:-left-16' },
+      { icon: 'language', title: 'Communication', desc: 'Regular Customer Updates', pos: '-bottom-12 right-10 lg:right-24' }
     ]
   },
   {
     image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768897852/Screenshot_2026-01-20_140022_hyixhi.png",
     mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867138/x5_z1wti2.png",
     badges: [
-      { icon: 'insights', title: 'Market Insights', desc: 'Analyze buyer trends', pos: 'top-10 -left-6 lg:-left-12' },
-      { icon: 'campaign', title: 'Ad Manager', desc: 'Boost product visibility', pos: '-top-12 right-12 lg:right-20' },
-      { icon: 'support_agent', title: '24/7 Support', desc: 'Help whenever you need it', pos: '-bottom-10 left-1/2 -translate-x-1/2' }
+      { icon: 'description', title: 'Product Description', desc: 'Improve product visibility', pos: 'top-10 -left-6 lg:-left-12' },
+      { icon: 'catalog', title: 'Product Catalog', desc: 'Manage your products', pos: '-top-12 right-12 lg:right-20' },
+      { icon: 'promote', title: 'Promote Products', desc: 'Boost your sales', pos: '-bottom-10 left-1/2 -translate-x-1/2' }
     ]
   },
   {
@@ -161,17 +168,17 @@ const DASHBOARD_SLIDES = [
     mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867725/x7_rmjw2w.png",
     badges: [
       { icon: 'security', title: 'Data Protection', desc: 'Your business is safe', pos: '-top-12 -left-8 lg:-left-16' },
-      { icon: 'public', title: 'Global Exposure', desc: 'Reach international buyers', pos: 'top-1/4 -right-8 lg:-right-14' },
-      { icon: 'verified_user', title: 'Verified Seller', desc: 'Elite status badge', pos: '-bottom-10 left-1/2 -translate-x-1/2' }
+      { icon: 'public', title: 'Documentations', desc: 'Compliance & Security', pos: 'top-1/4 -right-8 lg:-right-14' },
+      { icon: 'verified_user', title: 'Approval Process', desc: 'Prove Verified Seller', pos: '-bottom-10 left-1/2 -translate-x-1/2' }
     ]
   },
   {
     image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768898212/Screenshot_2026-01-20_140625_epit2t.png",
     mobileImage: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1768867138/x4_t99svv.png",
     badges: [
-      { icon: 'account_balance_wallet', title: 'Finance Tools', desc: 'Manage your earnings', pos: '-bottom-12 -right-4 lg:right-10' },
+      { icon: 'reviews', title: 'Reviews', desc: 'Well structured profile equals more reviews', pos: '-bottom-12 -right-4 lg:right-10' },
       { icon: 'hub', title: 'B2B Networking', desc: 'Connect with partners', pos: 'top-1/2 -left-12 lg:-left-20' },
-      { icon: 'trending_up', title: 'Growth Metrics', desc: 'Scale your business', pos: '-top-12 right-12 lg:right-20' }
+      { icon: 'trending_up', title: 'Profile Visibility', desc: 'Increase your visibility', pos: '-top-12 right-12 lg:right-20' }
     ]
   }
 ];
@@ -240,7 +247,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
         </nav>
 
         {/* New Mobile Sections */}
-        <main className="pt-16 pb-24">
+        <main className="pt-16">
           {/* Hero Slider at the Top */}
           <div className="px-5 pt-14 pb-4">
             <div className="relative rounded-3xl overflow-hidden h-80">
@@ -280,7 +287,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Mission Section */}
-          <section className="px-5 py-32 bg-slate-50">
+          <section className="px-5 py-16 bg-slate-50">
             <div className="text-center mb-8">
               <span className="inline-block text-[10px] uppercase tracking-widest font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">Mission Driven</span>
               <h2 className="text-2xl font-bold mb-4 text-slate-900">Why We Do What We Do</h2>
@@ -313,9 +320,6 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                   />
                 ))}
               </div>
-              <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-                Explore Scale
-              </span>
             </div>
 
             <div className="transition-all duration-500 transform">
@@ -326,7 +330,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                   </React.Fragment>
                 ))}
               </h2>
-              <p className="text-slate-500 mb-8 leading-relaxed text-sm h-20 overflow-hidden">
+              <p className="text-slate-500 mb-8 leading-relaxed text-sm">
                 {LOCAL_TRADE_CONTENT[activeLocalTradeSlide].text}
               </p>
               <div className="mb-8 rounded-3xl overflow-hidden shadow-lg border border-slate-100 h-56 relative group">
@@ -341,23 +345,21 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </div>
             </div>
 
-            <a className="text-primary font-bold flex items-center gap-2 group" href="#">
-              Explore Markets
-              <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+
           </section>
 
           {/* Benefits Section */}
           <section className="px-5 py-16 bg-blue-50">
             <div className="text-center mb-10">
               <h2 className="text-3xl font-extrabold mb-3 text-slate-900">Sell with AfricaMart</h2>
-              <p className="text-slate-500 text-sm">Elevate your business trajectory with premium tools designed for the modern African entrepreneur.</p>
+              <p className="text-slate-500 text-sm">Elevate your business progress with tools built for sustainable growth.</p>
             </div>
             <div className="space-y-6">
               {[
                 { icon: 'layers', title: 'Easy Setup & Toolkit', text: 'Professional listing, pricing, and promotion tools. Launch your continental storefront with intuitive systems.' },
                 { icon: 'public', title: 'Global Reach', text: 'Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into Pan-African markets.' },
-                { icon: 'star', title: 'Brand Visibility', text: 'Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques.' }
+                { icon: 'star', title: 'Brand Visibility', text: 'Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques.' },
+                { icon: 'verified_user', title: 'Verified Seller Status', text: 'Build instant trust with buyers through our verification process. Get the TrustSEAL badge and stand out.' }
               ].map((benefit, i) => (
                 <div key={i} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
                   <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
@@ -398,7 +400,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               {/* Smartphone Wrapper with External Badges */}
               <div className="relative group/phone">
                 {/* Floating Badges Positioned Around the Frame */}
-                {DASHBOARD_SLIDES[activeDashboardSlide].badges.map((badge, bIdx) => {
+                {activeDashboardSlide !== 1 && DASHBOARD_SLIDES[activeDashboardSlide].badges.map((badge, bIdx) => {
                   // Coordinate mapping for each slide to differentiate positions
                   const positions = [
                     ['top-20 -left-10', 'top-1/2 -right-10 -translate-y-1/2', '-bottom-6 left-1/2 -translate-x-1/2'], // Slide 1
@@ -410,17 +412,32 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
 
                   const mobilePos = positions[activeDashboardSlide % 5][bIdx % 3];
 
+                  // Specific logic for slide content overrides in mobile dashboard
+                  const displayBadge = (activeDashboardSlide === 2) ? [
+                    { icon: 'chat_bubble_outline', title: 'New Business Inquiry', desc: 'Direct request from buyer' },
+                    { icon: 'verified', title: 'Verified Lead Request', desc: 'High intent opportunity' },
+                    { icon: 'monitoring', title: 'Lead Track', desc: 'Monitor engagement level' }
+                  ][bIdx] : (activeDashboardSlide === 3) ? [
+                    { icon: 'chat_bubble_outline', title: 'Instant Chat', desc: 'Direct buyer connection' },
+                    { icon: 'hub', title: 'Smart Replies', desc: 'Speed up responses' },
+                    { icon: 'verified_user', title: 'Secure Messaging', desc: 'Safe trade discussions' }
+                  ][bIdx] : (activeDashboardSlide === 4) ? [
+                    { icon: 'notifications', title: 'Instant Alerts', desc: 'Real-time push notifications' },
+                    { icon: 'verified', title: 'Smart Notifications', desc: 'Important business updates' },
+                    { icon: 'monitoring', title: 'Activity Alerts', desc: 'Track live interactions' }
+                  ][bIdx] : badge;
+
                   return (
                     <div
                       key={activeDashboardSlide + '-' + bIdx}
                       className={`absolute z-30 bg-white shadow-2xl p-3 rounded-2xl border border-slate-50 flex items-center gap-3 scale-90 transition-all duration-700 animate-in fade-in slide-in-from-bottom-5 ${mobilePos}`}
                     >
                       <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center">
-                        {React.createElement(ICON_MAP[badge.icon] || Activity, { className: "w-5 h-5 text-primary" })}
+                        {React.createElement(ICON_MAP[displayBadge.icon] || Activity, { className: "w-5 h-5 text-primary" })}
                       </div>
                       <div className="whitespace-nowrap">
-                        <p className="text-[11px] font-extrabold text-slate-900 tracking-tight">{badge.title}</p>
-                        <p className="text-[9px] font-medium text-slate-500">{badge.desc}</p>
+                        <p className="text-[11px] font-extrabold text-slate-900 tracking-tight">{displayBadge.title}</p>
+                        <p className="text-[9px] font-medium text-slate-500">{displayBadge.desc}</p>
                       </div>
                     </div>
                   );
@@ -488,6 +505,61 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               Create Seller Account
             </button>
           </section>
+
+          {/* Mobile Brand Footer */}
+          <footer className="bg-[#0026C0] text-white pt-12 pb-6 px-8 mt-12 rounded-t-[3rem]">
+            <div className="max-w-md mx-auto flex flex-col items-center">
+              <div className="flex items-center gap-6 mb-10">
+                <a className="hover:opacity-80 transition-opacity" href="#">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg>
+                </a>
+                <a className="hover:opacity-80 transition-opacity" href="#">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+                </a>
+                <a className="hover:opacity-80 transition-opacity" href="#">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.261 7.929-7.261 4.162 0 7.397 2.965 7.397 6.93 0 4.135-2.607 7.462-6.225 7.462-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.034-1.002 2.331-1.492 3.131C10.287 23.818 11.127 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"></path></svg>
+                </a>
+                <a className="hover:opacity-80 transition-opacity" href="#">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+                </a>
+                <a className="hover:opacity-80 transition-opacity" href="#">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.981 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
+                </a>
+              </div>
+              <p className="text-center text-sm font-medium leading-relaxed mb-8 opacity-90">
+                You're receiving this because you signed up for <span className="font-bold">AFRICAMART</span>
+              </p>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-center text-xs font-semibold mb-12 w-full max-w-[280px]">
+                <a className="hover:underline transition-all" href="#">Buy Leads</a>
+                <a className="hover:underline transition-all" href="#">RFQ Request</a>
+                <a className="hover:underline transition-all" href="#">Success Stories</a>
+                <a className="hover:underline transition-all" href="#">Investors</a>
+                <a className="hover:underline transition-all" href="#">Our Mission</a>
+                <a className="hover:underline transition-all" href="#">Careers</a>
+                <a className="hover:underline transition-all" href="#">Newsroom</a>
+                <a className="hover:underline transition-all" href="#">Support</a>
+              </div>
+              <div className="flex flex-col items-center mb-8">
+                <div className="flex items-center gap-2">
+                  <Store className="w-8 h-8" />
+                  <div className="flex flex-col leading-none">
+                    <span className="text-xl font-extrabold tracking-tight uppercase">Africa</span>
+                    <span className="text-xl font-light tracking-widest uppercase text-white/80">Mart</span>
+                  </div>
+                </div>
+              </div>
+              <div className="text-[10px] font-bold tracking-wide uppercase opacity-70 text-center space-x-2">
+                <a className="hover:underline" href="#">Privacy</a>
+                <span>|</span>
+                <a className="hover:underline" href="#">Contact</a>
+                <span>|</span>
+                <a className="hover:underline" href="#">Unsubscribe</a>
+              </div>
+              <p className="mt-8 text-[9px] opacity-50 text-center uppercase tracking-widest">
+                © 2026 AfricaMart Inc. All rights reserved.
+              </p>
+            </div>
+          </footer>
         </main>
       </div>
 
@@ -647,10 +719,6 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                           <p className="text-lg text-slate-600 leading-relaxed max-w-md mb-8">
                             {item.text}
                           </p>
-                          <a className="group/link inline-flex items-center gap-2 text-primary font-bold text-lg" href="#">
-                            Explore Markets
-                            <MoveRight className="w-6 h-6 transition-transform duration-300 group-hover/link:translate-x-2" />
-                          </a>
                         </div>
                       </div>
                     ))}
@@ -684,7 +752,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900">Sell with AfricaMart</h2>
                 <p className="text-xl text-slate-500 max-w-2xl mx-auto">
-                  Elevate your business trajectory with premium tools designed for the modern African entrepreneur.
+                  Elevate your business progress with tools built for sustainable growth.
                 </p>
               </div>
               <div className="relative group/slider">
@@ -717,7 +785,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                       </div>
                       <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Easy Setup & Toolkit</h3>
                       <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
-                        Professional listing, pricing, and promotion tools. Launch your continental storefront with intuitive systems built for speed and scale.
+                        Professional listing, pricing and promotion tools. Launch your continental storefront with intuitive systems built for speed and scale.
                       </p>
                       <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
                         Learn More
@@ -775,9 +843,9 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                           <ShieldCheck className="w-12 h-12 text-primary font-light" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Secure Payments</h3>
+                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Verified Seller Status</h3>
                       <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
-                        Benefit from our integrated secure payment gateways and escrow services that ensure trust and safety for every trade on the platform.
+                        Build instant trust with buyers through our verification process. Get the TrustSEAL badge and stand out as a reliable continental trade partner.
                       </p>
                       <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
                         Learn More
@@ -933,16 +1001,68 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
         </main>
 
-        <footer className="py-12 border-t border-slate-100 bg-white">
-          <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center">
-              <span className="text-xl font-extrabold text-slate-400 flex items-center gap-1">
-                <Store className="w-6 h-6" />
-                AfricaMart
-              </span>
+        <footer className="pt-24 bg-[#0026C0] text-white">
+          <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-12 pb-20">
+            <div className="md:col-span-4 space-y-8">
+              <div className="flex items-center space-x-2">
+                <Store className="w-8 h-8 text-white" />
+                <span className="text-2xl font-bold tracking-tight text-white uppercase">AfricaMart</span>
+              </div>
+              <p className="text-white/70 max-w-sm leading-relaxed text-lg">
+                We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.
+              </p>
             </div>
-            <div className="text-slate-400 text-sm">
-              © 2024 AfricaMart. All rights reserved.
+            <div className="md:col-span-2 space-y-6">
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest text-center md:text-left">Business</h4>
+              <ul className="space-y-4 text-white/70 text-sm font-medium text-center md:text-left">
+                <li><a className="hover:text-white transition-colors" href="#">Buy Leads</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Post RFQ</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Verified Suppliers</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Success Stories</a></li>
+              </ul>
+            </div>
+            <div className="md:col-span-2 space-y-6">
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest text-center md:text-left">Solutions</h4>
+              <ul className="space-y-4 text-white/70 text-sm font-medium text-center md:text-left">
+                <li><a className="hover:text-white transition-colors" href="#">Logistics</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Trade Finance</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Escrow Payments</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">API & Integration</a></li>
+              </ul>
+            </div>
+            <div className="md:col-span-2 space-y-6">
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest text-center md:text-left">Company</h4>
+              <ul className="space-y-4 text-white/70 text-sm font-medium text-center md:text-left">
+                <li><a className="hover:text-white transition-colors" href="#">Our Mission</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Investors</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Careers</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Newsroom</a></li>
+              </ul>
+            </div>
+            <div className="md:col-span-2 space-y-6">
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest text-center md:text-left">Resources</h4>
+              <ul className="space-y-4 text-white/70 text-sm font-medium text-center md:text-left">
+                <li><a className="hover:text-white transition-colors" href="#">Help Center</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Compliance</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Trade Guides</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="bg-[#001da1] py-10 px-4 border-t border-white/10">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+              <p className="text-white/60 text-sm font-medium">© 2026 AfricaMart Inc. All rights reserved.</p>
+              <div className="flex items-center space-x-8">
+                <a className="text-white/60 hover:text-white transition-colors" href="#">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+                </a>
+                <a className="text-white/60 hover:text-white transition-colors" href="#">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                </a>
+                <a className="text-white/60 hover:text-white transition-colors" href="#">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>
+                </a>
+              </div>
             </div>
           </div>
         </footer>
