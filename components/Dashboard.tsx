@@ -17,7 +17,9 @@ import {
     UserPlus,
     Rocket,
     ArrowLeftRight,
-    Store
+    Store,
+    MessageSquare,
+    ArrowRight
 } from 'lucide-react';
 
 interface Props {
@@ -27,6 +29,7 @@ interface Props {
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [showWelcomeModal, setShowWelcomeModal] = useState(true);
     const [activeMonthIndex, setActiveMonthIndex] = useState(3);
     const months = [
         { name: 'AUG', full: 'AUGUST', leads: 95, height: '65%' },
@@ -86,26 +89,84 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => onNavigate(View.BUSINESS_REPORT)} className="text-sm font-medium text-primary hover:underline">View Report</button>
                         </div>
                         <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
-                            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                            <div className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
                                     <TrendingUp className="text-blue-500" size={20} />
                                     <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Total Views</p>
-                                    <p className="text-xl font-bold">1,245</p>
+                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Views</p>
+                                    <p className="text-xl font-extrabold text-slate-800">1,245</p>
                                 </div>
                             </div>
-                            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                            <div className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
                                     <Users className="text-purple-500" size={20} />
                                     <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">New Leads</p>
-                                    <p className="text-xl font-bold">85</p>
+                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">New Leads</p>
+                                    <p className="text-xl font-extrabold text-slate-800">85</p>
                                 </div>
                             </div>
+                            <div className="min-w-[220px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3.5 flex flex-col justify-between">
+                                <div className="flex items-start justify-between mb-1">
+                                    <div>
+                                        <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Response Rate</p>
+                                        <div className="flex items-baseline gap-1">
+                                            <span className="text-xl font-extrabold text-slate-800">92%</span>
+                                            <span className="text-[8px] font-bold text-emerald-500 uppercase">Avg Score</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                                        <MessageSquare className="text-emerald-500" size={16} />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="space-y-1">
+                                        <div className="flex justify-between items-center text-[8px] font-bold uppercase tracking-tight">
+                                            <span className="text-slate-400">Within 24h</span>
+                                            <span className="text-slate-700">92%</span>
+                                        </div>
+                                        <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                                            <div className="bg-emerald-500 h-full w-[92%] rounded-full"></div>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <div className="flex justify-between items-center text-[8px] font-bold uppercase tracking-tight">
+                                            <span className="text-slate-400">After 24h</span>
+                                            <span className="text-slate-400">8%</span>
+                                        </div>
+                                        <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                                            <div className="bg-slate-200 h-full w-[8%] rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="px-4 mb-6">
+                        <div className="bg-white rounded-2xl p-5 border border-primary/5 shadow-sm relative overflow-hidden">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-full h-full -rotate-90">
+                                        <circle className="text-slate-100" cx="28" cy="28" fill="transparent" r="24" stroke="currentColor" strokeWidth="4"></circle>
+                                        <circle className="text-primary" cx="28" cy="28" fill="transparent" r="24" stroke="currentColor" strokeDasharray="150.8" strokeDashoffset="22.62" strokeWidth="4"></circle>
+                                    </svg>
+                                    <span className="absolute text-[10px] font-bold text-slate-800">85%</span>
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-bold text-slate-900">Profile Completeness</h4>
+                                    <p className="text-[10px] text-slate-500 leading-tight">Complete your profile to gain 40% more visibility.</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => onNavigate(View.EDIT_PROFILE)}
+                                className="w-full bg-primary/5 text-primary py-3 rounded-xl font-bold text-xs active:scale-[0.98] transition-all"
+                            >
+                                Complete Profile
+                            </button>
                         </div>
                     </section>
 
@@ -147,60 +208,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                         </div>
                     </section>
 
-                    {/* Mobile Brand Footer */}
-                    <footer className="bg-[#0026C0] text-white pt-12 pb-6 px-8 mt-12 rounded-t-[3rem]">
-                        <div className="max-w-md mx-auto flex flex-col items-center">
-                            <div className="flex items-center gap-6 mb-10">
-                                <a className="hover:opacity-80 transition-opacity" href="#">
-                                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg>
-                                </a>
-                                <a className="hover:opacity-80 transition-opacity" href="#">
-                                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
-                                </a>
-                                <a className="hover:opacity-80 transition-opacity" href="#">
-                                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.261 7.929-7.261 4.162 0 7.397 2.965 7.397 6.93 0 4.135-2.607 7.462-6.225 7.462-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.034-1.002 2.331-1.492 3.131C10.287 23.818 11.127 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"></path></svg>
-                                </a>
-                                <a className="hover:opacity-80 transition-opacity" href="#">
-                                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923(trimmed path)"></path></svg>
-                                </a>
-                                <a className="hover:opacity-80 transition-opacity" href="#">
-                                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.981 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
-                                </a>
-                            </div>
-                            <p className="text-center text-sm font-medium leading-relaxed mb-8 opacity-90">
-                                You're receiving this because you signed up for <span className="font-bold">AFRICAMART</span>
-                            </p>
-                            <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-center text-xs font-semibold mb-12 w-full max-w-[280px]">
-                                <a className="hover:underline transition-all" href="#">FAQ</a>
-                                <a className="hover:underline transition-all" href="#">Careers</a>
-                                <a className="hover:underline transition-all" href="#">Contact Us</a>
-                                <a className="hover:underline transition-all" href="#">Newsroom</a>
-                                <a className="hover:underline transition-all" href="#">Buying Guides</a>
-                                <a className="hover:underline transition-all" href="#">Gift Cards</a>
-                                <a className="hover:underline transition-all" href="#">Support</a>
-                                <a className="hover:underline transition-all" href="#">Return Policy</a>
-                            </div>
-                            <div className="flex flex-col items-center mb-8">
-                                <div className="flex items-center gap-2">
-                                    <Store className="w-8 h-8" />
-                                    <div className="flex flex-col leading-none">
-                                        <span className="text-xl font-extrabold tracking-tight uppercase">Africa</span>
-                                        <span className="text-xl font-light tracking-widest uppercase text-white/80">Mart</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="text-[10px] font-bold tracking-wide uppercase opacity-70 text-center space-x-2">
-                                <a className="hover:underline" href="#">Privacy</a>
-                                <span>|</span>
-                                <a className="hover:underline" href="#">Contact</a>
-                                <span>|</span>
-                                <a className="hover:underline" href="#">Unsubscribe</a>
-                            </div>
-                            <p className="mt-8 text-[9px] opacity-50 text-center uppercase tracking-widest">
-                                © 2026 AfricaMart Inc. All rights reserved.
-                            </p>
-                        </div>
-                    </footer>
+
                 </main>
             </div>
 
@@ -457,6 +465,42 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     </div>
                 </main>
             </div>
+            {/* Onboarding Tip Popup */}
+            {showWelcomeModal && (
+                <div className="fixed bottom-6 lg:bottom-10 right-4 lg:right-10 z-[110] w-[calc(100%-2rem)] lg:w-[380px] transform animate-in slide-in-from-bottom-5 fade-in duration-500">
+                    <div className="bg-slate-900 text-white p-6 rounded-[2rem] shadow-2xl relative overflow-hidden group border border-white/10">
+                        <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
+                            <Rocket size={80} />
+                        </div>
+                        <div className="flex gap-4 items-start relative z-10">
+                            <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <Rocket className="text-primary w-5 h-5 animate-pulse" />
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex justify-between items-center mb-1">
+                                    <h3 className="font-bold text-sm tracking-tight text-white/90">Onboarding Tip</h3>
+                                    <button onClick={() => setShowWelcomeModal(false)} className="text-white/40 hover:text-white transition-colors p-1">
+                                        <Plus className="rotate-45" size={16} />
+                                    </button>
+                                </div>
+                                <p className="text-white/60 text-[11px] leading-relaxed mb-4">
+                                    Welcome! To start selling, please finish your <span className="text-white font-bold underline decoration-primary underline-offset-4 decoration-2">Profile Completeness</span> section.
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        setShowWelcomeModal(false);
+                                        onNavigate(View.EDIT_PROFILE);
+                                    }}
+                                    className="bg-primary hover:bg-blue-600 text-white text-[10px] font-bold py-2 px-6 rounded-full transition-all active:scale-95 shadow-lg shadow-primary/20"
+                                >
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Switch Mode Overlay */}
             {isOverlayOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">

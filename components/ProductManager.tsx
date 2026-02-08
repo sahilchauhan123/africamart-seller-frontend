@@ -31,45 +31,84 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
       <div className="lg:hidden flex flex-col h-full bg-[#F5F7FA]">
         <main className="flex-1 overflow-y-auto p-4 no-scrollbar">
           <div className="max-w-7xl mx-auto space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 h-32 flex flex-col justify-between">
-                <h2 className="text-sm font-medium text-gray-500">Total Products</h2>
-                <span className="text-3xl font-bold">250</span>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 h-32 flex flex-col justify-between">
-                <h2 className="text-sm font-medium text-gray-500">Categories</h2>
-                <div className="flex justify-between items-end">
-                  <span className="text-3xl font-bold">3</span>
-                  <span className="text-xs text-primary font-bold">View</span>
+            <div className="grid grid-cols-2 gap-4 auto-rows-fr">
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between col-span-2">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                    <Package size={16} className="text-blue-600" />
+                  </div>
+                  <h2 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Inventory</h2>
                 </div>
+                <span className="text-2xl font-extrabold text-slate-900">250 Products</span>
+              </div>
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                    <CheckCircle2 size={16} className="text-emerald-600" />
+                  </div>
+                  <h2 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active</h2>
+                </div>
+                <span className="text-2xl font-extrabold text-slate-900">242</span>
+              </div>
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
+                    <AlertTriangle size={16} className="text-amber-600" />
+                  </div>
+                  <h2 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Warnings</h2>
+                </div>
+                <span className="text-2xl font-extrabold text-slate-900">8</span>
               </div>
             </div>
 
-            <div className="space-y-4 pb-24">
+            <div className="space-y-4 pb-28">
+              <div className="flex items-center justify-between px-2">
+                <h3 className="text-lg font-extrabold text-slate-800">Your Inventory</h3>
+                <div className="flex gap-2">
+                  <button className="p-2 bg-white rounded-lg border border-slate-100 shadow-sm text-slate-400"><Search size={18} /></button>
+                  <button className="p-2 bg-white rounded-lg border border-slate-100 shadow-sm text-slate-400"><Filter size={18} /></button>
+                </div>
+              </div>
+
               {MOCK_PRODUCTS.map(product => (
-                <div key={product.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex gap-4 transition active:scale-[0.99]">
-                  <div className="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
-                    <img src={product.image} className="w-full h-full object-cover" alt={product.name} />
-                  </div>
-                  <div className="flex-1 flex flex-col justify-between relative">
-                    <button
-                      onClick={onEdit}
-                      className="absolute top-0 right-0 text-gray-400 p-1"
-                    >
-                      <Edit2 size={18} />
-                    </button>
-                    <div>
-                      <h3 className="font-semibold line-clamp-1">{product.name}</h3>
-                      <p className="text-sm text-green-600 font-medium">{product.price}</p>
+                <div key={product.id} className="group bg-white p-4 rounded-[1.75rem] shadow-sm border border-slate-100 transition-all active:scale-[0.98] relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[4rem] -z-10 transition-transform group-active:scale-95"></div>
+
+                  <div className="flex gap-4">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-md shrink-0 border-4 border-white">
+                      <img src={product.image} className="w-full h-full object-cover" alt={product.name} />
                     </div>
-                    <div className="flex justify-end">
-                      <button
-                        onClick={onReachBuyers}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-primary text-xs font-medium"
-                      >
-                        <MousePointerClick size={14} />
-                        Reach Buyers
-                      </button>
+
+                    <div className="flex-1 flex flex-col min-w-0 pt-1">
+                      <div className="flex justify-between items-start mb-1">
+                        <div className="min-w-0">
+                          <h3 className="font-extrabold text-slate-900 text-sm truncate pr-6">{product.name}</h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[9px] px-2 py-0.5 rounded-full bg-slate-50 text-slate-400 font-bold uppercase tracking-wider">{product.category}</span>
+                            <div className="flex items-center gap-1">
+                              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                              <span className="text-[9px] text-emerald-600 font-bold uppercase">Stock</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={onEdit}
+                          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 active:bg-slate-50"
+                        >
+                          <Edit2 size={14} />
+                        </button>
+                      </div>
+
+                      <div className="mt-auto flex items-center justify-between">
+                        <span className="text-base font-extrabold text-slate-900 tracking-tight">{product.price}</span>
+                        <button
+                          onClick={onReachBuyers}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-white text-[10px] font-bold shadow-lg shadow-primary/20 active:translate-y-0.5 transition-all"
+                        >
+                          <MousePointerClick size={12} />
+                          REACH BUYERS
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -77,9 +116,14 @@ const ProductManager: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers 
             </div>
           </div>
         </main>
-        <button onClick={onAdd} className="fixed bottom-6 right-6 bg-primary text-white rounded-full px-5 py-3 shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95 transition z-50">
-          <Plus size={24} />
-          <span className="font-medium">Add Product</span>
+        <button
+          onClick={onAdd}
+          className="fixed bottom-8 right-8 bg-primary text-white rounded-2xl px-6 py-4 shadow-[0_15px_30px_rgba(0,38,192,0.3)] flex items-center gap-3 hover:scale-105 active:scale-95 transition-all z-50 animate-in slide-in-from-bottom-10 duration-500"
+        >
+          <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center">
+            <Plus size={18} />
+          </div>
+          <span className="font-bold text-sm uppercase tracking-wider">New Product</span>
         </button>
       </div>
 

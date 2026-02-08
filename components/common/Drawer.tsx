@@ -21,7 +21,12 @@ import {
   Landmark,
   Send,
   LogOut,
-  CheckCircle
+  CheckCircle,
+  Users,
+  Layers,
+  Map,
+  Globe,
+  Settings
 } from 'lucide-react';
 
 interface Props {
@@ -61,28 +66,55 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
 
         <nav className="flex-1 overflow-y-auto no-scrollbar">
           {isOnboarding ? (
-            <div className="py-4">
-              <button
-                onClick={onClose}
-                className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-gray-600"
-              >
-                <Info className="text-gray-400" size={24} />
-                <span className="text-sm tracking-wide">Why AfricaMart</span>
-              </button>
-              <button
-                onClick={onClose}
-                className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-gray-600"
-              >
-                <CheckCircle className="text-gray-400" size={24} />
-                <span className="text-sm">Benefits</span>
-              </button>
-              <button
-                onClick={onClose}
-                className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-gray-600"
-              >
-                <HelpCircle className="text-gray-400" size={24} />
-                <span className="text-sm">FAQs</span>
-              </button>
+            <div className="flex flex-col h-full">
+              <div className="py-4 flex-1">
+                <div className="px-6 py-2 mb-2">
+                  <p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] bg-primary/5 w-fit px-3 py-1 rounded-full">Explore</p>
+                </div>
+                <button
+                  onClick={() => { onNavigate(View.ABOUT_US); if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-slate-600"
+                >
+                  <Globe className="text-slate-400" size={24} />
+                  <span className="text-sm font-bold tracking-wide">ABOUT US</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate(View.OUR_TEAM); if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-slate-600"
+                >
+                  <Users className="text-slate-400" size={24} />
+                  <span className="text-sm font-bold tracking-wide">OUR TEAM</span>
+                </button>
+
+                <div className="border-b border-gray-100 mx-6 my-4"></div>
+
+                <div className="px-6 py-2 mb-2">
+                  <p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] bg-primary/5 w-fit px-3 py-1 rounded-full">Support</p>
+                </div>
+                <button
+                  onClick={() => { onNavigate(View.FAQS); if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-slate-600"
+                >
+                  <HelpCircle className="text-slate-400" size={24} />
+                  <span className="text-sm font-bold tracking-wide">Help & Assistance</span>
+                </button>
+                <button
+                  onClick={() => { onNavigate(View.CONTACT_SUPPORT); if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-slate-600"
+                >
+                  <Headphones className="text-slate-400" size={24} />
+                  <span className="text-sm font-bold tracking-wide">Contact Support</span>
+                </button>
+              </div>
+
+              <div className="p-6 border-t border-gray-100">
+                <button
+                  onClick={() => { onNavigate(View.SIGNUP); if (window.innerWidth < 1024) onClose(); }}
+                  className="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
+                >
+                  Join AfricaMart
+                </button>
+              </div>
             </div>
           ) : (
             <>
@@ -161,6 +193,13 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                 {isHelpOpen && (
                   <div className="flex flex-col bg-white border-b border-gray-50">
                     <button
+                      onClick={() => { onNavigate(View.SETTINGS); if (window.innerWidth < 1024) onClose(); }}
+                      className={`w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium transition-colors ${currentView === View.SETTINGS ? 'bg-blue-50 text-primary' : 'text-gray-600 hover:bg-gray-50'}`}
+                    >
+                      <Settings className={currentView === View.SETTINGS ? 'text-primary' : 'text-gray-400'} size={20} />
+                      <span>Settings</span>
+                    </button>
+                    <button
                       onClick={() => { if (window.innerWidth < 1024) onClose(); }}
                       className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
                     >
@@ -168,24 +207,17 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                       <span>Help Center (FAQs)</span>
                     </button>
                     <button
-                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
-                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                      onClick={() => { onNavigate(View.CONTACT_SUPPORT); if (window.innerWidth < 1024) onClose(); }}
+                      className={`w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium transition-colors ${currentView === View.CONTACT_SUPPORT ? 'bg-blue-50 text-primary' : 'text-gray-600 hover:bg-gray-50'}`}
                     >
-                      <Headphones className="text-gray-400" size={20} />
+                      <Headphones className={currentView === View.CONTACT_SUPPORT ? 'text-primary' : 'text-gray-400'} size={20} />
                       <span>Contact Support</span>
                     </button>
                     <button
-                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
-                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                      onClick={() => { onNavigate(View.POLICIES); if (window.innerWidth < 1024) onClose(); }}
+                      className={`w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium transition-colors ${currentView === View.POLICIES ? 'bg-blue-50 text-primary' : 'text-gray-600 hover:bg-gray-50'}`}
                     >
-                      <AlertTriangle className="text-gray-400" size={20} />
-                      <span>Report a Problem</span>
-                    </button>
-                    <button
-                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
-                      className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-                    >
-                      <ShieldCheck className="text-gray-400" size={20} />
+                      <ShieldCheck className={currentView === View.POLICIES ? 'text-primary' : 'text-gray-400'} size={20} />
                       <span>Policies</span>
                     </button>
                   </div>
@@ -219,10 +251,10 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
             </>
           )}
         </nav>
-      </div>
+      </div >
 
       {/* Desktop Sidebar */}
-      <aside className="w-72 bg-white border-r border-slate-100 hidden lg:flex flex-col flex-shrink-0 z-20 fixed inset-y-0 left-0 font-display">
+      < aside className="w-72 bg-white border-r border-slate-100 hidden lg:flex flex-col flex-shrink-0 z-20 fixed inset-y-0 left-0 font-display" >
         <div className="px-8 h-[72px] flex items-center shrink-0 bg-white border-b border-slate-100">
           <h1 className="text-xl font-bold flex items-center gap-3 text-slate-800 tracking-tight">
             <span className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white shadow-sm shadow-brand/20">
@@ -320,16 +352,18 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                   <HelpCircle size={20} />
                   <span>Help Center (FAQs)</span>
                 </button>
-                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
-                  <Headphones size={20} />
+                <button
+                  onClick={() => onNavigate(View.CONTACT_SUPPORT)}
+                  className={`w-full flex items-center gap-4 px-6 py-3 text-sm font-medium transition-colors border-b border-slate-100/50 ${currentView === View.CONTACT_SUPPORT ? 'bg-slate-100 text-black' : 'text-slate-500 hover:text-black hover:bg-slate-100/50'}`}
+                >
+                  <Headphones className={currentView === View.CONTACT_SUPPORT ? 'text-black' : ''} size={20} />
                   <span>Contact Support</span>
                 </button>
-                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors border-b border-slate-100/50">
-                  <AlertTriangle size={20} />
-                  <span>Report a Problem</span>
-                </button>
-                <button className="w-full flex items-center gap-4 px-6 py-3 text-sm font-medium text-slate-500 hover:text-black hover:bg-slate-100/50 transition-colors">
-                  <ShieldCheck size={20} />
+                <button
+                  onClick={() => onNavigate(View.POLICIES)}
+                  className={`w-full flex items-center gap-4 px-6 py-3 text-sm font-medium transition-colors ${currentView === View.POLICIES ? 'bg-slate-100 text-black' : 'text-slate-500 hover:text-black hover:bg-slate-100/50'}`}
+                >
+                  <ShieldCheck className={currentView === View.POLICIES ? 'text-black' : ''} size={20} />
                   <span>Policies</span>
                 </button>
               </div>
@@ -361,7 +395,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
             <span className="font-medium text-sm">Logout</span>
           </button>
         </div>
-      </aside>
+      </aside >
     </>
   );
 };

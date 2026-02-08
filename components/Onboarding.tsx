@@ -41,7 +41,12 @@ import {
   Rocket,
   Languages,
   FileText,
-  Activity as ActivityIcon
+  Activity as ActivityIcon,
+  Youtube,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, any> = {
@@ -96,6 +101,7 @@ const WHY_SECTION_CONTENT = [
 
 interface Props {
   onNext: () => void;
+  onNavigate: (view: View) => void;
 }
 
 const LOCAL_TRADE_CONTENT = [
@@ -183,12 +189,13 @@ const DASHBOARD_SLIDES = [
   }
 ];
 
-const Onboarding: React.FC<Props> = ({ onNext }) => {
+const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
   const [activeWhySlide, setActiveWhySlide] = useState(0);
   const [activeDashboardSlide, setActiveDashboardSlide] = useState(0);
   const [activeLocalTradeSlide, setActiveLocalTradeSlide] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const benefitsScrollRef = React.useRef<HTMLDivElement>(null);
 
@@ -226,7 +233,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           isOpen={isMenuOpen}
           onClose={() => setIsMenuOpen(false)}
           isOnboarding={true}
-          onNavigate={() => { }}
+          onNavigate={onNavigate}
           currentView={View.ONBOARDING}
         />
 
@@ -290,7 +297,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           <section className="px-5 py-16 bg-slate-50">
             <div className="text-center mb-8">
               <span className="inline-block text-[10px] uppercase tracking-widest font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">Mission Driven</span>
-              <h2 className="text-2xl font-bold mb-4 text-slate-900">Why We Do What We Do</h2>
+              <h2 className="text-2xl font-bold mb-4 text-slate-900">Why We Do What We Do?</h2>
               <p className="font-serif italic text-lg text-slate-600 leading-relaxed px-4">
                 "We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross-border connectivity."
               </p>
@@ -308,7 +315,26 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Local Trade Section */}
-          <section className="px-5 py-16">
+          <section
+            className="px-5 py-16"
+            onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
+            onTouchEnd={(e) => {
+              if (touchStartX === null) return;
+              const touchEndX = e.changedTouches[0].clientX;
+              const diff = touchStartX - touchEndX;
+
+              if (Math.abs(diff) > 50) { // minimum swipe distance
+                if (diff > 0) {
+                  // Swipe left -> Next slide
+                  setActiveLocalTradeSlide((prev) => (prev + 1) % LOCAL_TRADE_CONTENT.length);
+                } else {
+                  // Swipe right -> Prev slide
+                  setActiveLocalTradeSlide((prev) => (prev - 1 + LOCAL_TRADE_CONTENT.length) % LOCAL_TRADE_CONTENT.length);
+                }
+              }
+              setTouchStartX(null);
+            }}
+          >
             <div className="flex items-center justify-between mb-8">
               <div className="flex justify-between w-24">
                 {LOCAL_TRADE_CONTENT.map((_, idx) => (
@@ -323,14 +349,14 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             </div>
 
             <div className="transition-all duration-500 transform">
-              <h2 className="text-3xl font-extrabold uppercase tracking-tight mb-4 text-slate-900 leading-none min-h-[4rem]">
+              <h2 className="text-3xl font-extrabold uppercase tracking-tight mb-4 text-slate-900 leading-none min-h-[4rem] animate-in fade-in slide-in-from-right-4 duration-500">
                 {LOCAL_TRADE_CONTENT[activeLocalTradeSlide].title.split(' ').map((word, i) => (
                   <React.Fragment key={i}>
                     {word} {i === 0 && <br />}
                   </React.Fragment>
                 ))}
               </h2>
-              <p className="text-slate-500 mb-8 leading-relaxed text-sm">
+              <p className="text-slate-500 mb-8 leading-relaxed text-sm animate-in fade-in slide-in-from-right-8 duration-700">
                 {LOCAL_TRADE_CONTENT[activeLocalTradeSlide].text}
               </p>
               <div className="mb-8 rounded-3xl overflow-hidden shadow-lg border border-slate-100 h-56 relative group">
@@ -338,14 +364,12 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                   <img
                     key={idx}
                     alt={slide.title}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${idx === activeLocalTradeSlide ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${idx === activeLocalTradeSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'}`}
                     src={slide.mobileImage || slide.image}
                   />
                 ))}
               </div>
             </div>
-
-
           </section>
 
           {/* Benefits Section */}
@@ -356,21 +380,24 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
             </div>
             <div className="space-y-6">
               {[
-                { icon: 'layers', title: 'Easy Setup & Toolkit', text: 'Professional listing, pricing, and promotion tools. Launch your continental storefront with intuitive systems.' },
-                { icon: 'public', title: 'Global Reach', text: 'Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into Pan-African markets.' },
-                { icon: 'star', title: 'Brand Visibility', text: 'Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques.' },
-                { icon: 'verified_user', title: 'Verified Seller Status', text: 'Build instant trust with buyers through our verification process. Get the TrustSEAL badge and stand out.' }
+                { icon: 'star', title: 'Business Visibility', text: 'Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques that ensure your products are always discoverable.' },
+                { icon: 'language', title: 'Continental Reach', text: 'Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into the burgeoning Pan-African market landscape.' },
+                { icon: 'verified_user', title: 'Verified Seller Status', text: 'Build instant trust with buyers through our verification process. Get the TrustSEAL badge and stand out as a reliable continental trade partner.' },
+                { icon: 'layers', title: 'Easy Setup & Toolkit', text: 'Professional listing, pricing, and promotion tools. Launch your continental storefront with intuitive systems.' }
               ].map((benefit, i) => (
-                <div key={i} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
-                    {React.createElement(ICON_MAP[benefit.icon] || Globe, { className: "w-6 h-6 text-primary" })}
+                <div key={i} className="group bg-white p-7 rounded-[2.25rem] shadow-sm border border-slate-100 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-24 h-24 bg-primary/5 rounded-br-full transform -translate-x-6 -translate-y-6 transition-transform duration-500"></div>
+                  <div className="relative z-10 mb-5">
+                    <div className="w-14 h-14 bg-primary rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center p-3">
+                      {React.createElement(ICON_MAP[benefit.icon] || Globe, { className: "w-8 h-8 text-white" })}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-slate-900">{benefit.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                  <h3 className="text-xl font-extrabold mb-3 text-slate-900 leading-tight">{benefit.title}</h3>
+                  <p className="text-slate-500 text-[15px] leading-relaxed mb-6">
                     {benefit.text}
                   </p>
-                  <a className="text-primary text-xs font-bold flex items-center gap-1" href="#">
-                    Learn More <ChevronRight className="w-4 h-4" />
+                  <a className="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-wide group/link" href="#">
+                    Learn More <MoveRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
                   </a>
                 </div>
               ))}
@@ -380,11 +407,30 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           {/* Dashboard Section */}
           <section className="px-5 py-16 overflow-hidden bg-white">
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold mb-3 text-slate-900 tracking-tight">Intuitive Seller Dashboard</h2>
+              <h2 className="text-3xl font-extrabold mb-3 text-slate-900 tracking-tight">Dashboard Overview</h2>
               <p className="text-slate-500 text-sm">Experience a seamless workflow with our state-of-the-art seller dashboard. </p>
             </div>
 
-            <div className="relative py-10 flex flex-col items-center">
+            <div
+              className="relative py-10 flex flex-col items-center"
+              onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
+              onTouchEnd={(e) => {
+                if (touchStartX === null) return;
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > 50) { // minimum swipe distance
+                  if (diff > 0) {
+                    // Swipe left -> Next slide
+                    setActiveDashboardSlide((prev) => (prev + 1) % DASHBOARD_SLIDES.length);
+                  } else {
+                    // Swipe right -> Prev slide
+                    setActiveDashboardSlide((prev) => (prev - 1 + DASHBOARD_SLIDES.length) % DASHBOARD_SLIDES.length);
+                  }
+                }
+                setTouchStartX(null);
+              }}
+            >
               {/* Interaction Dots */}
               <div className="flex justify-center gap-6 mb-8">
                 {DASHBOARD_SLIDES.map((_, idx) => (
@@ -507,57 +553,66 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Mobile Brand Footer */}
-          <footer className="bg-[#0026C0] text-white pt-12 pb-6 px-8 mt-12 rounded-t-[3rem]">
-            <div className="max-w-md mx-auto flex flex-col items-center">
-              <div className="flex items-center gap-6 mb-10">
-                <a className="hover:opacity-80 transition-opacity" href="#">
-                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg>
-                </a>
-                <a className="hover:opacity-80 transition-opacity" href="#">
-                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
-                </a>
-                <a className="hover:opacity-80 transition-opacity" href="#">
-                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.261 7.929-7.261 4.162 0 7.397 2.965 7.397 6.93 0 4.135-2.607 7.462-6.225 7.462-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.034-1.002 2.331-1.492 3.131C10.287 23.818 11.127 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"></path></svg>
-                </a>
-                <a className="hover:opacity-80 transition-opacity" href="#">
-                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
-                </a>
-                <a className="hover:opacity-80 transition-opacity" href="#">
-                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.981 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
-                </a>
-              </div>
-              <p className="text-center text-sm font-medium leading-relaxed mb-8 opacity-90">
-                You're receiving this because you signed up for <span className="font-bold">AFRICAMART</span>
-              </p>
-              <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-center text-xs font-semibold mb-12 w-full max-w-[280px]">
-                <a className="hover:underline transition-all" href="#">Buy Leads</a>
-                <a className="hover:underline transition-all" href="#">RFQ Request</a>
-                <a className="hover:underline transition-all" href="#">Success Stories</a>
-                <a className="hover:underline transition-all" href="#">Investors</a>
-                <a className="hover:underline transition-all" href="#">Our Mission</a>
-                <a className="hover:underline transition-all" href="#">Careers</a>
-                <a className="hover:underline transition-all" href="#">Newsroom</a>
-                <a className="hover:underline transition-all" href="#">Support</a>
-              </div>
-              <div className="flex flex-col items-center mb-8">
-                <div className="flex items-center gap-2">
-                  <Store className="w-8 h-8" />
+          <footer className="bg-[#001B4B] text-white pt-16 pb-12 px-8 mt-12 rounded-t-[3rem] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+            <div className="max-w-md mx-auto relative z-10">
+              {/* Brand Section */}
+              <div className="flex flex-col items-center mb-12 text-center">
+                <div className="flex items-center gap-2 mb-4">
+                  <Store className="w-9 h-9 text-blue-400" />
                   <div className="flex flex-col leading-none">
-                    <span className="text-xl font-extrabold tracking-tight uppercase">Africa</span>
-                    <span className="text-xl font-light tracking-widest uppercase text-white/80">Mart</span>
+                    <span className="text-2xl font-black tracking-tighter uppercase">Africa</span>
+                    <span className="text-2xl font-light tracking-widest uppercase text-white/70">Mart</span>
                   </div>
                 </div>
+                <p className="text-sm text-blue-200/60 max-w-xs leading-relaxed font-medium">
+                  Empowering African businesses with digital tools for global trade and local excellence.
+                </p>
               </div>
-              <div className="text-[10px] font-bold tracking-wide uppercase opacity-70 text-center space-x-2">
-                <a className="hover:underline" href="#">Privacy</a>
-                <span>|</span>
-                <a className="hover:underline" href="#">Contact</a>
-                <span>|</span>
-                <a className="hover:underline" href="#">Unsubscribe</a>
+
+              {/* Links Grid */}
+              <div className="grid grid-cols-2 gap-x-8 gap-y-10 mb-16 px-4">
+                <div className="space-y-5">
+                  <h4 className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">B2B Growth</h4>
+                  <ul className="space-y-4 text-[13px] font-bold text-white/80">
+                    <li><a href="#" className="hover:text-white transition-colors">Sell on AfricaMart</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">RFQ Marketplace</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Bulk Trading</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Seller Success</a></li>
+                  </ul>
+                </div>
+                <div className="space-y-5">
+                  <h4 className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">Startup Info</h4>
+                  <ul className="space-y-4 text-[13px] font-bold text-white/80">
+                    <li><a href="#" className="hover:text-white transition-colors">Our Mission</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Tech Stack</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Verification</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Scale Program</a></li>
+                  </ul>
+                </div>
               </div>
-              <p className="mt-8 text-[9px] opacity-50 text-center uppercase tracking-widest">
-                © 2026 AfricaMart Inc. All rights reserved.
-              </p>
+
+              {/* Social & Contact */}
+              <div className="flex flex-col items-center border-t border-white/10 pt-12">
+                <div className="flex gap-7 mb-10 text-white/40">
+                  <a href="#" className="hover:text-blue-400 transition-all hover:scale-110"><Youtube size={22} /></a>
+                  <a href="#" className="hover:text-blue-400 transition-all hover:scale-110"><Facebook size={22} /></a>
+                  <a href="#" className="hover:text-blue-400 transition-all hover:scale-110"><Instagram size={22} /></a>
+                  <a href="#" className="hover:text-blue-400 transition-all hover:scale-110"><Twitter size={22} /></a>
+                  <a href="#" className="hover:text-blue-400 transition-all hover:scale-110"><Linkedin size={22} /></a>
+                </div>
+
+                <div className="text-[10px] font-black tracking-widest uppercase text-white/30 flex flex-wrap justify-center gap-x-5 gap-y-3 mb-8">
+                  <a href="#" className="hover:text-white">Privacy Policy</a>
+                  <a href="#" className="hover:text-white">Terms of Use</a>
+                  <a href="#" className="hover:text-white">Return Policy</a>
+                </div>
+
+                <p className="text-[9px] text-white/20 uppercase tracking-[0.3em] font-bold">
+                  © 2026 AfricaMart Inc. All rights reserved.
+                </p>
+              </div>
             </div>
           </footer>
         </main>
@@ -575,9 +630,13 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
               </a>
             </div>
             <nav className="flex items-center gap-10">
-              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#how-it-works">How it Works</a>
-              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#benefits">Benefits</a>
-              <a className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#faqs">FAQs</a>
+              <button className="text-sm font-bold text-primary uppercase">THE PLATFORM</button>
+              <button
+                onClick={() => onNavigate(View.ABOUT_US)}
+                className="text-sm font-bold text-slate-600 hover:text-primary transition-colors uppercase"
+              >
+                ABOUT US
+              </button>
             </nav>
             <div className="flex items-center gap-6">
               <a className="text-sm font-bold text-slate-700 hover:text-primary transition-colors" href="#">Login</a>
@@ -593,7 +652,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
 
         <main>
           {/* Hero Section */}
-          <section className="bg-white dark:bg-slate-900 overflow-hidden py-24 md:py-32 lg:pt-44">
+          <section className="bg-white dark:bg-slate-900 overflow-hidden py-16 md:py-20 lg:pt-32">
             <div className="max-w-6xl mx-auto px-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="flex flex-col items-start text-left order-2 lg:order-1">
@@ -643,7 +702,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Mission Section */}
-          <section className="relative py-24 md:py-32 bg-section-grey border-y border-slate-100 overflow-hidden">
+          <section id="mission" className="relative py-16 md:py-20 bg-section-grey border-y border-slate-100 overflow-hidden">
             <div className="absolute inset-0 bg-pattern-africa opacity-[0.03] pointer-events-none"></div>
             <div className="relative max-w-5xl mx-auto px-4 text-center">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-8">
@@ -651,13 +710,12 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                 Mission Driven
               </div>
               <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
-                Why We Do What We Do
+                Why We Do What We Do?
               </h2>
               <div className="flex flex-col items-center">
                 <div className="relative mb-8">
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 text-primary/10 text-7xl font-serif select-none">"</span>
-                  <p className="text-xl md:text-2xl text-slate-800 leading-relaxed font-serif italic max-w-3xl mx-auto px-6 relative z-10">
-                    "We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity."
+                  <p className="text-xl md:text-2xl text-slate-800 leading-relaxed font-serif  max-w-3xl mx-auto px-6 relative z-10">
+                    We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
@@ -678,7 +736,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Local Trade Section */}
-          <section className="py-20 md:py-32 px-4 bg-section-grey dark:bg-slate-800/50">
+          <section className="py-12 md:py-12 px-4 bg-section-grey dark:bg-slate-800/50">
             <div className="max-w-6xl mx-auto">
               <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                 <div className="w-full lg:w-[45%] flex flex-col items-start">
@@ -686,7 +744,6 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                     {LOCAL_TRADE_CONTENT.map((_, idx) => (
                       <button
                         key={idx}
-                        onMouseEnter={() => setActiveLocalTradeSlide(idx)}
                         onClick={() => setActiveLocalTradeSlide(idx)}
                         className={`text-lg font-bold tracking-widest transition-all duration-300 ${activeLocalTradeSlide === idx ? 'text-primary scale-110' : 'text-slate-300 hover:text-slate-400'}`}
                       >
@@ -705,8 +762,8 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                     {LOCAL_TRADE_CONTENT.map((item, idx) => (
                       <div
                         key={idx}
-                        onMouseEnter={() => setActiveLocalTradeSlide(idx)}
-                        className={`group cursor-pointer transition-all duration-500 ${activeLocalTradeSlide === idx ? 'translate-x-4' : 'opacity-40 hover:opacity-60'}`}
+                        onClick={() => setActiveLocalTradeSlide(idx)}
+                        className={`group cursor-pointer transition-all duration-500 ${activeLocalTradeSlide === idx ? 'translate-x-4' : 'opacity-40 hover:opacity-100'}`}
                       >
                         <h2 className={`text-4xl font-extrabold mb-4 transition-colors duration-300 ${activeLocalTradeSlide === idx ? 'text-slate-900' : 'text-slate-400'} uppercase tracking-tight`}>
                           {item.title.split(' ').map((word, i) => (
@@ -744,7 +801,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Benefits Section */}
-          <section className="relative py-16 md:py-24 overflow-hidden bg-section-grey" id="benefits">
+          <section className="relative py-12 md:py-16 overflow-hidden bg-section-grey" id="benefits">
             <div className="absolute inset-0 opacity-[0.05] pointer-events-none topo-bg scale-150 transform"></div>
             <div className="absolute -right-20 -top-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
             <div className="absolute -left-20 -bottom-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -774,18 +831,18 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                   ref={benefitsScrollRef}
                   className="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory py-4 scroll-smooth"
                 >
-                  {/* Card 1 */}
+                  {/* Card 1 - Business Visibility (Swapped) */}
                   <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
-                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
-                      <div className="relative z-10 mb-6">
-                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
-                          <Layers className="w-12 h-12 text-primary font-light" />
+                    <div className="group glass-card p-7 rounded-[2.25rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full min-h-[320px] relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-br-full transform -translate-x-8 -translate-y-8 group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-5">
+                        <div className="w-14 h-14 bg-primary rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center p-3">
+                          <Star className="w-8 h-8 text-white" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Easy Setup & Toolkit</h3>
-                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
-                        Professional listing, pricing and promotion tools. Launch your continental storefront with intuitive systems built for speed and scale.
+                      <h3 className="text-[22px] font-extrabold mb-3 text-slate-900 leading-tight">Business Visibility</h3>
+                      <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
+                        Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques that ensure your products are always discoverable.
                       </p>
                       <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
                         Learn More
@@ -796,15 +853,15 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
 
                   {/* Card 2 */}
                   <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
-                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
-                      <div className="relative z-10 mb-6">
-                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
-                          <Languages className="w-12 h-12 text-primary font-light" />
+                    <div className="group glass-card p-7 rounded-[2.25rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full min-h-[320px] relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-br-full transform -translate-x-8 -translate-y-8 group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-5">
+                        <div className="w-14 h-14 bg-primary rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center p-3">
+                          <Languages className="w-8 h-8 text-white" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Global Reach</h3>
-                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
+                      <h3 className="text-[22px] font-extrabold mb-3 text-slate-900 leading-tight">Continental Reach</h3>
+                      <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
                         Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into the burgeoning Pan-African market landscape.
                       </p>
                       <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
@@ -814,18 +871,18 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                     </div>
                   </div>
 
-                  {/* Card 3 */}
+                  {/* Card 3 - Verified Seller Status (Swapped) */}
                   <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
-                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
-                      <div className="relative z-10 mb-6">
-                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
-                          <Star className="w-12 h-12 text-primary font-light" />
+                    <div className="group glass-card p-7 rounded-[2.25rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full min-h-[320px] relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-br-full transform -translate-x-8 -translate-y-8 group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-5">
+                        <div className="w-14 h-14 bg-primary rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center p-3">
+                          <ShieldCheck className="w-8 h-8 text-white" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Brand Visibility</h3>
-                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
-                        Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques that ensure your products are always discoverable.
+                      <h3 className="text-[22px] font-extrabold mb-3 text-slate-900 leading-tight">Verified Seller Status</h3>
+                      <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
+                        Build instant trust with buyers through our verification process. Get the TrustSEAL badge and stand out as a reliable continental trade partner.
                       </p>
                       <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
                         Learn More
@@ -834,18 +891,18 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                     </div>
                   </div>
 
-                  {/* Card 4 */}
+                  {/* Card 4 - Easy Setup & Toolkit (Swapped) */}
                   <div className="flex-shrink-0 w-full lg:w-[calc(33.333%-21.33px)] snap-start">
-                    <div className="group glass-card p-8 rounded-[2.5rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
-                      <div className="relative z-10 mb-6">
-                        <div className="w-20 h-20 bg-white rounded-3xl shadow-lg flex items-center justify-center p-4 border border-slate-100">
-                          <ShieldCheck className="w-12 h-12 text-primary font-light" />
+                    <div className="group glass-card p-7 rounded-[2.25rem] transition-all duration-500 hover:translate-y-[-8px] hover:shadow-2xl hover:shadow-primary/10 flex flex-col h-full min-h-[320px] relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-br-full transform -translate-x-8 -translate-y-8 group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
+                      <div className="relative z-10 mb-5">
+                        <div className="w-14 h-14 bg-primary rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center p-3">
+                          <Layers className="w-8 h-8 text-white" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-extrabold mb-4 text-slate-900 leading-tight">Verified Seller Status</h3>
-                      <p className="text-slate-600 leading-relaxed text-lg mb-6 flex-grow">
-                        Build instant trust with buyers through our verification process. Get the TrustSEAL badge and stand out as a reliable continental trade partner.
+                      <h3 className="text-[22px] font-extrabold mb-3 text-slate-900 leading-tight">Easy Setup & Toolkit</h3>
+                      <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
+                        Professional listing, pricing and promotion tools. Launch your continental storefront with intuitive systems built for speed and scale.
                       </p>
                       <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
                         Learn More
@@ -859,11 +916,11 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Dashboard Section */}
-          <section className="py-24 md:py-32 bg-white">
+          <section id="about-us" className="py-16 md:py-20 bg-white">
             <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight">
-                  Intuitive Seller Dashboard
+                  Dashboard Overview
                 </h2>
                 <p className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
                   Experience a seamless workflow with our state-of-the-art seller dashboard. Manage products, track leads, and monitor your business growth with ease.
@@ -920,9 +977,9 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
 
           {/* Procedures Section */}
-          <section className="py-24 md:py-40 px-4 bg-white" id="how-it-works">
+          <section className="py-16 md:py-24 px-4 bg-white" id="how-it-works">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-24">
+              <div className="text-center mb-16">
                 <h2 className="text-4xl font-extrabold mb-4 text-slate-900">Seller's Procedures</h2>
                 <p className="text-xl text-slate-500">
                   Complete guide to AfricaMart Seller Authentication Process
@@ -989,7 +1046,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
                   </div>
                 </div>
               </div>
-              <div className="mt-24 flex justify-center">
+              <div className="mt-16 flex justify-center">
                 <button
                   onClick={onNext}
                   className="bg-primary hover:bg-blue-700 text-white font-bold py-5 px-16 rounded-xl transition-all w-full md:w-auto text-lg uppercase tracking-wide shadow-xl shadow-blue-500/20"
@@ -1001,7 +1058,7 @@ const Onboarding: React.FC<Props> = ({ onNext }) => {
           </section>
         </main>
 
-        <footer className="pt-24 bg-[#0026C0] text-white">
+        <footer className="pt-16 bg-[#0026C0] text-white">
           <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-12 pb-20">
             <div className="md:col-span-4 space-y-8">
               <div className="flex items-center space-x-2">

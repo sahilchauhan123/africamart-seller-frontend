@@ -50,16 +50,6 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                 </button>
               ))}
             </div>
-            <div className="shrink-0 border-l border-gray-100 pl-3">
-              <select
-                value={sortOrder}
-                onChange={(e) => setSortOrder(e.target.value as any)}
-                className="bg-gray-50 text-[10px] font-bold text-gray-500 uppercase px-2 py-1.5 rounded-lg outline-none border border-gray-100"
-              >
-                <option value="Newest">Newest</option>
-                <option value="Oldest">Oldest</option>
-              </select>
-            </div>
           </div>
         </div>
 

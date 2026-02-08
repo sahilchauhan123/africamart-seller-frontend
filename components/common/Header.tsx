@@ -28,14 +28,14 @@ const Header: React.FC<HeaderProps> = (props) => {
 
     const isInquiryList = currentView === View.INQUIRY_LIST;
     const isDashboard = currentView === View.DASHBOARD;
-    const showBackButton = (isLeadDetails || isAddProduct || currentView === View.RECENT_UPLOADS || currentView === View.EDIT_PROFILE) && onBack;
+    const showBackButton = (isLeadDetails || isAddProduct || currentView === View.RECENT_UPLOADS || currentView === View.EDIT_PROFILE || currentView === View.SETTINGS) && onBack;
     const isListView = isProductManager || isInquiryList || currentView === View.BUSINESS_INFO;
     return (
         <>
             {/* Mobile Header */}
             <header className={`bg-primary fixed top-0 left-0 right-0 z-50 px-4 h-16 shadow-md lg:hidden ${currentView === View.EDIT_PROFILE ? 'hidden' : 'flex'} items-center shrink-0`}>
                 <div className="flex items-center justify-between gap-3 max-w-7xl mx-auto w-full">
-                    {showBackButton || isListView ? (
+                    {(showBackButton && currentView !== View.SETTINGS) || isListView ? (
                         <div className="flex items-center w-full relative">
                             {isListView ? (
                                 <button onClick={onOpenDrawer} className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center z-10">
@@ -107,7 +107,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                             <Bell size={24} />
                             <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-primary pointer-events-none"></span>
                         </button>
-                        <button className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all text-white">
+                        <button onClick={() => onNavigate(View.SETTINGS)} className={`w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all text-white ${currentView === View.SETTINGS ? 'bg-white/20' : ''}`}>
                             <Settings size={24} />
                         </button>
                     </div>
