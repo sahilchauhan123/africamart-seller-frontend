@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Building2, MapPin, Globe, Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Building2, MapPin, Globe, Phone, ArrowRight, CheckCircle2, Trophy, PartyPopper } from 'lucide-react';
 
 interface Props {
     onBack: () => void;
@@ -12,26 +12,59 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
 
     return (
         <>
-            {/* Success Overlay Modal */}
+            {/* Congratulation Overlay Modal */}
             {showModal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-                    <div className="absolute inset-0 bg-primary/20 backdrop-blur-md transition-opacity duration-300"></div>
-                    <div className="relative bg-white rounded-[2.5rem] p-8 lg:p-12 w-full max-w-sm lg:max-w-md shadow-2xl border border-white/50 transform transition-all duration-500 scale-100 animate-in fade-in zoom-in">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 overflow-hidden">
+                    <style>{`
+                        @keyframes fadeInUp {
+                            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+                            to { opacity: 1; transform: translateY(0) scale(1); }
+                        }
+                        .animate-fade-up {
+                            animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                        }
+                    `}</style>
+                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xl transition-opacity duration-500"></div>
+
+                    {/* Animated Background Elements */}
+                    <div className="absolute top-1/4 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+                    <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-700"></div>
+
+                    <div className="relative bg-white rounded-[2.5rem] p-8 lg:p-10 w-full max-w-[400px] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.3)] border border-white/20 transform transition-all animate-fade-up">
+                        {/* Decorative Confetti Shapes */}
+                        <div className="absolute -top-4 -right-4 w-10 h-10 bg-yellow-400 rounded-lg rotate-12 animate-bounce shadow-lg flex items-center justify-center">
+                            <PartyPopper className="text-white w-5 h-5" />
+                        </div>
+                        <div className="absolute -bottom-2 -left-2 w-8 h-8 bg-primary rounded-full animate-bounce delay-300 shadow-lg flex items-center justify-center">
+                            <Trophy className="text-white w-4 h-4" />
+                        </div>
+
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
-                                <CheckCircle2 className="text-green-500 w-12 h-12" />
+                            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-green-200/50 rotate-3">
+                                <CheckCircle2 className="text-white w-10 h-10" />
                             </div>
-                            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 mb-4 tracking-tight">Success!</h2>
-                            <p className="text-slate-500 leading-relaxed mb-10 text-sm lg:text-base px-2">
-                                Your basic profile is set. Please complete the <span className="font-bold text-primary">remaining business details</span> on your onboarding task list to go live.
+
+                            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 mb-3 tracking-tight">
+                                Congratulations!
+                            </h2>
+
+                            <p className="text-slate-500 leading-relaxed mb-8 text-sm lg:text-base font-medium px-2">
+                                Your business profile has been <span className="text-green-600 font-bold">successfully created</span>. You're now ready to connect with buyers across Africa!
                             </p>
-                            <button
-                                onClick={onNext}
-                                className="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 lg:py-5 rounded-full shadow-lg shadow-primary/30 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 text-sm lg:text-base tracking-wide"
-                            >
-                                GO TO DASHBOARD
-                                <ArrowRight size={20} />
-                            </button>
+
+                            <div className="w-full space-y-4">
+                                <button
+                                    onClick={onNext}
+                                    className="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-xl shadow-primary/30 transform active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 text-base tracking-wide group"
+                                >
+                                    GET STARTED
+                                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                </button>
+
+                                <p className="text-xs text-slate-400 font-semibold uppercase tracking-[0.2em]">
+                                    Welcome to AfricaMart
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,48 +134,50 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
 
             {/* Desktop View */}
             <div className={`hidden lg:flex h-screen overflow-hidden bg-white font-sans transition-all duration-500 ${showModal ? 'blur-sm grayscale-[0.2]' : ''}`}>
-                <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white">
-                    <div className="w-full max-w-md space-y-10">
+                <div className="w-1/2 flex items-center justify-center bg-white overflow-hidden">
+                    <div className="w-full max-w-md space-y-4 py-4">
                         <div>
-                            <h1 className="text-4xl font-black tracking-tight text-primary mb-4">
-                                Business Profile
-                            </h1>
-                            <p className="text-lg text-gray-500 leading-relaxed">
-                                Tell us more about your business to get tailored opportunities and verified status.
-                            </p>
+                            <div className="text-center">
+                                <h1 className="text-3xl font-black tracking-tight text-primary mb-1">
+                                    Business Profile
+                                </h1>
+                                <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                                    Complete your profile to get tailored opportunities and verified status.
+                                </p>
+                            </div>
                         </div>
 
-                        <div className="bg-[#F0F4FF] p-10 rounded-[2.5rem] shadow-sm border border-primary/5 space-y-8">
-                            <div className="space-y-6">
-                                <div>
-                                    <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase mb-3">
+                        <div className="bg-[#F0F4FF] p-6 lg:p-8 rounded-[2rem] shadow-sm border border-primary/5 space-y-4">
+                            <div className="space-y-5">
+                                <div className="space-y-1.5">
+                                    <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase pl-1">
                                         <Building2 size={14} /> Registered Business Name
                                     </label>
                                     <input
-                                        className="w-full px-5 py-4 bg-white border-none rounded-2xl focus:ring-2 focus:ring-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-medium"
+                                        className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                         placeholder="Enter your company name"
                                         type="text"
                                     />
                                 </div>
 
-                                <div>
-                                    <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase mb-3">
+                                <div className="space-y-1.5">
+                                    <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase pl-1">
                                         <MapPin size={14} /> Head Office Address
                                     </label>
                                     <input
-                                        className="w-full px-5 py-4 bg-white border-none rounded-2xl focus:ring-2 focus:ring-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-medium"
+                                        className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                         placeholder="Physical location"
                                         type="text"
                                     />
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-6">
-                                    <div>
-                                        <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase mb-3">
+                                    <div className="space-y-1.5">
+                                        <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase pl-1">
                                             <Globe size={14} /> Country
                                         </label>
                                         <div className="relative">
-                                            <select className="w-full px-5 py-4 bg-white border-none rounded-2xl focus:ring-2 focus:ring-primary transition-all outline-none text-gray-900 shadow-sm font-medium appearance-none cursor-pointer">
+                                            <select className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 shadow-sm font-semibold appearance-none cursor-pointer">
                                                 <option>Liberia</option>
                                                 <option>Nigeria</option>
                                                 <option>Ghana</option>
@@ -150,12 +185,12 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                                             </select>
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase mb-3">
+                                    <div className="space-y-1.5">
+                                        <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase pl-1">
                                             <Phone size={14} /> Business Contact
                                         </label>
                                         <input
-                                            className="w-full px-5 py-4 bg-white border-none rounded-2xl focus:ring-2 focus:ring-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-medium"
+                                            className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                             placeholder="+231..."
                                             type="tel"
                                         />
@@ -166,10 +201,10 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
 
                         <button
                             onClick={() => setShowModal(true)}
-                            className="w-full py-5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-2xl shadow-primary/40 text-lg flex items-center justify-center gap-3 tracking-wide"
+                            className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-xl shadow-primary/40 text-lg flex items-center justify-center gap-3 tracking-wide"
                         >
                             COMPLETE SETUP
-                            <ArrowRight size={24} />
+                            <ArrowRight size={20} />
                         </button>
                     </div>
                 </div>

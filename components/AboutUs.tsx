@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View } from '../types';
-import { Store, X, Map, Users, Layers, HelpCircle, Headphones, ArrowRight, MoveRight, Rocket, Search, Bot, ChevronRight, RotateCcw, TrendingUp, Truck, Globe, Check, MapPin, Mail, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Store, X, Map, Users, Layers, HelpCircle, Headphones, Rocket, Search, Bot, ChevronRight, RotateCcw, TrendingUp, Truck, Globe, Check, MapPin, Mail, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import TeamSection from './common/TeamSection';
 
 interface Props {
@@ -48,7 +48,7 @@ const AboutUs: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
                         <button className="text-sm font-bold text-primary uppercase">ABOUT US</button>
                     </nav>
                     <div className="flex items-center gap-6">
-                        <a className="text-sm font-bold text-slate-700 hover:text-primary transition-colors" href="#">Login</a>
+                        <button onClick={() => onNavigate(View.LOGIN)} className="text-sm font-bold text-slate-700 hover:text-primary transition-colors">Login</button>
                         <button
                             onClick={onSignup}
                             className="bg-primary hover:bg-blue-700 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all"
@@ -60,8 +60,9 @@ const AboutUs: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
             </header>
 
             <main className="lg:pt-20">
+
                 {/* Mission & Vision Section */}
-                <section className="bg-white py-14 lg:py-16 border-y border-[#f0f1f5]">
+                <section className="bg-white pb-14 lg:pb-16 pt-4 border-y border-[#f0f1f5]">
                     <div className="max-w-7xl mx-auto px-6 lg:px-10">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Mission Card */}

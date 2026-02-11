@@ -2,7 +2,7 @@
 import { Product, Inquiry, User } from './types';
 
 export const MOCK_USER: User = {
-  name: 'John Doe',
+  name: 'Username',
   businessName: 'Global Agro Supplies Ltd.',
   category: 'Wholesale Distributor',
   location: 'Paynesville, Monrovia',

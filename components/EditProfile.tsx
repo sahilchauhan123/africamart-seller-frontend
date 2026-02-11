@@ -216,7 +216,22 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
                     <FileText size={20} />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-bold text-slate-400">Proof of Address</h4>
+                    <h4 className="text-sm font-bold text-slate-800">Proof of Address</h4>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight italic">Not uploaded yet</p>
+                  </div>
+                </div>
+                <button className="bg-primary text-white p-2 rounded-xl shadow-lg shadow-primary/20">
+                  <Upload size={18} />
+                </button>
+              </div>
+
+              <div className="bg-slate-50 rounded-2xl p-5 border border-dashed border-slate-200 flex items-center justify-between group active:scale-[0.98] transition-all">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-300 shadow-sm border border-slate-100">
+                    <FileText size={20} />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-bold text-slate-800">GST/Tax Certificate</h4>
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight italic">Not uploaded yet</p>
                   </div>
                 </div>
@@ -244,20 +259,20 @@ const EditProfile: React.FC<Props> = ({ onBack, onSave }) => {
       {/* Mobile View */}
       <div className="lg:hidden h-full flex flex-col overflow-hidden bg-white">
         {/* Mobile Custom Header */}
-        <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-100 flex items-center px-4 z-50">
+        <header className="fixed top-0 left-0 right-0 h-16 bg-primary flex items-center px-4 z-50 shadow-md">
           <button
             onClick={step > 1 ? () => setStep(step - 1) : onBack}
-            className="p-2 -ml-2 text-slate-400 hover:text-primary transition-colors active:scale-90"
+            className="p-2 -ml-2 text-white/80 hover:text-white transition-colors active:scale-90"
           >
             <ChevronLeft size={24} />
           </button>
           <div className="flex-1 text-center">
-            <h1 className="text-sm font-black uppercase tracking-widest text-slate-800">Edit Profile</h1>
+            <h1 className="text-lg font-semibold tracking-tight text-white">Edit Profile</h1>
           </div>
           <div className="w-10"></div>
         </header>
 
-        <main className="flex-1 mt-16 px-5 py-8 overflow-y-auto no-scrollbar pb-32">
+        <main className="flex-1 pt-20 px-5 overflow-y-auto no-scrollbar pb-32">
           {renderStepIndicator()}
 
           <div className="max-w-sm mx-auto">

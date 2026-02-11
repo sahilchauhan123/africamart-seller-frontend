@@ -396,9 +396,20 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
                   <p className="text-slate-500 text-[15px] leading-relaxed mb-6">
                     {benefit.text}
                   </p>
-                  <a className="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-wide group/link" href="#">
+                  <button
+                    onClick={() => {
+                      if (benefit.title === 'Business Visibility') {
+                        onNavigate(View.BUSINESS_VISIBILITY);
+                      } else if (benefit.title === 'Continental Reach') {
+                        onNavigate(View.CONTINENTAL_REACH);
+                      } else if (benefit.title === 'Easy Setup & Toolkit') {
+                        onNavigate(View.EASY_SETUP_TOOLKIT);
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-wide group/link"
+                  >
                     Learn More <MoveRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-                  </a>
+                  </button>
                 </div>
               ))}
             </div>
@@ -639,7 +650,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
               </button>
             </nav>
             <div className="flex items-center gap-6">
-              <a className="text-sm font-bold text-slate-700 hover:text-primary transition-colors" href="#">Login</a>
+              <button onClick={() => onNavigate(View.LOGIN)} className="text-sm font-bold text-slate-700 hover:text-primary transition-colors">Login</button>
               <button
                 onClick={onNext}
                 className="bg-primary hover:bg-blue-700 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all"
@@ -844,10 +855,13 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
                       <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
                         Position your brand as a leader. Benefit from our high-traffic platform and advanced SEO techniques that ensure your products are always discoverable.
                       </p>
-                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                      <button
+                        onClick={() => onNavigate(View.BUSINESS_VISIBILITY)}
+                        className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link"
+                      >
                         Learn More
                         <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
-                      </a>
+                      </button>
                     </div>
                   </div>
 
@@ -864,10 +878,13 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
                       <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
                         Instantly connect with a vast network of B2B and B2C buyers. Transcend borders and tap into the burgeoning Pan-African market landscape.
                       </p>
-                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                      <button
+                        onClick={() => onNavigate(View.CONTINENTAL_REACH)}
+                        className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link"
+                      >
                         Learn More
                         <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
-                      </a>
+                      </button>
                     </div>
                   </div>
 
@@ -904,10 +921,13 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
                       <p className="text-slate-600 leading-relaxed text-[16px] mb-5 flex-grow">
                         Professional listing, pricing and promotion tools. Launch your continental storefront with intuitive systems built for speed and scale.
                       </p>
-                      <a className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link" href="#">
+                      <button
+                        onClick={() => onNavigate(View.EASY_SETUP_TOOLKIT)}
+                        className="inline-flex items-center gap-2 text-primary font-bold tracking-wide group/link"
+                      >
                         Learn More
                         <MoveRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

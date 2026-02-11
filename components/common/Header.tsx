@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MOCK_USER } from '../../constants';
 import { View } from '../../types';
 import {
     Menu,
@@ -8,6 +9,7 @@ import {
     ArrowLeftRight,
     Bell,
     Search,
+    User,
     Settings
 } from 'lucide-react';
 
@@ -66,8 +68,8 @@ const Header: React.FC<HeaderProps> = (props) => {
                                 <button onClick={onOpenDrawer} className="text-white p-1 rounded-md hover:bg-white/10 transition flex items-center justify-center">
                                     <Menu className="text-white" size={30} />
                                 </button>
-                                <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white/30 overflow-hidden flex-shrink-0 cursor-pointer" onClick={() => onNavigate(View.PROFILE)}>
-                                    <img alt="User Avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi46GtpiM2PCOQBHANxFI9RbtsMJaAKLO_wmlPAAI9F3P8WF4Ol7CjQYs4bVfLnxrSMCfSNXNeQZNlSe5fCq1nvg6iZK9cONpUeEMCCP0YutzWEoXUtRyuz5USsT-FRNDsMLjixVN0_9RsTDgd2TXFi9OZ8lX0X5GwJX3Zb-AjabzDVPsA4t09tANJ6-oBYYqtF1RK_ZE0PH2XuqcFnS0mHoUyU1lr8hykoYW9ig6b4rqQOWYvQFo666LkAWEMXSTWA60ibVTejNI" />
+                                <div className="w-8 h-8 rounded-full bg-white/20 border-2 border-white/30 overflow-hidden flex-shrink-0 flex items-center justify-center cursor-pointer text-white/70" onClick={() => onNavigate(View.PROFILE)}>
+                                    <User size={18} />
                                 </div>
                             </div>
                             <div className="flex-grow flex justify-center">
@@ -118,11 +120,11 @@ const Header: React.FC<HeaderProps> = (props) => {
                     </button>
                     <div className="flex items-center gap-3 pl-2" onClick={() => onNavigate(View.PROFILE)}>
                         <div className="text-right hidden sm:block cursor-pointer">
-                            <p className="text-sm font-semibold text-white leading-none">Alex Morgan</p>
-                            <p className="text-[10px] text-white/60 mt-1 uppercase tracking-tight">Premium Seller</p>
+                            <p className="text-sm font-semibold text-white leading-none">{MOCK_USER.name}</p>
+                            <p className="text-[10px] text-white/60 mt-1 uppercase tracking-tight">Verified Seller</p>
                         </div>
-                        <div className="w-10 h-10 rounded-full bg-white/20 overflow-hidden ring-2 ring-white/20 shadow-sm cursor-pointer">
-                            <img alt="Profile" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi46GtpiM2PCOQBHANxFI9RbtsMJaAKLO_wmlPAAI9F3P8WF4Ol7CjQYs4bVfLnxrSMCfSNXNeQZNlSe5fCq1nvg6iZK9cONpUeEMCCP0YutzWEoXUtRyuz5USsT-FRNDsMLjixVN0_9RsTDgd2TXFi9OZ8lX0X5GwJX3Zb-AjabzDVPsA4t09tANJ6-oBYYqtF1RK_ZE0PH2XuqcFnS0mHoUyU1lr8hykoYW9ig6b4rqQOWYvQFo666LkAWEMXSTWA60ibVTejNI" />
+                        <div className="w-10 h-10 rounded-full bg-white/20 overflow-hidden ring-2 ring-white/20 shadow-sm flex items-center justify-center cursor-pointer text-white/80">
+                            <User size={24} />
                         </div>
                     </div>
                 </div>

@@ -89,7 +89,10 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => onNavigate(View.BUSINESS_REPORT)} className="text-sm font-medium text-primary hover:underline">View Report</button>
                         </div>
                         <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
-                            <div className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                            <div
+                                onClick={() => onNavigate(View.VIEWS_SUMMARY)}
+                                className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between cursor-pointer active:scale-95 transition-transform"
+                            >
                                 <div className="flex items-start justify-between">
                                     <TrendingUp className="text-blue-500" size={20} />
                                     <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
@@ -102,14 +105,16 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <div className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
                                     <Users className="text-purple-500" size={20} />
-                                    <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">New Leads</p>
                                     <p className="text-xl font-extrabold text-slate-800">85</p>
                                 </div>
                             </div>
-                            <div className="min-w-[220px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3.5 flex flex-col justify-between">
+                            <div
+                                onClick={() => onNavigate(View.RESPONSE_RATE_SUMMARY)}
+                                className="min-w-[220px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3.5 flex flex-col justify-between cursor-pointer active:scale-95 transition-transform"
+                            >
                                 <div className="flex items-start justify-between mb-1">
                                     <div>
                                         <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Response Rate</p>

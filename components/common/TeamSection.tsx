@@ -14,8 +14,8 @@ const TeamSection: React.FC = () => {
                     <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-300 shadow-md">
                         <img alt="CEO" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcDJ-PduLoFavtLrZ69WYSAYws6XkiN49mXGaWcdicTVRNgSn3ygUmz4eNBF9C_TR-49s5KRkMurxmqbQZ0oLNfWTEaglhKyhcoGNvg0Tr8mfNE3Sv-scFvYGdfnWnRyUmKwu_wQ88H2nlJgbUeIKoGXcWRJtLxN37fYVLokgUZRiWkSuLWBSYl86OAUvimbamgUF206UyKDLEEEwkmm1aKbEZRuRFFdmJel-6sG2ZsTKk6zyOpBF_e-RKZuUQ0sWhHXEASaYERQg" />
                     </div>
-                    <h5 className="text-lg font-bold">Kofi Mensah</h5>
-                    <p className="text-primary text-sm font-medium mb-4">Founder & CEO</p>
+                    <h5 className="text-lg font-bold">Fritzgerald Wilson</h5>
+                    <p className="text-primary text-sm font-medium mb-4">Co-Founder</p>
                     <a className="inline-flex items-center text-primary hover:opacity-80" href="#">
                         <svg className="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                     </a>
@@ -25,8 +25,8 @@ const TeamSection: React.FC = () => {
                     <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-300 shadow-md">
                         <img alt="COO" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWYGocYTtWxxM4_Nc-msCZlqVZD6D0Pcy9fQVSTJ9vHmzUDpNLU9OXc4Snhgj4haH0RkW7CQMMHffI986m7PI2HaEW9vg2hI-oXGM0oBhQavNo9EW7AdSHRkgJ-kRDyRYyjL4XEsvYoIcFsQbNnZU3EvEWeiZ6fBroLoLZgNcYfKM3AU5ULS5FoAeyj66CZj3QS0m-NUOMD0ftb6LXCH-6z6Ycj0pcshmKzVsufqBsc4ZMFXl1TWScDFKgffyqDL5J52dU_BwSf4Y" />
                     </div>
-                    <h5 className="text-lg font-bold">Fatima Bello</h5>
-                    <p className="text-primary text-sm font-medium mb-4">Chief Operating Officer</p>
+                    <h5 className="text-lg font-bold">Sahil Chauhan</h5>
+                    <p className="text-primary text-sm font-medium mb-4">Co-Founder</p>
                     <a className="inline-flex items-center text-primary hover:opacity-80" href="#">
                         <svg className="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                     </a>
@@ -36,8 +36,8 @@ const TeamSection: React.FC = () => {
                     <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-300 shadow-md">
                         <img alt="CTO" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP4RjFJ1xypl1NhI38OB8RpvUnGFbz12xvpmVqhkn4GYg8v0OOslxuz85PxDAy2S8ANh3olOzWKXym9_6pGNv3P_NuBnc6J1M447BG7Z-r6n34pRjTulZNFmO6NWPEGqFxgYWcCpWP7ked0Ypz4rlZ-tVNyiZcpsaED8LDp3UTFbZQUqW7irKwsTXdgXGBV1VDJV1p56waMuMCh_Y-dlfo3goYRerXuxZe7knGGHyeSLkc381TBAsiPGY9KJ1Vz3PaToBz_c-NHAA" />
                     </div>
-                    <h5 className="text-lg font-bold">David Okoro</h5>
-                    <p className="text-primary text-sm font-medium mb-4">Chief Technology Officer</p>
+                    <h5 className="text-lg font-bold">Jonathan Brown</h5>
+                    <p className="text-primary text-sm font-medium mb-4">Chief Operating Officer</p>
                     <a className="inline-flex items-center text-primary hover:opacity-80" href="#">
                         <svg className="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                     </a>

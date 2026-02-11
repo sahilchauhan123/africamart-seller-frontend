@@ -61,7 +61,7 @@ const ContactSupport: React.FC<Props> = ({ onBack, onNavigate, onSignup, isDashb
                                 <button className="text-sm font-bold text-primary uppercase">CONTACT SUPPORT</button>
                             </nav>
                             <div className="flex items-center gap-6">
-                                <a className="text-sm font-bold text-slate-700 hover:text-primary transition-colors" href="#">Login</a>
+                                <button onClick={() => onNavigate(View.LOGIN)} className="text-sm font-bold text-slate-700 hover:text-primary transition-colors">Login</button>
                                 <button
                                     onClick={onSignup}
                                     className="bg-primary hover:bg-blue-700 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all"

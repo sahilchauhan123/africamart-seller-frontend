@@ -11,6 +11,7 @@ import {
   ChevronRight,
   PlusCircle,
   Users,
+  User,
   Globe,
   Edit,
   CheckCircle2,
@@ -50,12 +51,8 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
         <main className="flex-1 overflow-y-auto no-scrollbar px-4 py-6 space-y-10 pt-20">
           {/* Profile Header - Centered */}
           <div className="flex flex-col items-center text-center space-y-4">
-            <div className="w-24 h-24 rounded-full bg-slate-200 flex items-center justify-center border-4 border-white shadow-sm overflow-hidden">
-              <img
-                alt="Business Logo"
-                className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi46GtpiM2PCOQBHANxFI9RbtsMJaAKLO_wmlPAAI9F3P8WF4Ol7CjQYs4bVfLnxrSMCfSNXNeQZNlSe5fCq1nvg6iZK9cONpUeEMCCP0YutzWEoXUtRyuz5USsT-FRNDsMLjixVN0_9RsTDgd2TXFi9OZ8lX0X5GwJX3Zb-AjabzDVPsA4t09tANJ6-oBYYqtF1RK_ZE0PH2XuqcFnS0mHoUyU1lr8hykoYW9ig6b4rqQOWYvQFo666LkAWEMXSTWA60ibVTejNI"
-              />
+            <div className="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center border-4 border-white shadow-sm overflow-hidden text-slate-400">
+              <User size={48} />
             </div>
             <div className="space-y-1">
               <h1 className="text-2xl font-bold">Hi, {MOCK_USER.name}</h1>
@@ -206,12 +203,8 @@ const Profile: React.FC<Props> = ({ onBack, onEdit }) => {
             <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-8">
                 <div className="relative flex-shrink-0">
-                  <div className="w-32 h-32 rounded-full bg-slate-100 flex items-center justify-center border-4 border-white shadow-md overflow-hidden text-center">
-                    <img
-                      alt="Business Logo"
-                      className="w-full h-full object-cover"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvaLhmctPWKJhlK_MXdy_SIrtBngba8Y10QZ0DHMdN-qgihX1beyMHji9q1Ede6smdiP0vGLWjfETOnR2SvddgZMUOeCHMulFApwtoncfJWtPY6TxTPQ2WK-9uZGj-c4AmMGnWu-0bA7G7K-CPAbN2GYRKyY7tZwLMDa_uf1a0LOs14aEsSNxT-cXmZJDBtmMhN57qQpy6DcsABJ1tGzTTM7TUEU9LTAHIrubYK2D11Fp_EOdF6Jtic6b6u390Fthikys17BeOHsU"
-                    />
+                  <div className="w-32 h-32 rounded-full bg-slate-50 flex items-center justify-center border-4 border-white shadow-md overflow-hidden text-slate-300">
+                    <User size={64} />
                   </div>
                 </div>
                 <div className="flex-1">
