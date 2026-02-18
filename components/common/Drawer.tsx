@@ -78,13 +78,6 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                   <Globe className="text-slate-400" size={24} />
                   <span className="text-sm font-bold tracking-wide">ABOUT US</span>
                 </button>
-                <button
-                  onClick={() => { onNavigate(View.OUR_TEAM); if (window.innerWidth < 1024) onClose(); }}
-                  className="w-full flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-gray-50 text-slate-600"
-                >
-                  <Users className="text-slate-400" size={24} />
-                  <span className="text-sm font-bold tracking-wide">OUR TEAM</span>
-                </button>
 
                 <div className="border-b border-gray-100 mx-6 my-4"></div>
 

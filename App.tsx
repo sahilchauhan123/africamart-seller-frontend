@@ -30,7 +30,6 @@ import AboutUs from './components/AboutUs';
 import ContactSupport from './components/ContactSupport';
 import Policies from './components/Policies';
 import Settings from './components/Settings';
-import TeamPage from './components/TeamPage';
 import ViewsSummary from './components/ViewsSummary';
 import ResponseRateSummary from './components/ResponseRateSummary';
 import Drawer from './components/common/Drawer';
@@ -70,8 +69,8 @@ const App: React.FC = () => {
   };
 
   const isAuthView = windowWidth >= 1024
-    ? ![View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.ROADMAP, View.FAQS, View.ABOUT_US, View.OUR_TEAM, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView)
-    : ![View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.ROADMAP, View.FAQS, View.ABOUT_US, View.OUR_TEAM, View.CONTACT_SUPPORT, View.POLICIES, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView);
+    ? ![View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.ROADMAP, View.FAQS, View.ABOUT_US, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView)
+    : ![View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.ROADMAP, View.FAQS, View.ABOUT_US, View.CONTACT_SUPPORT, View.POLICIES, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView);
 
   const renderView = () => {
     switch (currentView) {
@@ -134,8 +133,6 @@ const App: React.FC = () => {
         return <Roadmap onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} />;
       case View.ABOUT_US:
         return <AboutUs onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} onNavigate={setCurrentView} />;
-      case View.OUR_TEAM:
-        return <TeamPage onBack={() => setCurrentView(View.ONBOARDING)} />;
       case View.BUSINESS_VISIBILITY:
         return <BusinessVisibility onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} onNavigate={setCurrentView} />;
       case View.CONTINENTAL_REACH:
@@ -153,7 +150,7 @@ const App: React.FC = () => {
     }
   };
 
-  const hideHeader = [View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT, View.FAQS, View.ROADMAP, View.ABOUT_US, View.OUR_TEAM, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView);
+  const hideHeader = [View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT, View.FAQS, View.ROADMAP, View.ABOUT_US, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
