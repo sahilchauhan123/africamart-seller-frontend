@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     X,
     Check,
@@ -26,6 +26,20 @@ interface Props {
 }
 
 const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
+    const [selectedCurrency, setSelectedCurrency] = useState('USD');
+
+    // Mock exchange rates (relative to 1 LD)
+    const rates: Record<string, number> = {
+        USD: 1 / 193.50,
+        EUR: 1 / 210.25,
+        GBP: 1 / 245.10,
+        NGN: 1 * 7.5, // Just for variety
+    };
+
+    const estValueLD = 300;
+    const convertedValue = (estValueLD * rates[selectedCurrency]).toFixed(2);
+    const exchangeRate = (1 / rates[selectedCurrency]).toFixed(2);
+
     return (
         <div className="bg-[#F8FAFC] font-sans text-slate-900 antialiased min-h-full flex flex-col focus:outline-none">
             {/* --- MOBILE VIEW (Snippet Implementation) --- */}
@@ -96,6 +110,46 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
                             </div>
                             <span className="text-xs text-slate-500 uppercase tracking-wider font-medium">Est. Value</span>
                             <span className="text-lg font-bold mt-1">LD 150 - 300</span>
+                        </div>
+                    </div>
+
+                    {/* Currency Convert Container (Mobile Only) */}
+                    <div className="bg-gradient-to-br from-primary to-blue-700 rounded-2xl p-4 shadow-lg shadow-blue-500/20 text-white">
+                        <div className="flex justify-between items-center mb-3">
+                            <div className="flex items-center gap-2">
+                                <div className="p-1.5 bg-white/10 rounded-lg">
+                                    <Banknote size={16} />
+                                </div>
+                                <span className="text-[10px] font-bold uppercase tracking-widest opacity-90">Currency Converter</span>
+                            </div>
+                            <select
+                                value={selectedCurrency}
+                                onChange={(e) => setSelectedCurrency(e.target.value)}
+                                className="bg-white/20 px-2 py-1 rounded-lg border border-white/20 text-[10px] font-bold outline-none cursor-pointer"
+                            >
+                                <option className="text-slate-900" value="USD">USD</option>
+                                <option className="text-slate-900" value="EUR">EUR</option>
+                                <option className="text-slate-900" value="GBP">GBP</option>
+                                <option className="text-slate-900" value="NGN">NGN</option>
+                            </select>
+                        </div>
+                        <div className="flex items-center justify-between gap-4">
+                            <div className="flex-1">
+                                <div className="flex items-baseline gap-1">
+                                    <span className="text-[10px] font-bold opacity-60">{selectedCurrency}</span>
+                                    <p className="text-2xl font-black tracking-tight">{convertedValue}</p>
+                                </div>
+                                <p className="text-[10px] font-medium opacity-70 mt-0.5 italic">Est. {estValueLD}.00 LD</p>
+                            </div>
+                            <div className="h-10 w-px bg-white/20"></div>
+                            <div className="flex-1 text-right">
+                                <p className="text-[10px] font-bold opacity-60 mb-0.5">Exchange Rate</p>
+                                <p className="text-sm font-black tracking-tight px-1">1 {selectedCurrency} = {exchangeRate} LD</p>
+                                <div className="flex items-center justify-end gap-1 mt-1">
+                                    <span className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></span>
+                                    <p className="text-[8px] opacity-50">Live Rates Applied</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

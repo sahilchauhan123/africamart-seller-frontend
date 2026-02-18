@@ -49,39 +49,39 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
             {/* Desktop View */}
             <div className="hidden lg:flex h-screen overflow-hidden bg-white font-sans">
                 {/* Left Side: Form */}
-                <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white">
-                    <div className="w-full max-w-md space-y-8">
-                        <div className="text-center mb-8">
-                            <h1 className="text-3xl font-bold tracking-tight text-primary">
+                <div className="w-1/2 flex items-center justify-center bg-white">
+                    <div className="w-full max-w-sm space-y-6">
+                        <div className="text-center mb-6">
+                            <h1 className="text-3xl font-black tracking-tight text-primary">
                                 Verify Account
                             </h1>
                         </div>
 
-                        <div className="bg-[#F0F4FF] p-8 rounded-[1.5rem] shadow-sm text-center">
-                            <p className="text-gray-600 mb-8 leading-relaxed">
+                        <div className="bg-[#F0F4FF] p-6 lg:p-8 rounded-[1.5rem] shadow-sm text-center">
+                            <p className="text-gray-600 mb-6 leading-relaxed text-sm font-medium">
                                 Please use the OTP sent to your sms/email to verify.
                             </p>
                             <input
                                 type="text"
                                 value={otp}
                                 onChange={(e) => setOtp(e.target.value)}
-                                className="w-full h-16 bg-white border-2 border-primary/30 rounded-2xl text-center text-3xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900"
+                                className="w-full h-14 bg-white border-2 border-primary/30 rounded-2xl text-center text-3xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900"
                             />
                             <div className="mt-6">
                                 <p className="text-gray-500 text-sm">Resend OTP in <span className="font-bold text-primary">0:30</span></p>
                             </div>
                         </div>
 
-                        <div className="space-y-4 text-center">
+                        <div className="space-y-4 text-left">
                             <button
                                 onClick={onNext}
-                                className="w-full py-4 bg-primary hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform active:scale-[0.98] shadow-lg shadow-primary/20"
+                                className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform active:scale-[0.98] shadow-lg shadow-primary/20"
                             >
                                 Verify & Continue
                             </button>
                             <button
                                 onClick={onBack}
-                                className="w-full text-gray-500 font-medium hover:text-primary transition-colors text-sm"
+                                className="w-full text-center text-gray-400 font-bold uppercase tracking-widest hover:text-primary transition-colors text-[10px]"
                             >
                                 Change details
                             </button>

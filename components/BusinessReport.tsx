@@ -91,8 +91,8 @@ const BusinessReport: React.FC<Props> = ({ onBack }) => {
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center font-bold text-slate-500 text-xs">1</div>
                                     <div>
-                                        <p className="text-sm font-bold text-slate-900">Maharashtra</p>
-                                        <p className="text-[11px] font-medium text-slate-400">Mumbai, Pune, Nashik</p>
+                                        <p className="text-sm font-bold text-slate-900">Monrovia</p>
+                                        <p className="text-[11px] font-medium text-slate-400">Paynesville, Red Light, Sinkor</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
@@ -106,8 +106,8 @@ const BusinessReport: React.FC<Props> = ({ onBack }) => {
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center font-bold text-slate-500 text-xs">2</div>
                                     <div>
-                                        <p className="text-sm font-bold text-slate-900">Gujarat</p>
-                                        <p className="text-[11px] font-medium text-slate-400">Surat, Ahmedabad, Rajkot</p>
+                                        <p className="text-sm font-bold text-slate-900">Ghana</p>
+                                        <p className="text-[11px] font-medium text-slate-400">Kumasi, Accra, Tema</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
@@ -121,8 +121,8 @@ const BusinessReport: React.FC<Props> = ({ onBack }) => {
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center font-bold text-slate-500 text-xs">3</div>
                                     <div>
-                                        <p className="text-sm font-bold text-slate-900">Tamil Nadu</p>
-                                        <p className="text-[11px] font-medium text-slate-400">Chennai, Coimbatore</p>
+                                        <p className="text-sm font-bold text-slate-900">Nigeria</p>
+                                        <p className="text-[11px] font-medium text-slate-400">Lagos, Abuja, Kano</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
@@ -136,8 +136,8 @@ const BusinessReport: React.FC<Props> = ({ onBack }) => {
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center font-bold text-slate-500 text-xs">4</div>
                                     <div>
-                                        <p className="text-sm font-bold text-slate-900">Karnataka</p>
-                                        <p className="text-[11px] font-medium text-slate-400">Bengaluru, Hubli</p>
+                                        <p className="text-sm font-bold text-slate-900">Namibia</p>
+                                        <p className="text-[11px] font-medium text-slate-400">Windhoek, Oshakati</p>
                                     </div>
                                 </div>
                                 <div className="text-right">

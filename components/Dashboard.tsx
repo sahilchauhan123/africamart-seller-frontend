@@ -16,7 +16,10 @@ import {
     FilePlus,
     UserPlus,
     Rocket,
-    ArrowLeftRight
+    ArrowLeftRight,
+    Store,
+    MessageSquare,
+    ArrowRight
 } from 'lucide-react';
 
 interface Props {
@@ -26,6 +29,7 @@ interface Props {
 
 const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [showWelcomeModal, setShowWelcomeModal] = useState(true);
     const [activeMonthIndex, setActiveMonthIndex] = useState(3);
     const months = [
         { name: 'AUG', full: 'AUGUST', leads: 95, height: '65%' },
@@ -41,7 +45,7 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
 
             {/* Mobile Dashboard */}
             <div className="lg:hidden flex flex-col h-full">
-                <main className="pb-8 flex-1 overflow-y-auto no-scrollbar max-w-7xl mx-auto w-full">
+                <main className="flex-1 overflow-y-auto no-scrollbar max-w-7xl mx-auto w-full">
                     <section className="px-4 py-6">
                         <div className="grid grid-cols-4 gap-4">
                             <button onClick={() => onNavigate(View.ADD_PRODUCT)} className="flex flex-col items-center group">
@@ -85,26 +89,89 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <button onClick={() => onNavigate(View.BUSINESS_REPORT)} className="text-sm font-medium text-primary hover:underline">View Report</button>
                         </div>
                         <div className="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar">
-                            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                            <div
+                                onClick={() => onNavigate(View.VIEWS_SUMMARY)}
+                                className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between cursor-pointer active:scale-95 transition-transform"
+                            >
                                 <div className="flex items-start justify-between">
                                     <TrendingUp className="text-blue-500" size={20} />
                                     <span className="text-xs font-semibold text-green-500 bg-green-100 px-1.5 py-0.5 rounded">+12%</span>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Total Views</p>
-                                    <p className="text-xl font-bold">1,245</p>
+                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Views</p>
+                                    <p className="text-xl font-extrabold text-slate-800">1,245</p>
                                 </div>
                             </div>
-                            <div className="min-w-[140px] h-[100px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
+                            <div className="min-w-[140px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between">
                                 <div className="flex items-start justify-between">
                                     <Users className="text-purple-500" size={20} />
-                                    <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">0%</span>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">New Leads</p>
-                                    <p className="text-xl font-bold">85</p>
+                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">New Leads</p>
+                                    <p className="text-xl font-extrabold text-slate-800">85</p>
                                 </div>
                             </div>
+                            <div
+                                onClick={() => onNavigate(View.RESPONSE_RATE_SUMMARY)}
+                                className="min-w-[220px] h-[115px] bg-white rounded-xl shadow-sm border border-gray-100 p-3.5 flex flex-col justify-between cursor-pointer active:scale-95 transition-transform"
+                            >
+                                <div className="flex items-start justify-between mb-1">
+                                    <div>
+                                        <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Response Rate</p>
+                                        <div className="flex items-baseline gap-1">
+                                            <span className="text-xl font-extrabold text-slate-800">92%</span>
+                                            <span className="text-[8px] font-bold text-emerald-500 uppercase">Avg Score</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                                        <MessageSquare className="text-emerald-500" size={16} />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="space-y-1">
+                                        <div className="flex justify-between items-center text-[8px] font-bold uppercase tracking-tight">
+                                            <span className="text-slate-400">Within 24h</span>
+                                            <span className="text-slate-700">92%</span>
+                                        </div>
+                                        <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                                            <div className="bg-emerald-500 h-full w-[92%] rounded-full"></div>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <div className="flex justify-between items-center text-[8px] font-bold uppercase tracking-tight">
+                                            <span className="text-slate-400">After 24h</span>
+                                            <span className="text-slate-400">8%</span>
+                                        </div>
+                                        <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                                            <div className="bg-slate-200 h-full w-[8%] rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="px-4 mb-6">
+                        <div className="bg-white rounded-2xl p-5 border border-primary/5 shadow-sm relative overflow-hidden">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-full h-full -rotate-90">
+                                        <circle className="text-slate-100" cx="28" cy="28" fill="transparent" r="24" stroke="currentColor" strokeWidth="4"></circle>
+                                        <circle className="text-primary" cx="28" cy="28" fill="transparent" r="24" stroke="currentColor" strokeDasharray="150.8" strokeDashoffset="22.62" strokeWidth="4"></circle>
+                                    </svg>
+                                    <span className="absolute text-[10px] font-bold text-slate-800">85%</span>
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-bold text-slate-900">Profile Completeness</h4>
+                                    <p className="text-[10px] text-slate-500 leading-tight">Complete your profile to gain 40% more visibility.</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => onNavigate(View.EDIT_PROFILE)}
+                                className="w-full bg-primary/5 text-primary py-3 rounded-xl font-bold text-xs active:scale-[0.98] transition-all"
+                            >
+                                Complete Profile
+                            </button>
                         </div>
                     </section>
 
@@ -113,9 +180,9 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                             <h2 className="text-lg font-bold">Recent Inquiries</h2>
                             <button onClick={() => onNavigate(View.INQUIRY_LIST)} className="text-sm font-medium text-primary hover:underline">View all</button>
                         </div>
-                        <div className="flex flex-col gap-3">
-                            {MOCK_INQUIRIES.map(inq => (
-                                <div key={inq.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99]" onClick={() => onNavigate(View.LEAD_DETAILS)}>
+                        <div className="flex flex-col gap-3 relative">
+                            {MOCK_INQUIRIES.slice(0, 5).map((inq, index) => (
+                                <div key={inq.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99] relative" onClick={() => onNavigate(View.LEAD_DETAILS)}>
                                     <div className="flex gap-4">
                                         <div className="w-12 h-12 rounded-full border-2 border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0">
                                             <span className="text-orange-500 font-bold text-sm">{inq.initials}</span>
@@ -137,10 +204,16 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                                             </div>
                                         </div>
                                     </div>
+                                    {/* Shade Overlay on the last visible item */}
+                                    {index === 4 && (
+                                        <div className="absolute inset-0 bg-gradient-to-t from-background-light via-background-light/40 to-transparent rounded-xl pointer-events-none"></div>
+                                    )}
                                 </div>
                             ))}
                         </div>
                     </section>
+
+
                 </main>
             </div>
 
@@ -397,6 +470,42 @@ const Dashboard: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
                     </div>
                 </main>
             </div>
+            {/* Onboarding Tip Popup */}
+            {showWelcomeModal && (
+                <div className="fixed bottom-6 lg:bottom-10 right-4 lg:right-10 z-[110] w-[calc(100%-2rem)] lg:w-[380px] transform animate-in slide-in-from-bottom-5 fade-in duration-500">
+                    <div className="bg-slate-900 text-white p-6 rounded-[2rem] shadow-2xl relative overflow-hidden group border border-white/10">
+                        <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
+                            <Rocket size={80} />
+                        </div>
+                        <div className="flex gap-4 items-start relative z-10">
+                            <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <Rocket className="text-primary w-5 h-5 animate-pulse" />
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex justify-between items-center mb-1">
+                                    <h3 className="font-bold text-sm tracking-tight text-white/90">Onboarding Tip</h3>
+                                    <button onClick={() => setShowWelcomeModal(false)} className="text-white/40 hover:text-white transition-colors p-1">
+                                        <Plus className="rotate-45" size={16} />
+                                    </button>
+                                </div>
+                                <p className="text-white/60 text-[11px] leading-relaxed mb-4">
+                                    Welcome! To start selling, please finish your <span className="text-white font-bold underline decoration-primary underline-offset-4 decoration-2">Profile Completeness</span> section.
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        setShowWelcomeModal(false);
+                                        onNavigate(View.EDIT_PROFILE);
+                                    }}
+                                    className="bg-primary hover:bg-blue-600 text-white text-[10px] font-bold py-2 px-6 rounded-full transition-all active:scale-95 shadow-lg shadow-primary/20"
+                                >
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Switch Mode Overlay */}
             {isOverlayOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">

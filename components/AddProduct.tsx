@@ -10,7 +10,6 @@ import {
   Circle,
   PlusCircle,
   Video,
-  RefreshCw,
   LayoutGrid,
   Bold,
   Italic,
@@ -34,6 +33,7 @@ type Step = 'basic' | 'specification';
 const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
   const [step, setStep] = useState<Step>('basic');
   const [expandedSpec, setExpandedSpec] = useState<number | null>(0);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleBack = () => {
     if (step === 'specification') {
@@ -45,6 +45,54 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
 
   return (
     <div className="flex-1 flex flex-col bg-[#F8FAFC] text-slate-900 antialiased overflow-hidden min-h-screen">
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+          <style>{`
+            @keyframes celebrate {
+              0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+              100% { transform: scale(1) translateY(0); opacity: 1; }
+            }
+            .animate-celebrate {
+              animation: celebrate 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+          `}</style>
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity"></div>
+
+          <div className="relative bg-white rounded-[2.5rem] p-8 lg:p-12 w-full max-w-md shadow-2xl border border-white/20 animate-celebrate text-center">
+            <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl shadow-emerald-100 rotate-3">
+              <CheckCircle2 className="text-white w-10 h-10" />
+            </div>
+
+            <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">Product Published!</h2>
+
+            <p className="text-slate-500 leading-relaxed mb-10 text-base font-medium">
+              Thank you for contributing to AfricaMart's ecosystem! Your product has been <span className="text-emerald-600 font-bold">successfully listed</span> and is now visible to buyers across the continent.
+            </p>
+
+            <div className="space-y-4">
+              <button
+                onClick={onSave}
+                className="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-2 group"
+              >
+                BACK TO PRODUCTS
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <button
+                onClick={() => {
+                  setShowSuccessModal(false);
+                  setStep('basic');
+                }}
+                className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-primary transition-colors"
+              >
+                Add Another Product
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Mobile Header (Only visible on mobile, since App.tsx Header is used for layout) */}
       <div className="lg:hidden bg-white border-b border-slate-200 shrink-0">
         <div className="max-w-7xl mx-auto flex w-full">
@@ -118,7 +166,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                   <h2 className="text-xl font-bold text-slate-900">Product Images & Video</h2>
                   <p className="text-sm text-slate-500 mt-1">Upload at least 3 images for best results. First image will be your cover.</p>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   <div className="aspect-square border-2 border-dashed border-slate-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-white transition-all group bg-slate-100/50">
                     <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-2 group-hover:scale-110 transition-transform border border-slate-100">
                       <Camera className="text-primary" size={24} />
@@ -132,10 +180,6 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
                   <div className="aspect-square border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-all bg-slate-50/50 group">
                     <Video className="text-slate-400 mb-2 group-hover:text-primary transition-colors" size={28} />
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Video</span>
-                  </div>
-                  <div className="aspect-square border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-all bg-slate-50/50 group">
-                    <RefreshCw className="text-slate-400 mb-2 group-hover:text-primary transition-colors" size={28} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">360 View</span>
                   </div>
                 </div>
               </section>
@@ -296,7 +340,7 @@ const AddProduct: React.FC<Props> = ({ onBack, onSave }) => {
               {step === 'specification' ? 'Back' : 'Cancel'}
             </button>
             <button
-              onClick={() => step === 'basic' ? setStep('specification') : onSave()}
+              onClick={() => step === 'basic' ? setStep('specification') : setShowSuccessModal(true)}
               className="flex-1 sm:flex-none px-8 py-2.5 lg:py-3 bg-primary text-white font-bold rounded-xl hover:shadow-xl hover:shadow-primary/20 transition-all flex items-center justify-center gap-2"
             >
               {step === 'basic' ? (

@@ -1,13 +1,15 @@
 
 import React from 'react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 
 interface Props {
   onBack: () => void;
   onNext: () => void;
+  onLogin: () => void;
 }
 
-const Signup: React.FC<Props> = ({ onBack, onNext }) => {
+const Signup: React.FC<Props> = ({ onBack, onNext, onLogin }) => {
   return (
     <>
       {/* Mobile View */}
@@ -23,26 +25,35 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
             </p>
 
             <div>
-              <label className="block text-sm font-bold mb-2 text-gray-700">Business Owner Name</label>
+              <label className="block text-sm font-bold mb-2 text-gray-700 font-display">Business Owner Name</label>
               <input
                 type="text"
                 placeholder="Individual name here"
-                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-medium"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2 text-gray-700">Mobile</label>
+              <label className="block text-sm font-bold mb-2 text-gray-700 font-display">Email Address</label>
               <input
-                type="tel"
-                placeholder="+231 555 367 471"
-                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
+                type="email"
+                placeholder="name@company.com"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold mb-2 text-gray-700 font-display">Password</label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-medium"
               />
             </div>
           </div>
 
           <p className="text-xs text-gray-500 text-center mb-6">
-            Click continue to verify your contact details
+            Click continue to verify your account details
           </p>
 
           <button
@@ -51,66 +62,104 @@ const Signup: React.FC<Props> = ({ onBack, onNext }) => {
           >
             Continue
           </button>
+          <p className="text-sm text-center text-slate-500 mt-6">
+            Already have an account? {' '}
+            <button
+              onClick={onLogin}
+              className="text-primary font-bold hover:underline"
+            >
+              Login
+            </button>
+          </p>
         </main>
       </div>
 
       {/* Desktop View */}
       <div className="hidden lg:flex h-screen overflow-hidden bg-white font-sans">
         {/* Left Side: Form */}
-        <div className="w-1/2 flex items-center justify-center p-12 xl:p-24 bg-white">
-          <div className="w-full max-w-md space-y-8">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold tracking-tight text-primary">
+        <div className="w-1/2 flex items-center justify-center bg-white overflow-hidden relative">
+          <div className="absolute top-12 left-12">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-primary transition-colors focus:ring-4 focus:ring-primary/10">
+                <ArrowLeft size={20} className="group-hover:-translate-x-0.5 transition-transform" />
+              </div>
+            </button>
+          </div>
+
+          <div className="w-full max-w-md space-y-4 py-4">
+            <div className="text-center">
+              <h1 className="text-3xl font-black tracking-tight text-primary mb-1">
                 Create Seller Account
               </h1>
+              <p className="text-sm text-slate-500 font-medium">
+                Set up your profile to start selling across Africa.
+              </p>
             </div>
 
-            <div className="bg-[#F0F4FF] p-8 rounded-[1.5rem] shadow-sm">
-              <p className="text-left text-gray-600 mb-8 leading-relaxed">
-                Enter your details below to set up your seller account.
-              </p>
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2" htmlFor="business_name">
+            <div className="bg-[#F0F4FF] p-6 lg:p-8 rounded-[2rem] shadow-sm border border-primary/5">
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-bold text-[#0033C4]/40 uppercase tracking-widest pl-1" htmlFor="owner_name">
                     Business Owner Name
                   </label>
                   <input
-                    className="w-full px-4 py-3 bg-white border border-primary/20 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-900 placeholder-gray-400"
-                    id="business_name"
-                    name="business_name"
-                    placeholder="Typing...."
+                    className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
+                    id="owner_name"
+                    name="owner_name"
+                    placeholder="Full Name"
                     type="text"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2" htmlFor="mobile">
-                    Mobile
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-bold text-[#0033C4]/40 uppercase tracking-widest pl-1" htmlFor="email">
+                    Email Address
                   </label>
-                  <div className="relative">
-                    <input
-                      className="w-full px-4 py-3 bg-white border border-primary/20 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-900"
-                      id="mobile"
-                      name="mobile"
-                      type="tel"
-                      defaultValue="+231 555 367 471"
-                    />
-                  </div>
+                  <input
+                    className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="name@company.com"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-bold text-[#0033C4]/40 uppercase tracking-widest pl-1" htmlFor="password">
+                    Account Password
+                  </label>
+                  <input
+                    className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="••••••••"
+                  />
                 </div>
               </form>
             </div>
 
-            <div className="space-y-4 text-center">
-              <p className="text-sm text-gray-500">
-                Click continue to verify your contact details
+            <div className="space-y-4 text-left">
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] pl-1">
+                Verify account on next step
               </p>
               <button
                 onClick={onNext}
-                className="w-full py-4 bg-primary hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform active:scale-[0.98] shadow-lg shadow-primary/20"
+                className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-xl shadow-primary/20 text-lg flex items-center justify-center gap-2"
               >
-                Continue
+                Continue <ArrowRight size={20} />
               </button>
+              <p className="text-sm text-center text-slate-500 mt-4">
+                Already have an account? {' '}
+                <button
+                  onClick={onLogin}
+                  className="text-primary font-bold hover:underline"
+                >
+                  Login here
+                </button>
+              </p>
             </div>
-
           </div>
         </div>
 
