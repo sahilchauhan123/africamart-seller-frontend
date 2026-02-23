@@ -7,7 +7,73 @@ interface Props {
 }
 
 const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
-    const [otp, setOtp] = useState('2026');
+    const [otp, setOtp] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleVerify = async () => {
+        setError('');
+        setIsLoading(true);
+
+        const email = localStorage.getItem('registration_email');
+        if (!email) {
+            setError('Missing registration details. Please go back and try again.');
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:4000/api/v1/auth/seller/registration/submitotp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    email: email,
+                    otp: parseInt(otp, 10)
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Success - Now automatically login
+                setIsLoading(true);
+                const password = localStorage.getItem('registration_password');
+
+                try {
+                    const loginResponse = await fetch('http://localhost:4000/api/v1/auth/seller/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        }),
+                    });
+
+                    if (loginResponse.ok) {
+                        // Clear sensitive data
+                        localStorage.removeItem('registration_password');
+                        onNext();
+                    } else {
+                        setError('Verification successful, but automatic login failed. Please login manually.');
+                    }
+                } catch (loginErr) {
+                    setError('Verification successful, but login failed due to network error.');
+                }
+            } else {
+                setError(data.message || 'Invalid OTP. Please try again.');
+            }
+        } catch (err) {
+            setError('Network error. Please check your connection.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <>
@@ -19,10 +85,17 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
                     <div className="w-full bg-[#F0F4FF] rounded-2xl p-5 space-y-4 mb-6 shadow-sm">
                         <p className="font-medium text-gray-600">Please use the OTP sent to your sms/email to verify.</p>
 
+                        {error && (
+                            <div className="bg-red-50 text-red-500 text-xs p-3 rounded-lg border border-red-100 mb-2">
+                                {error}
+                            </div>
+                        )}
+
                         <input
                             type="text"
                             value={otp}
                             onChange={(e) => setOtp(e.target.value)}
+                            placeholder="0000"
                             className="w-full h-14 bg-white border-2 border-primary/30 rounded-2xl text-center text-2xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
                         />
 
@@ -32,13 +105,15 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
                     </div>
 
                     <button
-                        onClick={onNext}
-                        className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
+                        onClick={handleVerify}
+                        disabled={isLoading || otp.length < 4}
+                        className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        Verify & Continue
+                        {isLoading ? 'Verifying...' : 'Verify & Continue'}
                     </button>
                     <button
                         onClick={onBack}
+                        disabled={isLoading}
                         className="w-full mt-4 text-gray-500 font-medium hover:text-primary transition-colors"
                     >
                         Change details
@@ -61,10 +136,16 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
                             <p className="text-gray-600 mb-6 leading-relaxed text-sm font-medium">
                                 Please use the OTP sent to your sms/email to verify.
                             </p>
+                            {error && (
+                                <div className="bg-red-50 text-red-500 text-xs p-3 rounded-lg border border-red-100 mb-4">
+                                    {error}
+                                </div>
+                            )}
                             <input
                                 type="text"
                                 value={otp}
                                 onChange={(e) => setOtp(e.target.value)}
+                                placeholder="0000"
                                 className="w-full h-14 bg-white border-2 border-primary/30 rounded-2xl text-center text-3xl font-bold tracking-[0.5em] focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900"
                             />
                             <div className="mt-6">
@@ -74,13 +155,15 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
 
                         <div className="space-y-4 text-left">
                             <button
-                                onClick={onNext}
-                                className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform active:scale-[0.98] shadow-lg shadow-primary/20"
+                                onClick={handleVerify}
+                                disabled={isLoading || otp.length < 4}
+                                className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform active:scale-[0.98] shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Verify & Continue
+                                {isLoading ? 'Verifying...' : 'Verify & Continue'}
                             </button>
                             <button
                                 onClick={onBack}
+                                disabled={isLoading}
                                 className="w-full text-center text-gray-400 font-bold uppercase tracking-widest hover:text-primary transition-colors text-[10px]"
                             >
                                 Change details

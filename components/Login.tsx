@@ -9,6 +9,53 @@ interface Props {
 }
 
 const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
+    const [formData, setFormData] = React.useState({
+        email: '',
+        password: '',
+    });
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [error, setError] = React.useState('');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleLogin = async (e?: React.FormEvent) => {
+        if (e) e.preventDefault();
+        setError('');
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('http://localhost:4000/api/v1/auth/seller/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Tokens are set as cookies by the backend
+                onLoginSuccess();
+            } else {
+                setError(data.message || 'Login failed. Please check your credentials.');
+            }
+        } catch (err) {
+            setError('Network error. Please check your connection.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <>
             {/* Mobile View */}
@@ -30,10 +77,19 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
                             Enter your credentials to access your seller dashboard.
                         </p>
 
+                        {error && (
+                            <div className="bg-red-50 text-red-500 text-xs p-3 rounded-lg border border-red-100 mb-4">
+                                {error}
+                            </div>
+                        )}
+
                         <div>
                             <label className="block text-sm font-bold mb-2 text-gray-700 font-display">Email Address</label>
                             <input
                                 type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 placeholder="name@company.com"
                                 className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-medium"
                             />
@@ -43,6 +99,9 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
                             <label className="block text-sm font-bold mb-2 text-gray-700 font-display">Password</label>
                             <input
                                 type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
                                 placeholder="••••••••"
                                 className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-medium"
                             />
@@ -51,10 +110,11 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
 
                     <div className="flex flex-col gap-4 w-full">
                         <button
-                            onClick={onLoginSuccess}
-                            className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
+                            onClick={() => handleLogin()}
+                            disabled={isLoading}
+                            className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            Login
+                            {isLoading ? 'Logging in...' : 'Login'}
                         </button>
                         <p className="text-sm text-center text-slate-500">
                             Don't have an account? {' '}
@@ -95,7 +155,12 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
                         </div>
 
                         <div className="bg-[#F0F4FF] p-6 lg:p-8 rounded-[2rem] shadow-sm border border-primary/5">
-                            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); onLoginSuccess(); }}>
+                            <form className="space-y-4" onSubmit={handleLogin}>
+                                {error && (
+                                    <div className="bg-red-50 text-red-500 text-xs p-3 rounded-lg border border-red-100 mb-4">
+                                        {error}
+                                    </div>
+                                )}
                                 <div className="space-y-1.5">
                                     <label className="block text-[10px] font-bold text-[#0033C4]/40 uppercase tracking-widest pl-1" htmlFor="email">
                                         Email Address
@@ -104,8 +169,11 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
                                         className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                         id="email"
                                         name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
                                         type="email"
                                         placeholder="name@company.com"
+                                        required
                                     />
                                 </div>
                                 <div className="space-y-1.5">
@@ -121,15 +189,19 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
                                         className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                         id="password"
                                         name="password"
+                                        value={formData.password}
+                                        onChange={handleChange}
                                         type="password"
                                         placeholder="••••••••"
+                                        required
                                     />
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-full mt-4 py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-xl shadow-primary/20 text-lg flex items-center justify-center gap-2"
+                                    disabled={isLoading}
+                                    className="w-full mt-4 py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-xl shadow-primary/20 text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    Login <ArrowRight size={20} />
+                                    {isLoading ? 'Logging in...' : <>{'Login'} <ArrowRight size={20} /></>}
                                 </button>
                             </form>
                         </div>

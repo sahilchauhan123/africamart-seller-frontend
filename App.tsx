@@ -80,7 +80,7 @@ const App: React.FC = () => {
       case View.SIGNUP:
         return <Signup onBack={() => setCurrentView(View.ONBOARDING)} onNext={() => setCurrentView(View.OTP)} onLogin={() => setCurrentView(View.LOGIN)} />;
       case View.OTP:
-        return <OtpVerification onBack={() => setCurrentView(View.SIGNUP)} onNext={() => setCurrentView(View.BUSINESS_SETUP)} />;
+        return <OtpVerification onBack={() => setCurrentView(View.SIGNUP)} onNext={() => setCurrentView(View.DASHBOARD)} />;
       case View.BUSINESS_SETUP:
         return <BusinessSetup onBack={() => setCurrentView(View.OTP)} onNext={() => setCurrentView(View.DASHBOARD)} />;
       case View.DASHBOARD:
