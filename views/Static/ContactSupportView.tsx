@@ -17,7 +17,7 @@ import {
     Twitter,
     Linkedin
 } from 'lucide-react';
-import { View } from '../types';
+import { View } from '../../types';
 
 interface Props {
     onBack?: () => void;
@@ -26,7 +26,7 @@ interface Props {
     isDashboardMode?: boolean;
 }
 
-const ContactSupport: React.FC<Props> = ({ onBack, onNavigate, onSignup, isDashboardMode = false }) => {
+const ContactSupportView: React.FC<Props> = ({ onBack, onNavigate, onSignup, isDashboardMode = false }) => {
     const content = (
         <>
             {!isDashboardMode && (
@@ -357,4 +357,4 @@ const ContactSupport: React.FC<Props> = ({ onBack, onNavigate, onSignup, isDashb
     );
 };
 
-export default ContactSupport;
+export default ContactSupportView;

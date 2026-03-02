@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from '../types';
+import { View } from '../../types';
 import { Store, X, ArrowRight, ArrowLeft, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
     onNavigate: (view: View) => void;
 }
 
-const EasySetupToolkit: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
+const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
     return (
         <div className="bg-white text-[#121018] antialiased min-h-screen font-display">
             {/* Mobile Header */}
@@ -350,4 +350,4 @@ const EasySetupToolkit: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => 
     );
 };
 
-export default EasySetupToolkit;
+export default EasySetupToolkitView;

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { BASE_URL } from '../services/api';
+import { useLoginController } from '../controllers/useLoginController';
 
 interface Props {
     onBack: () => void;
@@ -9,53 +9,8 @@ interface Props {
     onLoginSuccess: () => void;
 }
 
-const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
-    const [formData, setFormData] = React.useState({
-        email: '',
-        password: '',
-    });
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [error, setError] = React.useState('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleLogin = async (e?: React.FormEvent) => {
-        if (e) e.preventDefault();
-        setError('');
-        setIsLoading(true);
-
-        try {
-            const response = await fetch(`${BASE_URL}/auth/seller/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    email: formData.email,
-                    password: formData.password
-                }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Tokens are set as cookies by the backend
-                onLoginSuccess();
-            } else {
-                setError(data.message || 'Login failed. Please check your credentials.');
-            }
-        } catch (err) {
-            setError('Network error. Please check your connection.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
+const LoginView: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
+    const { formData, isLoading, error, handleChange, handleLogin } = useLoginController(onLoginSuccess);
 
     return (
         <>
@@ -240,4 +195,4 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
     );
 };
 
-export default Login;
+export default LoginView;

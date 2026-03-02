@@ -5,7 +5,7 @@ interface Props {
     onBack: () => void;
 }
 
-const BusinessReport: React.FC<Props> = ({ onBack }) => {
+const BusinessReportView: React.FC<Props> = ({ onBack }) => {
     return (
         <div className="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col font-sans">
             {/* Mobile View */}
@@ -171,4 +171,4 @@ const BusinessReport: React.FC<Props> = ({ onBack }) => {
     );
 };
 
-export default BusinessReport;
+export default BusinessReportView;

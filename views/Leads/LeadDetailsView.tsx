@@ -20,13 +20,17 @@ import {
     HelpCircle
 } from 'lucide-react';
 
+import { useLeadsController } from '../../controllers/useLeadsController';
+
 interface Props {
     onBack: () => void;
     onAccept: () => void;
 }
 
-const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
-    const [selectedCurrency, setSelectedCurrency] = useState('USD');
+const LeadDetailsView: React.FC<Props> = ({ onBack, onAccept }) => {
+    const { state, actions } = useLeadsController();
+    const { selectedCurrency } = state;
+    const { setSelectedCurrency } = actions;
 
     // Mock exchange rates (relative to 1 LD)
     const rates: Record<string, number> = {
@@ -422,4 +426,4 @@ const LeadDetails: React.FC<Props> = ({ onBack, onAccept }) => {
     );
 };
 
-export default LeadDetails;
+export default LeadDetailsView;

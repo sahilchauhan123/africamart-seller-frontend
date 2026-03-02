@@ -1,5 +1,5 @@
-
-import React, { useState } from 'react';
+import React from 'react';
+import { useBusinessController } from '../../controllers/useBusinessController';
 import { Building2, MapPin, Globe, Phone, ArrowRight, CheckCircle2, Trophy, PartyPopper } from 'lucide-react';
 
 interface Props {
@@ -7,8 +7,10 @@ interface Props {
     onNext: () => void;
 }
 
-const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
-    const [showModal, setShowModal] = useState(false);
+const BusinessSetupView: React.FC<Props> = ({ onBack, onNext }) => {
+    const { state, actions } = useBusinessController();
+    const { showModal, formData, isLoading, error } = state;
+    const { setShowModal, handleInputChange, submitBusiness } = actions;
 
     return (
         <>
@@ -49,7 +51,7 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                             </h2>
 
                             <p className="text-slate-500 leading-relaxed mb-8 text-sm lg:text-base font-medium px-2">
-                                Your business profile has been <span className="text-green-600 font-bold">successfully created</span>. You're now ready to connect with buyers across Africa!
+                                Your Account has been <span className="text-green-600 font-bold">successfully created</span>
                             </p>
 
                             <div className="w-full space-y-4">
@@ -83,6 +85,9 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                         <div>
                             <label className="block text-sm font-bold mb-2 text-gray-700">Business Name</label>
                             <input
+                                name="business_name"
+                                value={formData.business_name}
+                                onChange={handleInputChange}
                                 type="text"
                                 placeholder="e.g. AfriTrade Solutions"
                                 className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
@@ -92,6 +97,9 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                         <div>
                             <label className="block text-sm font-bold mb-2 text-gray-700">Location / Address</label>
                             <input
+                                name="business_address"
+                                value={formData.business_address}
+                                onChange={handleInputChange}
                                 type="text"
                                 placeholder="e.g. 123 Sinkor, Monrovia"
                                 className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
@@ -100,19 +108,27 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
 
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Country</label>
-                                <select className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all appearance-none cursor-pointer text-sm">
-                                    <option>Liberia</option>
-                                    <option>Nigeria</option>
-                                    <option>Ghana</option>
-                                    <option>Kenya</option>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">Business Type</label>
+                                <select
+                                    name="business_type"
+                                    value={formData.business_type}
+                                    onChange={handleInputChange}
+                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all appearance-none cursor-pointer text-sm">
+                                    <option value="">Select Type</option>
+                                    <option value="Retail">Retail</option>
+                                    <option value="Wholesale">Wholesale</option>
+                                    <option value="Manufacturing">Manufacturing</option>
+                                    <option value="Services">Services</option>
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Contact</label>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">Business Category</label>
                                 <input
-                                    type="tel"
-                                    placeholder="+231..."
+                                    name="business_category"
+                                    value={formData.business_category}
+                                    onChange={handleInputChange}
+                                    type="text"
+                                    placeholder="e.g. Electronics"
                                     className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all"
                                 />
                             </div>
@@ -123,11 +139,13 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                         Help buyers find your business faster
                     </p>
 
+                    {error && <div className="text-red-500 text-sm text-center mb-4">{error}</div>}
                     <button
-                        onClick={() => setShowModal(true)}
-                        className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200"
+                        onClick={submitBusiness}
+                        disabled={isLoading}
+                        className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/20 transform active:scale-95 transition-all duration-200 disabled:opacity-50"
                     >
-                        Finish Setup
+                        {isLoading ? 'Setting up...' : 'Finish Setup'}
                     </button>
                 </main>
             </div>
@@ -154,7 +172,10 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                                         <Building2 size={14} /> Registered Business Name
                                     </label>
                                     <input
-                                        className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
+                                        name="business_name"
+                                        value={formData.business_name}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                         placeholder="Enter your company name"
                                         type="text"
                                     />
@@ -165,7 +186,10 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                                         <MapPin size={14} /> Head Office Address
                                     </label>
                                     <input
-                                        className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
+                                        name="business_address"
+                                        value={formData.business_address}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
                                         placeholder="Physical location"
                                         type="text"
                                     />
@@ -174,37 +198,47 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
                                 <div className="grid grid-cols-2 gap-6">
                                     <div className="space-y-1.5">
                                         <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase pl-1">
-                                            <Globe size={14} /> Country
+                                            <Globe size={14} /> Business Type
                                         </label>
                                         <div className="relative">
-                                            <select className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 shadow-sm font-semibold appearance-none cursor-pointer">
-                                                <option>Liberia</option>
-                                                <option>Nigeria</option>
-                                                <option>Ghana</option>
-                                                <option>South Africa</option>
+                                            <select
+                                                name="business_type"
+                                                value={formData.business_type}
+                                                onChange={handleInputChange}
+                                                className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 shadow-sm font-semibold appearance-none cursor-pointer">
+                                                <option value="">Select</option>
+                                                <option value="Retail">Retail</option>
+                                                <option value="Wholesale">Wholesale</option>
+                                                <option value="Manufacturing">Manufacturing</option>
+                                                <option value="Services">Services</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
                                         <label className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#0033C4]/40 uppercase pl-1">
-                                            <Phone size={14} /> Business Contact
+                                            <Building2 size={14} /> Business Category
                                         </label>
                                         <input
-                                            className="w-full px-4 py-3 bg-white border-2 border-transparent rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
-                                            placeholder="+231..."
-                                            type="tel"
+                                            name="business_category"
+                                            value={formData.business_category}
+                                            onChange={handleInputChange}
+                                            className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-[1rem] focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-gray-900 placeholder-gray-300 shadow-sm font-semibold"
+                                            placeholder="e.g. Electronics"
+                                            type="text"
                                         />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        {error && <div className="text-red-500 flex justify-center text-sm font-semibold p-2 bg-red-50 rounded-lg">{error}</div>}
                         <button
-                            onClick={() => setShowModal(true)}
-                            className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-xl shadow-primary/40 text-lg flex items-center justify-center gap-3 tracking-wide"
+                            onClick={submitBusiness}
+                            disabled={isLoading}
+                            className="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-full transition-all transform active:scale-[0.98] shadow-xl shadow-primary/40 text-lg flex items-center justify-center gap-3 tracking-wide disabled:opacity-50"
                         >
-                            COMPLETE SETUP
-                            <ArrowRight size={20} />
+                            {isLoading ? 'WAIT...' : 'COMPLETE SETUP'}
+                            {!isLoading && <ArrowRight size={20} />}
                         </button>
                     </div>
                 </div>
@@ -230,4 +264,4 @@ const BusinessSetup: React.FC<Props> = ({ onBack, onNext }) => {
     );
 };
 
-export default BusinessSetup;
+export default BusinessSetupView;

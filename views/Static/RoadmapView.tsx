@@ -16,7 +16,7 @@ import {
     ArrowRight,
     X
 } from 'lucide-react';
-import { View } from '../types';
+import { View } from '../../types';
 
 interface Props {
     onBack: () => void;
@@ -24,7 +24,7 @@ interface Props {
     onNavigate: (view: View) => void;
 }
 
-const Roadmap: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
+const RoadmapView: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
     return (
         <div className="bg-white text-gray-900 antialiased min-h-screen">
             {/* Mobile Header */}
@@ -430,4 +430,4 @@ const Roadmap: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
     );
 };
 
-export default Roadmap;
+export default RoadmapView;

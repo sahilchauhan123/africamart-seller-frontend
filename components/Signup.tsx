@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { BASE_URL } from '../services/api';
 
 
 interface Props {
@@ -31,7 +32,7 @@ const Signup: React.FC<Props> = ({ onBack, onNext, onLogin }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/api/v1/auth/seller/registration/sendotp', {
+      const response = await fetch(`${BASE_URL}/auth/seller/registration/sendotp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

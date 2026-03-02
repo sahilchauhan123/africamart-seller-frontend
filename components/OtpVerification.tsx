@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { AuthService } from '../services/AuthService';
 
 interface Props {
     onBack: () => void;
@@ -23,53 +23,26 @@ const OtpVerification: React.FC<Props> = ({ onBack, onNext }) => {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/v1/auth/seller/registration/submitotp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    email: email,
-                    otp: parseInt(otp, 10)
-                }),
-            });
+            await AuthService.submitOtp(email, parseInt(otp, 10));
 
-            const data = await response.json();
+            // Success - Now automatically login
+            setIsLoading(true);
+            const password = localStorage.getItem('registration_password');
 
-            if (response.ok) {
-                // Success - Now automatically login
-                setIsLoading(true);
-                const password = localStorage.getItem('registration_password');
-
-                try {
-                    const loginResponse = await fetch('http://localhost:4000/api/v1/auth/seller/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        credentials: 'include',
-                        body: JSON.stringify({
-                            email: email,
-                            password: password
-                        }),
-                    });
-
-                    if (loginResponse.ok) {
-                        // Clear sensitive data
-                        localStorage.removeItem('registration_password');
-                        onNext();
-                    } else {
-                        setError('Verification successful, but automatic login failed. Please login manually.');
-                    }
-                } catch (loginErr) {
-                    setError('Verification successful, but login failed due to network error.');
+            try {
+                if (password) {
+                    await AuthService.login(email, password);
+                    // Clear sensitive data
+                    localStorage.removeItem('registration_password');
+                    onNext();
+                } else {
+                    setError('Verification successful, but automatic login failed. Please login manually.');
                 }
-            } else {
-                setError(data.message || 'Invalid OTP. Please try again.');
+            } catch (loginErr: any) {
+                setError(loginErr.message || 'Verification successful, but login failed.');
             }
-        } catch (err) {
-            setError('Network error. Please check your connection.');
+        } catch (err: any) {
+            setError(err.message || 'Network error. Please check your connection.');
         } finally {
             setIsLoading(false);
         }

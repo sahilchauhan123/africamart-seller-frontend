@@ -11,7 +11,7 @@ import {
     Store,
     X
 } from 'lucide-react';
-import { View } from '../types';
+import { View } from '../../types';
 
 interface Props {
     onBack?: () => void;
@@ -20,7 +20,7 @@ interface Props {
     onSignup?: () => void;
 }
 
-const Policies: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = false, onSignup }) => {
+const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = false, onSignup }) => {
     const content = (
         <>
             {!isDashboardMode && (
@@ -233,4 +233,4 @@ const Policies: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = false
     );
 };
 
-export default Policies;
+export default PoliciesView;

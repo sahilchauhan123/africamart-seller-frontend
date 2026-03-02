@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useBusinessController } from '../../controllers/useBusinessController';
 import {
     CheckCircle2,
     Upload,
@@ -24,8 +25,9 @@ interface BusinessInfoProps {
     onViewAll: () => void;
 }
 
-const BusinessInfo: React.FC<BusinessInfoProps> = ({ onOpenDrawer, onViewAll }) => {
-    const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+const BusinessInfoView: React.FC<BusinessInfoProps> = ({ onOpenDrawer, onViewAll }) => {
+    const { state } = useBusinessController();
+    const { viewMode } = state;
 
     return (
         <div className="bg-[#f9fafb] font-display text-[#131516] min-h-screen flex flex-col pb-10">
@@ -331,4 +333,4 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({ onOpenDrawer, onViewAll }) 
     );
 };
 
-export default BusinessInfo;
+export default BusinessInfoView;

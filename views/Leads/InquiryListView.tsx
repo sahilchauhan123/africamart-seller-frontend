@@ -1,43 +1,22 @@
-
-import React, { useState, useMemo } from 'react';
-import { MOCK_INQUIRIES } from '../constants';
+import React from 'react';
 import { MapPin, Search, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLeadsController } from '../../controllers/useLeadsController';
 
 interface Props {
   onBack: () => void;
   onSelectLead: () => void;
 }
 
-const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortOrder, setSortOrder] = useState<'Newest' | 'Oldest'>('Newest');
-
-  const filteredInquiries = useMemo(() => {
-    let result = MOCK_INQUIRIES.filter(inq => {
-      // Search matching
-      const matchesSearch = inq.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        inq.message.toLowerCase().includes(searchQuery.toLowerCase());
-
-      if (!matchesSearch) return false;
-
-      // Filter matching
-      if (activeFilter === 'All') return true;
-      if (activeFilter === 'New Leads') return inq.status === 'New Lead' || inq.status === 'Urgent';
-      if (activeFilter === 'Viewed') return inq.status === 'Viewed';
-      if (activeFilter === 'Replied') return inq.status === 'Replied';
-
-      return true;
-    });
-
-    return sortOrder === 'Newest' ? result : [...result].reverse();
-  }, [searchQuery, activeFilter, sortOrder]);
+const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
+  const { state, actions } = useLeadsController();
+  const { activeFilter, searchQuery, sortOrder, filteredInquiries } = state;
+  const { setActiveFilter, setSearchQuery, setSortOrder } = actions;
 
   return (
     <div className="flex flex-col bg-[#F8FAFC] h-full overflow-hidden">
       {/* Mobile View - Existing Layout */}
       <div className="lg:hidden flex flex-col h-full bg-gray-100">
-        <div className="bg-white shadow-sm border-b border-gray-100 shrink-0">
+        <div className="bg-white shadow-sm border-b border-slate-200 shrink-0">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4 overflow-hidden">
             <div className="flex gap-2 overflow-x-auto no-scrollbar flex-1">
               {['All', 'New Leads', 'Viewed', 'Replied'].map(filter => (
@@ -56,7 +35,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
         <main className="flex-1 overflow-y-auto p-4 no-scrollbar">
           <div className="max-w-7xl mx-auto space-y-3 pb-20">
             {filteredInquiries.length > 0 ? filteredInquiries.map(inq => (
-              <div key={inq.id} onClick={onSelectLead} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 transition active:scale-[0.99] cursor-pointer">
+              <div key={inq.id} onClick={onSelectLead} className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition active:scale-[0.99] cursor-pointer">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full border-2 border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0">
                     <span className="text-orange-600 font-bold text-sm">{inq.initials}</span>
@@ -92,7 +71,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
       <div className="hidden lg:flex flex-col h-full bg-slate-50">
         <section className="p-8 flex-1 overflow-y-auto no-scrollbar">
           <div className="max-w-6xl mx-auto space-y-6">
-            <div className="bg-white p-4 rounded-xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100">
+            <div className="bg-white p-4 rounded-xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-200">
               <div className="flex items-center p-1 bg-slate-100 rounded-lg w-fit">
                 {['All', 'New Leads', 'Viewed', 'Replied'].map(filter => (
                   <button
@@ -115,7 +94,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
-                <div className="flex items-center gap-2 bg-slate-50 p-1 rounded-lg border border-slate-100">
+                <div className="flex items-center gap-2 bg-slate-50 p-1 rounded-lg border border-slate-200">
                   <select
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value as any)}
@@ -137,7 +116,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                 <div
                   key={inq.id}
                   onClick={onSelectLead}
-                  className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group cursor-pointer"
+                  className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow group cursor-pointer"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 font-bold flex-shrink-0 text-xs">
@@ -178,7 +157,7 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
                   </div>
                 </div>
               )) : (
-                <div className="flex flex-col items-center justify-center py-32 bg-white rounded-xl border border-dashed border-slate-200 text-slate-400">
+                <div className="flex flex-col items-center justify-center py-32 bg-white rounded-xl border border-dashed border-slate-300 text-slate-400">
                   <Search size={64} className="mb-4 opacity-10" />
                   <p className="text-lg font-medium">No results found for "{searchQuery}"</p>
                   <button onClick={() => { setSearchQuery(''); setActiveFilter('All'); }} className="mt-4 text-primary font-bold hover:underline">Clear all filters</button>
@@ -187,13 +166,13 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
             </div>
 
             <div className="flex items-center justify-center gap-2 py-4">
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled>
                 <ChevronLeft size={20} />
               </button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-medium">1</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">2</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">3</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50">
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50">2</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50">3</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-400 hover:bg-slate-50">
                 <ChevronRight size={20} />
               </button>
             </div>
@@ -204,4 +183,4 @@ const InquiryList: React.FC<Props> = ({ onBack, onSelectLead }) => {
   );
 };
 
-export default InquiryList;
+export default InquiryListView;

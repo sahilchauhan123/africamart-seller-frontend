@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View } from '../types';
+import { View } from '../../types';
 import { Store, X, Map, Users, Layers, HelpCircle, Headphones, Rocket, Search, Bot, ChevronRight, RotateCcw, TrendingUp, Truck, Globe, Check, MapPin, Mail, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
     onNavigate: (view: View) => void;
 }
 
-const AboutUs: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
+const AboutUsView: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
     return (
         <div className="bg-white text-gray-900 antialiased min-h-screen font-display">
             {/* Mobile Header */}
@@ -548,10 +548,48 @@ const AboutUs: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
                     </div>
                 </footer>
 
+                {/* Developer Options */}
+                <section className="py-16 lg:py-20 max-w-7xl mx-auto px-6 lg:px-10 border-t border-slate-100">
+                    <div className="flex items-center gap-3 mb-8">
+                        <h3 className="text-2xl font-bold font-mono text-purple-600">Developer Options</h3>
+                        <span className="rounded-full bg-purple-100 px-3 py-1 text-[10px] font-bold text-purple-700 uppercase tracking-widest">Temporary</span>
+                    </div>
+                    <div className="rounded-3xl bg-slate-50 p-8 lg:p-10 border border-purple-100">
+                        <div className="space-y-4 max-w-2xl text-left">
+                            <div>
+                                <label className="text-sm font-bold text-slate-700">API Base URL</label>
+                                <p className="text-xs text-slate-500 mb-4">Override the default backend connection. Useful for switching between local testing and production.</p>
+                                <div className="flex flex-col sm:flex-row gap-3">
+                                    <input
+                                        type="text"
+                                        id="dev-base-url"
+                                        defaultValue={localStorage.getItem('apiBaseUrl') || 'http://localhost:4000/api/v1'}
+                                        className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 font-mono text-sm text-slate-700 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none transition"
+                                        placeholder="http://localhost:4000/api/v1"
+                                    />
+                                    <button
+                                        onClick={() => {
+                                            const val = (document.getElementById('dev-base-url') as HTMLInputElement).value;
+                                            if (val) {
+                                                localStorage.setItem('apiBaseUrl', val);
+                                            } else {
+                                                localStorage.removeItem('apiBaseUrl');
+                                            }
+                                            window.location.reload();
+                                        }}
+                                        className="shrink-0 rounded-xl bg-purple-600 hover:bg-purple-700 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all active:scale-95"
+                                    >
+                                        Save & Reload
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
 
         </div>
     );
 };
 
-export default AboutUs;
+export default AboutUsView;

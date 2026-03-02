@@ -35,9 +35,10 @@ interface Props {
   onNavigate: (view: View) => void;
   currentView: View;
   isOnboarding?: boolean;
+  onLogout?: () => void;
 }
 
-const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isOnboarding }) => {
+const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isOnboarding, onLogout }) => {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
@@ -144,7 +145,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                   className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.BUSINESS_INFO ? 'bg-blue-50 text-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
                 >
                   <FileText className={currentView === View.BUSINESS_INFO ? 'text-primary' : 'text-gray-400'} size={24} />
-                  <span className="font-medium text-sm">Documents</span>
+                  <span className="font-medium text-sm">Business Management</span>
                 </button>
                 <button
                   onClick={() => { onNavigate(View.MESSAGES); if (window.innerWidth < 1024) onClose(); }}
@@ -240,6 +241,13 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                     </button>
                   </div>
                 )}
+                <button
+                  onClick={onLogout}
+                  className="w-full flex items-center gap-4 px-6 py-4 text-red-500 hover:bg-red-50 transition-colors mt-auto border-t border-gray-100"
+                >
+                  <LogOut size={24} />
+                  <span className="text-sm font-bold tracking-widest uppercase">Logout</span>
+                </button>
               </div>
             </>
           )}
@@ -304,7 +312,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
               className={`flex items-center gap-4 px-6 py-3 transition-all cursor-pointer ${currentView === View.BUSINESS_INFO ? 'text-brand font-bold bg-slate-50/50' : 'text-slate-500 hover:text-black'}`}
             >
               <FileText className={currentView === View.BUSINESS_INFO ? 'font-bold text-brand' : ''} size={22} />
-              <span className="font-medium text-sm">Documents</span>
+              <span className="font-medium text-sm">Business Management</span>
             </a>
             <a
               onClick={() => onNavigate(View.MESSAGES)}
@@ -383,9 +391,12 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
           </div>
         </nav>
         <div className="p-8 border-t border-slate-100">
-          <button className="flex items-center gap-4 px-4 py-2 transition-all text-slate-400 hover:text-red-500 w-full text-left">
+          <button
+            onClick={onLogout}
+            className="flex items-center gap-4 px-4 py-2 transition-all text-slate-400 hover:text-red-500 w-full text-left outline-none"
+          >
             <LogOut size={24} />
-            <span className="font-medium text-sm">Logout</span>
+            <span className="font-medium text-sm text-[10px] font-bold uppercase tracking-widest">Logout</span>
           </button>
         </div>
       </aside >

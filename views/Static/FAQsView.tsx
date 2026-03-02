@@ -69,7 +69,7 @@ interface Props {
     onSignup: () => void;
 }
 
-const FAQs: React.FC<Props> = ({ onBack, onSignup }) => {
+const FAQsView: React.FC<Props> = ({ onBack, onSignup }) => {
     const [activeFaq, setActiveFaq] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -206,4 +206,4 @@ const FAQs: React.FC<Props> = ({ onBack, onSignup }) => {
     );
 };
 
-export default FAQs;
+export default FAQsView;

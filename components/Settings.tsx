@@ -24,48 +24,6 @@ const Settings: React.FC<Props> = ({ onNavigate }) => {
                         </button>
                     </div>
 
-                    {/* Business Profile Section */}
-                    <section className="space-y-6 text-slate-900 dark:text-white">
-                        <div className="flex items-center justify-between">
-                            <h3 className="text-xl font-bold">Business Profile</h3>
-                            <a className="text-sm font-bold text-primary hover:underline cursor-pointer">Edit Public Profile</a>
-                        </div>
-                        <div className="rounded-xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-                            <div className="flex flex-col md:flex-row gap-6">
-                                <div className="size-24 shrink-0 rounded-lg bg-slate-50 dark:bg-slate-700 border-2 border-slate-100 dark:border-slate-600 flex items-center justify-center overflow-hidden">
-                                    <img
-                                        className="w-full h-full object-cover"
-                                        alt="Business Logo"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPYvqU8g69673ysZDFuR4JWBiF0qF7QUgfo_DGOtfjq1unaP9W9PiEgqYLR49AneoV5tKwNP9rrmA3pG_4gbujCzILBW1Me-3n_2Uqdxxxuvy7FcnWfggDxBjaRD4wmi8stO8MR6-najR0UdMVmwGOsWsxvY25rw2zzpbuvSDMKbb0N02wtAfa7Hhh2CK_P6hlNzPe6EYDZ5IXDRTw9ooAjoUzI3gN_9OgYJ8n7heVzkFGtxDVPBa0SvoSi5Q8VHY_7gOOZZStdtU"
-                                    />
-                                </div>
-                                <div className="flex-1 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <h4 className="text-lg font-bold">AfricaMart Trading Co.</h4>
-                                        <span className="flex items-center gap-1 rounded-full bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 text-[10px] font-bold text-primary dark:text-blue-400 ring-1 ring-primary/20">
-                                            <span className="material-symbols-outlined text-[12px]">verified</span> VERIFIED SELLER
-                                        </span>
-                                    </div>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-lg">Primary category: Wholesale Electronics & Local Produce. Based in Lagos, Nigeria. Operating since 2021.</p>
-                                    <div className="flex items-center gap-4 pt-2">
-                                        <div className="text-xs text-slate-400 uppercase font-bold tracking-wider">Store Rating</div>
-                                        <div className="flex text-yellow-400 text-[18px]">
-                                            ★ ★ ★ ★ ½
-                                        </div>
-                                        <span className="text-xs font-bold text-slate-600 dark:text-slate-300">(4.8/5)</span>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col items-end gap-2">
-                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Store Status</span>
-                                    <div className="flex items-center gap-2 rounded-full bg-emerald-50 dark:bg-emerald-900/30 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-200 dark:ring-emerald-800">
-                                        <span className="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                        ACTIVE
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
                     {/* Notifications Matrix */}
                     <section className="space-y-6 text-slate-900 dark:text-white">
                         <div className="space-y-1">
@@ -230,6 +188,7 @@ const Settings: React.FC<Props> = ({ onNavigate }) => {
                             </button>
                         </div>
                     </section>
+
                 </div>
 
                 <footer className="mt-12 pt-8 pb-4 text-center text-slate-400 border-t border-slate-100 dark:border-slate-800 max-w-7xl mx-auto w-full">

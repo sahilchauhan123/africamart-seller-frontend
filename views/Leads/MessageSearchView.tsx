@@ -1,50 +1,19 @@
 
 import React, { useState } from 'react';
-import { View } from '../types';
 import { ArrowLeft, Search, X, History, User, Filter } from 'lucide-react';
+import { useMessagingController } from '../../controllers/useMessagingController';
+
+import { View } from '../../types';
 
 interface Props {
     onBack: () => void;
     onNavigate: (view: View) => void;
 }
 
-const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
-    const [searchQuery, setSearchQuery] = useState('meet');
-
-    const results = [
-        {
-            id: 1,
-            initials: 'IN',
-            name: 'Individual Name',
-            time: '22:30 AM',
-            message: 'Can we reschedule our meeting for tomorrow? I have a conflict.',
-            color: 'bg-blue-100 text-primary border-blue-200'
-        },
-        {
-            id: 2,
-            initials: 'AJ',
-            name: 'Alex Jones',
-            time: 'Sun',
-            message: "Looking forward to the meeting next week. Don't forget the slides.",
-            color: 'bg-indigo-100 text-indigo-700 border-indigo-200'
-        },
-        {
-            id: 3,
-            initials: 'SW',
-            name: 'Sarah Williams',
-            time: 'Oct 24',
-            message: "Sure, let's meet at the usual place.",
-            color: 'bg-emerald-100 text-emerald-700 border-emerald-200'
-        },
-        {
-            id: 4,
-            initials: 'RB',
-            name: 'Robert Brown',
-            time: 'Oct 20',
-            message: 'Did you get the meetup invite link?',
-            color: 'bg-orange-100 text-orange-700 border-orange-200'
-        }
-    ];
+const MessageSearchView: React.FC<Props> = ({ onBack, onNavigate }) => {
+    const { state, actions } = useMessagingController();
+    const { searchQuery, searchResults } = state;
+    const { setSearchQuery } = actions;
 
     const highlightMatch = (text: string, query: string) => {
         if (!query) return text;
@@ -133,7 +102,7 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
                             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Results for "{searchQuery}"</h3>
                         </div>
                         <div className="divide-y divide-slate-100">
-                            {results.map((chat) => (
+                            {searchResults.map((chat) => (
                                 <div
                                     key={chat.id}
                                     onClick={() => onNavigate(View.CHAT)}
@@ -165,4 +134,4 @@ const MessageSearch: React.FC<Props> = ({ onBack, onNavigate }) => {
     );
 };
 
-export default MessageSearch;
+export default MessageSearchView;

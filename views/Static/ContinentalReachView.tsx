@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View } from '../types';
+import { View } from '../../types';
 import { Store, X, ArrowRight, ArrowLeft, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
     onNavigate: (view: View) => void;
 }
 
-const ContinentalReach: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
+const ContinentalReachView: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => {
     return (
         <div className="bg-white text-gray-900 antialiased min-h-screen font-display">
             {/* Mobile Header */}
@@ -278,4 +278,4 @@ const ContinentalReach: React.FC<Props> = ({ onBack, onSignup, onNavigate }) => 
     );
 };
 
-export default ContinentalReach;
+export default ContinentalReachView;
