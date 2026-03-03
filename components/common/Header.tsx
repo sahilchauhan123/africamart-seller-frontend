@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             </header>
 
             {/* Desktop Header */}
-            <header className="bg-primary px-10 h-[72px] hidden lg:flex items-center justify-between fixed top-0 right-0 left-0 lg:left-72 z-10 shrink-0">
+            <header className="bg-primary px-10 h-[72px] hidden lg:flex items-center justify-between fixed top-0 right-0 left-0 lg:left-72 z-50 shrink-0">
                 <div className="flex-1 flex items-center gap-4">
                     {showBackButton && !isListView && (
                         <>
