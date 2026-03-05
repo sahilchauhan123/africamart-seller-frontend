@@ -93,9 +93,12 @@ const LeadDetailsView: React.FC<Props> = ({ onBack, onAccept }) => {
                                     <span>Posted Yesterday, 5 hrs ago</span>
                                 </div>
                             </div>
-                            <button className="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
-                                <Bookmark size={24} />
-                            </button>
+                            <div className="relative group">
+                                <button className="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+                                    <Bookmark size={24} />
+                                </button>
+                                <span className="tooltip">Save Lead</span>
+                            </div>
                         </div>
                     </div>
 

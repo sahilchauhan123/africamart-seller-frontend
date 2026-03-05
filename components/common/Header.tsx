@@ -105,27 +105,34 @@ const Header: React.FC<HeaderProps> = (props) => {
                 </div>
                 <div className="flex items-center gap-6 ml-8">
                     <div className="flex gap-1">
-                        <button onClick={() => onNavigate(View.NOTIFICATIONS)} className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all relative text-white">
-                            <Bell size={24} />
-                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-primary pointer-events-none"></span>
-                        </button>
-                        <button onClick={() => onNavigate(View.SETTINGS)} className={`w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all text-white ${currentView === View.SETTINGS ? 'bg-white/20' : ''}`}>
-                            <Settings size={24} />
-                        </button>
+                        <div className="relative group">
+                            <button onClick={() => onNavigate(View.NOTIFICATIONS)} className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all relative text-white">
+                                <Bell size={24} />
+                                <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-primary pointer-events-none"></span>
+                            </button>
+                            <span className="tooltip">Notifications</span>
+                        </div>
+                        <div className="relative group">
+                            <button onClick={() => onNavigate(View.SETTINGS)} className={`w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-all text-white ${currentView === View.SETTINGS ? 'bg-white/20' : ''}`}>
+                                <Settings size={24} />
+                            </button>
+                            <span className="tooltip">Settings</span>
+                        </div>
                     </div>
                     <div className="h-8 w-[1px] bg-white/20"></div>
                     <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-[10px] font-bold border border-white/20 transition-all flex items-center gap-2 whitespace-nowrap">
                         <ArrowLeftRight size={16} />
                         SWITCH TO BUYER
                     </button>
-                    <div className="flex items-center gap-3 pl-2" onClick={() => onNavigate(View.PROFILE)}>
-                        <div className="text-right hidden sm:block cursor-pointer">
+                    <div className="relative group flex items-center gap-3 pl-2 cursor-pointer" onClick={() => onNavigate(View.PROFILE)}>
+                        <div className="text-right hidden sm:block">
                             <p className="text-sm font-semibold text-white leading-none">{MOCK_USER.name}</p>
                             <p className="text-[10px] text-white/60 mt-1 uppercase tracking-tight">Verified Seller</p>
                         </div>
-                        <div className="w-10 h-10 rounded-full bg-white/20 overflow-hidden ring-2 ring-white/20 shadow-sm flex items-center justify-center cursor-pointer text-white/80">
+                        <div className="w-10 h-10 rounded-full bg-white/20 overflow-hidden ring-2 ring-white/20 shadow-sm flex items-center justify-center text-white/80">
                             <User size={24} />
                         </div>
+                        <span className="tooltip">View Profile</span>
                     </div>
                 </div>
             </header>

@@ -104,9 +104,12 @@ const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
                     <option value="Oldest">Oldest First</option>
                   </select>
                   <div className="w-px h-6 bg-slate-200"></div>
-                  <button className="p-1.5 text-slate-400 hover:text-primary transition-colors">
-                    <SlidersHorizontal size={18} />
-                  </button>
+                  <div className="relative group">
+                    <button className="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                      <SlidersHorizontal size={18} />
+                    </button>
+                    <span className="tooltip">Sort & Filter</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -166,15 +169,21 @@ const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
             </div>
 
             <div className="flex items-center justify-center gap-2 py-4">
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled>
-                <ChevronLeft size={20} />
-              </button>
+              <div className="relative group">
+                <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled>
+                  <ChevronLeft size={20} />
+                </button>
+                <span className="tooltip">Previous Page</span>
+              </div>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-medium">1</button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50">2</button>
               <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50">3</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-400 hover:bg-slate-50">
-                <ChevronRight size={20} />
-              </button>
+              <div className="relative group">
+                <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 text-slate-400 hover:bg-slate-50">
+                  <ChevronRight size={20} />
+                </button>
+                <span className="tooltip">Next Page</span>
+              </div>
             </div>
           </div>
         </section>

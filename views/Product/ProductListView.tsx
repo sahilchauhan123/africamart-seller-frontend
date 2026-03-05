@@ -145,15 +145,24 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
                             <div className="flex items-center justify-between">
                               <span className="text-sm font-bold text-slate-900 tracking-tight">${parseFloat(product.min_price || '0').toFixed(2)}</span>
                               <div className="flex items-center gap-1">
-                                <button onClick={(e) => { e.stopPropagation(); onEdit(); }} className="p-2 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
-                                  <Edit2 size={14} />
-                                </button>
-                                <button onClick={(e) => { e.stopPropagation(); onReachBuyers(); }} className="p-2 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition-all active:scale-90">
-                                  <MousePointerClick size={14} />
-                                </button>
-                                <button onClick={(e) => { e.stopPropagation(); }} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
-                                  <Trash2 size={14} />
-                                </button>
+                                <div className="relative group">
+                                  <button onClick={(e) => { e.stopPropagation(); onEdit(); }} className="p-2 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
+                                    <Edit2 size={14} />
+                                  </button>
+                                  <span className="tooltip">Edit Product</span>
+                                </div>
+                                <div className="relative group">
+                                  <button onClick={(e) => { e.stopPropagation(); onReachBuyers(); }} className="p-2 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition-all active:scale-90">
+                                    <MousePointerClick size={14} />
+                                  </button>
+                                  <span className="tooltip">Reach Buyers</span>
+                                </div>
+                                <div className="relative group">
+                                  <button onClick={(e) => { e.stopPropagation(); }} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
+                                    <Trash2 size={14} />
+                                  </button>
+                                  <span className="tooltip">Delete Product</span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -214,15 +223,24 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
                             </td>
                             <td className="px-4 py-4 text-right">
                               <div className="flex items-center justify-end gap-1.5">
-                                <button onClick={onEdit} className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
-                                  <Edit2 size={16} />
-                                </button>
-                                <button onClick={onReachBuyers} className="p-1.5 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition-all active:scale-90">
-                                  <MousePointerClick size={16} />
-                                </button>
-                                <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
-                                  <Trash2 size={16} />
-                                </button>
+                                <div className="relative group">
+                                  <button onClick={onEdit} className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
+                                    <Edit2 size={16} />
+                                  </button>
+                                  <span className="tooltip">Edit Listing</span>
+                                </div>
+                                <div className="relative group">
+                                  <button onClick={onReachBuyers} className="p-1.5 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition-all active:scale-90">
+                                    <MousePointerClick size={16} />
+                                  </button>
+                                  <span className="tooltip">Reach Buyers</span>
+                                </div>
+                                <div className="relative group">
+                                  <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
+                                    <Trash2 size={16} />
+                                  </button>
+                                  <span className="tooltip">Delete Listing</span>
+                                </div>
                               </div>
                             </td>
                           </tr>
