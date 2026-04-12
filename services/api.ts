@@ -1,10 +1,11 @@
+/// <reference types="vite/client" />
 import axios from 'axios';
 
 // Set global default just in case
 axios.defaults.withCredentials = true;
 
 const storedBaseUrl = localStorage.getItem('apiBaseUrl');
-export const BASE_URL = storedBaseUrl || 'http://165.232.47.156:4000/api/v1';
+export const BASE_URL = storedBaseUrl || (import.meta.env.DEV ? 'http://165.232.47.156:4000/api/v1' : '/api');
 
 const api = axios.create({
     baseURL: BASE_URL,
