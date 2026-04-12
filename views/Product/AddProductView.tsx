@@ -24,15 +24,15 @@ import {
 } from 'lucide-react';
 
 interface Props {
+  productId?: string;
   onBack: () => void;
   onSave: () => void;
 }
 
-const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
-  const { state, actions } = useAddProductController();
+const AddProductView: React.FC<Props> = ({ productId, onBack, onSave }) => {
+  const { state, actions } = useAddProductController(productId);
   const {
     step,
-    expandedSpec,
     showSuccessModal,
     isLoading,
     isPublishing,
@@ -46,12 +46,12 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
     showCategoryResults,
     categoryFilters,
     attributeValues,
+    availableUnits,
     progress
   } = state;
 
   const {
     setStep,
-    setExpandedSpec,
     setShowSuccessModal,
     setShowCategoryResults,
     handleInputChange,
@@ -93,10 +93,10 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
               <CheckCircle2 className="text-white w-10 h-10" />
             </div>
 
-            <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">Product Published!</h2>
+            <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">{productId ? 'Product Updated!' : 'Product Published!'}</h2>
 
             <p className="text-slate-500 leading-relaxed mb-10 text-base font-medium">
-              Thank you for contributing to AfricaMart's ecosystem! Your product has been <span className="text-emerald-600 font-bold">successfully listed</span> and is now visible to buyers across the continent.
+              Thank you for contributing to AfricaMart's ecosystem! Your product has been <span className="text-emerald-600 font-bold">{productId ? 'successfully updated' : 'successfully listed'}</span> and is now visible to buyers across the continent.
             </p>
 
             <div className="space-y-4">
@@ -168,6 +168,14 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
         </div>
 
         <div className="max-w-5xl mx-auto py-6 lg:py-10 px-4 lg:px-10">
+          {isLoading && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-white/60 backdrop-blur-sm">
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                <p className="mt-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Loading Product Data...</p>
+              </div>
+            </div>
+          )}
           {error && (
             <div className="bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 mb-8 flex items-center gap-3">
               <HelpCircle size={20} />
@@ -244,9 +252,10 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
               {/* Basic Info Section */}
               <section>
                 <div className="mb-8">
-                  <h2 className="text-xl font-bold text-slate-900">Basic Information</h2>
-                  <p className="text-sm text-slate-500 mt-1">Provide core identification details for your product listing.</p>
-                </div>
+                  <h2 className="text-xl lg:text-3xl font-black text-slate-900 tracking-tight">{productId ? 'Edit Product' : 'Add New Product'}</h2>
+                  <p className="text-slate-500 text-xs lg:text-sm font-medium mt-1">
+                    {productId ? 'Update your product details and specifications' : 'Provide accurate details to reach more buyers across Africa'}
+                  </p></div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-semibold text-slate-700 mb-2">Product/Service Name <span className="text-red-500">*</span></label>
@@ -312,7 +321,7 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
                       />
                     </div>
                   </div>
-                  <div>
+                  <div className="md:col-span-1">
                     <label className="block text-sm font-semibold text-slate-700 mb-2">Max Price</label>
                     <div className="relative">
                       <input
@@ -324,6 +333,29 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
                         type="number"
                       />
                     </div>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">Product Unit <span className="text-red-500">*</span></label>
+                    <div className="relative group">
+                      <select
+                        name="unit"
+                        value={productData.unit}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none appearance-none"
+                      >
+                        <option value="" disabled>Select unit...</option>
+                        {availableUnits.map((u: any) => (
+                          <option key={u.id} value={u.symbol}>{u.name} ({u.symbol})</option>
+                        ))}
+                      </select>
+                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none group-focus-within:text-primary transition-colors" size={20} />
+                    </div>
+                    {availableUnits.length === 0 && selectedCategory && (
+                      <p className="mt-2 text-xs text-amber-600 flex items-center gap-1.5">
+                        <HelpCircle size={14} />
+                        No specific units defined for this category.
+                      </p>
+                    )}
                   </div>
                 </div>
               </section>
@@ -367,17 +399,32 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
           ) : (
             <div className="space-y-10">
               <section>
+                {/* Product Summary Header */}
+                <div className="bg-white border border-slate-200 rounded-2xl p-6 lg:p-8 shadow-sm mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="flex items-center gap-5">
+                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary flex-shrink-0">
+                      <LayoutGrid size={28} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900 leading-tight">{productData.title || 'Untitled Product'}</h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Selected Category:</span>
+                        <span className="text-xs font-bold text-primary bg-primary/5 px-2 py-0.5 rounded-md border border-primary/10">{selectedCategory?.name}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setStep('basic')}
+                    className="text-xs font-bold text-slate-500 hover:text-primary flex items-center gap-1.5 px-4 py-2 rounded-xl hover:bg-slate-50 transition-all border border-slate-100"
+                  >
+                    Switch Category
+                    <ChevronDown size={14} className="rotate-90" />
+                  </button>
+                </div>
+
                 <div className="mb-8">
                   <h2 className="text-xl font-bold text-slate-900">Technical Specifications</h2>
                   <p className="text-sm text-slate-500 mt-1">Add specific details to help buyers filter and find your product.</p>
-                </div>
-
-                <div className="flex items-center flex-wrap gap-2 mb-6">
-                  <span className="font-semibold text-sm text-slate-900">Selected Category:</span>
-                  <div className="bg-primary/5 text-primary text-sm px-4 py-1.5 rounded-lg border border-primary/20 font-bold flex items-center gap-2">
-                    <LayoutGrid size={14} />
-                    {selectedCategory?.name || 'Please select in first step'}
-                  </div>
                 </div>
 
                 {isLoading ? (
@@ -392,53 +439,42 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
                     <p className="text-slate-500 max-w-sm mx-auto mt-2">This category doesn't have custom specifications. You can proceed to publish.</p>
                   </div>
                 ) : (
-                  <div className="space-y-6">
-                    {categoryFilters.map((filter, index) => (
-                      <div key={filter.id} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
-                        <div
-                          className={`p-6 flex justify-between items-center cursor-pointer transition-colors ${expandedSpec === index ? 'bg-primary/5' : 'hover:bg-slate-50'}`}
-                          onClick={() => setExpandedSpec(expandedSpec === index ? null : index)}
-                        >
-                          <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${expandedSpec === index ? 'bg-primary text-white' : 'bg-slate-100 text-slate-400'}`}>
-                              {attributeValues[filter.id]?.length > 0 || attributeValues[filter.id] !== '' ? <CheckCircle2 size={20} /> : <Circle size={20} />}
-                            </div>
-                            <div>
-                              <h3 className={`font-bold text-base ${expandedSpec === index ? 'text-primary' : 'text-slate-900'}`}>
-                                {filter.name}
-                                {filter.is_required && <span className="text-red-500 ml-1">*</span>}
-                              </h3>
-                              <p className="text-xs text-slate-500 font-medium">
-                                {filter.type === 'select' ? 'Select an option' : filter.type === 'checkbox' ? 'Select multiple' : 'Provide value'}
-                                {filter.unit ? ` (${filter.unit})` : ''}
-                              </p>
-                            </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    {categoryFilters.map((filter) => (
+                      <div key={filter.id} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:border-primary/20 transition-all flex flex-col">
+                        <div className="flex items-start justify-between mb-4">
+                          <div>
+                            <label className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                              {filter.name}
+                              {filter.is_required && <span className="text-red-500">*</span>}
+                            </label>
+                            {filter.unit && <span className="text-[10px] text-primary font-bold uppercase tracking-wider">{filter.unit}</span>}
                           </div>
-                          <div className={`p-1 rounded-full transition-transform ${expandedSpec === index ? 'rotate-180 bg-primary/10 text-primary' : 'text-slate-400'}`}>
-                            <ChevronDown size={20} />
-                          </div>
+                          {attributeValues[filter.id] && (attributeValues[filter.id].length > 0 || attributeValues[filter.id] === true || attributeValues[filter.id] === false || attributeValues[filter.id] !== '') && (
+                            <CheckCircle2 size={16} className="text-emerald-500" />
+                          )}
                         </div>
 
-                        {expandedSpec === index && (
-                          <div className="p-8 bg-white border-t border-slate-100">
-                            {filter.type === 'boolean' && (
-                              <div className="flex gap-4">
-                                <button
-                                  onClick={() => handleAttributeChange(filter.id, true, false)}
-                                  className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all ${attributeValues[filter.id] === true ? 'border-primary bg-primary/5 text-primary' : 'border-slate-200 text-slate-700 hover:border-slate-300'}`}
-                                >
-                                  Yes
-                                </button>
-                                <button
-                                  onClick={() => handleAttributeChange(filter.id, false, false)}
-                                  className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all ${attributeValues[filter.id] === false ? 'border-red-500 bg-red-50 text-red-600' : 'border-slate-200 text-slate-700 hover:border-slate-300'}`}
-                                >
-                                  No
-                                </button>
-                              </div>
-                            )}
+                        <div className="flex-1">
+                          {filter.type === 'boolean' && (
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => handleAttributeChange(filter.id, true, false)}
+                                className={`flex-1 py-2.5 rounded-xl border font-bold transition-all text-sm ${attributeValues[filter.id] === true ? 'border-primary bg-primary text-white' : 'border-slate-200 text-slate-600 hover:border-slate-300 bg-slate-50'}`}
+                              >
+                                Yes
+                              </button>
+                              <button
+                                onClick={() => handleAttributeChange(filter.id, false, false)}
+                                className={`flex-1 py-2.5 rounded-xl border font-bold transition-all text-sm ${attributeValues[filter.id] === false ? 'border-red-500 bg-red-500 text-white' : 'border-slate-200 text-slate-600 hover:border-slate-300 bg-slate-50'}`}
+                              >
+                                No
+                              </button>
+                            </div>
+                          )}
 
-                            {['select', 'checkbox', 'tag'].includes(filter.type) && (
+                          {['select', 'checkbox', 'tag'].includes(filter.type) && (
+                            filter.options && filter.options.length > 6 ? (
                               <div className="relative">
                                 <select
                                   multiple={filter.is_multi}
@@ -451,49 +487,69 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
                                       handleAttributeChange(filter.id, e.target.value, false);
                                     }
                                   }}
-                                  className={`w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none ${!filter.is_multi ? 'appearance-none' : ''}`}
+                                  className={`w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all ${!filter.is_multi ? 'appearance-none pr-10' : 'h-32'}`}
                                 >
-                                  {!filter.is_multi && <option value="" disabled>Select an option...</option>}
-                                  {filter.options?.map((option: string) => (
+                                  {!filter.is_multi && <option value="" disabled>Select {filter.name}...</option>}
+                                  {filter.options.map((option: string) => (
                                     <option key={option} value={option}>{option}</option>
                                   ))}
                                 </select>
                                 {!filter.is_multi && (
-                                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={20} />
+                                  <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                                 )}
+                                {filter.is_multi && <p className="mt-1.5 text-[10px] text-slate-400 font-medium">Hold Ctrl/Cmd to select multiple options</p>}
                               </div>
-                            )}
+                            ) : (
+                              <div className="flex flex-wrap gap-2">
+                                {filter.options?.map((option: string) => {
+                                  const isSelected = filter.is_multi
+                                    ? attributeValues[filter.id]?.includes(option)
+                                    : attributeValues[filter.id] === option;
+                                  return (
+                                    <button
+                                      key={option}
+                                      onClick={() => handleAttributeChange(filter.id, option, filter.is_multi)}
+                                      className={`px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${isSelected ? 'border-primary bg-primary/10 text-primary shadow-sm' : 'border-slate-200 text-slate-500 hover:border-primary/30 hover:bg-white bg-slate-50'}`}
+                                    >
+                                      {option}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            )
+                          )}
 
-                            {filter.type === 'number' && (
+                          {filter.type === 'number' && (
+                            <div className="relative">
                               <input
                                 type="number"
-                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none"
+                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all"
                                 value={attributeValues[filter.id] || ''}
                                 onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
-                                placeholder="Enter numeric value..."
+                                placeholder={`Enter ${filter.name.toLowerCase()}...`}
                               />
-                            )}
+                            </div>
+                          )}
 
-                            {filter.type === 'text' && (
-                              <input
-                                type="text"
-                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none"
-                                value={attributeValues[filter.id] || ''}
-                                onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
-                                placeholder="Enter text..."
-                              />
-                            )}
+                          {filter.type === 'text' && (
+                            <input
+                              type="text"
+                              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all"
+                              value={attributeValues[filter.id] || ''}
+                              onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
+                              placeholder={`Specify ${filter.name.toLowerCase()}...`}
+                            />
+                          )}
 
-                            {filter.type === 'date' && (
-                              <input
-                                type="date"
-                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none"
-                                value={attributeValues[filter.id] || ''}
-                                onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
-                              />
-                            )}
-                          </div>
-                        )}
+                          {filter.type === 'date' && (
+                            <input
+                              type="date"
+                              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all"
+                              value={attributeValues[filter.id] || ''}
+                              onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
+                            />
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -519,28 +575,34 @@ const AddProductView: React.FC<Props> = ({ onBack, onSave }) => {
             >
               {step === 'specification' ? 'Back' : 'Cancel'}
             </button>
-            <button
-              onClick={() => step === 'basic' ? setStep('specification') : handleSubmit()}
-              disabled={isPublishing || (step === 'basic' && !selectedCategory)}
-              className="flex-1 sm:flex-none px-8 py-2.5 lg:py-3 bg-primary text-white font-bold rounded-xl hover:shadow-xl hover:shadow-primary/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isPublishing ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Publishing...
-                </>
-              ) : step === 'basic' ? (
-                <>
-                  Next Step
-                  <ArrowRight size={20} />
-                </>
-              ) : (
-                <>
-                  <Sparkles size={18} />
-                  Publish Product
-                </>
-              )}
-            </button>
+            {step === 'basic' ? (
+              <button
+                onClick={() => setStep('specification')}
+                disabled={isPublishing || !selectedCategory}
+                className="flex-1 sm:flex-none px-8 py-2.5 lg:py-3 bg-primary text-white font-bold rounded-xl hover:shadow-xl hover:shadow-primary/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next Step
+                <ArrowRight size={20} />
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                disabled={isPublishing}
+                className="px-10 py-4 bg-primary hover:bg-blue-700 disabled:bg-slate-300 text-white font-bold rounded-2xl shadow-xl shadow-primary/20 transition-all flex items-center gap-3 group active:scale-95"
+              >
+                {isPublishing ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span>{productId ? 'UPDATING...' : 'PUBLISHING...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{productId ? 'SAVE CHANGES' : 'PUBLISH LISTING'}</span>
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </footer>

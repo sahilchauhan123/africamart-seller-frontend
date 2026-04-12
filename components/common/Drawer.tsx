@@ -113,6 +113,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
           ) : (
             <>
               <div className="py-4">
+                {/* 
                 <button
                   onClick={() => { onNavigate(View.DASHBOARD); if (window.innerWidth < 1024) onClose(); }}
                   className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.DASHBOARD ? 'bg-blue-50 text-primary font-bold border-r-4 border-primary' : 'hover:bg-gray-50 text-gray-600'}`}
@@ -120,6 +121,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                   <Home className={currentView === View.DASHBOARD ? 'text-primary' : 'text-gray-400'} size={24} />
                   <span className="text-sm tracking-wide">Home</span>
                 </button>
+                */}
                 <button
                   onClick={() => { onNavigate(View.PRODUCT_LIST); if (window.innerWidth < 1024) onClose(); }}
                   className={`w-full flex items-center gap-4 px-6 py-3.5 transition-colors ${currentView === View.PRODUCT_LIST ? 'bg-blue-50 text-primary font-bold border-r-4 border-primary' : 'hover:bg-gray-50 text-gray-600'}`}

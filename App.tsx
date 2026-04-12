@@ -19,7 +19,6 @@ import BusinessVisibilityView from './views/Static/BusinessVisibilityView';
 import ContinentalReachView from './views/Static/ContinentalReachView';
 import EasySetupToolkitView from './views/Static/EasySetupToolkitView';
 
-import PremiumServices from './components/PremiumServices';
 import BusinessInfoView from './views/Business/BusinessInfoView';
 import RecentUploads from './components/RecentUploads';
 import Notifications from './components/Notifications';
@@ -41,8 +40,13 @@ const App: React.FC = () => {
   const [currentView, setInternalView] = useState<View>(View.ONBOARDING);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isProfileFilled, setIsProfileFilled] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
+  const [selectedLead, setSelectedLead] = useState<any | null>(null);
 
   const publicViews = [
     View.ONBOARDING,
@@ -59,13 +63,16 @@ const App: React.FC = () => {
     View.CONTINENTAL_REACH
   ];
 
+  const checkUserAuth = async () => {
+    setIsAuthLoading(true);
+    const { isAuthenticated, isActive, isProfileFilled } = await AuthService.checkAuth();
+    setIsAuthenticated(isAuthenticated);
+    setIsActive(isActive);
+    setIsProfileFilled(isProfileFilled);
+    setIsAuthLoading(false);
+  };
+
   useEffect(() => {
-    const checkUserAuth = async () => {
-      setIsAuthLoading(true);
-      const isAuth = await AuthService.checkAuth();
-      setIsAuthenticated(isAuth);
-      setIsAuthLoading(false);
-    };
     checkUserAuth();
   }, []);
 
@@ -99,11 +106,15 @@ const App: React.FC = () => {
       const isPublic = publicViews.includes(currentView);
       if (!isAuthenticated && !isPublic) {
         setCurrentView(View.LOGIN);
-      } else if (isAuthenticated && (currentView === View.LOGIN || currentView === View.SIGNUP || currentView === View.ONBOARDING)) {
-        setCurrentView(View.DASHBOARD);
+      } else if (isAuthenticated) {
+        if (!isProfileFilled && currentView !== View.BUSINESS_SETUP) {
+          setCurrentView(View.BUSINESS_SETUP);
+        } else if (isProfileFilled && (currentView === View.LOGIN || currentView === View.SIGNUP || currentView === View.ONBOARDING || currentView === View.BUSINESS_SETUP)) {
+          setCurrentView(View.PRODUCT_LIST);
+        }
       }
     }
-  }, [currentView, isAuthenticated, isAuthLoading]);
+  }, [currentView, isAuthenticated, isActive, isProfileFilled, isAuthLoading]);
 
   const setCurrentView = (view: View) => {
     setInternalView(view);
@@ -136,51 +147,75 @@ const App: React.FC = () => {
           setCurrentView(View.DASHBOARD);
         }} />;
       case View.BUSINESS_SETUP:
-        return <BusinessSetupView onBack={() => setCurrentView(View.OTP)} onNext={() => setCurrentView(View.DASHBOARD)} />;
+        return <BusinessSetupView onBack={() => setCurrentView(View.OTP)} onNext={async () => {
+          await checkUserAuth();
+          setCurrentView(View.PRODUCT_LIST);
+        }} />;
       case View.DASHBOARD:
         return <DashboardView onNavigate={(view: View) => setCurrentView(view)} onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case View.PRODUCT_LIST:
         return (
           <ProductListView
             onBack={() => setIsDrawerOpen(true)}
-            onAdd={() => setCurrentView(View.ADD_PRODUCT)}
-            onEdit={() => setCurrentView(View.ADD_PRODUCT)}
-            onReachBuyers={() => setCurrentView(View.PREMIUM_SERVICES)}
+            onAdd={() => {
+              setEditingProductId(null);
+              setCurrentView(View.ADD_PRODUCT);
+            }}
+            onEdit={(id) => {
+              setEditingProductId(id);
+              setCurrentView(View.ADD_PRODUCT);
+            }}
           />
         );
       case View.ADD_PRODUCT:
-        return <AddProductView onBack={() => setCurrentView(View.PRODUCT_LIST)} onSave={() => setCurrentView(View.PRODUCT_LIST)} />;
+        return (
+          <AddProductView
+            productId={editingProductId || undefined}
+            onBack={() => {
+              setEditingProductId(null);
+              setCurrentView(View.PRODUCT_LIST);
+            }}
+            onSave={() => {
+              setEditingProductId(null);
+              setCurrentView(View.PRODUCT_LIST);
+            }}
+          />
+        );
       case View.INQUIRY_LIST:
-        return <InquiryListView onBack={() => setIsDrawerOpen(true)} onSelectLead={() => setCurrentView(View.LEAD_DETAILS)} />;
+        return <InquiryListView onBack={() => setIsDrawerOpen(true)} onSelectLead={(lead) => {
+          setSelectedLead(lead);
+          setCurrentView(View.LEAD_DETAILS);
+        }} />;
       case View.LEAD_DETAILS:
-        return <LeadDetailsView onBack={() => setCurrentView(View.INQUIRY_LIST)} onAccept={() => setCurrentView(View.CHAT)} />;
+        return <LeadDetailsView onBack={() => setCurrentView(View.INQUIRY_LIST)} onAccept={() => setCurrentView(View.CHAT)} lead={selectedLead} />;
       case View.MESSAGES:
-        return <BusinessMessagesView onNavigate={setCurrentView} onOpenDrawer={() => setIsDrawerOpen(true)} />;
+        return <BusinessMessagesView onNavigate={setCurrentView} onOpenDrawer={() => setIsDrawerOpen(true)} selectedChatId={selectedChatId} setSelectedChatId={setSelectedChatId} />;
       case View.MESSAGE_SEARCH:
         return <MessageSearchView onBack={() => setCurrentView(View.MESSAGES)} onNavigate={setCurrentView} />;
       case View.CHAT:
-        return <ChatSessionView onBack={() => setCurrentView(View.MESSAGES)} />;
+        return <ChatSessionView onBack={() => {
+          setSelectedChatId(null);
+          setCurrentView(View.MESSAGES);
+        }} chatId={selectedChatId || undefined} />;
       case View.PROFILE:
         return <ProfileView onBack={() => setIsDrawerOpen(true)} onEdit={() => setCurrentView(View.EDIT_PROFILE)} />;
       case View.EDIT_PROFILE:
-        return <EditProfileView onBack={() => setCurrentView(View.PROFILE)} onSave={() => setCurrentView(View.DASHBOARD)} />;
+        return <EditProfileView onBack={() => setCurrentView(View.PROFILE)} onSave={() => setCurrentView(View.PRODUCT_LIST)} />;
 
-      case View.PREMIUM_SERVICES:
-        return <PremiumServices onBack={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.BUSINESS_INFO:
-        return <EditProfileView onBack={() => setIsDrawerOpen(true)} onSave={() => setCurrentView(View.DASHBOARD)} />;
+        return <EditProfileView onBack={() => setIsDrawerOpen(true)} onSave={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.RECENT_UPLOADS:
         return <RecentUploads onBack={() => setCurrentView(View.BUSINESS_INFO)} />;
       case View.NOTIFICATIONS:
-        return <Notifications onBack={() => setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} />;
+        return <Notifications onBack={() => setCurrentView(View.PRODUCT_LIST)} onNavigate={setCurrentView} />;
       case View.BUSINESS_REPORT:
-        return <BusinessReportView onBack={() => setCurrentView(View.DASHBOARD)} />;
+        return <BusinessReportView onBack={() => setCurrentView(View.PRODUCT_LIST)} />;
       case View.FAQS:
         return <FAQsView onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} />;
       case View.CONTACT_SUPPORT:
-        return <ContactSupportView isDashboardMode={windowWidth >= 1024} onBack={() => windowWidth < 1024 ? window.history.back() : setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} onSignup={() => setCurrentView(View.SIGNUP)} />;
+        return <ContactSupportView isDashboardMode={windowWidth >= 1024} onBack={() => windowWidth < 1024 ? window.history.back() : setCurrentView(View.PRODUCT_LIST)} onNavigate={setCurrentView} onSignup={() => setCurrentView(View.SIGNUP)} />;
       case View.POLICIES:
-        return <PoliciesView isDashboardMode={windowWidth >= 1024} onBack={() => windowWidth < 1024 ? window.history.back() : setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} onSignup={() => setCurrentView(View.SIGNUP)} />;
+        return <PoliciesView isDashboardMode={windowWidth >= 1024} onBack={() => windowWidth < 1024 ? window.history.back() : setCurrentView(View.PRODUCT_LIST)} onNavigate={setCurrentView} onSignup={() => setCurrentView(View.SIGNUP)} />;
       case View.SETTINGS:
         return <Settings onNavigate={setCurrentView} />;
       case View.ROADMAP:
@@ -192,22 +227,29 @@ const App: React.FC = () => {
       case View.CONTINENTAL_REACH:
         return <ContinentalReachView onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} onNavigate={setCurrentView} />;
       case View.VIEWS_SUMMARY:
-        return <ViewsSummary onBack={() => setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} />;
+        return <ViewsSummary onBack={() => setCurrentView(View.PRODUCT_LIST)} onNavigate={setCurrentView} />;
       case View.RESPONSE_RATE_SUMMARY:
-        return <ResponseRateSummary onBack={() => setCurrentView(View.DASHBOARD)} onNavigate={setCurrentView} />;
+        return <ResponseRateSummary onBack={() => setCurrentView(View.PRODUCT_LIST)} onNavigate={setCurrentView} />;
       case View.EASY_SETUP_TOOLKIT:
         return <EasySetupToolkitView onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} onNavigate={setCurrentView} />;
       case View.LOGIN:
-        return <Login onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} onLoginSuccess={() => {
-          setIsAuthenticated(true);
-          setCurrentView(View.DASHBOARD);
+        return <Login onBack={() => setCurrentView(View.ONBOARDING)} onSignup={() => setCurrentView(View.SIGNUP)} onLoginSuccess={async () => {
+          const { isAuthenticated, isActive, isProfileFilled } = await AuthService.checkAuth();
+          setIsAuthenticated(isAuthenticated);
+          setIsActive(isActive);
+          setIsProfileFilled(isProfileFilled);
+          if (isProfileFilled) {
+            setCurrentView(View.PRODUCT_LIST);
+          } else {
+            setCurrentView(View.BUSINESS_SETUP);
+          }
         }} />;
       default:
         return <Onboarding onNext={() => setCurrentView(View.SIGNUP)} onNavigate={setCurrentView} />;
     }
   };
 
-  const hideHeader = [View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.PREMIUM_SERVICES, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT, View.FAQS, View.ROADMAP, View.ABOUT_US, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView);
+  const hideHeader = [View.ONBOARDING, View.SIGNUP, View.OTP, View.BUSINESS_SETUP, View.MESSAGES, View.CHAT, View.MESSAGE_SEARCH, View.NOTIFICATIONS, View.PROFILE, View.BUSINESS_REPORT, View.FAQS, View.ROADMAP, View.ABOUT_US, View.BUSINESS_VISIBILITY, View.CONTINENTAL_REACH, View.VIEWS_SUMMARY, View.RESPONSE_RATE_SUMMARY, View.EASY_SETUP_TOOLKIT, View.LOGIN].includes(currentView);
 
   return (
     <div className={`bg-background-light ${isAuthView ? 'h-screen overflow-hidden flex flex-col' : 'min-h-screen'}`}>
@@ -243,7 +285,7 @@ const App: React.FC = () => {
             } : undefined}
             title={
               currentView === View.LEAD_DETAILS ? "Lead Request Details" :
-                currentView === View.ADD_PRODUCT ? "Add New Product" :
+                currentView === View.ADD_PRODUCT ? (editingProductId ? "Edit Product" : "Add New Product") :
                   currentView === View.PRODUCT_LIST ? "Manage Products" :
                     currentView === View.INQUIRY_LIST ? "Leads & Inquiries" :
                       currentView === View.CONTACT_SUPPORT ? "Contact Support" :

@@ -4,14 +4,11 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 const storedBaseUrl = localStorage.getItem('apiBaseUrl');
-export const BASE_URL = storedBaseUrl || 'http://localhost:4000/api/v1';
+export const BASE_URL = storedBaseUrl || 'http://165.232.47.156:4000/api/v1';
 
 const api = axios.create({
     baseURL: BASE_URL,
     withCredentials: true,
-    headers: {
-        'Content-Type': 'application/json',
-    },
 });
 
 // Ensure withCredentials is set for every request

@@ -11,8 +11,8 @@ interface Props {
 
 const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
   const { state, actions } = useEditProfileController(onSave);
-  const { step, showSuccess, totalSteps, formData, isLoading, error, documentRequirements, uploadedDocuments, selectedFiles } = state;
-  const { setStep, handleSave, handleCloseSuccess, handleInputChange, handleFileChange } = actions;
+  const { step, showSuccess, totalSteps, formData, isLoading, error, documentRequirements, uploadedDocuments, selectedFiles, countries, states } = state;
+  const { setStep, handleSave, handleCloseSuccess, handleInputChange, handleFileChange, handleLogoUpload } = actions;
 
   const renderStepIndicator = () => (
     <div className="flex items-center justify-center gap-2 mb-8">
@@ -35,11 +35,29 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
             <div className="flex flex-col items-center mb-8">
               <div className="relative">
                 <div className="w-28 h-28 rounded-full bg-[#F0F4FF] flex items-center justify-center text-3xl font-black text-primary border-4 border-white shadow-xl overflow-hidden">
-                  {MOCK_USER.businessName.charAt(0)}
+                  {formData.logo_url ? (
+                    <img src={formData.logo_url} alt="Business Logo" className="w-full h-full object-cover" />
+                  ) : (
+                    formData.business_name?.charAt(0) || MOCK_USER.businessName.charAt(0)
+                  )}
                 </div>
-                <button className="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full border-4 border-white shadow-md active:scale-90 transition-transform">
-                  <Camera size={16} />
-                </button>
+                <label className="absolute bottom-0 right-0 bg-primary text-white p-2.5 rounded-full border-4 border-white shadow-md active:scale-90 transition-all cursor-pointer">
+                  {isLoading && !formData.logo_url ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <Camera size={16} />
+                  )}
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleLogoUpload(file);
+                    }}
+                    disabled={isLoading}
+                  />
+                </label>
               </div>
               <h2 className="mt-4 text-xl font-bold text-slate-800">Business Identity</h2>
               <p className="text-xs text-slate-400 mt-1 uppercase tracking-widest font-bold">Step 1 of 3</p>
@@ -58,23 +76,24 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
               </div>
               <div>
                 <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Nature of Business</label>
-                <input
-                  type="text"
-                  name="business_type"
-                  value={formData.business_type}
-                  onChange={handleInputChange}
-                  placeholder="e.g. Trading & Logistics"
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
-                />
-              </div>
-              <div className="relative">
-                <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Business Category</label>
-                <select name="business_category" value={formData.business_category} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 appearance-none shadow-sm cursor-pointer">
-                  <option value="">Select Category</option>
+                <select name="business_type" value={formData.business_type} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 appearance-none shadow-sm cursor-pointer">
+                  <option value="">Select Type</option>
                   <option value="Retail">Retail</option>
                   <option value="Wholesale">Wholesale</option>
                   <option value="Manufacturing">Manufacturing</option>
+                  <option value="Services">Services</option>
                 </select>
+              </div>
+              <div className="relative">
+                <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Business Category</label>
+                <input
+                  type="text"
+                  name="business_category"
+                  value={formData.business_category}
+                  onChange={handleInputChange}
+                  placeholder="e.g. Electronics, Clothing"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
+                />
               </div>
             </div>
           </div>
@@ -114,26 +133,44 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Country</label>
-                  <input
-                    type="text"
+                  <select
                     name="country"
                     value={formData.country}
                     onChange={handleInputChange}
-                    placeholder="Liberia"
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
-                  />
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm appearance-none cursor-pointer"
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map(c => (
+                      <option key={c.id} value={c.name}>{c.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Capital</label>
-                  <input
-                    type="text"
+                  <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">State / City</label>
+                  <select
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    placeholder="Monrovia"
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
-                  />
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm appearance-none cursor-pointer"
+                    disabled={!formData.country}
+                  >
+                    <option value="">Select State</option>
+                    {states.map(s => (
+                      <option key={s.id} value={s.name}>{s.name}</option>
+                    ))}
+                  </select>
                 </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone_number"
+                  value={formData.phone_number}
+                  onChange={handleInputChange}
+                  placeholder="+231 770 000 000"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
+                />
               </div>
             </div>
           </div>
@@ -164,25 +201,25 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
                 <div>
                   <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Tax ID</label>
                   <input
+                    type="text"
+                    name="tax_id"
+                    placeholder="Tax Number"
+                    value={formData.tax_id}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Employees</label>
+                  <input
                     type="number"
                     name="no_of_employees"
-                    placeholder="No. of Employees"
+                    placeholder="Count"
                     value={formData.no_of_employees || ''}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
                   />
                 </div>
-              </div>
-              <div>
-                <label className="block text-xs font-bold mb-2 text-slate-500 uppercase tracking-wider">Website / Social</label>
-                <input
-                  type="text"
-                  name="phone_number"
-                  placeholder="Phone Number"
-                  value={formData.phone_number}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 shadow-sm"
-                />
               </div>
             </div>
           </div>
@@ -267,14 +304,32 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
           <div className="flex flex-col lg:flex-row items-center lg:items-center gap-6 lg:gap-8 mb-10 lg:mb-16">
             <div className="relative flex-shrink-0">
               <div className="w-24 h-24 lg:w-24 lg:h-24 rounded-full bg-white flex items-center justify-center border border-slate-200 shadow-sm overflow-hidden">
-                <span className="text-3xl font-bold text-slate-400">{MOCK_USER.businessName.charAt(0)}</span>
+                {formData.logo_url ? (
+                  <img src={formData.logo_url} alt="Business Logo" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-3xl font-bold text-slate-400">{formData.business_name?.charAt(0) || MOCK_USER.businessName.charAt(0)}</span>
+                )}
               </div>
-              <button className="absolute -bottom-1 -right-1 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center border-2 border-white hover:scale-110 transition-transform shadow-md">
-                <ImagePlus size={14} />
-              </button>
+              <label className="absolute -bottom-1 -right-1 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center border-2 border-white hover:scale-110 transition-all shadow-md cursor-pointer">
+                {isLoading && !formData.logo_url ? (
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <ImagePlus size={14} />
+                )}
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleLogoUpload(file);
+                  }}
+                  disabled={isLoading}
+                />
+              </label>
             </div>
             <div className="text-center lg:text-left">
-              <h2 className="text-2xl lg:text-3xl font-bold text-slate-900">Hi, {MOCK_USER.name}</h2>
+              <h2 className="text-2xl lg:text-3xl font-bold text-slate-900">Hi, {formData.business_name || MOCK_USER.name}</h2>
               <p className="text-slate-500 mt-1 text-sm lg:text-lg">Manage your business identity and verification details.</p>
             </div>
           </div>
@@ -297,13 +352,25 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Business Category</label>
-                  <select name="business_category" value={formData.business_category} onChange={handleInputChange} className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none cursor-pointer">
-                    <option value="">Select Category</option>
+                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Nature of Business</label>
+                  <select name="business_type" value={formData.business_type} onChange={handleInputChange} className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none cursor-pointer">
+                    <option value="">Select Type</option>
                     <option value="Retail">Retail</option>
+                    <option value="Wholesale">Wholesale</option>
                     <option value="Manufacturing">Manufacturing</option>
                     <option value="Services">Services</option>
                   </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Business Category</label>
+                  <input
+                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none"
+                    placeholder="e.g. Electronics, Building Materials"
+                    type="text"
+                    name="business_category"
+                    value={formData.business_category}
+                    onChange={handleInputChange}
+                  />
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Location/Address</label>
@@ -318,25 +385,32 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Country</label>
-                  <input
-                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none"
-                    placeholder="e.g. Liberia"
-                    type="text"
+                  <select
                     name="country"
                     value={formData.country}
                     onChange={handleInputChange}
-                  />
+                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none cursor-pointer"
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map(c => (
+                      <option key={c.id} value={c.name}>{c.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Capital</label>
-                  <input
-                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none"
-                    placeholder="e.g. Monrovia"
-                    type="text"
+                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">State / City</label>
+                  <select
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                  />
+                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none cursor-pointer"
+                    disabled={!formData.country}
+                  >
+                    <option value="">Select State</option>
+                    {states.map(s => (
+                      <option key={s.id} value={s.name}>{s.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Established Year</label>
@@ -360,16 +434,16 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="space-y-2 md:col-span-2">
-                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Nature of Business</label>
-                  <textarea
-                    name="business_type"
-                    value={formData.business_type}
+                <div className="space-y-2">
+                  <label className="block text-[10px] lg:text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number</label>
+                  <input
+                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none"
+                    placeholder="+231 770 000 000"
+                    type="tel"
+                    name="phone_number"
+                    value={formData.phone_number}
                     onChange={handleInputChange}
-                    className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none resize-none"
-                    placeholder="Describe your business activities, products, or services..."
-                    rows={4}
-                  ></textarea>
+                  />
                 </div>
               </div>
             </div>
@@ -387,8 +461,8 @@ const EditProfileView: React.FC<Props> = ({ onBack, onSave }) => {
                     className="w-full px-5 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-primary focus:ring-0 transition-all outline-none"
                     placeholder="Tax ID Number"
                     type="text"
-                    name="phone_number"
-                    value={formData.phone_number}
+                    name="tax_id"
+                    value={formData.tax_id}
                     onChange={handleInputChange}
                   />
                 </div>

@@ -7,15 +7,18 @@ import { View } from '../../types';
 interface Props {
     onNavigate: (view: View) => void;
     onOpenDrawer: () => void;
+    selectedChatId: string | null;
+    setSelectedChatId: (id: string | null) => void;
 }
 
-const BusinessMessagesView: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => {
+const BusinessMessagesView: React.FC<Props> = ({ onNavigate, onOpenDrawer, selectedChatId, setSelectedChatId }) => {
     const { state, actions } = useMessagingController();
-    const { activeTab, chats, filteredChats, selectedChat } = state;
-    const { setActiveTab, setSelectedChatId } = actions;
+    const { activeTab, conversations, selectedChat } = state;
+    const { setActiveTab, setSelectedChatId: setLocalSelectedId } = actions;
 
-    const handleChatClick = (chatId: number) => {
+    const handleChatClick = (chatId: string) => {
         setSelectedChatId(chatId);
+        setLocalSelectedId(chatId);
         // On mobile, still navigate to the full screen chat
         if (window.innerWidth < 1024) {
             onNavigate(View.CHAT);
@@ -85,50 +88,37 @@ const BusinessMessagesView: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => 
                         className={`py-3 lg:py-4 border-b-2 text-xs lg:text-sm font-bold transition-all whitespace-nowrap relative ${activeTab === 'unread' ? 'border-primary text-primary' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
                     >
                         Unread
-                        {chats.filter(c => c.unread > 0).length > 0 && (
-                            <span className="ml-1.5 bg-primary text-white text-[9px] px-1.5 py-0.5 rounded-full">
-                                {chats.filter(c => c.unread > 0).length}
-                            </span>
-                        )}
                     </button>
                 </div>
 
                 {/* Chat List */}
                 <main className="flex-1 overflow-y-auto no-scrollbar relative bg-[#F8FAFC] pb-20 lg:pb-0">
                     <div className="divide-y divide-slate-100">
-                        {filteredChats.map((chat) => (
+                        {conversations.map((chat) => (
                             <div
                                 key={chat.id}
                                 onClick={() => handleChatClick(chat.id)}
-                                className={`group transition-colors cursor-pointer active:bg-slate-100 ${selectedChat?.id === chat.id ? 'bg-blue-50/70 border-l-4 border-primary' : 'bg-white hover:bg-slate-50'}`}
+                                className={`group transition-colors cursor-pointer active:bg-slate-100 ${selectedChatId === chat.id ? 'bg-blue-50/70 border-l-4 border-primary' : 'bg-white hover:bg-slate-50'}`}
                             >
                                 <div className="flex items-center px-4 py-4 sm:px-6 lg:px-6">
                                     <div className="relative flex-shrink-0">
-                                        <div className={`h-11 w-11 lg:h-12 lg:w-12 rounded-full flex items-center justify-center border-2 ${chat.color} font-bold text-base lg:text-lg`}>
-                                            {chat.initials}
+                                        <div className={`h-11 w-11 lg:h-12 lg:w-12 rounded-full flex items-center justify-center border-2 border-slate-200 bg-slate-50 font-bold text-base lg:text-lg text-primary`}>
+                                            {(chat.buyer_name || 'B')[0].toUpperCase()}
                                         </div>
-                                        {chat.online && (
-                                            <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 lg:h-3 lg:w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
-                                        )}
                                     </div>
                                     <div className="ml-3 lg:ml-4 flex-1 min-w-0">
                                         <div className="flex justify-between items-baseline mb-0.5">
-                                            <h2 className={`text-sm tracking-tight truncate pr-2 ${chat.unread > 0 || selectedChat?.id === chat.id ? 'font-bold text-slate-900' : 'font-semibold text-slate-700'}`}>
-                                                {chat.name}
+                                            <h2 className={`text-sm tracking-tight truncate pr-2 font-bold text-slate-900`}>
+                                                {chat.buyer_name || chat.buyer_phone || `Buyer #${chat.buyer_id}`}
                                             </h2>
-                                            <span className={`text-[10px] whitespace-nowrap uppercase tracking-tighter ${chat.unread > 0 ? 'text-primary font-bold' : 'text-slate-400 font-medium'}`}>
-                                                {chat.time}
+                                            <span className={`text-[10px] whitespace-nowrap uppercase tracking-tighter text-slate-400 font-medium`}>
+                                                {new Date(chat.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <p className={`text-[12px] lg:text-sm truncate pr-4 ${chat.unread > 0 ? 'text-slate-900 font-bold' : 'text-slate-500 font-medium'}`}>
-                                                {chat.message}
+                                            <p className={`text-[12px] lg:text-sm truncate pr-4 text-slate-500 font-medium`}>
+                                                Open conversation
                                             </p>
-                                            {chat.unread > 0 && (
-                                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-black bg-primary text-white shadow-sm shadow-primary/20">
-                                                    {chat.unread}
-                                                </span>
-                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +126,7 @@ const BusinessMessagesView: React.FC<Props> = ({ onNavigate, onOpenDrawer }) => 
                         ))}
 
                         {/* Unknown User Placeholder */}
-                        {!filteredChats.length && (
+                        {!conversations.length && (
                             <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
                                 <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4 text-slate-200">
                                     <User size={32} />

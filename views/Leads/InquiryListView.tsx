@@ -4,13 +4,24 @@ import { useLeadsController } from '../../controllers/useLeadsController';
 
 interface Props {
   onBack: () => void;
-  onSelectLead: () => void;
+  onSelectLead: (lead: any) => void;
 }
 
 const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
   const { state, actions } = useLeadsController();
-  const { activeFilter, searchQuery, sortOrder, filteredInquiries } = state;
+  const { activeFilter, searchQuery, sortOrder, filteredInquiries, isLoading } = state;
   const { setActiveFilter, setSearchQuery, setSortOrder } = actions;
+
+  if (isLoading) {
+    return (
+      <div className="flex h-full items-center justify-center bg-slate-50">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Fetching Leads...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col bg-[#F8FAFC] h-full overflow-hidden">
@@ -35,7 +46,7 @@ const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
         <main className="flex-1 overflow-y-auto p-4 no-scrollbar">
           <div className="max-w-7xl mx-auto space-y-3 pb-20">
             {filteredInquiries.length > 0 ? filteredInquiries.map(inq => (
-              <div key={inq.id} onClick={onSelectLead} className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition active:scale-[0.99] cursor-pointer">
+              <div key={inq.id} onClick={() => onSelectLead(inq)} className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition active:scale-[0.99] cursor-pointer">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full border-2 border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0">
                     <span className="text-orange-600 font-bold text-sm">{inq.initials}</span>
@@ -118,7 +129,7 @@ const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
               {filteredInquiries.length > 0 ? filteredInquiries.map((inq) => (
                 <div
                   key={inq.id}
-                  onClick={onSelectLead}
+                  onClick={() => onSelectLead(inq)}
                   className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow group cursor-pointer"
                 >
                   <div className="flex items-start gap-4">
@@ -150,7 +161,7 @@ const InquiryListView: React.FC<Props> = ({ onBack, onSelectLead }) => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          onSelectLead();
+                          onSelectLead(inq);
                         }}
                         className="px-4 py-2 bg-primary/5 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all border border-primary/20"
                       >

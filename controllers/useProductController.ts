@@ -43,12 +43,25 @@ export const useProductController = () => {
         setPage(newPage);
     };
 
+    const deleteProduct = async (productId: string) => {
+        if (!window.confirm('Are you sure you want to delete this listing?')) return;
+
+        try {
+            await ProductService.deleteProduct(productId);
+            await fetchProducts();
+        } catch (err) {
+            console.error('Failed to delete product:', err);
+            alert('Failed to delete product. Please try again.');
+        }
+    };
+
     return {
         products,
         isLoading,
         page,
         total,
         setPageNumber,
+        deleteProduct,
         refreshProducts: fetchProducts
     };
 };

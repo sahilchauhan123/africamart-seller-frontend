@@ -14,7 +14,6 @@ export enum View {
   EDIT_PROFILE = 'EDIT_PROFILE',
   MESSAGES = 'MESSAGES',
   MESSAGE_SEARCH = 'MESSAGE_SEARCH',
-  PREMIUM_SERVICES = 'PREMIUM_SERVICES',
   BUSINESS_INFO = 'BUSINESS_INFO',
   RECENT_UPLOADS = 'RECENT_UPLOADS',
   NOTIFICATIONS = 'NOTIFICATIONS',
@@ -67,4 +66,25 @@ export interface User {
   about?: string;
   expertise?: string[];
   certifications?: string[];
+}
+
+export interface Message {
+  id: string;
+  conversation_id: string;
+  sender_id: number;
+  sender_type: string;
+  content: string;
+  created_at: string;
+  is_read: boolean;
+}
+
+export interface Conversation {
+  id: string;
+  buyer_id: number;
+  seller_id: number;
+  buyer_name: string;
+  buyer_phone: string;
+  seller_business_name: string;
+  created_at: string;
+  updated_at: string;
 }

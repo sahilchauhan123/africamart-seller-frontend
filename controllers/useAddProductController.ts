@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProductService } from '../services/ProductService';
 
 export type AddProductStep = 'basic' | 'specification';
 
-export const useAddProductController = () => {
+export const useAddProductController = (initialProductId?: string) => {
     const [step, setStep] = useState<AddProductStep>('basic');
-    const [expandedSpec, setExpandedSpec] = useState<number | null>(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isPublishing, setIsPublishing] = useState(false);
     const [error, setError] = useState('');
+    const [availableUnits, setAvailableUnits] = useState<{ id: string, name: string, symbol: string }[]>([]);
+    const [isEditing, setIsEditing] = useState(!!initialProductId);
 
     // Product Basic Details
     const [productData, setProductData] = useState({
@@ -18,11 +19,11 @@ export const useAddProductController = () => {
         minPrice: '',
         maxPrice: '',
         currency: 'USD',
-        unit: 'Kilogram (kg)'
+        unit: ''
     });
 
     // Media
-    const [mediaFiles, setMediaFiles] = useState<{ file: File, preview: string, type: 'image' | 'video' }[]>([]);
+    const [mediaFiles, setMediaFiles] = useState<{ file?: File, preview: string, type: 'image' | 'video' }[]>([]);
 
     // Category Search
     const [categorySearch, setCategorySearch] = useState('');
@@ -34,6 +35,63 @@ export const useAddProductController = () => {
     // Filters/Attributes
     const [categoryFilters, setCategoryFilters] = useState<any[]>([]);
     const [attributeValues, setAttributeValues] = useState<Record<string, any>>({});
+
+    // Load product for editing
+    useEffect(() => {
+        if (initialProductId) {
+            loadProductData(initialProductId);
+        }
+    }, [initialProductId]);
+
+    const loadProductData = async (id: string) => {
+        setIsLoading(true);
+        setError('');
+        try {
+            const response = await ProductService.getProduct(id);
+            const { product_details, filters, images, attributes, units } = response.data;
+
+            setProductData({
+                title: product_details.title || '',
+                description: product_details.description || '',
+                minPrice: product_details.min_price || '',
+                maxPrice: product_details.max_price || '',
+                currency: 'USD',
+                unit: product_details.unit || ''
+            });
+
+            setSelectedCategory({
+                id: product_details.category_id,
+                name: product_details.category_name
+            });
+            setCategorySearch(product_details.category_name);
+            setCategoryFilters(filters || []);
+            setAvailableUnits(units || []);
+
+            // Map existing attributes to attributeValues state
+            const mappedValues: Record<string, any> = {};
+            (filters || []).forEach((f: any) => {
+                const attr = (attributes || []).find((a: any) => a.filter_id === f.id);
+                if (attr) {
+                    mappedValues[f.id] = attr.values;
+                } else {
+                    mappedValues[f.id] = f.is_multi ? [] : '';
+                }
+            });
+            setAttributeValues(mappedValues);
+
+            // Pre-fill existing images
+            if (images && images.length > 0) {
+                setMediaFiles(images.map((img: any) => ({
+                    preview: img.img_url,
+                    type: 'image'
+                })));
+            }
+        } catch (err: any) {
+            setError(err.message || 'Failed to load product data.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setProductData({
@@ -70,7 +128,16 @@ export const useAddProductController = () => {
         try {
             const data = await ProductService.getCategoryFilters(category.id);
             setCategoryFilters(data.data.filters || []);
-            // Initialize attribute values
+            setAvailableUnits(data.data.units || []);
+
+            // Set default unit if available
+            if (data.data.units && data.data.units.length > 0) {
+                setProductData(prev => ({
+                    ...prev,
+                    unit: data.data.units[0].symbol
+                }));
+            }
+
             const initialValues: Record<string, any> = {};
             (data.data.filters || []).forEach((f: any) => {
                 initialValues[f.id] = f.is_multi ? [] : '';
@@ -111,7 +178,9 @@ export const useAddProductController = () => {
     const handleRemoveMedia = (index: number) => {
         setMediaFiles(prev => {
             const updated = [...prev];
-            URL.revokeObjectURL(updated[index].preview);
+            if (updated[index].file) {
+                URL.revokeObjectURL(updated[index].preview);
+            }
             updated.splice(index, 1);
             return updated;
         });
@@ -121,59 +190,93 @@ export const useAddProductController = () => {
         if (!selectedCategory || !productData.title || !productData.description) {
             setError('Please fill in all required basic details.');
             setStep('basic');
-            return false; // Indicating failure to proceed
+            return false;
         }
 
         setIsPublishing(true);
         setError('');
 
-        const formData = new FormData();
+        const preparedAttributes = Object.entries(attributeValues).map(([filterId, values]) => {
+            const filter = categoryFilters.find(f => f.id === filterId);
+            let processedValue = values;
 
-        // Prepare API expected structure
-        const payload = {
-            product_details: {
-                title: productData.title,
-                description: productData.description,
-                category_id: selectedCategory.id,
-                min_price: parseFloat(productData.minPrice) || 0,
-                max_price: parseFloat(productData.maxPrice) || 0
-            },
-            product_attributes: Object.entries(attributeValues).map(([filterId, values]) => {
-                const filter = categoryFilters.find(f => f.id === filterId);
-                let processedValue = values;
+            if (filter) {
+                if (['select', 'checkbox', 'tag'].includes(filter.type)) {
+                    if (!Array.isArray(values)) {
+                        processedValue = values ? [values] : [];
+                    }
+                } else if (filter.type === 'number') {
+                    const num = parseFloat(String(values));
+                    processedValue = isNaN(num) ? 0 : num;
+                } else if (filter.type === 'boolean') {
+                    processedValue = String(values).toLowerCase() === 'true';
+                }
+            }
 
-                if (filter) {
-                    if (['select', 'checkbox', 'tag'].includes(filter.type)) {
-                        if (!Array.isArray(values)) {
-                            processedValue = values ? [values] : [];
-                        }
-                    } else if (filter.type === 'number') {
-                        const num = parseFloat(String(values));
-                        processedValue = isNaN(num) ? 0 : num;
-                    } else if (filter.type === 'boolean') {
-                        processedValue = String(values).toLowerCase() === 'true';
+            return {
+                filter_id: filterId,
+                values: processedValue
+            };
+        });
+
+        const productDetails = {
+            title: productData.title,
+            description: productData.description,
+            category_id: selectedCategory.id,
+            min_price: parseFloat(productData.minPrice) || 0,
+            max_price: parseFloat(productData.maxPrice) || 0,
+            unit: productData.unit
+        };
+
+        try {
+            if (isEditing && initialProductId) {
+                // Determine which files are new and need uploading
+                const finalImages = [];
+
+                for (let i = 0; i < mediaFiles.length; i++) {
+                    const m = mediaFiles[i];
+                    if (m.file) {
+                        // If there's a file, it's new. Upload and get the URL.
+                        const uploadRes = await ProductService.uploadFile(m.file);
+                        // Backend returns the URL as response.data (uploadRes here)
+                        finalImages.push({
+                            img_url: uploadRes.data,
+                            position: i
+                        });
+                    } else {
+                        // Existing image, just use its preview URL
+                        finalImages.push({
+                            img_url: m.preview,
+                            position: i
+                        });
                     }
                 }
 
-                return {
-                    filter_id: filterId,
-                    values: processedValue
+                const payload = {
+                    product_id: initialProductId,
+                    product_details: productDetails,
+                    product_attributes: preparedAttributes,
+                    product_images: finalImages
                 };
-            })
-        };
 
-        formData.append('data', JSON.stringify(payload));
+                await ProductService.editProduct(initialProductId, payload);
+            } else {
+                const formData = new FormData();
+                formData.append('data', JSON.stringify({
+                    product_details: productDetails,
+                    product_attributes: preparedAttributes
+                }));
 
-        mediaFiles.forEach(m => {
-            formData.append('files', m.file);
-        });
+                mediaFiles.forEach(m => {
+                    if (m.file) formData.append('files', m.file);
+                });
 
-        try {
-            await ProductService.createProduct(formData);
+                await ProductService.createProduct(formData);
+            }
             setShowSuccessModal(true);
             return true;
         } catch (err: any) {
-            setError(err.message || 'Failed to publish product. Please check your data.');
+            setError(err.message || 'Failed to process product. Please check your data.');
             return false;
         } finally {
             setIsPublishing(false);
@@ -195,21 +298,22 @@ export const useAddProductController = () => {
 
     const resetForm = () => {
         setProductData({
-            title: '', description: '', minPrice: '', maxPrice: '', currency: 'USD', unit: 'Kilogram (kg)'
+            title: '', description: '', minPrice: '', maxPrice: '', currency: 'USD', unit: ''
         });
         setMediaFiles([]);
         setSelectedCategory(null);
         setCategorySearch('');
         setCategoryFilters([]);
+        setAvailableUnits([]);
         setAttributeValues({});
         setStep('basic');
         setShowSuccessModal(false);
+        setIsEditing(false);
     };
 
     return {
         state: {
             step,
-            expandedSpec,
             showSuccessModal,
             isLoading,
             isPublishing,
@@ -223,11 +327,12 @@ export const useAddProductController = () => {
             showCategoryResults,
             categoryFilters,
             attributeValues,
+            availableUnits,
+            isEditing,
             progress: calculateProgress()
         },
         actions: {
             setStep,
-            setExpandedSpec,
             setShowSuccessModal,
             setShowCategoryResults,
             handleInputChange,
@@ -241,3 +346,4 @@ export const useAddProductController = () => {
         }
     };
 };
+

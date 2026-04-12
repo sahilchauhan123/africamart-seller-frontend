@@ -9,11 +9,25 @@ interface DocumentInfo {
     created_at: string;
 }
 
+interface Country {
+    id: number;
+    name: string;
+    iso2: string;
+}
+
+interface State {
+    id: number;
+    name: string;
+    iso2: string;
+}
+
 export const useEditProfileController = (onSave: () => void) => {
     const [step, setStep] = useState(1);
     const [showSuccess, setShowSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [countries, setCountries] = useState<Country[]>([]);
+    const [states, setStates] = useState<State[]>([]);
     const totalSteps = 4;
 
     const [formData, setFormData] = useState({
@@ -26,6 +40,7 @@ export const useEditProfileController = (onSave: () => void) => {
         state: '',
         email: '',
         phone_number: '',
+        tax_id: '',
         no_of_employees: 0,
         year_of_establishment: new Date().getFullYear(),
         logo_url: ''
@@ -45,12 +60,53 @@ export const useEditProfileController = (onSave: () => void) => {
             });
     };
 
+    // Fetch countries on mount
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                const response = await fetch('https://country-city-state.akshitagulerialdh.workers.dev/v1/regions/1/countries');
+                const data = await response.json();
+                setCountries(data || []);
+            } catch (err) {
+                console.error("Failed to fetch countries:", err);
+            }
+        };
+
+        fetchCountries();
+    }, []);
+
+    // Fetch states when country changes
+    useEffect(() => {
+        const fetchStates = async () => {
+            if (!formData.country) {
+                setStates([]);
+                return;
+            }
+
+            // Find ISO2 code for the selected country name
+            const country = countries.find(c => c.name === formData.country);
+            if (!country) return;
+
+            try {
+                const response = await fetch(`https://country-city-state.akshitagulerialdh.workers.dev/v1/countries/${country.iso2}/states`);
+                const data = await response.json();
+                setStates(data || []);
+            } catch (err) {
+                console.error("Failed to fetch states:", err);
+            }
+        };
+
+        fetchStates();
+    }, [formData.country, countries]);
+
     // Fetch business profile details and uploaded documents on mount
     useEffect(() => {
-        api.get('/auth/seller/business/profile')
-            .then(res => {
-                const payload = res.data?.data?.business_details ? res.data.data : res.data;
-                if (payload && payload.is_active && payload.business_details) {
+        const fetchProfile = async () => {
+            try {
+                // 1. Try fetching full verified profile
+                const res = await api.get('/auth/seller/business/profile');
+                const payload = res.data?.data;
+                if (payload && payload.business_details) {
                     const details = payload.business_details;
                     setFormData(prev => ({
                         ...prev,
@@ -68,11 +124,30 @@ export const useEditProfileController = (onSave: () => void) => {
                         logo_url: details.logo_url || ''
                     }));
                 }
-            })
-            .catch(err => {
-                console.error("Failed to fetch business profile:", err);
-            });
+                else {
+                    throw new Error("Business details not found");
+                }
+            } catch (err) {
+                // 2. Fallback: If not verified/found, try fetching just the basic (half) details
+                try {
+                    const halfRes = await api.get('/auth/seller/business/half-details');
+                    const halfDetails = halfRes.data?.data?.business_details;
+                    if (halfDetails) {
+                        setFormData(prev => ({
+                            ...prev,
+                            business_name: halfDetails.business_name || '',
+                            business_type: halfDetails.business_type || '',
+                            business_address: halfDetails.business_address || '',
+                            business_category: halfDetails.business_category || '',
+                        }));
+                    }
+                } catch (fallbackErr) {
+                    console.error("Failed to fetch any business details:", fallbackErr);
+                }
+            }
+        };
 
+        fetchProfile();
         fetchUploadedDocuments();
     }, []);
 
@@ -161,6 +236,18 @@ export const useEditProfileController = (onSave: () => void) => {
         onSave();
     };
 
+    const handleLogoUpload = async (file: File) => {
+        setIsLoading(true);
+        try {
+            const logoUrl = await uploadFile(file);
+            setFormData(prev => ({ ...prev, logo_url: logoUrl }));
+        } catch (err: any) {
+            setError('Logo upload failed');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return {
         state: {
             step,
@@ -171,14 +258,17 @@ export const useEditProfileController = (onSave: () => void) => {
             error,
             documentRequirements,
             uploadedDocuments,
-            selectedFiles
+            selectedFiles,
+            countries,
+            states
         },
         actions: {
             setStep,
             handleSave,
             handleCloseSuccess,
             handleInputChange,
-            handleFileChange
+            handleFileChange,
+            handleLogoUpload
         }
     };
 };

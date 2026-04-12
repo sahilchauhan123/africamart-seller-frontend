@@ -2,11 +2,9 @@ import React from 'react';
 import { useProductController } from '../../controllers/useProductController';
 import {
   Edit2,
-  MousePointerClick,
   Plus,
   Package,
   CheckCircle2,
-  AlertTriangle,
   Trash2,
   Search,
   Filter,
@@ -17,12 +15,11 @@ import {
 interface Props {
   onBack: () => void;
   onAdd: () => void;
-  onEdit: () => void;
-  onReachBuyers: () => void;
+  onEdit: (productId: string) => void;
 }
 
-const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers }) => {
-  const { products, isLoading, page, total, setPageNumber } = useProductController();
+const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit }) => {
+  const { products, isLoading, page, total, setPageNumber, deleteProduct } = useProductController();
 
   return (
     <div className="flex flex-col bg-[#F8FAFC] h-full overflow-hidden">
@@ -46,7 +43,7 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
               </button>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6">
+            <div className="grid grid-cols-2 gap-3 lg:gap-6">
               <div className="bg-white p-3 lg:p-5 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 shadow-sm group hover:border-primary/20 transition-all">
                 <div className="w-8 h-8 lg:w-11 lg:h-11 bg-blue-50 text-blue-600 rounded-lg lg:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <Package size={18} className="lg:hidden" />
@@ -67,15 +64,7 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
                   <h2 className="text-sm lg:text-xl font-bold text-slate-800">{total || 0} Listings</h2>
                 </div>
               </div>
-              <div className="hidden lg:flex bg-white p-5 rounded-xl border border-slate-200 items-center gap-4 shadow-sm group hover:border-amber-200 transition-all">
-                <div className="w-11 h-11 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                  <AlertTriangle size={20} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1">Status Alerts</p>
-                  <h2 className="text-xl font-bold text-slate-800">0 Active</h2>
-                </div>
-              </div>
+
             </div>
           </div>
 
@@ -146,19 +135,13 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
                               <span className="text-sm font-bold text-slate-900 tracking-tight">${parseFloat(product.min_price || '0').toFixed(2)}</span>
                               <div className="flex items-center gap-1">
                                 <div className="relative group">
-                                  <button onClick={(e) => { e.stopPropagation(); onEdit(); }} className="p-2 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
+                                  <button onClick={(e) => { e.stopPropagation(); onEdit(product.id); }} className="p-2 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
                                     <Edit2 size={14} />
                                   </button>
                                   <span className="tooltip">Edit Product</span>
                                 </div>
                                 <div className="relative group">
-                                  <button onClick={(e) => { e.stopPropagation(); onReachBuyers(); }} className="p-2 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition-all active:scale-90">
-                                    <MousePointerClick size={14} />
-                                  </button>
-                                  <span className="tooltip">Reach Buyers</span>
-                                </div>
-                                <div className="relative group">
-                                  <button onClick={(e) => { e.stopPropagation(); }} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
+                                  <button onClick={(e) => { e.stopPropagation(); deleteProduct(product.id); }} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
                                     <Trash2 size={14} />
                                   </button>
                                   <span className="tooltip">Delete Product</span>
@@ -176,10 +159,8 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="bg-slate-50/50 text-[10px] uppercase tracking-widest text-slate-400 font-bold border-b border-slate-100">
-                          <th className="w-12 px-6 py-4">
-                            <input className="rounded border-slate-300 text-primary w-3.5 h-3.5 cursor-pointer" type="checkbox" />
-                          </th>
-                          <th className="px-4 py-4">Product Info</th>
+                          <th className="w-12 px-6 py-4"></th>
+                          <th className="px-4 py-4 w-40">Product Info</th>
                           <th className="px-4 py-4 w-40">Category</th>
                           <th className="px-4 py-4 w-32">Price (USD)</th>
                           <th className="px-4 py-4 w-32 text-center">Status</th>
@@ -224,19 +205,13 @@ const ProductListView: React.FC<Props> = ({ onBack, onAdd, onEdit, onReachBuyers
                             <td className="px-4 py-4 text-right">
                               <div className="flex items-center justify-end gap-1.5">
                                 <div className="relative group">
-                                  <button onClick={onEdit} className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
+                                  <button onClick={() => onEdit(product.id)} className="p-1.5 text-slate-400 hover:text-primary hover:bg-blue-50 rounded-lg transition-all active:scale-90">
                                     <Edit2 size={16} />
                                   </button>
                                   <span className="tooltip">Edit Listing</span>
                                 </div>
                                 <div className="relative group">
-                                  <button onClick={onReachBuyers} className="p-1.5 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition-all active:scale-90">
-                                    <MousePointerClick size={16} />
-                                  </button>
-                                  <span className="tooltip">Reach Buyers</span>
-                                </div>
-                                <div className="relative group">
-                                  <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
+                                  <button onClick={() => deleteProduct(product.id)} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90">
                                     <Trash2 size={16} />
                                   </button>
                                   <span className="tooltip">Delete Listing</span>

@@ -37,12 +37,32 @@ export const AuthService = {
 
     async checkAuth() {
         try {
-            // Using a simple listing endpoint to check if the token is valid
-            // Since listing routes are protected at the gateway level
-            await api.get('/listing/seller/products?page=1');
-            return true;
-        } catch (error) {
-            return false;
+            // Check if half details are filled first
+            const halfDetailsRes = await api.get('/auth/seller/business/half-details');
+            const isProfileFilled = halfDetailsRes.data.data.is_filled;
+
+            try {
+                // Then try to get the full profile to check activation status
+                const profileRes = await api.get('/auth/seller/business/profile');
+                return {
+                    isAuthenticated: true,
+                    isProfileFilled,
+                    isActive: profileRes.data.data.is_active
+                };
+            } catch (err) {
+                // If profile fails (e.g. not verified), but half-details worked, they are authenticated
+                return {
+                    isAuthenticated: true,
+                    isProfileFilled,
+                    isActive: false
+                };
+            }
+        } catch (error: any) {
+            return {
+                isAuthenticated: false,
+                isProfileFilled: false,
+                isActive: false
+            };
         }
     },
 
