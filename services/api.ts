@@ -5,7 +5,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 // const storedBaseUrl = localStorage.getItem('apiBaseUrl');
-export const BASE_URL = import.meta.env.DEV ? 'https://api.lasomaa.com/api/v1' : '/api';
+export const BASE_URL = import.meta.env.DEV ? '/api' : 'https://api.lasomaa.com/api/v1';
 
 const api = axios.create({
     baseURL: BASE_URL,
