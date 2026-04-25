@@ -99,7 +99,7 @@ const ViewsSummary: React.FC<Props> = ({ onBack, onNavigate }) => {
                                 <span className="text-sm font-black">642</span>
                             </div>
                             <div className="flex items-center justify-between p-3 bg-white/5 rounded-2xl border border-white/5">
-                                <span className="text-xs font-bold text-white/70">AfricaMart Direct</span>
+                                <span className="text-xs font-bold text-white/70">Lasomaa Direct</span>
                                 <span className="text-sm font-black">408</span>
                             </div>
                             <div className="flex items-center justify-between p-3 bg-white/5 rounded-2xl border border-white/5">

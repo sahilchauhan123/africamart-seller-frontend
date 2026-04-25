@@ -96,7 +96,7 @@ const AddProductView: React.FC<Props> = ({ productId, onBack, onSave }) => {
             <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">{productId ? 'Product Updated!' : 'Product Published!'}</h2>
 
             <p className="text-slate-500 leading-relaxed mb-10 text-base font-medium">
-              Thank you for contributing to AfricaMart's ecosystem! Your product has been <span className="text-emerald-600 font-bold">{productId ? 'successfully updated' : 'successfully listed'}</span> and is now visible to buyers across the continent.
+              Thank you for contributing to Lasomaa's ecosystem! Your product has been <span className="text-emerald-600 font-bold">{productId ? 'successfully updated' : 'successfully listed'}</span> and is now visible to buyers across the continent.
             </p>
 
             <div className="space-y-4">

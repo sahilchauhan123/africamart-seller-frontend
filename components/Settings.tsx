@@ -192,7 +192,7 @@ const Settings: React.FC<Props> = ({ onNavigate }) => {
                 </div>
 
                 <footer className="mt-12 pt-8 pb-4 text-center text-slate-400 border-t border-slate-100 dark:border-slate-800 max-w-7xl mx-auto w-full">
-                    <p className="text-xs font-medium">© 2026 AfricaMart Marketplace. All rights reserved. <a className="underline cursor-pointer">Terms of Service</a> • <a className="underline cursor-pointer">Privacy Policy</a></p>
+                    <p className="text-xs font-medium">© 2026 Lasomaa Marketplace. All rights reserved. <a className="underline cursor-pointer">Terms of Service</a> • <a className="underline cursor-pointer">Privacy Policy</a></p>
                 </footer>
             </div>
         </main>

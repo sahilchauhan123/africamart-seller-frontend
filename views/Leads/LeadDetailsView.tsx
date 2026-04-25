@@ -325,7 +325,7 @@ const LeadDetailsView: React.FC<Props> = ({ onBack, onAccept, lead }) => {
                                                     ELITE BUYER
                                                 </div>
                                                 <h4 className="font-bold text-sm mb-1 leading-tight uppercase tracking-tighter">Trusted Partner</h4>
-                                                <p className="text-blue-100 text-[10px] lg:text-xs leading-relaxed font-medium opacity-80">This buyer has a history of high-value inquiries on AfricaMart.</p>
+                                                <p className="text-blue-100 text-[10px] lg:text-xs leading-relaxed font-medium opacity-80">This buyer has a history of high-value inquiries on Lasomaa.</p>
                                             </div>
                                             <div className="absolute -right-4 -bottom-4 w-16 h-16 lg:w-20 lg:h-20 bg-white/10 rounded-full blur-xl transition-transform group-hover:scale-150 duration-700"></div>
                                         </div>

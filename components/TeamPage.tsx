@@ -19,7 +19,7 @@ const TeamPage: React.FC<Props> = ({ onBack }) => {
                                 <Store size={24} />
                             </div>
                             <div>
-                                <span className="text-xl font-bold tracking-tight text-slate-900">AfricaMart</span>
+                                <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
                                 <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Our Team</p>
                             </div>
                         </div>

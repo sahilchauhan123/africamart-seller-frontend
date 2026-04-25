@@ -59,7 +59,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
               <Store className="text-white" size={24} />
             </div>
             <div>
-              <h1 className="text-xl font-bold tracking-tight leading-none text-slate-800">AfricaMart</h1>
+              <h1 className="text-xl font-bold tracking-tight leading-none text-slate-800">Lasomaa</h1>
               <p className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mt-0.5">Seller Center</p>
             </div>
           </div>
@@ -106,7 +106,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                   onClick={() => { onNavigate(View.SIGNUP); if (window.innerWidth < 1024) onClose(); }}
                   className="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
                 >
-                  Join AfricaMart
+                  Join Lasomaa
                 </button>
               </div>
             </div>
@@ -231,14 +231,14 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                       className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
                     >
                       <Info className="text-gray-400" size={20} />
-                      <span>About AfricaMart</span>
+                      <span>About Lasomaa</span>
                     </button>
                     <button
                       onClick={() => { if (window.innerWidth < 1024) onClose(); }}
                       className="w-full flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
                     >
                       <BadgeCheck className="text-gray-400" size={20} />
-                      <span>AfricaMart Services</span>
+                      <span>Lasomaa Services</span>
                     </button>
                   </div>
                 )}

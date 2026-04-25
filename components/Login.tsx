@@ -71,7 +71,7 @@ const Login: React.FC<Props> = ({ onBack, onSignup, onLoginSuccess }) => {
                             Back
                         </button>
                     </div>
-                    <h1 className="text-2xl font-extrabold text-primary text-center mb-5">Login to AfricaMart</h1>
+                    <h1 className="text-2xl font-extrabold text-primary text-center mb-5">Login to Lasomaa</h1>
 
                     <div className="w-full bg-[#F0F4FF] rounded-2xl p-5 space-y-4 mb-6 shadow-sm">
                         <p className="text-center text-sm text-gray-600 leading-relaxed mb-4">

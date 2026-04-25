@@ -34,7 +34,7 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                                         <StoreIcon size={24} />
                                     </div>
                                     <div>
-                                        <span className="text-xl font-bold tracking-tight text-slate-900">AfricaMart</span>
+                                        <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
                                         <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Policies & Legal</p>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                             <div className="flex items-center gap-4">
                                 <button onClick={onBack} className="text-2xl font-extrabold text-primary flex items-center gap-1">
                                     <Store className="w-8 h-8 text-primary" />
-                                    AfricaMart
+                                    Lasomaa
                                 </button>
                                 <div className="h-8 w-px bg-slate-200 mx-2"></div>
                                 <span className="text-lg font-bold text-slate-800">Policies & Legal</span>
@@ -81,7 +81,7 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                         <section className="max-w-4xl mx-auto text-center mb-16">
                             <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Policies & Legal</h1>
                             <p className="text-slate-500 dark:text-slate-400 text-lg leading-relaxed">
-                                At AfricaMart, transparency and security are at the core of our business.
+                                At Lasomaa, transparency and security are at the core of our business.
                                 Explore our legal framework and marketplace standards to understand how we protect our community.
                             </p>
                         </section>
@@ -106,7 +106,7 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                                 </div>
                                 <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Terms of Service</h3>
                                 <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
-                                    The legal agreement between you and AfricaMart regarding the use of our platform and services.
+                                    The legal agreement between you and Lasomaa regarding the use of our platform and services.
                                 </p>
                                 <a className="inline-flex items-center text-primary font-semibold text-sm hover:underline cursor-pointer group-hover:translate-x-1 transition-transform">
                                     View Full Policy <ArrowRight className="ml-2" size={16} />
@@ -119,7 +119,7 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                                 </div>
                                 <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Seller Policy</h3>
                                 <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
-                                    Guidelines and standards for merchants selling goods and services to businesses on AfricaMart.
+                                    Guidelines and standards for merchants selling goods and services to businesses on Lasomaa.
                                 </p>
                                 <a className="inline-flex items-center text-primary font-semibold text-sm hover:underline cursor-pointer group-hover:translate-x-1 transition-transform">
                                     View Full Policy <ArrowRight className="ml-2" size={16} />
@@ -148,7 +148,7 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                             <div className="prose prose-slate dark:prose-invert max-w-none">
                                 <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">1. Acceptance of Terms</h2>
                                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
-                                    By accessing or using the AfricaMart platform (the "Service"), you agree to be bound by these Terms of Service. If you are using the Service on behalf of a company or legal entity, you represent and warrant that you have the authority to bind that entity to these terms.
+                                    By accessing or using the Lasomaa platform (the "Service"), you agree to be bound by these Terms of Service. If you are using the Service on behalf of a company or legal entity, you represent and warrant that you have the authority to bind that entity to these terms.
                                 </p>
 
                                 <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">2. Eligibility and Account Registration</h2>
@@ -173,12 +173,12 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
 
                                 <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">3. Platform Fees and Payments</h2>
                                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                                    AfricaMart provides a marketplace infrastructure. Fees associated with transactions are clearly outlined in our merchant fee schedule.
+                                    Lasomaa provides a marketplace infrastructure. Fees associated with transactions are clearly outlined in our merchant fee schedule.
                                 </p>
                                 <ol className="space-y-4 text-slate-600 dark:text-slate-400 mb-8 list-none pl-0">
                                     <li className="flex gap-4">
                                         <span className="font-bold text-primary shrink-0">3.1</span>
-                                        <span>All payments must be processed through AfricaMart's approved payment gateways.</span>
+                                        <span>All payments must be processed through Lasomaa's approved payment gateways.</span>
                                     </li>
                                     <li className="flex gap-4">
                                         <span className="font-bold text-primary shrink-0">3.2</span>

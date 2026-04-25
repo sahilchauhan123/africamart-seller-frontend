@@ -64,7 +64,7 @@ const BusinessSetupView: React.FC<Props> = ({ onBack, onNext }) => {
                                 </button>
 
                                 <p className="text-xs text-slate-400 font-semibold uppercase tracking-[0.2em]">
-                                    Welcome to AfricaMart
+                                    Welcome to Lasomaa
                                 </p>
                             </div>
                         </div>
@@ -255,7 +255,7 @@ const BusinessSetupView: React.FC<Props> = ({ onBack, onNext }) => {
                         <div className="w-16 h-1 bg-white mb-6 rounded-full"></div>
                         <h2 className="text-4xl font-black mb-4 leading-tight">Ready to Scale?</h2>
                         <p className="text-xl text-white/70 leading-relaxed">
-                            AfricaMart helps over 10,000 sellers reach verified buyers across the continent. Your success starts with a professional profile.
+                            Lasomaa helps over 10,000 sellers reach verified buyers across the continent. Your success starts with a professional profile.
                         </p>
                     </div>
                 </div>

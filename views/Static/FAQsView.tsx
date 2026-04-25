@@ -19,8 +19,8 @@ const FAQ_DATA: FAQSection[] = [
         icon: <Info className="text-primary" size={20} />,
         faqs: [
             {
-                question: "What is AfricaMart Seller Center?",
-                answer: "AfricaMart Seller Center is a comprehensive B2B marketplace platform designed to empower African manufacturers and wholesalers to reach international buyers. We provide the tools for digital storefront management, logistics tracking, and secure payment processing."
+                question: "What is Lasomaa Seller Center?",
+                answer: "Lasomaa Seller Center is a comprehensive B2B marketplace platform designed to empower African manufacturers and wholesalers to reach international buyers. We provide the tools for digital storefront management, logistics tracking, and secure payment processing."
             },
             {
                 question: "Which countries can join the platform?",
@@ -48,7 +48,7 @@ const FAQ_DATA: FAQSection[] = [
         faqs: [
             {
                 question: "Can I integrate my logistics partner?",
-                answer: "Yes, we offer API integrations for established logistics providers. However, we also provide pre-negotiated shipping rates through our native AfricaMart Logistics network to save you time and money."
+                answer: "Yes, we offer API integrations for established logistics providers. However, we also provide pre-negotiated shipping rates through our native Lasomaa Logistics network to save you time and money."
             }
         ]
     },
@@ -58,7 +58,7 @@ const FAQ_DATA: FAQSection[] = [
         faqs: [
             {
                 question: "How are payments secured?",
-                answer: "All transactions are protected by end-to-end encryption and our AfricaMart Escrow service. Funds are only released to sellers once the buyer confirms receipt of goods in the promised condition."
+                answer: "All transactions are protected by end-to-end encryption and our Lasomaa Escrow service. Funds are only released to sellers once the buyer confirms receipt of goods in the promised condition."
             }
         ]
     }
@@ -96,7 +96,7 @@ const FAQsView: React.FC<Props> = ({ onBack, onSignup }) => {
                                 <Store size={24} />
                             </div>
                             <div>
-                                <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">AfricaMart</span>
+                                <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Lasomaa</span>
                                 <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Seller Center</p>
                             </div>
                         </div>
@@ -114,7 +114,7 @@ const FAQsView: React.FC<Props> = ({ onBack, onSignup }) => {
                         Frequently Asked Questions
                     </h1>
                     <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                        Everything you need to know about selling on AfricaMart.
+                        Everything you need to know about selling on Lasomaa.
                     </p>
                 </div>
 

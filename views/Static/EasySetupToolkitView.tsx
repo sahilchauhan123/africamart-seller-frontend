@@ -20,7 +20,7 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                                 <Store size={24} />
                             </div>
                             <div>
-                                <span className="text-xl font-bold tracking-tight text-slate-900">AfricaMart</span>
+                                <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
                                 <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Easy Setup</p>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                     <div className="flex items-center">
                         <button onClick={onBack} className="text-2xl font-extrabold text-primary flex items-center gap-1">
                             <Store className="w-8 h-8 text-primary" />
-                            AfricaMart
+                            Lasomaa
                         </button>
                     </div>
                     <nav className="flex items-center gap-10">
@@ -198,15 +198,15 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                     </div>
                 </section>
 
-                {/* Why Choose AfricaMart */}
+                {/* Why Choose Lasomaa */}
                 <section className="py-24 px-6 bg-background-light">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-16 px-4">
-                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">Why Sellers Choose AfricaMart</h2>
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">Why Sellers Choose Lasomaa</h2>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-0">
                             {[
-                                { icon: 'terminal', title: 'Zero Technical Skills', text: "If you can post on social media, you can run an AfricaMart store. It's that simple." },
+                                { icon: 'terminal', title: 'Zero Technical Skills', text: "If you can post on social media, you can run an Lasomaa store. It's that simple." },
                                 { icon: 'verified', title: 'Professional Brand', text: "Get a sleek storefront that looks as good as global brands without hiring a designer." },
                                 { icon: 'smartphone', title: 'Mobile Management', text: "Manage orders, update stock, and chat with buyers all from your mobile device." },
                                 { icon: 'monitoring', title: 'Real-time Analytics', text: "Understand what's selling and why. Data-driven growth at your fingertips." }
@@ -267,7 +267,7 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                         <div className="space-y-5">
                             <h4 className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">B2B Growth</h4>
                             <ul className="space-y-4 text-[13px] font-bold text-white/80">
-                                <li><a href="#" className="hover:text-white transition-colors">Sell on AfricaMart</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">Sell on Lasomaa</a></li>
                                 <li><a href="#" className="hover:text-white transition-colors">RFQ Marketplace</a></li>
                             </ul>
                         </div>
@@ -289,7 +289,7 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                             <a href="#" className="hover:text-blue-400 transition-all hover:scale-110"><Linkedin size={22} /></a>
                         </div>
                         <p className="text-[9px] text-white/20 uppercase tracking-[0.3em] font-bold">
-                            © 2026 AfricaMart Inc. All rights reserved.
+                            © 2026 Lasomaa Inc. All rights reserved.
                         </p>
                     </div>
                 </div>
@@ -301,7 +301,7 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                     <div className="md:col-span-4 space-y-8">
                         <div className="flex items-center space-x-2">
                             <Store className="w-8 h-8 text-white" />
-                            <span className="text-2xl font-bold tracking-tight text-white uppercase">AfricaMart</span>
+                            <span className="text-2xl font-bold tracking-tight text-white uppercase">Lasomaa</span>
                         </div>
                         <p className="text-white/70 max-w-sm leading-relaxed text-lg font-medium">
                             We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.
@@ -338,7 +338,7 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                 </div>
                 <div className="bg-[#001da1] py-10 px-4 border-t border-white/10">
                     <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-                        <p className="text-white/60 text-sm font-medium uppercase tracking-widest">© 2026 AfricaMart Inc. All rights reserved.</p>
+                        <p className="text-white/60 text-sm font-medium uppercase tracking-widest">© 2026 Lasomaa Inc. All rights reserved.</p>
                         <div className="flex items-center space-x-8">
                             <a href="#" className="text-white/60 hover:text-white"><Twitter size={20} /></a>
                             <a href="#" className="text-white/60 hover:text-white"><Linkedin size={20} /></a>
