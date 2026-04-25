@@ -93,7 +93,9 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
 
             <div className="h-8 w-px bg-white/20"></div>
 
-            <button className="bg-white/10 hover:bg-white text-white hover:text-primary px-5 py-2 rounded-lg font-bold text-sm transition-all border border-white/20">
+            <button className="bg-white/10 hover:bg-white text-white hover:text-primary px-5 py-2 rounded-lg font-bold text-sm transition-all border border-white/20"
+              onClick={() => window.location.href = "https://lasomaa.com"}
+            >
               Buyer Portal
             </button>
 
@@ -453,7 +455,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
               <a className="hover:text-primary transition-colors" href="#">Privacy</a>
               <a className="hover:text-primary transition-colors" href="#">Help</a>
             </div>
-            <p className="text-[10px] md:text-xs text-slate-400 font-medium">© 2024 Lasomaa Inc. All rights reserved.</p>
+            <p className="text-[10px] md:text-xs text-slate-400 font-medium">© {new Date().getFullYear()} Lasomaa Inc. All rights reserved.</p>
           </div>
         </div>
       </footer>
