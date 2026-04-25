@@ -6,7 +6,10 @@ axios.defaults.withCredentials = true;
 
 
 // export const BASE_URL = 'http://localhost:4000/api/v1'
-export const BASE_URL = import.meta.env.DEV ? '/api' : "https://api.lasomaa.com/api/v1"
+// export const WS_BASE_URL = 'ws://localhost:4000/api/v1/messaging/ws'
+
+export const BASE_URL = "https://api.lasomaa.com/api/v1"
+export const WS_BASE_URL = "wss://api.lasomaa.com/api/v1/messaging/ws"
 
 
 const api = axios.create({

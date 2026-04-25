@@ -8,13 +8,6 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3001,
       host: '0.0.0.0',
-      proxy: {
-        '/api': {
-          target: 'https://api.lasomaa.com/api/v1',
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
     },
     plugins: [react()],
     define: {

@@ -1,9 +1,10 @@
+import { BASE_URL, WS_BASE_URL } from "./api";
+
 /**
  * Service to handle messaging using custom Go backend
  */
-const GATEWAY_URL = "http://localhost:4000/api/v1/messaging";
-const MESSAGING_URL = `${GATEWAY_URL}/protected`;
-const MESSAGING_WS_URL = "ws://localhost:4000/api/v1/messaging/ws";
+const MESSAGING_URL = `${BASE_URL}/protected`;
+const MESSAGING_WS_URL = WS_BASE_URL;
 
 class MessasingService {
     /**
