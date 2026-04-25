@@ -3,7 +3,7 @@ import { BASE_URL, WS_BASE_URL } from "./api";
 /**
  * Service to handle messaging using custom Go backend
  */
-const MESSAGING_URL = `${BASE_URL}/protected`;
+const MESSAGING_URL = `${BASE_URL}/messaging/protected`;
 const MESSAGING_WS_URL = WS_BASE_URL;
 
 class MessasingService {
