@@ -474,32 +474,8 @@ const AddProductView: React.FC<Props> = ({ productId, onBack, onSave }) => {
                           )}
 
                           {['select', 'checkbox', 'tag'].includes(filter.type) && (
-                            filter.options && filter.options.length > 6 ? (
-                              <div className="relative">
-                                <select
-                                  multiple={filter.is_multi}
-                                  value={attributeValues[filter.id] || (filter.is_multi ? [] : '')}
-                                  onChange={(e) => {
-                                    if (filter.is_multi) {
-                                      const options = Array.from(e.target.selectedOptions, (option: HTMLOptionElement) => option.value);
-                                      handleAttributeChange(filter.id, options, false);
-                                    } else {
-                                      handleAttributeChange(filter.id, e.target.value, false);
-                                    }
-                                  }}
-                                  className={`w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all ${!filter.is_multi ? 'appearance-none pr-10' : 'h-32'}`}
-                                >
-                                  {!filter.is_multi && <option value="" disabled>Select {filter.name}...</option>}
-                                  {filter.options.map((option: string) => (
-                                    <option key={option} value={option}>{option}</option>
-                                  ))}
-                                </select>
-                                {!filter.is_multi && (
-                                  <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
-                                )}
-                                {filter.is_multi && <p className="mt-1.5 text-[10px] text-slate-400 font-medium">Hold Ctrl/Cmd to select multiple options</p>}
-                              </div>
-                            ) : (
+                            <div className="space-y-4">
+                              {/* Option Chips */}
                               <div className="flex flex-wrap gap-2">
                                 {filter.options?.map((option: string) => {
                                   const isSelected = filter.is_multi
@@ -508,22 +484,49 @@ const AddProductView: React.FC<Props> = ({ productId, onBack, onSave }) => {
                                   return (
                                     <button
                                       key={option}
+                                      type="button"
                                       onClick={() => handleAttributeChange(filter.id, option, filter.is_multi)}
-                                      className={`px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${isSelected ? 'border-primary bg-primary/10 text-primary shadow-sm' : 'border-slate-200 text-slate-500 hover:border-primary/30 hover:bg-white bg-slate-50'}`}
+                                      className={`px-4 py-2 rounded-xl border text-sm font-bold transition-all flex items-center gap-2 ${isSelected ? 'border-primary bg-primary text-white shadow-lg shadow-primary/20' : 'border-slate-200 text-slate-600 hover:border-primary/40 hover:bg-slate-50 bg-white'}`}
                                     >
                                       {option}
+                                      {isSelected && <Plus size={14} className="rotate-45" />}
                                     </button>
                                   );
                                 })}
                               </div>
-                            )
+
+                              {/* Custom Value Input */}
+                              <div className="relative group mt-4">
+                                <div className="flex items-center gap-2">
+                                  <div className="relative flex-1">
+                                    <input
+                                      type="text"
+                                      placeholder={`Add custom ${filter.name.toLowerCase()}...`}
+                                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-dashed border-slate-300 bg-slate-50/50 focus:bg-white focus:border-primary focus:border-solid focus:ring-4 focus:ring-primary/10 outline-none text-sm transition-all"
+                                      onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                          e.preventDefault();
+                                          const val = e.currentTarget.value.trim();
+                                          if (val) {
+                                            handleAttributeChange(filter.id, val, filter.is_multi);
+                                            e.currentTarget.value = '';
+                                          }
+                                        }
+                                      }}
+                                    />
+                                    <PlusCircle className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={18} />
+                                  </div>
+                                </div>
+                                <p className="mt-2 text-[10px] text-slate-400 font-bold uppercase tracking-wider ml-1">Type and press Enter to add a custom value</p>
+                              </div>
+                            </div>
                           )}
 
                           {filter.type === 'number' && (
-                            <div className="relative">
+                            <div className="relative group">
                               <input
                                 type="number"
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all"
+                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm font-bold transition-all"
                                 value={attributeValues[filter.id] || ''}
                                 onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
                                 placeholder={`Enter ${filter.name.toLowerCase()}...`}
@@ -532,13 +535,15 @@ const AddProductView: React.FC<Props> = ({ productId, onBack, onSave }) => {
                           )}
 
                           {filter.type === 'text' && (
-                            <input
-                              type="text"
-                              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm transition-all"
-                              value={attributeValues[filter.id] || ''}
-                              onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
-                              placeholder={`Specify ${filter.name.toLowerCase()}...`}
-                            />
+                            <div className="relative group">
+                              <input
+                                type="text"
+                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-sm font-bold transition-all"
+                                value={attributeValues[filter.id] || ''}
+                                onChange={(e) => handleAttributeChange(filter.id, e.target.value, false)}
+                                placeholder={`Specify ${filter.name.toLowerCase()}...`}
+                              />
+                            </div>
                           )}
 
                           {filter.type === 'date' && (
