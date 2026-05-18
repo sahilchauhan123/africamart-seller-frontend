@@ -17,13 +17,8 @@ const ContinentalReachView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-                                <Store size={24} />
-                            </div>
-                            <div>
-                                <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
-                                <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Reach</p>
-                            </div>
+                            <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
+                            <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 ml-1 mt-1">Reach</p>
                         </div>
 
                         <button onClick={onBack} className="p-2 text-slate-600">
@@ -37,9 +32,8 @@ const ContinentalReachView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
             <header className="hidden lg:block fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
                 <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
                     <div className="flex items-center">
-                        <button onClick={onBack} className="text-2xl font-extrabold text-primary flex items-center gap-1">
-                            <Store className="w-8 h-8 text-primary" />
-                            Lasomaa
+                        <button onClick={onBack} className="flex items-center gap-1">
+                            <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
                         </button>
                     </div>
                     <nav className="flex items-center gap-10">
@@ -179,12 +173,8 @@ const ContinentalReachView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
             <footer className="lg:hidden bg-[#001B4B] text-white pt-16 pb-12 px-8 mt-12 rounded-t-[3rem] relative overflow-hidden">
                 <div className="max-w-md mx-auto relative z-10">
                     <div className="flex flex-col items-center mb-12 text-center">
-                        <div className="flex items-center gap-2 mb-4">
-                            <Store className="w-9 h-9 text-blue-400" />
-                            <div className="flex flex-col leading-none">
-                                <span className="text-2xl font-black tracking-tighter uppercase">Africa</span>
-                                <span className="text-2xl font-light tracking-widest uppercase text-white/70">Mart</span>
-                            </div>
+                        <div className="flex items-center gap-2 mb-4 bg-white px-3 py-2 rounded-xl">
+                            <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
                         </div>
                         <p className="text-sm text-blue-200/60 max-w-xs leading-relaxed font-medium">
                             Empowering African businesses with digital tools for global trade and local excellence.
@@ -227,9 +217,8 @@ const ContinentalReachView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
             <footer className="hidden lg:block pt-16 bg-[#0026C0] text-white">
                 <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-12 pb-20">
                     <div className="md:col-span-4 space-y-8">
-                        <div className="flex items-center space-x-2">
-                            <Store className="w-8 h-8 text-white" />
-                            <span className="text-2xl font-bold tracking-tight text-white uppercase">Lasomaa</span>
+                        <div className="flex items-center space-x-2 bg-white px-3 py-2 rounded-xl w-fit">
+                            <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
                         </div>
                         <p className="text-white/70 max-w-sm leading-relaxed text-lg">
                             We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.

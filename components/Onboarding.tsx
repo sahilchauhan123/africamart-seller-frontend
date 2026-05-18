@@ -19,12 +19,9 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center gap-2">
-            <div className="bg-white p-1.5 rounded-lg shadow-sm">
-              <svg className="w-6 h-6 md:w-8 md:h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
+            <div className="bg-white px-2 py-1.5 rounded-lg shadow-sm">
+              <img src="/logo.png" alt="Lasomaa Logo" className="h-6 md:h-8 object-contain" />
             </div>
-            <span className="text-white text-xl md:text-2xl font-black tracking-tight">Lasomaa</span>
           </div>
 
           {/* Desktop Navigation (Hidden on Mobile) */}

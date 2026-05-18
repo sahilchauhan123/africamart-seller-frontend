@@ -30,11 +30,8 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="flex justify-between items-center h-16">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-                                        <StoreIcon size={24} />
-                                    </div>
-                                    <div>
-                                        <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
+                                    <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
+                            <div>
                                         <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Policies & Legal</p>
                                     </div>
                                 </div>
@@ -50,9 +47,8 @@ const PoliciesView: React.FC<Props> = ({ onBack, onNavigate, isDashboardMode = f
                     <header className="hidden lg:block fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
                         <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
                             <div className="flex items-center gap-4">
-                                <button onClick={onBack} className="text-2xl font-extrabold text-primary flex items-center gap-1">
-                                    <Store className="w-8 h-8 text-primary" />
-                                    Lasomaa
+                                <button onClick={onBack} className="flex items-center gap-1">
+                                    <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
                                 </button>
                                 <div className="h-8 w-px bg-slate-200 mx-2"></div>
                                 <span className="text-lg font-bold text-slate-800">Policies & Legal</span>

@@ -54,14 +54,9 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
           <button className="absolute top-4 right-4 text-gray-400 z-10 p-1 hover:bg-gray-100 rounded-full transition lg:hidden" onClick={onClose}>
             <X size={20} />
           </button>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-sm shadow-primary/30">
-              <Store className="text-white" size={24} />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tight leading-none text-slate-800">Lasomaa</h1>
-              <p className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mt-0.5">Seller Center</p>
-            </div>
+          <div className="flex flex-col items-start gap-0.5">
+            <img src="/logo.png" alt="Lasomaa" className="h-8 object-contain" />
+            <p className="text-[10px] text-slate-400 font-bold tracking-wider uppercase ml-1">Seller Center</p>
           </div>
         </div>
 

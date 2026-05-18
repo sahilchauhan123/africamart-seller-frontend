@@ -16,11 +16,8 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-                                <Store size={24} />
-                            </div>
+                            <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
                             <div>
-                                <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
                                 <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Easy Setup</p>
                             </div>
                         </div>
@@ -36,10 +33,9 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
             <header className="hidden lg:block fixed top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
                 <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
                     <div className="flex items-center">
-                        <button onClick={onBack} className="text-2xl font-extrabold text-primary flex items-center gap-1">
-                            <Store className="w-8 h-8 text-primary" />
-                            Lasomaa
-                        </button>
+                        <button onClick={onBack} className="flex items-center gap-1">
+                                    <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
+                                </button>
                     </div>
                     <nav className="flex items-center gap-10">
                         <button onClick={onBack} className="text-sm font-bold text-slate-700 hover:text-primary transition-colors uppercase">THE PLATFORM</button>
@@ -299,10 +295,9 @@ const EasySetupToolkitView: React.FC<Props> = ({ onBack, onSignup, onNavigate })
             <footer className="hidden lg:block pt-16 bg-[#0026C0] text-white">
                 <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-12 pb-20">
                     <div className="md:col-span-4 space-y-8">
-                        <div className="flex items-center space-x-2">
-                            <Store className="w-8 h-8 text-white" />
-                            <span className="text-2xl font-bold tracking-tight text-white uppercase">Lasomaa</span>
-                        </div>
+                        <div className="flex items-center space-x-2 bg-white px-3 py-2 rounded-xl w-fit">
+                                    <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
+                                </div>
                         <p className="text-white/70 max-w-sm leading-relaxed text-lg font-medium">
                             We exist to challenge African businesses to take initiative in producing, innovating and reshaping Africa's economy through digital and cross boarder connectivity.
                         </p>

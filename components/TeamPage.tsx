@@ -15,13 +15,8 @@ const TeamPage: React.FC<Props> = ({ onBack }) => {
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-                                <Store size={24} />
-                            </div>
-                            <div>
-                                <span className="text-xl font-bold tracking-tight text-slate-900">Lasomaa</span>
-                                <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 -mt-1">Our Team</p>
-                            </div>
+                            <img src="/logo.png" alt="Lasomaa Logo" className="h-8 object-contain" />
+                            <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-500 ml-1 mt-1">Our Team</p>
                         </div>
 
                         <button onClick={onBack} className="p-2 text-slate-600">
