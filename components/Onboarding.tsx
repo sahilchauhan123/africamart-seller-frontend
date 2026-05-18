@@ -15,7 +15,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
   return (
     <div className="font-sans text-gray-900 bg-white h-full overflow-y-auto no-scrollbar">
       {/* Header */}
-      <header className="bg-primary/95 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-lg border-b border-white/10">
+      <header className="bg-white/95 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-sm border-b border-slate-200">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center gap-2">
@@ -30,7 +30,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
               <button
                 onMouseEnter={() => setShowAssistanceDropdown(true)}
                 onMouseLeave={() => setShowAssistanceDropdown(false)}
-                className="flex items-center gap-1.5 text-white hover:text-blue-100 font-medium transition-colors py-2"
+                className="flex items-center gap-1.5 text-slate-700 hover:text-primary font-medium transition-colors py-2"
               >
                 Assistance
                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showAssistanceDropdown ? 'rotate-180' : ''}`} />
@@ -58,7 +58,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
               <button
                 onMouseEnter={() => setShowHelpDropdown(true)}
                 onMouseLeave={() => setShowHelpDropdown(false)}
-                className="flex items-center gap-1.5 text-white hover:text-blue-100 font-medium transition-colors py-2"
+                className="flex items-center gap-1.5 text-slate-700 hover:text-primary font-medium transition-colors py-2"
               >
                 Help
                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showHelpDropdown ? 'rotate-180' : ''}`} />
@@ -88,9 +88,9 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
               )}
             </div>
 
-            <div className="h-8 w-px bg-white/20"></div>
+            <div className="h-8 w-px bg-slate-200"></div>
 
-            <button className="bg-white/10 hover:bg-white text-white hover:text-primary px-5 py-2 rounded-lg font-bold text-sm transition-all border border-white/20"
+            <button className="bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-primary px-5 py-2 rounded-lg font-bold text-sm transition-all border border-slate-200"
               onClick={() => window.location.href = "https://lasomaa.com"}
             >
               Buyer Portal
@@ -139,7 +139,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
             <div className="relative">
               <button
                 onClick={() => { setShowMobileHelp(!showMobileHelp); setShowSignInDropdown(false); }}
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white active:scale-90 transition-transform"
+                className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700 active:scale-90 transition-transform"
               >
                 <HelpCircle size={20} />
               </button>
@@ -181,7 +181,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
             <div className="relative">
               <button
                 onClick={() => { setShowSignInDropdown(!showSignInDropdown); setShowMobileHelp(false); }}
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white active:scale-90 transition-transform"
+                className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700 active:scale-90 transition-transform"
               >
                 <User size={20} />
               </button>
