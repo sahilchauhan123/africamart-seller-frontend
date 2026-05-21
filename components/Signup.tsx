@@ -73,11 +73,11 @@ const Signup: React.FC<Props> = ({ onBack, onNext, onLogin }) => {
 
           <div className="w-full bg-[#F0F4FF] rounded-2xl p-5 space-y-4 mb-6 shadow-sm">
             <p className="text-center text-sm text-gray-600 leading-relaxed mb-4">
-              Enter your details below to get started with Africa's first B2B marketplace.
+              Enter your details below to get started with Lasomaa Online marketplace.
             </p>
 
             {error && (
-              <div className="bg-red-50 text-red-500 text-xs p-3 rounded-lg border border-red-100 mb-4">
+              <div className="bg-red-50 text-red-500 text-xs p-2 rounded-lg border border-red-100 mb-4">
                 {error}
               </div>
             )}
