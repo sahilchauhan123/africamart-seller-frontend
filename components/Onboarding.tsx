@@ -222,10 +222,10 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-4 md:space-y-8 order-2 lg:order-1">
               <h1 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-[1.2] md:leading-tight">
-                Africa's First <span className="text-primary">B2B Marketplace</span>
+                We connect your business to buyers
               </h1>
               <p className="text-sm md:text-xl text-gray-600 max-w-xl leading-relaxed">
-                Connect with verified buyers across 54 countries and grow your business digitally today.
+                Online marketplace for all African Businesses. Manufacturers, wholesalers, distributors, retailers and consumers.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
                 <button
@@ -349,29 +349,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
         </div>
       </section>
 
-      {/* Trust Signals */}
-      <section className="py-16 md:py-24 bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">50k+</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Registered Businesses</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">20+</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Countries</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">1M+</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Monthly Leads</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">10k+</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Product Categories</div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* What to Sell Section */}
       <section id="what-to-sell" className="py-24 bg-gray-50 overflow-hidden">
@@ -421,7 +399,7 @@ const Onboarding: React.FC<Props> = ({ onNext, onNavigate }) => {
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6 relative z-10">Start Your Selling Journey Today</h2>
             <p className="text-base md:text-lg text-gray-600 mb-10 max-w-2xl mx-auto relative z-10 leading-relaxed">
-              Join Africa's first B2B marketplace and grow your revenue with tools designed for enterprise success.
+              Join Lasomaa marketplace and grow your revenue with tools designed for enterprise success.
             </p>
             <button
               onClick={onNext}
