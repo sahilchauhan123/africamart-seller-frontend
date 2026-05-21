@@ -153,7 +153,6 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                       <MessageCircle className={currentView === View.MESSAGES ? 'text-primary' : 'text-gray-400'} size={24} />
                       <span className="text-sm">Messages</span>
                     </div>
-                    <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">20+</span>
                   </div>
                 </button>
                 <button
@@ -165,7 +164,7 @@ const Drawer: React.FC<Props> = ({ isOpen, onClose, onNavigate, currentView, isO
                       <Bell className={currentView === View.NOTIFICATIONS ? 'text-primary' : 'text-gray-400'} size={24} />
                       <span className="text-sm">Notifications</span>
                     </div>
-                    <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+                    {/* <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">1</span> */}
                   </div>
                 </button>
               </div>
